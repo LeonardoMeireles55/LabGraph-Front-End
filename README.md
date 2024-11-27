@@ -16,4 +16,5 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-![image](https://github.com/LeonardoMeireles55/ReactPlotLyJs-Example/assets/123477726/fc993170-a839-4bc7-8245-8d2c17ce79f1)
+![image](https://github.com/user-attachments/assets/94104350-c8e9-48b1-9d33-6937a4539407)
+

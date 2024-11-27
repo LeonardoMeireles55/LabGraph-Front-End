@@ -40,8 +40,8 @@ export default function GetLineCharts() {
     const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
     const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());    
 
-    const baseUrl = "http://10.111.0.214:8081/biochemistry-analytics/results/search/date-range?name=";
-    const meanAndDeviationUrl = "http://10.111.0.214:8081/biochemistry-analytics/results/mean-standard-deviation?name="
+    const baseUrl = "http://10.111.0.214:8080/biochemistry-analytics/results/search/date-range?name=";
+    const meanAndDeviationUrl = "http://10.111.0.214:8080/biochemistry-analytics/results/mean-standard-deviation?name="
     const url = `${baseUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
     const urlMeanAndDeviation = `${meanAndDeviationUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
 

@@ -1,4 +1,3 @@
-// components/TestSelector.tsx
 import Link from 'next/link';
 import React from 'react';
 import MeanAndDeviationDisplay from './MeanAndDeviationDisplay';
@@ -16,11 +15,11 @@ interface TestSelectorProps {
 
 const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTestName, setTestLevel, sd, mean, ownMean, ownSd }) => {
   return (
-    <div className="flex items-center gap-2 text-gray-200">
+    <div className="flex items-center gap-2 text-textSecondary">
       <div className="flex items-center gap-2">
         <span className="text-sm font-medium">Analíto:</span>
         <select 
-          className="bg-gray-600 text-gray-200 rounded px-2 py-1 text-sm"
+          className="bg-muted text-textSecondary rounded px-2 py-1 text-sm"
           value={testName}
           onChange={(e) => setTestName(e.target.value)}
         >
@@ -39,7 +38,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTes
       <div className="flex items-center gap-2">
         <span className="text-sm font-medium">Nível:</span>
         <select 
-          className="bg-gray-600 text-gray-200 rounded px-2 py-1 text-sm"
+          className="bg-muted text-textSecondary rounded px-2 py-1 text-sm"
           value={testLevel}
           onChange={(e) => setTestLevel(+e.target.value)}
         >
@@ -48,7 +47,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTes
         </select>
       </div>
       <Link 
-        className="bg-gray-600 hover:bg-gray-400 text-gray-200 rounded px-4 py-1 text-sm"
+        className="bg-muted hover:scale-105 text-textSecondary rounded px-4 py-1 text-sm"
             target="_blank" href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit?userstoinvite=andersongomesbio@gmail.com&sharingaction=manageaccess&role=writer&pli=1#gid=1397277322"
             >&#10003;
         </Link>

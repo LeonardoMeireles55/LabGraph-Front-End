@@ -1,7 +1,7 @@
-import getLineCharts from './getLineCharts'
+import GetLineCharts from './home'
 
 export default function Home() {
   return (
-    getLineCharts()
+    GetLineCharts()
   )
 }

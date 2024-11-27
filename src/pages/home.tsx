@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import Footer from '@/components/Footer';
 import DateSelector from '@/components/DateSelector';
 import TestSelector from '@/components/TestSelector';
+import colors from '../styles/colors';
+
+
 
 interface ListingItem {
     name: string;
@@ -19,7 +22,7 @@ interface ListingItem {
 
 interface ListingCollection extends Array<ListingItem> {}
 
-export default function getLineCharts() {
+export default function GetLineCharts() {
     
     const defaultDate = new Date();
 
@@ -37,8 +40,8 @@ export default function getLineCharts() {
     const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
     const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());    
 
-    const baseUrl = "http://10.111.0.214:8080/biochemistry-analytics/results/search/date-range?name=";
-    const meanAndDeviationUrl = "http://localhost:8080/biochemistry-analytics/results/mean-standard-deviation?name="
+    const baseUrl = "http://10.111.0.214:8081/biochemistry-analytics/results/search/date-range?name=";
+    const meanAndDeviationUrl = "http://10.111.0.214:8081/biochemistry-analytics/results/mean-standard-deviation?name="
     const url = `${baseUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
     const urlMeanAndDeviation = `${meanAndDeviationUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
 
@@ -105,33 +108,33 @@ export default function getLineCharts() {
         textposition: 'top center',
         textfont: { 
             size: 12, 
-            color: '#E2E8F0' // Slate-200
+            color: colors.textSecondary // Gray-200
         },
         marker: { 
-            color: '#60A5FA', // Blue-400
+            color: colors.primary, // Blue-400
             size: 8,
             line: {
-                color: '#ffffff',
+                color: colors.border,
                 width: 1
             }
         },
         line: {
-            color: '#60A5FA', // Blue-400
+            color: colors.primary, // Blue-400
             width: 2
         },
         name: 'Valores',
     }];
-
+    
     const lines = [
-        { multiple: 3, color: 'rgba(239, 68, 68, 0.8)', legend: '3x SD' },   // Red-500
-        { multiple: 2, color: 'rgba(251, 146, 60, 0.8)', legend: '2x SD' },  // Orange-400
-        { multiple: 1, color: 'rgba(250, 204, 21, 0.8)', legend: '1x SD' },  // Yellow-400
-        { multiple: 0, color: 'rgba(34, 197, 94, 0.8)', legend: 'mean' },    // Green-500
-        { multiple: -1, color: 'rgba(250, 204, 21, 0.8)', legend: '-1x SD' },// Yellow-400
-        { multiple: -2, color: 'rgba(251, 146, 60, 0.8)', legend: '-2x SD' },// Orange-400
-        { multiple: -3, color: 'rgba(239, 68, 68, 0.8)', legend: '-3x SD' }, // Red-500
+        { multiple: 3, color: colors.sd3, legend: '3x SD' },
+        { multiple: 2, color: colors.sd2, legend: '2x SD' },
+        { multiple: 1, color: colors.sd1, legend: '1x SD' },
+        { multiple: 0, color: colors.meanLine, legend: 'mean' },
+        { multiple: -1, color: colors.sd1, legend: '-1x SD' },
+        { multiple: -2, color: colors.sd2, legend: '-2x SD' },
+        { multiple: -3, color: colors.sd3, legend: '-3x SD' },
     ];
-
+    
     const shapes = lines.map(line => ({
         type: 'line',
         xref: 'paper',
@@ -147,28 +150,28 @@ export default function getLineCharts() {
         },
         name: line.legend,
     }));
-
+    
     const layout: any = {
         width: Math.max(width * 0.9, 800),
         height: Math.max(height * 0.7, 500),
-        plot_bgcolor: '#1F2937', // Gray-800 
-        paper_bgcolor: '#1F2937', // Gray-800 
+        plot_bgcolor: colors.surface, // Gray-800 
+        paper_bgcolor: colors.surface, // Gray-800 
         font: { 
             family: 'Inter, system-ui, sans-serif', 
             size: 14, 
-            color: '#F3F4F6' // Gray-100 
+            color: colors.textPrimary // Gray-100 
         },
         title: {
             text: `${name} - Nível ${level}`,
             font: {
                 size: 24,
-                color: '#F3F4F6' // Gray-100 
+                color: colors.textPrimary // Gray-100 
             },
             y: 0.95
         },
         showgrid: true,
         gridwidth: 1,
-        gridcolor: 'rgba(243, 244, 246, 0.1)', // Gray-100
+        gridcolor: colors.gridLines, // Gray-100
         showlegend: false,
         displayModeBar: false,
         margin: {
@@ -181,9 +184,9 @@ export default function getLineCharts() {
         xaxis: {
             tickangle: -45,
             type: 'category',
-            color: '#F3F4F6', // Gray-100
+            color: colors.textPrimary, // Gray-100
             tickfont: { size: 12 },
-            gridcolor: 'rgba(243, 244, 246, 0.1)',
+            gridcolor: colors.gridLines,
             zeroline: false,
             title: {
                 text: 'Data',
@@ -194,24 +197,24 @@ export default function getLineCharts() {
             title: 'Valores',
             titlefont: { size: 16 },
             range: yaxisRange,
-            color: '#F3F4F6', // Gray-100
+            color: colors.textPrimary, // Gray-100
             tickvals: yTickValues,
             ticktext: yTickText,
             tickfont: { size: 12 },
-            gridcolor: 'rgba(243, 244, 246, 0.1)',
+            gridcolor: colors.gridLines,
             zeroline: false
         },
         shapes: shapes,
     };
 
     return (
-        <div className="min-h-screen w-full bg-gray-900 p-6">
+        <div className="min-h-screen w-full bg-background p-6">
             <Head>
                 <title>LabGraph - {name}</title>
             </Head>
             
             <div className="max-w-7xl mx-auto space-y-0">
-                <div className="bg-gray-900 p-4 rounded-lg">
+                <div className="bg-background p-4 rounded-lg">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <DateSelector 
                     initialDay={initialDay}
@@ -235,7 +238,7 @@ export default function getLineCharts() {
                     </div>
                 </div>
                 
-                <div className="bg-gray-800 flex justify-center content-center p-2 rounded-xl shadow-lg">
+                <div className="bg-surface flex justify-center content-center p-2 rounded-lg shadow-md">
                     <Plot
                         data={plotData}
                         layout={layout}

@@ -151,7 +151,7 @@ const AclUpdateResults: React.FC = () => {
           ${status.isProcessing ? 'opacity-50 cursor-not-allowed' : ''}
         `}
       >
-        {status.isProcessing ? 'Processing...' : 'Update CSV'}
+        {status.isProcessing ? 'Processando...' : 'Atualizar ACL'}
       </label>
       {status.error && <div className="mt-2 text-red-500">{status.error}</div>}
     </div>

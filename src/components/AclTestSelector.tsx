@@ -16,7 +16,7 @@ interface TestSelectorProps {
   unitValue: string;
 }
 
-const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTestName, setTestLevel, sd, mean, ownMean, ownSd, unitValue }) => {
+const AclTestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTestName, setTestLevel, sd, mean, ownMean, ownSd, unitValue }) => {
   return (
     <div className="flex items-center gap-2 text-textSecondary">
       <div className="flex items-center gap-2">
@@ -27,11 +27,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTes
           onChange={(e) => setTestName(e.target.value)}
         >
           {[
-            "ALB2", "ALP2S", "ALTL", "AMYL2", "ASTL", "BILD2",
-            "BILT3", "CA2", "CHOL2", "CK2", "CKMB2", "CL-I",
-            "CREJ2", "CRP4", "GGTI2", "GLUC3", "HDLC4", "K-I",
-            "LDHI2", "LIP", "MG-2", "NA-I", "PHOS2", "TRIGL",
-            "UA2", "UREL"
+            "TAP-20", "TTPA"
           ].map((test) => (
             <option key={test} value={test}>{test}</option>
           ))}
@@ -64,4 +60,4 @@ const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTes
   );
 };
 
-export default TestSelector;
+export default AclTestSelector;

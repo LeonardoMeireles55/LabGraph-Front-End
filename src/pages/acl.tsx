@@ -10,6 +10,7 @@ import TestSelector from '@/components/TestSelector';
 import colors from '../styles/colors';
 import UpdateResults from '@/components/UpdateResults';
 import NavBar from '@/components/NavBar';
+import AclTestSelector from '@/components/AclTestSelector';
 
 
 
@@ -31,21 +32,21 @@ export default function GetLineCharts() {
 
     const { width = 800, height = 600 } = useWindowDimensions();
 
-    const [testName, setTestName] = useState<string>('ALB2');
+    const [testName, setTestName] = useState<string>('TAP-20');
     const [testLevel, setTestLevel] = useState<number>(1);
     const [ownMean, setOwnMean] = useState<number>(0);
     const [ownSd, setOwnSd] = useState<number>(0);
     const [unitValue, setUnitValue] = useState<string>('');
 
-    const [initialMonth, setInitialMonth] = useState<number>(defaultDate.getMonth());
+    const [initialMonth, setInitialMonth] = useState<number>(defaultDate.getMonth() - 8);
     const [secondMonth, setSecondMonth] = useState<number>(defaultDate.getMonth() + 1);
     const [initialDay, setInitialDay] = useState<number>(10);
     const [secondDay, setSecondDay] = useState<number>(defaultDate.getDate());
     const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
     const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());    
 
-    const baseUrl = "https://68.183.141.155/biochemistry-analytics/results/search/date-range?name=";
-    const meanAndDeviationUrl = "https://68.183.141.155/biochemistry-analytics/results/mean-standard-deviation?name="
+    const baseUrl = "https://68.183.141.155/coagulation-analytics/results/search/date-range?name=";
+    const meanAndDeviationUrl = "https://68.183.141.155/coagulation-analytics/results/mean-standard-deviation?name="
     const url = `${baseUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
     const urlMeanAndDeviation = `${meanAndDeviationUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
 
@@ -81,6 +82,7 @@ export default function GetLineCharts() {
                 if (!response.ok) throw new Error('Network response was not ok');
 
                 const json = await response.json();
+                console.log(json);
                 setUnitValue(json[0].unit_value);
 
                 setListing(json);
@@ -250,7 +252,7 @@ export default function GetLineCharts() {
                     setSecondMonth={setSecondMonth}
                     setSecondYear={setSecondYear}/>
                     <div className="flex  ">
-                        <TestSelector 
+                        <AclTestSelector 
                         testName={testName} setTestName={setTestName} testLevel={testLevel} 
                         setTestLevel={setTestLevel} 
                         mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} unitValue={unitValue} />

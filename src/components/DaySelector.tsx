@@ -8,7 +8,7 @@ interface DaySelectorProps {
 const DaySelector: React.FC<DaySelectorProps> = ({ selectedDay, onDayChange }) => {
   return (
     <select
-      className="bg-muted text-gray-100 rounded px-2 py-1 text-sm"
+      className="bg-muted text-gray-100 rounded p-0 md:px-2 md:py-1 text-sm"
       value={selectedDay}
       onChange={(e) => onDayChange(+e.target.value)}
     >

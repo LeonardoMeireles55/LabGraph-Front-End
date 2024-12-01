@@ -13,7 +13,7 @@ const MonthSelector: React.FC<MonthSelectorProps> = ({ selectedMonth, onMonthCha
 
   return (
     <select
-      className="bg-muted text-textSecondary rounded px-2 py-1 text-sm"
+      className="bg-muted text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
       value={selectedMonth}
       onChange={(e) => onMonthChange(+e.target.value)}
     >

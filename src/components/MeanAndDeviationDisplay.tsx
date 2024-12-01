@@ -11,9 +11,9 @@ interface MeanAndDeviationDisplayProps {
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({ mean, sd, ownMean, ownSd, unitValue }) => {
   return (
     <><div className="w-full flex flex-col text-xs p-0 gap-0 m-0 text-textSecondary">
-      <span>Média Bula: {" ->"} </span>
+      <span>Média Bula: {"->"} </span>
       <span className='text-xs text-textPrimary'>{" " +  mean.toFixed(2)+ " "}{unitValue}</span>
-      <span>Desvio Bula: {" ->"} </span>
+      <span>Desvio Bula: {"->"} </span>
       <span className='text-xs text-textPrimary'>{" " + sd.toFixed(2)+ " "}{unitValue}</span>
     </div><div className="w-full flex flex-col text-xs p-0 gap-0 m-0 text-textSecondary">
         <span> Média Cal: </span>

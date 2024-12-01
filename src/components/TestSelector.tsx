@@ -55,8 +55,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTes
             >&#10003;
         </Link>
         <div className='hidden md:flex gap-1 w-full'>
-        {/* <UpdateResults /> */}
-        <AclUpdateResults />
+        <UpdateResults />
         <MeanAndDeviationDisplay mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} unitValue={unitValue} />
         </div>
 

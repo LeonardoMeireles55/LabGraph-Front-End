@@ -163,7 +163,7 @@ const UpdateResults: React.FC = () => {
           ${status.isProcessing ? 'opacity-50 cursor-not-allowed' : ''}
         `}
       >
-        {status.isProcessing ? 'Processing...' : 'Update'}
+        {status.isProcessing ? 'Processando...' : 'Atualizar'}
       </label>
     </div>
   );

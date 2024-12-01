@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import MeanAndDeviationDisplay from './MeanAndDeviationDisplay';
+import UpdateResults from './UpdateResults';
 
 interface TestSelectorProps {
   testName: string;
@@ -11,9 +12,10 @@ interface TestSelectorProps {
   sd: number;
   ownMean: number;
   ownSd: number;
+  unitValue: string;
 }
 
-const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTestName, setTestLevel, sd, mean, ownMean, ownSd }) => {
+const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTestName, setTestLevel, sd, mean, ownMean, ownSd, unitValue }) => {
   return (
     <div className="flex items-center gap-2 text-textSecondary">
       <div className="flex items-center gap-2">
@@ -51,7 +53,8 @@ const TestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTes
             target="_blank" href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit?userstoinvite=andersongomesbio@gmail.com&sharingaction=manageaccess&role=writer&pli=1#gid=1397277322"
             >&#10003;
         </Link>
-        <MeanAndDeviationDisplay mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} />
+        <UpdateResults />
+        <MeanAndDeviationDisplay mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} unitValue={unitValue} />
     </div>
   );
 };

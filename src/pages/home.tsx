@@ -19,6 +19,7 @@ interface ListingItem {
     mean: number;
     date: string;
     value: number;
+    unit_value: string;
 }
 
 interface ListingCollection extends Array<ListingItem> {}
@@ -33,10 +34,11 @@ export default function GetLineCharts() {
     const [testLevel, setTestLevel] = useState<number>(1);
     const [ownMean, setOwnMean] = useState<number>(0);
     const [ownSd, setOwnSd] = useState<number>(0);
+    const [unitValue, setUnitValue] = useState<string>('');
 
     const [initialMonth, setInitialMonth] = useState<number>(defaultDate.getMonth());
     const [secondMonth, setSecondMonth] = useState<number>(defaultDate.getMonth() + 1);
-    const [initialDay, setInitialDay] = useState<number>(1);
+    const [initialDay, setInitialDay] = useState<number>(10);
     const [secondDay, setSecondDay] = useState<number>(defaultDate.getDate());
     const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
     const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());    
@@ -49,6 +51,12 @@ export default function GetLineCharts() {
 
 
     const [listing, setListing] = useState<ListingCollection>([]);
+
+    const filter = (value: number, mean: number, sd: number) => {
+        if (value > mean + 3 * sd) return (mean + 3 * sd) + sd/3;
+        if (value < mean - 3 * sd) return (mean - 3 * sd) - sd/3;
+        return value;
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -69,10 +77,11 @@ export default function GetLineCharts() {
                 setOwnMean(jsonMeanAndDeviation.mean);
                 setOwnSd(jsonMeanAndDeviation.standardDeviation);
 
-
                 if (!response.ok) throw new Error('Network response was not ok');
 
                 const json = await response.json();
+                setUnitValue(json[0].unit_value);
+
                 setListing(json);
 
                 if (!listing.length) {
@@ -102,7 +111,10 @@ export default function GetLineCharts() {
 
     const plotData: any = [{
         x: dates,
-        y: values,
+        y: values.map(value => 
+            value < mean - 3 * sd || value > mean + 3 * sd 
+                ? filter(value, mean, sd) 
+                : value),
         type: 'scatter',
         mode: 'lines+markers+text',
         text: values.map(value => value.toFixed(2)),
@@ -234,8 +246,7 @@ export default function GetLineCharts() {
                         <TestSelector 
                         testName={testName} setTestName={setTestName} testLevel={testLevel} 
                         setTestLevel={setTestLevel} 
-                        mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} />
-                        <UpdateResults />
+                        mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} unitValue={unitValue} />
                         </div>
                     </div>
                 </div>

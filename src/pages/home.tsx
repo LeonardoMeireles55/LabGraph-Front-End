@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import DateSelector from '@/components/DateSelector';
 import TestSelector from '@/components/TestSelector';
 import colors from '../styles/colors';
+import UpdateResults from '@/components/UpdateResults';
 
 
 
@@ -234,6 +235,7 @@ export default function GetLineCharts() {
                         testName={testName} setTestName={setTestName} testLevel={testLevel} 
                         setTestLevel={setTestLevel} 
                         mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} />
+                        <UpdateResults />
                         </div>
                     </div>
                 </div>

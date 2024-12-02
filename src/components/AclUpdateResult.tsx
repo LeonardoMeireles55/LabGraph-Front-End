@@ -81,8 +81,6 @@ const AclUpdateResults: React.FC = () => {
         arrayValues.push(entryData);
       }
 
-      console.log(arrayValues);
-
       const jsonOutput = JSON.stringify(arrayValues, null, 4);
       await saveJsonFile(jsonOutput);
       await postResults(arrayValues);
@@ -151,7 +149,7 @@ const AclUpdateResults: React.FC = () => {
           ${status.isProcessing ? 'opacity-50 cursor-not-allowed' : ''}
         `}
       >
-        {status.isProcessing ? 'Processando...' : 'Atualizar ACL'}
+        {status.isProcessing ? 'Processando...' : 'Atualizar'}
       </label>
       {status.error && <div className="mt-2 text-red-500">{status.error}</div>}
     </div>

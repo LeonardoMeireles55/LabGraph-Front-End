@@ -148,7 +148,7 @@ const UpdateResults: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center mr-8 gap-0 text-textSecondary">
+    <div className="flex items-center mr-4 gap-0 text-textSecondary">
       <input
         type="file"
         id="fileInput"

@@ -10,18 +10,24 @@ interface MeanAndDeviationDisplayProps {
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({ mean, sd, ownMean, ownSd, unitValue }) => {
   return (
-    <><div className="w-full flex flex-col text-xs p-0 gap-0 m-0 text-textSecondary">
-      <span>Média Bula: </span>
-      <span className='text-xs text-textPrimary'>{" " +  mean.toFixed(2)+ " "}{unitValue}</span>
-      <span>Desvio Bula: </span>
-      <span className='text-xs text-textPrimary'>{" " + sd.toFixed(2)+ " "}{unitValue}</span>
-    </div><div className="w-full flex flex-col text-xs p-0 gap-0 m-0 text-textSecondary">
-        <span> Média Cal: </span>
-        <span className='text-xs text-textPrimary'>{" " + (typeof ownMean === 'number' && !isNaN(ownMean) ? ownMean.toFixed(2)+ " " : 0)}{unitValue}</span>
-        <span> Desvio Cal: </span>
-        <span className='text-xs text-textPrimary'>{" " + (typeof ownSd === 'number' && !isNaN(ownSd) ? ownSd.toFixed(2)+ " " : 0)}{unitValue}</span> 
-      </div></>
-
+    <div className="w-full flex flex-row text-xs gap-4 text-textSecondary">
+      <div className="flex flex-col">
+        <span>Média Bula:</span>
+        <span className="text-textPrimary">{mean.toFixed(2) + " "}{unitValue}</span>
+        <span>Desvio Bula:</span>
+        <span className="text-textPrimary">{sd.toFixed(2) + " "}{unitValue}</span>
+      </div>
+      <div className="flex flex-col">
+        <span>Média Calculado:</span>
+        <span className="text-textPrimary">
+          {typeof ownMean === 'number' && !isNaN(ownMean) ? ownMean.toFixed(2) + " " : "0"}{unitValue}
+        </span>
+        <span>Desvio Calculado:</span>
+        <span className="text-textPrimary">
+          {typeof ownSd === 'number' && !isNaN(ownSd) ? ownSd.toFixed(2) + " " : "0"}{unitValue}
+        </span>
+      </div>
+    </div>
   );
 };
 

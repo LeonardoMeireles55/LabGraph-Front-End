@@ -7,97 +7,118 @@ const NavBar: React.FC = () => {
   const navLinks = [
     { text: 'BIOQUÍMICA', url: '/' },
     { text: 'COAGULAÇÃO', url: '/acl' },
-
     { text: 'INFORMAÇÕES', url: 'https://github.com/LeonardoMeireles55/QualityLab-Pro-Backend' },
   ];
 
   return (
-    <nav
-      className="flex items-center justify-between px-4 py-3 rounded-md shadow-xl "
+    <nav 
+      className="fixed top-0 left-0 w-full shadow-md z-50"
       style={{
         backgroundColor: colors.background,
         borderBottom: `1px solid ${colors.textSecondary}`,
       }}
     >
-      <div className="flex items-center gap-2">
-        <div
-          className="h-8 w-8 rounded-full flex-shrink-0"
-          style={{ backgroundColor: colors.primary }}
-        ></div>
-        <span
-          className="text-lg font-semibold text-gray-800"
-          style={{ color: colors.textPrimary }}
-        >
-          LabGraph® 0.2
-        </span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <div 
+              className="h-10 w-10 rounded-full flex items-center justify-center shadow-md flex-shrink-0 mr-3"
+              style={{ 
+                backgroundColor: colors.primary,
+                boxShadow: `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)` 
+              }}
+            >
+              <span className="text-white text-lg font-bold">L</span>
+            </div>
+            <span
+              className="text-xl font-bold tracking-wide"
+              style={{ color: colors.textPrimary }}
+            >
+              LabGraph® 0.2
+            </span>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  className="px-3 py-2 text-xs font-medium transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-opacity-10"
+                  style={{ 
+                    color: colors.textSecondary,
+                    backgroundColor: colors.background + '10',
+                  }}
+                >
+                  {link.text}
+                </a>
+              ))}
+              <button
+                className="ml-4 px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
+                style={{
+                  backgroundColor: colors.accent,
+                  color: colors.textPrimary,
+                }}
+              >
+                Em breve
+              </button>
+            </div>
+          </div>
+
+          <div className="-mr-2 flex md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 transition-all duration-300"
+              style={{
+                color: colors.textPrimary,
+                backgroundColor: colors.textPrimary + '10',
+              }}
+            >
+              <span className="sr-only">Toggle menu</span>
+              <div className="space-y-1.5">
+                <span className="block w-6 h-0.5 rounded" style={{ backgroundColor: colors.textSecondary }}></span>
+                <span className="block w-6 h-0.5 rounded" style={{ backgroundColor: colors.textSecondary }}></span>
+                <span className="block w-6 h-0.5 rounded" style={{ backgroundColor: colors.textSecondary }}></span>
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <ul className="hidden md:flex items-center gap-6">
-      {navLinks.map((link, index) => (
-            <li key={index}>
-              <a
-                href={link.url}
-                className="text-sm font-medium transition-colors duration-200 hover:text-blue-600"
-                style={{ color: colors.textSecondary }}
-              >
-                {link.text}
-              </a>
-          </li>
-        ))}
-      </ul>
-
-      <button
-        className="hidden md:inline-block px-4 py-2 rounded-md text-sm font-semibold"
-        style={{
-          backgroundColor: colors.accent,
-          color: colors.textPrimary,
-        }}
-      >
-        Em breve
-      </button>
-
-      <button
-        className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        <span className="sr-only">Toggle navigation</span>
-        <div className="space-y-2">
-          <span className="block w-6 h-0.5 bg-gray-600"></span>
-          <span className="block w-6 h-0.5 bg-gray-600"></span>
-          <span className="block w-6 h-0.5 bg-gray-600"></span>
-        </div>
-      </button>
-
       {isMenuOpen && (
-        <ul
-          className="absolute top-16 left-0 w-full bg-white shadow-md flex flex-col items-center gap-4 py-4 md:hidden"
-          style={{
+        <div 
+          className="md:hidden absolute w-full shadow-lg"
+          style={{ 
             backgroundColor: colors.background,
+            borderBottom: `1px solid ${colors.textSecondary}`,
           }}
         >
-          {navLinks.map((link, index) => (
-            <li key={index}>
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navLinks.map((link, index) => (
               <a
+                key={index}
                 href={link.url}
-                className="text-sm font-medium transition-colors duration-200 hover:text-blue-600"
-                style={{ color: colors.textSecondary }}
+                className="block px-3 py-2 rounded-md text-xs font-medium transition-all duration-300 ease-in-out"
+                style={{ 
+                  color: colors.textSecondary,
+                  backgroundColor: colors.muted + '20',
+                }}
               >
                 {link.text}
               </a>
-            </li>
-          ))}
-          <li>
+            ))}
             <button
-              className="px-4 py-2 rounded-md text-sm font-semibold"
+              className="w-full mt-2 px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition-all duration-300 ease-in-out"
               style={{
                 backgroundColor: colors.accent,
-                color: colors.background,
+                color: colors.textPrimary,
               }}
             >
               Em breve
             </button>
-          </li>
-        </ul>
+          </div>
+        </div>
       )}
     </nav>
   );

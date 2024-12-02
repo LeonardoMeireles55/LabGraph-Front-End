@@ -8,7 +8,6 @@ import Footer from '@/components/Footer';
 import DateSelector from '@/components/DateSelector';
 import TestSelector from '@/components/TestSelector';
 import colors from '../styles/colors';
-import UpdateResults from '@/components/UpdateResults';
 import NavBar from '@/components/NavBar';
 
 
@@ -44,8 +43,8 @@ export default function GetLineCharts() {
     const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
     const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());    
 
-    const baseUrl = "https://68.183.141.155/biochemistry-analytics/results/search/date-range?name=";
-    const meanAndDeviationUrl = "https://68.183.141.155/biochemistry-analytics/results/mean-standard-deviation?name="
+    const baseUrl = "http://localhost/api/biochemistry-analytics/results/search/date-range?name=";
+    const meanAndDeviationUrl = "http://localhost/api/biochemistry-analytics/results/mean-standard-deviation?name="
     const url = `${baseUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
     const urlMeanAndDeviation = `${meanAndDeviationUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
 
@@ -168,8 +167,8 @@ export default function GetLineCharts() {
     const layout: any = {
 
         width: width < 640 ? width * 1.1 : // mobile
-        width < 1024 ? width * 1.1 : // tablet
-        Math.max(width * 0.85, 800), // desktop
+        width < 1024 ? width * 0.85 : // tablet
+        Math.max(width * 0.80, 800), // desktop
         height: height < 400 ? height * 0.8 : // telas muito pequenas
         height < 600 ? height * 0.7 : // telas médias
         Math.max(height * 0.7, 500), // telas grandes
@@ -228,14 +227,14 @@ export default function GetLineCharts() {
     };
 
     return (
-        <div className="min-h-screen w-full flex flex-col  bg-background p-2 sm:p-4 md:p-6">
+        <div className="min-h-screen w-full flex flex-col bg-background p-2 sm:p-4 md:p-6">
         <NavBar />
         <Head>
             <title>LabGraph - {name}</title>
         </Head>
-        <div className="flex flex-col w-full mx-auto md:w-4/5 lg:w-3/4 xl:max-w-7xl mt-6">
+        <div className="flex flex-col w-full mx-auto md:w-5/6 lg:w-3/4 xl:max-w-7xl">
             <div className="flex  justify-center bg-background p-2 sm:p-4 rounded-lg">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 sm:gap-4 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-0 mt-16">
                     <DateSelector 
                     initialDay={initialDay}
                     initialMonth={initialMonth}
@@ -249,7 +248,7 @@ export default function GetLineCharts() {
                     setSecondDay={setSecondDay}
                     setSecondMonth={setSecondMonth}
                     setSecondYear={setSecondYear}/>
-                    <div className="flex  ">
+                    <div className="flex">
                         <TestSelector 
                         testName={testName} setTestName={setTestName} testLevel={testLevel} 
                         setTestLevel={setTestLevel} 
@@ -257,8 +256,7 @@ export default function GetLineCharts() {
                         </div>
                     </div>
                 </div>
-                
-                <div className="bg-surface flex justify-center content-center p-6 rounded-lg shadow-md mt-1">
+                <div className="bg-surface w-full flex justify-center content-center p-6 rounded-lg shadow-md mt-1">
                     <Plot
                         data={plotData}
                         layout={layout}

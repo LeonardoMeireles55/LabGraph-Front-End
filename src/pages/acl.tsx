@@ -82,7 +82,6 @@ export default function GetLineCharts() {
                 if (!response.ok) throw new Error('Network response was not ok');
 
                 const json = await response.json();
-                console.log(json);
                 setUnitValue(json[0].unit_value);
 
                 setListing(json);
@@ -170,8 +169,8 @@ export default function GetLineCharts() {
     const layout: any = {
 
         width: width < 640 ? width * 1.1 : // mobile
-        width < 1024 ? width * 1.1 : // tablet
-        Math.max(width * 0.85, 800), // desktop
+        width < 1024 ? width * 0.85 : // tablet
+        Math.max(width * 0.80, 800), // desktop
         height: height < 400 ? height * 0.8 : // telas muito pequenas
         height < 600 ? height * 0.7 : // telas médias
         Math.max(height * 0.7, 500), // telas grandes
@@ -235,9 +234,9 @@ export default function GetLineCharts() {
         <Head>
             <title>LabGraph - {name}</title>
         </Head>
-        <div className="flex flex-col w-full mx-auto md:w-4/5 lg:w-3/4 xl:max-w-7xl mt-6">
+        <div className="flex flex-col w-full mx-auto md:w-5/6 lg:w-3/4 xl:max-w-7xl">
             <div className="flex  justify-center bg-background p-2 sm:p-4 rounded-lg">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-0 sm:gap-4 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-0 mt-16">
                     <DateSelector 
                     initialDay={initialDay}
                     initialMonth={initialMonth}

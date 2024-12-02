@@ -98,7 +98,7 @@ export default function GetLineCharts() {
             }
         };
         fetchData();
-    }, [testName, testLevel, initialYear, initialMonth, initialDay, secondYear, secondMonth, secondDay, url]);
+    }, [testName, testLevel, initialYear, initialMonth, initialDay, secondYear, secondMonth, secondDay, url, listing.length, urlMeanAndDeviation]);
 
     if (!listing.length) return null;
 

@@ -1,36 +1,32 @@
 # Etapa 1: Build
-FROM node:18 AS builder
+FROM node:20 AS builder
 
-# Definindo o diretório de trabalho
 WORKDIR /app
 
-# Copiando o package.json e o package-lock.json
+# Copie apenas os arquivos necessários para instalar dependências
 COPY package*.json ./
 
-# Instalando as dependências
-RUN npm install
+# Instale dependências apenas uma vez e use cache do Docker
+RUN npm ci
 
-# Copiando os arquivos do projeto
+# Copie os arquivos do projeto
 COPY . .
 
-# Executando o build da aplicação Next.js
+# Execute o build da aplicação
 RUN npm run build
 
 # Etapa 2: Produção
-FROM node:18
+FROM node:20-slim AS runner
 
-# Definindo o diretório de trabalho
 WORKDIR /app
 
-# Copiando as dependências e o build da etapa de build
+# Copie apenas os arquivos necessários da etapa de build
 COPY --from=builder /app/.next /app/.next
 COPY --from=builder /app/package*.json /app/
 
-# Instalando as dependências na produção
-RUN npm install --production
+# Instale apenas dependências de produção
+RUN npm ci --omit=dev
 
-# Expondo a porta que o Next.js vai rodar
 EXPOSE 3000
 
-# Definindo o comando para iniciar o Next.js em produção
 CMD ["npm", "start"]

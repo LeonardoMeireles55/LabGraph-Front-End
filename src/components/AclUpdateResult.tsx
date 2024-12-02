@@ -112,7 +112,7 @@ const AclUpdateResults: React.FC = () => {
   };
 
   const postResults = async (data: ProcessedData[]) => {
-    const endpointUrl = 'https://68.183.141.155/biochemistry-analytics';
+    const endpointUrl = 'https://leomeireles-dev.xyz/api/coagulation-analytics';
     try {
       const response = await fetch(endpointUrl, {
         method: 'POST',

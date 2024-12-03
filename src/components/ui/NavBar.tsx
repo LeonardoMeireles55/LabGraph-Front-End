@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import colors from '../styles/colors';
+import colors from '../../styles/colors';
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { text: 'BIOQUÍMICA', url: '/' },
-    { text: 'COAGULAÇÃO', url: '/acl' },
+    { text: 'BIOQUÍMICA', url: '/biochemistry' },
+    { text: 'COAGULAÇÃO', url: '/coagulation' },
     { text: 'INFORMAÇÕES', url: 'https://github.com/LeonardoMeireles55/QualityLab-Pro-Backend' },
   ];
 

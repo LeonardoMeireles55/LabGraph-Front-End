@@ -2,21 +2,22 @@ import Link from 'next/link';
 import React from 'react';
 import MeanAndDeviationDisplay from './MeanAndDeviationDisplay';
 import UpdateResults from './UpdateResults';
-import AclUpdateResults from './AclUpdateResult';
 
 interface TestSelectorProps {
+  list: string[];
   testName: string;
   testLevel: number;
   setTestName: (testName: string) => void;
   setTestLevel: (testLevel: number) => void;
   mean: number;
   sd: number;
-  ownMean: number;
-  ownSd: number;
-  unitValue: string;
+  ownMean: number | null;
+  ownSd: number | null;
+  unitValue: string | null;
+  analyticsType: string;
 }
 
-const AclTestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, setTestName, setTestLevel, sd, mean, ownMean, ownSd, unitValue }) => {
+const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, testName, testLevel, setTestName, setTestLevel, sd, mean, ownMean, ownSd, unitValue }) => {
   return (
     <div className="flex items-center gap-2 text-textSecondary">
       <div className="flex items-center gap-2">
@@ -26,9 +27,7 @@ const AclTestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, set
           value={testName}
           onChange={(e) => setTestName(e.target.value)}
         >
-          {[
-            "TAP-20", "TTPA"
-          ].map((test) => (
+          {list.map((test) => (
             <option key={test} value={test}>{test}</option>
           ))}
         </select>
@@ -50,9 +49,8 @@ const AclTestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, set
             target="_blank" href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit?userstoinvite=andersongomesbio@gmail.com&sharingaction=manageaccess&role=writer&pli=1#gid=1397277322"
             >&#10003;
         </Link>
-        <div className='hidden md:flex gap-1 w-full'>
-        {/* <UpdateResults /> */}
-        <AclUpdateResults />
+        <div className='hidden md:flex gap-0 w-full text-xs'>
+        <UpdateResults alc={analyticsType}/>
         <MeanAndDeviationDisplay mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} unitValue={unitValue} />
         </div>
 
@@ -60,4 +58,4 @@ const AclTestSelector: React.FC<TestSelectorProps> = ({ testName, testLevel, set
   );
 };
 
-export default AclTestSelector;
+export default TestSelector;

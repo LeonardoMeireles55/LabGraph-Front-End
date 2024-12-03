@@ -3,9 +3,9 @@ import React from 'react';
 interface MeanAndDeviationDisplayProps {
   mean: number;
   sd: number;
-  ownMean: number;
-  ownSd: number;
-  unitValue: string;
+  ownMean: number | null;
+  ownSd: number | null;
+  unitValue: string | null;
 }
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({ mean, sd, ownMean, ownSd, unitValue }) => {

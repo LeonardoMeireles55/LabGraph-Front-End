@@ -1,7 +1,7 @@
-import GetLineCharts from './home'
+import Biochemistry from './biochemistry'
 
 export default function Home() {
   return (
-    GetLineCharts()
+    Biochemistry()
   )
 }

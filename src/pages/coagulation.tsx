@@ -1,15 +1,14 @@
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import Head from 'next/head';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from '@/components/ui/Footer';
 import DateSelector from '@/components/functional/DateSelector';
 import TestSelector from '@/components/chart/TestSelector';
-import colors from '../styles/colors';
 import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
 import useFetchListing from '@/hooks/useFetchListing';
 import Loading from '@/components/ui/Loading';
-import Title from '@/components/ui/Title';
+import colors from '@/styles/colors';
 
 
 
@@ -22,7 +21,6 @@ interface ListingItem {
     value: number;
     unit_value: string;
 }
-
 interface ListingCollection extends Array<ListingItem> {}
 
 const list = ["TAP-20", "TTPA"];
@@ -95,7 +93,7 @@ export default function Coagulation() {
                         </div>
                     </div>
                 </div>
-                {!listing[0] ? <Loading /> : <ControlChart listing={listing} width={width} height={height} colors={colors} />}
+                {!listing[0] ? <Loading /> : <ControlChart listing={listing} width={width} height={height} colors={colors.lightColors} />}
             </div>
             <Footer />
         </div>

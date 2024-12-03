@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Footer from '@/components/ui/Footer';
 import DateSelector from '@/components/functional/DateSelector';
 import TestSelector from '@/components/chart/TestSelector';
-import colors from '../styles/colors';
 import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
 import useFetchListing from '@/hooks/useFetchListing';
 import Loading from '@/components/ui/Loading';
+import colors from '../styles/colors';
 
 interface ListingItem {
     name: string;
@@ -97,7 +97,7 @@ export default function Biochemistry() {
                         </div>
                     </div>
                 </div>
-                {!listing[0] ? <Loading /> :  <ControlChart listing={listing} width={width} height={height} colors={colors} />}
+                {!listing[0] ? <Loading /> :  <ControlChart listing={listing} width={width} height={height} colors={colors.lightColors} />}
             </div>
             <Footer  />
         </div>

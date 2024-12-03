@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss'
-import colors  from './src/styles/colors'
+import colors from './src/styles/colors'
 
 const config: Config = {
   content: [
@@ -16,17 +16,17 @@ const config: Config = {
       },
     },
     colors: {
-      primary: colors.primary,
-      secondary: colors.secondary,
-      accent: colors.accent,
-      danger: colors.danger,
-      background: colors.background,
-      surface: colors.surface,
-      textPrimary: colors.textPrimary,
-      textSecondary: colors.textSecondary,
-      muted: colors.muted,
-      gridLines: colors.gridLines,
-      border: colors.border,
+      primary: colors.lightColors.primary,
+      secondary: colors.lightColors.secondary,
+      accent: colors.lightColors.accent,
+      danger: colors.lightColors.danger,
+      background: colors.lightColors.background,
+      surface: colors.lightColors.surface,
+      textPrimary: colors.lightColors.textPrimary,
+      textSecondary: colors.lightColors.textSecondary,
+      muted: colors.lightColors.muted,
+      gridLines: colors.lightColors.gridLines,
+      border: colors.lightColors.border,
     },
   },
   plugins: [],

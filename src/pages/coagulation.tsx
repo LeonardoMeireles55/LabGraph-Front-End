@@ -8,6 +8,8 @@ import colors from '../styles/colors';
 import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
 import useFetchListing from '@/hooks/useFetchListing';
+import Loading from '@/components/ui/Loading';
+import Title from '@/components/ui/Title';
 
 
 
@@ -61,18 +63,13 @@ export default function Coagulation() {
         secondDay: secondDay,
       });
 
-      if (!listing.length) {
-        return <div>Loading...</div>;
-      }
-
     const data = listing;
-    const { mean, sd, name, } = data[0];
 
     return (
-        <div className="h-screen w-full flex flex-col bg-background p-2 md:p-4">
+        <div className="w-full h-screen flex flex-col bg-background p-2 md:p-4">
         <NavBar />
         <Head>
-            <title>LabGraph - {name}</title>
+            <title>{`LabGraph - ${testName || ''}`}</title>
         </Head>
         <div className="flex flex-col w-full mx-auto md:w-5/6 lg:w-3/4 xl:max-w-7xl">
             <div className="flex  justify-center bag-background p-2 sm:p-4 rounded-lg">
@@ -90,17 +87,17 @@ export default function Coagulation() {
                     setSecondDay={setSecondDay}
                     setSecondMonth={setSecondMonth}
                     setSecondYear={setSecondYear}/>
-                    <div className="flex  ">
-                        <TestSelector analyticsType='coagulation' list={list}
+                    <div className="flex">
+                        {!listing[0] ? <Loading /> : <TestSelector analyticsType={"coagulation"} list={list}
                         testName={testName} setTestName={setTestName} testLevel={testLevel} 
                         setTestLevel={setTestLevel} 
-                        mean={mean} sd={sd} ownMean={ownMeanValue} ownSd={ownSdValue} unitValue={unitValues} />
+                        mean={listing[0].mean} sd={listing[0].sd} ownMean={ownMeanValue} ownSd={ownSdValue} unitValue={unitValues} />}
                         </div>
                     </div>
                 </div>
                 
-                <div className="bg-surface flex justify-center content-center p-6 rounded-lg shadow-md mt-1">
-                <ControlChart listing={data} width={width} height={height} colors={colors} />
+                <div className="bg-surface w-full h-5/6 flex justify-center content-center rounded-lg shadow-md mt-2">
+                {!listing[0] ? <Loading /> : <ControlChart listing={listing} width={width} height={height} colors={colors} />}
                 </div>
             </div>
             <Footer />

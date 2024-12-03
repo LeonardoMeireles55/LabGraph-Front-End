@@ -51,7 +51,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, testNa
             >&#10003;
         </Link>
         <div className='hidden md:flex gap-0 w-full text-xs'>
-        <UpdateResults alc={analyticsType}/>
+        <UpdateResults analyticsType={analyticsType}/>
         <MeanAndDeviationDisplay mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} unitValue={unitValue} />
         </div>
 

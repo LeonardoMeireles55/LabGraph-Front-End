@@ -3,6 +3,7 @@ const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 import { Layout, Shape, ScatterData } from 'plotly.js';
 import dynamic from 'next/dynamic';
 import formatarDate from '../functional/FormatDate';
+import Loading from '../ui/Loading';
 
 interface DataEntry {
   date: string;
@@ -50,6 +51,7 @@ const filter = (value: number, mean: number, sd: number) => {
 };
 
 const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, colors }) => {
+  
   const data = listing;
   const dates = data.map(entry => formatarDate(entry.date).toString());
   const values = data.map(entry => entry.value);
@@ -114,12 +116,12 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, col
   }));
 
   const layout: Partial<Layout> = {
-    width: width < 640 ? width * 1.1 : 
+    width: width < 640 ? width * 1.0 : 
            width < 1024 ? width * 0.85 : 
            Math.max(width * 0.80, 800),
-    height: height < 400 ? height * 0.8 : 
-            height < 600 ? height * 0.7 : 
-            Math.max(height * 0.7, 500),
+    height: height < 400 ? height * 0.7 : 
+            height < 600 ? height * 0.75 : 
+            Math.max(height * 0.1, 500),
     plot_bgcolor: colors.surface,
     paper_bgcolor: colors.surface,
     font: { 

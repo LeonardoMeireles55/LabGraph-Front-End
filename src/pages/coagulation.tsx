@@ -7,6 +7,7 @@ import TestSelector from '@/components/chart/TestSelector';
 import colors from '../styles/colors';
 import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
+import useFetchListing from '@/hooks/useFetchListing';
 
 
 
@@ -32,6 +33,7 @@ export default function Coagulation() {
 
     const [testName, setTestName] = useState<string>('TAP-20');
     const [testLevel, setTestLevel] = useState<number>(1);
+
     const [ownMean, setOwnMean] = useState<number>(0);
     const [ownSd, setOwnSd] = useState<number>(0);
     const [unitValue, setUnitValue] = useState<string>('');
@@ -48,60 +50,23 @@ export default function Coagulation() {
     const url = `${baseUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
     const urlMeanAndDeviation = `${meanAndDeviationUrl}${testName}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
 
+    const {listing, ownMeanValue, ownSdValue, unitValues} = useFetchListing({
+        url: url,
+        urlMeanAndDeviation: urlMeanAndDeviation,
+        initialYear: initialYear,
+        initialMonth: initialMonth,
+        initialDay: initialDay,
+        secondYear: secondYear,
+        secondMonth: secondMonth,
+        secondDay: secondDay,
+      });
 
-
-    const [listing, setListing] = useState<ListingCollection>([]);
-
-    const filter = (value: number, mean: number, sd: number) => {
-        if (value > mean + 3 * sd) return (mean + 3 * sd) + sd/3;
-        if (value < mean - 3 * sd) return (mean - 3 * sd) - sd/3;
-        return value;
-    };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-
-                const responseMeanAndDeviation = await fetch(urlMeanAndDeviation, {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-
-                if (!responseMeanAndDeviation.ok) throw new Error('Network response was not ok');
-
-                const jsonMeanAndDeviation = await responseMeanAndDeviation.json();
-                setOwnMean(jsonMeanAndDeviation.mean);
-                setOwnSd(jsonMeanAndDeviation.standardDeviation);
-
-                if (!response.ok) throw new Error('Network response was not ok');
-
-                const json = await response.json();
-                setUnitValue(json[0].unit_value);
-
-                setListing(json);
-
-                if (!listing.length) {
-                    setInitialYear(initialYear);
-                    setInitialMonth(initialMonth);
-                    setSecondYear(secondYear);
-                    setSecondMonth(secondMonth);
-                    setSecondDay(secondDay);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchData();
-    }, [testName, testLevel, initialYear, initialMonth, initialDay, secondYear, secondMonth, secondDay, url, listing.length, urlMeanAndDeviation]);
-
-    if (!listing.length) return null;
+      if (!listing.length) {
+        return <div>Loading...</div>;
+      }
 
     const data = listing;
-    const { mean, sd, name } = data[0];
+    const { mean, sd, name, } = data[0];
 
     return (
         <div className="h-screen w-full flex flex-col bg-background p-2 md:p-4">
@@ -110,7 +75,7 @@ export default function Coagulation() {
             <title>LabGraph - {name}</title>
         </Head>
         <div className="flex flex-col w-full mx-auto md:w-5/6 lg:w-3/4 xl:max-w-7xl">
-            <div className="flex  justify-center bg-background p-2 sm:p-4 rounded-lg">
+            <div className="flex  justify-center bag-background p-2 sm:p-4 rounded-lg">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-0 mt-16">
                     <DateSelector 
                     initialDay={initialDay}
@@ -126,10 +91,10 @@ export default function Coagulation() {
                     setSecondMonth={setSecondMonth}
                     setSecondYear={setSecondYear}/>
                     <div className="flex  ">
-                    <TestSelector analyticsType='coagulation' list={list}
+                        <TestSelector analyticsType='coagulation' list={list}
                         testName={testName} setTestName={setTestName} testLevel={testLevel} 
                         setTestLevel={setTestLevel} 
-                        mean={mean} sd={sd} ownMean={ownMean} ownSd={ownSd} unitValue={unitValue} />
+                        mean={mean} sd={sd} ownMean={ownMeanValue} ownSd={ownSdValue} unitValue={unitValues} />
                         </div>
                     </div>
                 </div>

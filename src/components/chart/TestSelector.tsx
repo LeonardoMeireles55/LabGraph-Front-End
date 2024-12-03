@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import MeanAndDeviationDisplay from './MeanAndDeviationDisplay';
 import UpdateResults from './UpdateResults';
+import Loading from '../ui/Loading';
 
 interface TestSelectorProps {
   list: string[];

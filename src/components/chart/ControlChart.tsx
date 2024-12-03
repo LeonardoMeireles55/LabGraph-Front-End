@@ -49,10 +49,10 @@ const calculateResponsiveLayout = (width: number, height: number) => {
   const dimensions = {
     width: width < breakpoints.sm ? width * 0.95 :
            width < breakpoints.md ? width * 0.9 :
-           width < breakpoints.lg ? width * 0.85 :
+           width < breakpoints.lg ? width * 0.80 :
            Math.min(width * 0.8, 1200),
     height: height < 400 ? height * 0.8 :
-            height < 600 ? height * 0.75 :
+            height < 600 ? height * 0.68 :
             Math.min(height * 0.7, 800),
     margin: {
       l: width < breakpoints.sm ? 40 : 80,
@@ -190,14 +190,14 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, col
   };
 
   return (
-    <div className="bg-surface w-full h-5/6 mt-auto flex justify-center content-center rounded-lg shadow-md">
+    <div className="bg-surface w-full flex justify-center mt-12 p-1 md:mt-0 rounded-lg shadow-md">
     <Plot
       data={plotData}
       layout={layout}
       config={{ 
         responsive: true, 
         displayModeBar: false,
-        scrollZoom: width >= 768,
+        scrollZoom: false,
         modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
       }}
     />

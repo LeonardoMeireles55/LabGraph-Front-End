@@ -22,7 +22,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, testNa
   return (
     <div className="flex items-center gap-2 text-textSecondary">
       <div className="flex items-center gap-2">
-        <span className="text-xs md:text-sm font-medium">Analíto:</span>
+        <span className="text-xs md:text-sm font-medium">Teste:</span>
         <select 
           className="bg-muted text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
           value={testName}

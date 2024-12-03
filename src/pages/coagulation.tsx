@@ -66,13 +66,13 @@ export default function Coagulation() {
     const data = listing;
 
     return (
-        <div className="w-full h-screen flex flex-col bg-background p-2 md:p-4">
+        <div className="w-full h-screen flex justify-center flex-col bg-background p-2 md:p-4">
         <NavBar />
         <Head>
             <title>{`LabGraph - ${testName || ''}`}</title>
         </Head>
-        <div className="flex flex-col w-full mx-auto md:w-5/6 lg:w-3/4 xl:max-w-7xl">
-            <div className="flex  justify-center bag-background p-2 sm:p-4 rounded-lg">
+        <div className="flex flex-col justify-center content-center w-full mx-auto md:w-5/6 lg:w-3/4 xl:max-w-7xl p-4">
+        <div className="flex justify-center bg-background p-2 sm:p-4 rounded-lg">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-0 mt-16">
                     <DateSelector 
                     initialDay={initialDay}
@@ -95,10 +95,7 @@ export default function Coagulation() {
                         </div>
                     </div>
                 </div>
-                
-                <div className="bg-surface w-full h-5/6 flex justify-center content-center rounded-lg shadow-md">
                 {!listing[0] ? <Loading /> : <ControlChart listing={listing} width={width} height={height} colors={colors} />}
-                </div>
             </div>
             <Footer />
         </div>

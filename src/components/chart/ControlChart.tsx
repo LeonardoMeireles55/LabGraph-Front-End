@@ -3,16 +3,6 @@ const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 import { Layout, Shape, ScatterData } from 'plotly.js';
 import dynamic from 'next/dynamic';
 import formatarDate from '../functional/FormatDate';
-import Loading from '../ui/Loading';
-
-interface DataEntry {
-  date: string;
-  value: number;
-  mean: number;
-  sd: number;
-  name: string;
-  level: string;
-}
 
 interface ListingItem {
     name: string;
@@ -23,7 +13,6 @@ interface ListingItem {
     value: number;
     unit_value: string;
 }
-
 
 interface ControlChartProps {
   listing: ListingItem[];
@@ -43,19 +32,52 @@ interface ControlChartProps {
   };
 }
 
-
 const filter = (value: number, mean: number, sd: number) => {
   if (value > mean + 3 * sd) return (mean + 3 * sd) + sd/3;
   if (value < mean - 3 * sd) return (mean - 3 * sd) - sd/3;
   return value;
 };
 
+const calculateResponsiveLayout = (width: number, height: number) => {
+  const breakpoints = {
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280
+  };
+
+  const dimensions = {
+    width: width < breakpoints.sm ? width * 0.95 :
+           width < breakpoints.md ? width * 0.9 :
+           width < breakpoints.lg ? width * 0.85 :
+           Math.min(width * 0.8, 1200),
+    height: height < 400 ? height * 0.8 :
+            height < 600 ? height * 0.75 :
+            Math.min(height * 0.7, 800),
+    margin: {
+      l: width < breakpoints.sm ? 40 : 80,
+      r: width < breakpoints.sm ? 20 : 50,
+      t: width < breakpoints.sm ? 60 : 80,
+      b: width < breakpoints.sm ? 60 : 80,
+    },
+    font: {
+      title: width < breakpoints.sm ? 14 : 24,
+      axis: width < breakpoints.sm ? 10 : 16,
+      ticks: width < breakpoints.sm ? 8 : 12,
+      values: width < breakpoints.sm ? 8 : 12
+    }
+  };
+
+  return dimensions;
+};
+
 const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, colors }) => {
-  
   const data = listing;
   const dates = data.map(entry => formatarDate(entry.date).toString());
   const values = data.map(entry => entry.value);
   const { mean, sd, name, level } = data[0];
+
+  const responsive = calculateResponsiveLayout(width, height);
 
   const yaxisRange = [mean - (3 * 1.2) * sd, mean + (3 * 1.2) * sd];
   const yTickValues = [mean - 3 * sd, mean - 2 * sd, mean - sd, mean, mean + sd, mean + 2 * sd, mean + 3 * sd];
@@ -70,14 +92,14 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, col
     type: 'scatter',
     mode: 'text+lines+markers',
     text: values.map(value => value.toFixed(2)),
-    textposition: 'top center',
+    textposition: width < 768 ? 'top right' : 'top center',
     textfont: { 
-      size: 12, 
+      size: responsive.font.values, 
       color: colors.textSecondary
     },
     marker: { 
       color: colors.primary,
-      size: 8,
+      size: width < 768 ? 2 : 4,
       line: {
         color: colors.border,
         width: 1
@@ -85,7 +107,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, col
     },
     line: {
       color: colors.primary,
-      width: 2
+      width: width < 768 ? 1 : 2
     },
     name: 'Valores',
   }];
@@ -110,65 +132,55 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, col
     y1: mean + line.multiple * sd,
     line: { 
       color: line.color, 
-      width: 1.5, 
+      width: width < 768 ? 1 : 2, 
       dash: 'dash' 
     },
   }));
 
   const layout: Partial<Layout> = {
-    width: width < 640 ? width * 1.0 : 
-           width < 1024 ? width * 0.85 : 
-           Math.max(width * 0.80, 800),
-    height: height < 400 ? height * 0.7 : 
-            height < 600 ? height * 0.75 : 
-            Math.max(height * 0.1, 500),
+    width: responsive.width,
+    height: responsive.height,
     plot_bgcolor: colors.surface,
     paper_bgcolor: colors.surface,
     font: { 
       family: 'Inter, system-ui, sans-serif', 
-      size: width < 640 ? 8 : 14, 
+      size: responsive.font.ticks, 
       color: colors.textPrimary
     },
     title: {
       text: `${name} - Nível ${level}`,
       font: {
-        size: width < 640 ? 14 : 24,
+        size: responsive.font.title,
         color: colors.textPrimary
       },
       y: 0.95
     },
     showlegend: false,
-    margin: {
-      l: 80,
-      r: 50,
-      t: 80,
-      b: 80,
-      pad: 5
-    },
+    margin: responsive.margin,
     xaxis: {
-      tickangle: -45,
+      tickangle: width < 768 ? -60 : -45,
       type: 'category',
       color: colors.textPrimary,
-      tickfont: { size: width < 640 ? 8 : 12 },
+      tickfont: { size: responsive.font.ticks },
       gridcolor: colors.gridLines,
       gridwidth: 1,
       showgrid: true,
       zeroline: false,
       title: {
         text: 'Data',
-        font: { size: width < 640 ? 10 : 16 }
+        font: { size: responsive.font.axis }
       }
     },
     yaxis: {
       title: {
         text: 'Valores',
-        font: { size: width < 640 ? 10 : 16 }
+        font: { size: responsive.font.axis }
       },
       range: yaxisRange,
       color: colors.textPrimary,
       tickvals: yTickValues,
       ticktext: yTickText,
-      tickfont: { size: width < 640 ? 10 : 12 },
+      tickfont: { size: responsive.font.ticks },
       gridcolor: colors.gridLines,
       gridwidth: 1,
       showgrid: true,
@@ -178,11 +190,18 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, col
   };
 
   return (
+    <div className="bg-surface w-full h-5/6 mt-auto flex justify-center content-center rounded-lg shadow-md">
     <Plot
       data={plotData}
       layout={layout}
-      config={{ responsive: true, displayModeBar: false }}
+      config={{ 
+        responsive: true, 
+        displayModeBar: false,
+        scrollZoom: width >= 768,
+        modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
+      }}
     />
+    </div>
   );
 };
 

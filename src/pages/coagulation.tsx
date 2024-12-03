@@ -96,7 +96,7 @@ export default function Coagulation() {
                     </div>
                 </div>
                 
-                <div className="bg-surface w-full h-5/6 flex justify-center content-center rounded-lg shadow-md mt-2">
+                <div className="bg-surface w-full h-5/6 flex justify-center content-center rounded-lg shadow-md">
                 {!listing[0] ? <Loading /> : <ControlChart listing={listing} width={width} height={height} colors={colors} />}
                 </div>
             </div>

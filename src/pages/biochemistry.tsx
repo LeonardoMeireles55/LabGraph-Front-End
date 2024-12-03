@@ -97,12 +97,9 @@ export default function Biochemistry() {
                         </div>
                     </div>
                 </div>
-
-                <div className="bg-surface w-full h-5/6 flex justify-center content-center rounded-lg shadow-md mt-2">
                 {!listing[0] ? <Loading /> :  <ControlChart listing={listing} width={width} height={height} colors={colors} />}
-                </div>
             </div>
-            <Footer />
+            <Footer  />
         </div>
     );
 }

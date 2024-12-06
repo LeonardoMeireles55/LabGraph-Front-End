@@ -9,6 +9,7 @@ services:
       - NODE_ENV=production
     volumes:
       - /app/node_modules 
+      - /app/public
     stdin_open: true
     tty: true
     command: ["npm", "start"]

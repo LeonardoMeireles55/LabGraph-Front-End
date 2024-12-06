@@ -11,6 +11,7 @@ const NavBar: React.FC = () => {
   const navLinks: NavLink[] = [
     { text: 'BIOQUÍMICA', url: '/biochemistry' },
     { text: 'COAGULAÇÃO', url: '/coagulation' },
+    { text: 'HEMATOLOGIA', url: '/#' },
     { text: 'INFORMAÇÕES', url: 'https://github.com/LeonardoMeireles55/QualityLab-Pro-Backend' },
   ];
 
@@ -43,7 +44,7 @@ const NavBar: React.FC = () => {
               </a>
             ))}
             <button className="px-4 py-2 bg-primary text-background rounded-lg text-sm 
-              font-medium shadow-lg hover:bg-primary/90 transition-colors duration-300">
+              font-medium shadow-lg hover:scale-105 hover:bg-primary/90 transition-colors duration-300">
               Em breve
             </button>
           </div>

@@ -85,7 +85,7 @@ export default function Coagulation() {
                     setSecondDay={setSecondDay}
                     setSecondMonth={setSecondMonth}
                     setSecondYear={setSecondYear}/>
-                    <div className="flex">
+                    <div className="">
                         {!listing[0] ? <Loading /> : <TestSelector analyticsType={"coagulation"} list={list}
                         testName={testName} setTestName={setTestName} testLevel={testLevel} 
                         setTestLevel={setTestLevel} 

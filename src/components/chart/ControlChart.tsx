@@ -120,7 +120,7 @@ const calculateResponsiveLayout = (width: number, height: number) => {
   }
   // Extra large screens
   else if (width < breakpoints.xl) {
-    dimensions.width *= 0.8;
+    dimensions.width *= 1;
     dimensions.height *= 0.7;
   }
   // XXL screens
@@ -172,13 +172,11 @@ const ControlChart: React.FC<ControlChartProps> = ({
     textposition: width < 768 ? 'top right' : 'top center',
     textfont: { 
       size: responsive.font.values, 
-      color: colors.textSecondary
     },
     marker: { 
       color: colors.primary,
       size: width < 768 ? 2 : 4,
       line: {
-        color: colors.border,
         width: 1
       }
     },
@@ -268,7 +266,9 @@ const ControlChart: React.FC<ControlChartProps> = ({
 
   return (
       <Plot
-        className='w-full flex justify-center mt-4 md:mt-2 p-2 md:p-0 lg:p-0 xl:p-8 rounded-lg shadow-md bg-surface'
+        useResizeHandler = {true}
+        style={{ width: '100%', backgroundColor: colors.surface }}
+        className='flex justify-center content-center p-4 rounded-xl shadow-md'
         data={plotData}
         layout={layout}
         config={{ 

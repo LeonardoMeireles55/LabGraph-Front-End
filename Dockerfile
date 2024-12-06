@@ -1,5 +1,5 @@
 # Etapa 1: Build
-FROM node:20 AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -23,6 +23,7 @@ WORKDIR /app
 # Copie apenas os arquivos necessários da etapa de build
 COPY --from=builder /app/.next /app/.next
 COPY --from=builder /app/package*.json /app/
+COPY --from=builder /app/public /app/public
 
 # Instale apenas dependências de produção
 RUN npm ci --omit=dev

@@ -1,8 +1,14 @@
 import React from 'react';
-const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
-import { Layout, Shape, ScatterData } from 'plotly.js';
 import dynamic from 'next/dynamic';
+import { Layout, Shape, ScatterData } from 'plotly.js';
 import formatarDate from '../functional/FormatDate';
+import Loading from '../ui/Loading';
+
+// Dynamic import with better typing
+const Plot = dynamic(() => import('react-plotly.js'), { 
+  ssr: false,
+  loading: () => <div className="w-full h-64 flex items-center justify-center"><Loading /> </div>
+});
 
 interface ListingItem {
     name: string;
@@ -32,55 +38,125 @@ interface ControlChartProps {
   };
 }
 
+// Simplified filter function
 const filter = (value: number, mean: number, sd: number) => {
   if (value > mean + 3 * sd) return (mean + 3 * sd) + sd/3;
   if (value < mean - 3 * sd) return (mean - 3 * sd) - sd/3;
   return value;
 };
 
+// Enhanced responsive layout calculation
 const calculateResponsiveLayout = (width: number, height: number) => {
+  // More granular breakpoints
   const breakpoints = {
+    xs: 480,
     sm: 640,
     md: 768,
     lg: 1024,
-    xl: 1280
+    xl: 1280,
+    xxl: 1600
   };
 
-  const dimensions = {
-    width: width < breakpoints.sm ? width * 0.95 :
-           width < breakpoints.md ? width * 0.9 :
-           width < breakpoints.lg ? width * 0.80 :
-           Math.min(width * 0.8, 1200),
-    height: height < 400 ? height * 0.8 :
-            height < 600 ? height * 0.68 :
-            Math.min(height * 0.7, 800),
+  // Default dimensions
+  let dimensions = {
+    width: width,
+    height: height,
     margin: {
-      l: width < breakpoints.sm ? 40 : 80,
-      r: width < breakpoints.sm ? 20 : 50,
-      t: width < breakpoints.sm ? 60 : 80,
-      b: width < breakpoints.sm ? 60 : 80,
+      l: 80,
+      r: 50,
+      t: 80,
+      b: 80
     },
     font: {
-      title: width < breakpoints.sm ? 14 : 24,
-      axis: width < breakpoints.sm ? 10 : 16,
-      ticks: width < breakpoints.sm ? 8 : 12,
-      values: width < breakpoints.sm ? 8 : 12
+      title: 24,
+      axis: 16,
+      ticks: 12,
+      values: 12
     }
   };
+
+  // Adjust for very small screens
+  if (width < breakpoints.xs) {
+    dimensions = {
+      width: width * 0.95,
+      height: height * 0.7,
+      margin: {
+        l: 40,
+        r: 20,
+        t: 60,
+        b: 60
+      },
+      font: {
+        title: 14,
+        axis: 10,
+        ticks: 8,
+        values: 8
+      }
+    };
+  }
+  // Small screens
+  else if (width < breakpoints.sm) {
+    dimensions.width *= 0.95;
+    dimensions.height *= 0.8;
+    dimensions.margin = {
+      l: 50,
+      r: 30,
+      t: 70,
+      b: 70
+    };
+    dimensions.font.title = 16;
+    dimensions.font.axis = 12;
+  }
+  // Medium screens
+  else if (width < breakpoints.md) {
+    dimensions.width *= 0.9;
+    dimensions.height *= 0.75;
+    dimensions.margin.l = 70;
+  }
+  // Large screens
+  else if (width < breakpoints.lg) {
+    dimensions.width *= 0.85;
+    dimensions.height *= 0.75;
+  }
+  // Extra large screens
+  else if (width < breakpoints.xl) {
+    dimensions.width *= 0.8;
+    dimensions.height *= 0.7;
+  }
+  // XXL screens
+  else {
+    dimensions.width = Math.min(width * 0.75, 1400);
+    dimensions.height = Math.min(height * 0.7, 900);
+  }
 
   return dimensions;
 };
 
-const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, colors }) => {
+const ControlChart: React.FC<ControlChartProps> = ({ 
+  listing, 
+  width, 
+  height, 
+  colors 
+}) => {
   const data = listing;
   const dates = data.map(entry => formatarDate(entry.date).toString());
   const values = data.map(entry => entry.value);
   const { mean, sd, name, level } = data[0];
 
+  // Calculate responsive layout
   const responsive = calculateResponsiveLayout(width, height);
 
+  // Prepare chart configuration
   const yaxisRange = [mean - (3 * 1.2) * sd, mean + (3 * 1.2) * sd];
-  const yTickValues = [mean - 3 * sd, mean - 2 * sd, mean - sd, mean, mean + sd, mean + 2 * sd, mean + 3 * sd];
+  const yTickValues = [
+    mean - 3 * sd, 
+    mean - 2 * sd, 
+    mean - sd, 
+    mean, 
+    mean + sd, 
+    mean + 2 * sd, 
+    mean + 3 * sd
+  ];
   const yTickText = ['-3s ', '-2s ', '-1s ', 'Média ', '+1s ', '+2s ', '+3s '];
 
   const plotData: Partial<ScatterData>[] = [{
@@ -88,7 +164,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, col
     y: values.map(value => 
       value < mean - 3 * sd || value > mean + 3 * sd 
         ? filter(value, mean, sd) 
-        : value),
+        : value
+    ),
     type: 'scatter',
     mode: 'text+lines+markers',
     text: values.map(value => value.toFixed(2)),
@@ -190,17 +267,18 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing, width, height, col
   };
 
   return (
-    <div className="bg-surface w-full flex justify-center mt-12 p-1 md:mt-0 rounded-lg shadow-md">
-    <Plot
-      data={plotData}
-      layout={layout}
-      config={{ 
-        responsive: true, 
-        displayModeBar: false,
-        scrollZoom: false,
-        modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
-      }}
-    />
+    <div className="w-full flex justify-center mt-4 md:mt-2 rounded-lg shadow-md bg-surface">
+      <Plot
+        className='p-2 md:p-0 lg:p-2 xl:p-8'
+        data={plotData}
+        layout={layout}
+        config={{ 
+          responsive: true, 
+          displayModeBar: false,
+          scrollZoom: false,
+          modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
+        }}
+      />
     </div>
   );
 };

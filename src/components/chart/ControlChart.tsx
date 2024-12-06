@@ -184,7 +184,6 @@ const ControlChart: React.FC<ControlChartProps> = ({
       color: colors.primary,
       width: width < 768 ? 1 : 2
     },
-    name: 'Valores',
   }];
 
   const lines = [
@@ -242,13 +241,11 @@ const ControlChart: React.FC<ControlChartProps> = ({
       showgrid: true,
       zeroline: false,
       title: {
-        text: 'Data',
         font: { size: responsive.font.axis }
       }
     },
     yaxis: {
       title: {
-        text: 'Valores',
         font: { size: responsive.font.axis }
       },
       range: yaxisRange,

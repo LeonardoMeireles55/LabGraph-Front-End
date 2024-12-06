@@ -242,7 +242,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
       />
       <label
         htmlFor="fileInput"
-        className={`bg-muted text-textSecondary rounded px-2 py-1 text-sm cursor-pointer hover:bg-accent ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''}`}
+        className={`bg-muted text-textSecondary rounded px-2 py-1 text-sm cursor-pointer hover:scale-110 ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''}`}
       >
         {status.isProcessing ? status.message : 'Atualizar'}
       </label>

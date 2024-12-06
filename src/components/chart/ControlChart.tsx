@@ -267,9 +267,8 @@ const ControlChart: React.FC<ControlChartProps> = ({
   };
 
   return (
-    <div className="w-full flex justify-center mt-4 md:mt-2 rounded-lg shadow-md bg-surface">
       <Plot
-        className='p-2 md:p-0 lg:p-2 xl:p-8'
+        className='w-full flex justify-center mt-4 md:mt-2 p-2 md:p-0 lg:p-0 xl:p-8 rounded-lg shadow-md bg-surface'
         data={plotData}
         layout={layout}
         config={{ 
@@ -279,7 +278,6 @@ const ControlChart: React.FC<ControlChartProps> = ({
           modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
         }}
       />
-    </div>
   );
 };
 

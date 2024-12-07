@@ -6,7 +6,6 @@ interface NavLink {
   url: string;
 }
 
-// Interface para as props do NavBar
 interface NavBarProps {
   jsonData: Array<Record<string, any>>;
   fileName?: string;
@@ -34,7 +33,6 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
               <span className="text-textPrimary text-xl font-bold">LabGraph</span>
               <span className="text-textSecondary text-xs -mt-1">versão 0.2</span>
             </div>
-
           </div>
 
           <div className="hidden md:flex items-center gap-8">
@@ -42,15 +40,13 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
               <a
                 key={index}
                 href={link.url}
-                className="text-textSecondary hover:text-textPrimary text-sm font-medium 
-                  transition-colors duration-300 relative group"
+                className="text-textSecondary hover:text-textPrimary text-sm font-medium transition-colors duration-300 relative group"
               >
                 {link.text}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary
-                  group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
-            <div className='bg-green rounded-md'>
+            <div className="p-1 rounded-md">
               <CsvGenerator jsonData={jsonData} fileName={fileName} />
             </div>
           </div>
@@ -61,33 +57,38 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
             aria-label="Toggle menu"
           >
             <div className="space-y-1.5">
-              <span className={`block w-6 h-0.5 bg-textPrimary transition-all duration-300
-                ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-              <span className={`block w-6 h-0.5 bg-textPrimary transition-all duration-300
-                ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`block w-6 h-0.5 bg-textPrimary transition-all duration-300
-                ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+              <span
+                className={`block w-6 h-0.5 bg-textPrimary transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}
+              ></span>
+              <span
+                className={`block w-6 h-0.5 bg-textPrimary transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}
+              ></span>
+              <span
+                className={`block w-6 h-0.5 bg-textPrimary transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}
+              ></span>
             </div>
           </button>
         </div>
       </div>
 
-      <div className={`md:hidden absolute w-full bg-background shadow-lg 
-        transition-all duration-300 ${isMenuOpen ? 'max-h-64' : 'max-h-0'} overflow-hidden`}>
+      <div
+        className={`md:hidden absolute w-full bg-background shadow-lg transition-all duration-300 ${
+          isMenuOpen ? 'max-h-64' : 'max-h-0'
+        } overflow-hidden`}
+      >
         <div className="px-4 py-3 space-y-3">
           {navLinks.map((link, index) => (
             <a
               key={index}
               href={link.url}
-              className="block text-textSecondary hover:text-textPrimary text-sm 
-                font-medium transition-colors duration-300"
+              className="block text-textSecondary hover:text-textPrimary text-sm font-medium transition-colors duration-300"
             >
               {link.text}
             </a>
           ))}
-            <div className='bg-green w-1/4 flex justify-center rounded-xl'>
-              <CsvGenerator jsonData={jsonData} fileName={fileName} />
-            </div>
+          <div className="rounded-md w-full flex justify-start text-white text-sm font-medium transition-colors duration-300">
+            <CsvGenerator jsonData={jsonData} fileName={fileName} />
+          </div>
         </div>
       </div>
     </nav>

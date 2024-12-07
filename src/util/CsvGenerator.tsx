@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { parse } from 'json2csv';
 
 interface CsvGeneratorProps {
@@ -7,7 +7,11 @@ interface CsvGeneratorProps {
 }
 
 const CsvGenerator: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'data.csv' }) => {
+  const [isGenerating, setIsGenerating] = useState(false); 
   const generateCsv = () => {
+    if (isGenerating) return; 
+    setIsGenerating(true);
+
     try {
       const csv = parse(jsonData);
       const blob = new Blob([csv], { type: 'text/csv' });
@@ -23,32 +27,19 @@ const CsvGenerator: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'data.
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Erro ao gerar o CSV:', error);
+    } finally {
+      setIsGenerating(false); 
     }
   };
 
   return (
     <button
       onClick={generateCsv}
-      className="flex flex-col text-xs justify-center text-center bg-green text-white gap-2 px-4 py-2 rounded-lg shadow-sm"
+      className={`text-white bg-green rounded-lg shadow-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 ${isGenerating ? 'opacity-50 cursor-not-allowed' : ''}`}
+      disabled={isGenerating}
+      aria-label="Exportar CSV"
     >
- <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    width="16"
-    height="16"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <rect x="2" y="2" width="20" height="20" rx="2" />
-    <line x1="8" y1="2" x2="8" y2="22" />
-    <line x1="2" y1="8" x2="22" y2="8" />
-    <line x1="2" y1="14" x2="22" y2="14" />
-    <line x1="2" y1="20" x2="22" y2="20" />
-  </svg>
-
+      {isGenerating ? 'Gerando...' : 'Exportar'}
     </button>
   );
 };

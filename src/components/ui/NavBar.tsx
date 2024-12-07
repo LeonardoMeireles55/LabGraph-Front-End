@@ -1,3 +1,4 @@
+import CsvGenerator from '@/util/CsvGenerator';
 import React, { useState } from 'react';
 
 interface NavLink {
@@ -5,7 +6,13 @@ interface NavLink {
   url: string;
 }
 
-const NavBar: React.FC = () => {
+// Interface para as props do NavBar
+interface NavBarProps {
+  jsonData: Array<Record<string, any>>;
+  fileName?: string;
+}
+
+const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const navLinks: NavLink[] = [
@@ -43,10 +50,7 @@ const NavBar: React.FC = () => {
                   group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
-            <button className="px-4 py-2 bg-primary text-background rounded-lg text-sm 
-              font-medium shadow-lg hover:scale-105 hover:bg-primary/90 transition-colors duration-300">
-              Em breve
-            </button>
+                <CsvGenerator jsonData={jsonData} fileName={fileName} />
           </div>
 
           <button

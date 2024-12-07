@@ -68,7 +68,7 @@ export default function Coagulation() {
         <Head>
             <title>{`LabGraph - ${testName || ''}`}</title>
         </Head>
-        <NavBar />
+        <NavBar jsonData={listing}/>
         <div className="flex flex-col justify-center items-center content-center w-full h-full md:w-5/6 lg:w-4/4 xl:max-w-7xl p-0">
             <div className="flex justify-center items-center content-center bg-background p-2 md:p-0 lg:p-4 rounded-lg">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-0">

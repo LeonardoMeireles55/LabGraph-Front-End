@@ -15,6 +15,7 @@ const lightColors = {
   sd2: 'rgba(251, 113, 133, 0.7)', // Linha 2x SD (Pink-400) - mais suave
   sd3: 'rgba(220, 38, 38, 0.7)', // Linha 3x SD (Red-400) - mais suave
   navbar: '#E5E7EB', // Cor para a Navbar (Gray-200) - clara para um visual mais suave
+  white: '#FFFFFF', // Branco puro
 };
 
 const darkColors = {

@@ -27,6 +27,7 @@ const config: Config = {
       muted: colors.lightColors.muted,
       gridLines: colors.lightColors.gridLines,
       border: colors.lightColors.border,
+      white: colors.lightColors.white,
     },
   },
   plugins: [],

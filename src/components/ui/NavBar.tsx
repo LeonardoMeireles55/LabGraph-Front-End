@@ -46,7 +46,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
-            <div className="p-1 rounded-md">
+            <div className="p-2 rounded-md">
               <CsvGenerator jsonData={jsonData} fileName={fileName} />
             </div>
           </div>
@@ -86,7 +86,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
               {link.text}
             </a>
           ))}
-          <div className="rounded-md w-full flex justify-start text-white text-sm font-medium transition-colors duration-300">
+          <div className="rounded-md bg-green w-full flex justify-start text-white text-sm font-medium transition-colors duration-300">
             <CsvGenerator jsonData={jsonData} fileName={fileName} />
           </div>
         </div>

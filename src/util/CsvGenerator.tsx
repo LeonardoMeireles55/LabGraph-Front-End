@@ -39,7 +39,7 @@ const CsvGenerator: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'data.
       disabled={isGenerating}
       aria-label="Exportar CSV"
     >
-      {isGenerating ? 'Gerando...' : 'Exportar'}
+      {isGenerating ? 'Gerando...' : 'Exportar CSV'}
     </button>
   );
 };

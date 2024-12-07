@@ -11,7 +11,7 @@ const NavBar: React.FC = () => {
   const navLinks: NavLink[] = [
     { text: 'BIOQUÍMICA', url: '/biochemistry' },
     { text: 'COAGULAÇÃO', url: '/coagulation' },
-    { text: 'HEMATOLOGIA', url: '/#' },
+    { text: 'HEMATOLOGIA', url: '/hematology' },
     { text: 'INFORMAÇÕES', url: 'https://github.com/LeonardoMeireles55/QualityLab-Pro-Backend' },
   ];
 

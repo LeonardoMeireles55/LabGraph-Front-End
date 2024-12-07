@@ -18,6 +18,18 @@ interface TestSelectorProps {
   analyticsType: string;
 }
 
+const testFormatFix = (testName: string) => {
+  if (testName.includes('#')) {
+    return testName = testName.replace('#', '%23');
+  }
+  if (testName.includes('%')) {
+    return testName = testName.replace('%', '%25');
+  }
+
+  return testName;
+
+}
+
 const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, testName, testLevel, setTestName, setTestLevel, sd, mean, ownMean, ownSd, unitValue }) => {
   return (
     <div className="flex items-center gap-2 text-textSecondary">
@@ -26,10 +38,10 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, testNa
         <select 
           className="bg-muted text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
           value={testName}
-          onChange={(e) => setTestName(e.target.value)}
+          onChange={(e) => setTestName((e.target.value))}
         >
           {list.map((test) => (
-            <option key={test} value={test}>{test}</option>
+            <option key={test} value={testFormatFix(test)}>{test}</option>
           ))}
         </select>
       </div>
@@ -43,6 +55,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, testNa
         >
           <option value={1}>1</option>
           <option value={2}>2</option>
+          <option value={3}>3</option>
         </select>
       </div>
       <Link 

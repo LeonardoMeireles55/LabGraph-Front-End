@@ -59,7 +59,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, testNa
         </select>
       </div>
       <Link 
-        className="bg-muted hover:scale-110 text-textSecondary rounded py-0 px-1 md:px-2 md:py-1 text-xs md:text-sm"
+        className="bg-muted hover:scale-110 text-textSecondary rounded py-0 px-1 md:px-2 md:py-1 text-sm md:text-sm"
             target="_blank" href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit?userstoinvite=andersongomesbio@gmail.com&sharingaction=manageaccess&role=writer&pli=1#gid=1397277322"
             >&#10003;
         </Link>

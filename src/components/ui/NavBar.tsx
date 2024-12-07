@@ -85,10 +85,9 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
               {link.text}
             </a>
           ))}
-          <button className="w-full px-4 py-2 bg-primary text-background rounded-lg 
-            text-sm font-medium shadow-md hover:bg-primary/90 transition-colors duration-300">
-            Em breve
-          </button>
+            <div className='bg-green w-1/4 flex justify-center rounded-xl'>
+              <CsvGenerator jsonData={jsonData} fileName={fileName} />
+            </div>
         </div>
       </div>
     </nav>

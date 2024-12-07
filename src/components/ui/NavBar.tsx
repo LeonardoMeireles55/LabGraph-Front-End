@@ -46,11 +46,13 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
                   transition-colors duration-300 relative group"
               >
                 {link.text}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary 
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary
                   group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
-                <CsvGenerator jsonData={jsonData} fileName={fileName} />
+            <div className='bg-green rounded-md'>
+              <CsvGenerator jsonData={jsonData} fileName={fileName} />
+            </div>
           </div>
 
           <button

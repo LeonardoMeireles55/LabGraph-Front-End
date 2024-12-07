@@ -28,6 +28,7 @@ const config: Config = {
       gridLines: colors.lightColors.gridLines,
       border: colors.lightColors.border,
       white: colors.lightColors.white,
+      green:colors.lightColors.green
     },
   },
   plugins: [],

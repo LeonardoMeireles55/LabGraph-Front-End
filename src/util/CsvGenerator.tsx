@@ -29,11 +29,26 @@ const CsvGenerator: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'data.
   return (
     <button
       onClick={generateCsv}
-      className="text-white group inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90  rounded-lg 
-                 shadow-sm transition-colors duration-200"
+      className="flex flex-col text-xs justify-center text-center bg-green text-white gap-2 px-4 py-2 rounded-lg shadow-sm"
     >
-      {/* Ícone de download feito com CSS */}
-        CSV
+ <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="16"
+    height="16"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="2" />
+    <line x1="8" y1="2" x2="8" y2="22" />
+    <line x1="2" y1="8" x2="22" y2="8" />
+    <line x1="2" y1="14" x2="22" y2="14" />
+    <line x1="2" y1="20" x2="22" y2="20" />
+  </svg>
+
     </button>
   );
 };

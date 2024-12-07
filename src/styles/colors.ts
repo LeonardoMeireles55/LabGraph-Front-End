@@ -1,40 +1,41 @@
 const lightColors = {
-  primary: '#60A5FA', // Azul principal (Blue-400) - tom mais suave
-  secondary: '#34D399', // Verde secundário (Green-400) - mais claro e fresco
-  accent: '#F59E0B', // Amarelo de destaque (Yellow-400) - mais leve
-  danger: '#F87171', // Vermelho para alertas (Red-300) - mais suave
-  background: '#F3F4F6', // Fundo principal (Gray-100) - fundo claro
-  surface: '#E5E7EB', // Superfície (Gray-200) - mais suave e contrastante
-  muted: '#D1D5DB', // Cinza moderado (Gray-300) - tom mais leve e neutro
-  textPrimary: '#111827', // Texto principal (Gray-900) - mais escuro para boa legibilidade
-  textSecondary: '#4B5563', // Texto secundário (Gray-600) - contraste suave
-  gridLines: 'rgba(243, 244, 246, 0.3)', // Linhas da grade (Gray-100 mais leve)
-  border: '#D1D5DB', // Cinza claro (Gray-300) - bordas mais suaves
-  meanLine: 'rgba(34, 197, 94, 0.7)', // Linha da média (Green-400) - mais leve
-  sd1: 'rgba(250, 204, 21, 0.7)', // Linha 1x SD (Yellow-400) - mais suave
-  sd2: 'rgba(251, 113, 133, 0.7)', // Linha 2x SD (Pink-400) - mais suave
-  sd3: 'rgba(220, 38, 38, 0.7)', // Linha 3x SD (Red-400) - mais suave
-  navbar: '#E5E7EB', // Cor para a Navbar (Gray-200) - clara para um visual mais suave
-  white: '#FFFFFF', // Branco puro
+  primary: '#4F80F0', // Azul mais suave para uma experiência visual mais amigável
+  secondary: '#2CCF6D', // Verde mais vibrante para um contraste agradável
+  accent: '#F9D200', // Amarelo suave e mais harmonioso para destaque
+  danger: '#FB716F', // Vermelho suave, mas com intensidade moderada
+  background: '#F8F9FB', // Fundo mais quente e confortável
+  surface: '#E1E4E8', // Superfície clara, mais contrastante para áreas secundárias
+  muted: '#D1D5DB', // Cinza moderado (Gray-300)
+  textPrimary: '#212529', // Texto principal, mais escuro para boa legibilidade
+  textSecondary: '#5A636D', // Texto secundário, suave para contraste mais leve
+  gridLines: 'rgba(243, 244, 246, 0.5)', // Linhas discretas de grade
+  border: '#D0D5D9', // Bordas suaves para um visual clean
+  meanLine: 'rgba(34, 197, 94, 0.8)', // Linha da média (Green-400)
+  sd1: 'rgba(250, 204, 21, 0.8)', // Linha 1x SD suave, sem ser excessiva
+  sd2: 'rgba(251, 113, 133, 0.8)', // Linha 2x SD moderada para contraste
+  sd3: 'rgba(220, 38, 38, 0.8)', // Linha 3x SD com uma leve intensidade
+  navbar: '#D1D5DB', // Cor de navbar clara e suave
+  white: '#FFFFFF', // Branco puro para elementos que precisam de contraste
+  green: '#13A860', // Verde mais vivo para botões
 };
 
 const darkColors = {
-  primary: '#3B82F6', // Azul principal (Blue-500)
-  secondary: '#10B981', // Verde secundário (Green-500)
-  accent: '#FACC15', // Amarelo de destaque (Yellow-500)
-  danger: '#DC2626', // Vermelho para alertas (Red-600)
-  background: '#111827', // Fundo principal (Gray-900)
-  surface: '#1E293B', // Superfície (Gray-800)
-  muted: '#6B7280', // Cinza moderado (Gray-500)
-  textPrimary: '#F9FAFB', // Texto principal (Gray-50)
-  textSecondary: '#D1D5DB', // Texto secundário (Gray-300)
-  gridLines: 'rgba(255, 255, 255, 0.1)', // Linhas da grade (Branco transparente)
-  border: '#E5E7EB', // Cinza claro (Gray-200)
-  meanLine: 'rgba(34, 197, 94, 0.9)', // Linha da média (Green-500)
-  sd1: 'rgba(250, 204, 21, 0.9)', // Linha 1x SD (Yellow-500)
-  sd2: 'rgba(251, 113, 133, 0.9)', // Linha 2x SD (Pink-500)
-  sd3: 'rgba(220, 38, 38, 0.9)', // Linha 3x SD (Red-600)
-  navbar: '#2D3748', // Cor para a Navbar (Gray-800)
+  primary: '#1D4ED8', // Azul profundo para impacto visual
+  secondary: '#10B981', // Verde forte e harmonioso
+  accent: '#FACC15', // Amarelo mais saturado, criando contraste
+  danger: '#EF4444', // Vermelho forte para alertas visíveis
+  background: '#121212', // Fundo escuro equilibrado para modo noturno
+  surface: '#1F2937', // Superfície mais clara, mas sem ser ofuscante
+  muted: '#808080', // Cinza mais frio, mantendo o foco no conteúdo
+  textPrimary: '#E5E7EB', // Texto principal claro e suave
+  textSecondary: '#B8C2CC', // Texto secundário com contraste suave
+  gridLines: 'rgba(255, 255, 255, 0.15)', // Linhas de grade discretas para não interferir
+  border: '#4B5563', // Bordas de tom mais escuro, mas suaves
+  meanLine: 'rgba(34, 197, 94, 0.9)', // Linha da média (Green-500) mais visível no modo escuro
+  sd1: 'rgba(250, 204, 21, 0.9)', // Linha 1x SD mais destacada
+  sd2: 'rgba(251, 113, 133, 0.9)', // Linha 2x SD ajustada para contrastar bem
+  sd3: 'rgba(220, 38, 38, 0.9)', // Linha 3x SD com contraste mais forte
+  navbar: '#2A3A4B', // Navbar com tom escuro, mas não opressor
 };
 
-export default {lightColors, darkColors};
+export default { lightColors, darkColors };

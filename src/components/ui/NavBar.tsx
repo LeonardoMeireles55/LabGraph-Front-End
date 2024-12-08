@@ -1,4 +1,4 @@
-import CsvGenerator from '@/util/CsvGenerator';
+import CsvGenerator from '@/components/util/CsvGenerator';
 import React, { useState } from 'react';
 
 interface NavLink {
@@ -72,9 +72,8 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
       </div>
 
       <div
-        className={`md:hidden absolute w-full bg-background shadow-lg transition-all duration-300 ${
-          isMenuOpen ? 'max-h-64' : 'max-h-0'
-        } overflow-hidden`}
+        className={`md:hidden absolute w-full bg-background shadow-lg transition-all duration-300 ${isMenuOpen ? 'max-h-64' : 'max-h-0'
+          } overflow-hidden`}
       >
         <div className="px-4 py-3 space-y-3">
           {navLinks.map((link, index) => (

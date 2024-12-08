@@ -28,7 +28,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
 
   const postResults = useCallback(
     async (data: ProcessedData[]) => {
-      const endpointUrl = analyticsType === 'biochemistry'
+      const endpointUrl = analyticsType === 'biochemistry-analytics'
         ? 'https://leomeireles-dev.xyz/api/biochemistry-analytics'
         : 'https://leomeireles-dev.xyz/api/coagulation-analytics';
 

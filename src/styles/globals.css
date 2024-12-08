@@ -7,6 +7,10 @@
     margin: 0;
 }
 
+html {
+    height: 100%;
+}
+
 select {
     cursor: pointer;
 }

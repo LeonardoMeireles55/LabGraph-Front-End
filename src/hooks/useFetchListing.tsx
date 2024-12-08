@@ -1,31 +1,23 @@
 import { useEffect, useState } from 'react';
 
-interface ListingCollection extends Array<any> {}
+interface ListingCollection extends Array<any> { }
 interface UseFetchListingProps {
   url: string;
   urlMeanAndDeviation: string;
-  initialYear: number;
-  initialMonth: number;
-  initialDay: number;
-  secondYear: number;
-  secondMonth: number;
-  secondDay: number;
 }
 
-const useFetchListing = ({
-  url,
-  urlMeanAndDeviation,
-  initialYear,
-  initialMonth,
-  initialDay,
-  secondYear,
-  secondMonth,
-  secondDay,
-}: UseFetchListingProps) => {
+const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => {
   const [listing, setListing] = useState<ListingCollection>([]);
   const [unitValues, setUnitValues] = useState<string | null>(null);
   const [ownMeanValue, setOwnMean] = useState<number | null>(null);
   const [ownSdValue, setOwnSd] = useState<number | null>(null);
+
+  const checkResponse = async (response: Response) => {
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+    return await response.json();
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,29 +26,21 @@ const useFetchListing = ({
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
+        const json = await checkResponse(response);
 
         const responseMeanAndDeviation = await fetch(urlMeanAndDeviation, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
+        const jsonMeanAndDeviation = await checkResponse(responseMeanAndDeviation);
 
-        if (!responseMeanAndDeviation.ok) {
-          throw new Error('Network response was not ok for mean and deviation');
-        }
-
-        const jsonMeanAndDeviation = await responseMeanAndDeviation.json();
         setOwnMean(jsonMeanAndDeviation.mean);
         setOwnSd(jsonMeanAndDeviation.standardDeviation);
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok for listing');
-        }
-
-        const json = await response.json();
-        setUnitValues(json[0]?.unit_value || null);
-        setListing(json);
-
-        if (!json.length) {
+        if (json.length > 0) {
+          setUnitValues(json[0]?.unit_value || null);
+          setListing(json);
+        } else {
           setUnitValues(null);
         }
       } catch (error) {

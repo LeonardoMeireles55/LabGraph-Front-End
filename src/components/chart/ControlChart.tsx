@@ -5,19 +5,19 @@ import formatarDate from '../functional/FormatDate';
 import Loading from '../ui/Loading';
 
 // Dynamic import with better typing
-const Plot = dynamic(() => import('react-plotly.js'), { 
+const Plot = dynamic(() => import('react-plotly.js'), {
   ssr: false,
   loading: () => <div className="w-full h-64 flex items-center justify-center"><Loading /> </div>
 });
 
 interface ListingItem {
-    name: string;
-    level: number;
-    sd: number;
-    mean: number;
-    date: string;
-    value: number;
-    unit_value: string;
+  name: string;
+  level: number;
+  sd: number;
+  mean: number;
+  date: string;
+  value: number;
+  unit_value: string;
 }
 
 interface ControlChartProps {
@@ -40,8 +40,8 @@ interface ControlChartProps {
 
 // Simplified filter function
 const filter = (value: number, mean: number, sd: number) => {
-  if (value > mean + 3 * sd) return (mean + 3 * sd) + sd/3;
-  if (value < mean - 3 * sd) return (mean - 3 * sd) - sd/3;
+  if (value > mean + 3 * sd) return (mean + 3 * sd) + sd / 3;
+  if (value < mean - 3 * sd) return (mean - 3 * sd) - sd / 3;
   return value;
 };
 
@@ -132,11 +132,11 @@ const calculateResponsiveLayout = (width: number, height: number) => {
   return dimensions;
 };
 
-const ControlChart: React.FC<ControlChartProps> = ({ 
-  listing, 
-  width, 
-  height, 
-  colors 
+const ControlChart: React.FC<ControlChartProps> = ({
+  listing,
+  width,
+  height,
+  colors
 }) => {
   const data = listing;
   const dates = data.map(entry => formatarDate(entry.date).toString());
@@ -149,31 +149,31 @@ const ControlChart: React.FC<ControlChartProps> = ({
   // Prepare chart configuration
   const yaxisRange = [mean - (3 * 1.2) * sd, mean + (3 * 1.2) * sd];
   const yTickValues = [
-    mean - 3 * sd, 
-    mean - 2 * sd, 
-    mean - sd, 
-    mean, 
-    mean + sd, 
-    mean + 2 * sd, 
+    mean - 3 * sd,
+    mean - 2 * sd,
+    mean - sd,
+    mean,
+    mean + sd,
+    mean + 2 * sd,
     mean + 3 * sd
   ];
   const yTickText = ['-3s ', '-2s ', '-1s ', 'Média ', '+1s ', '+2s ', '+3s '];
 
   const plotData: Partial<ScatterData>[] = [{
     x: dates,
-    y: values.map(value => 
-      value < mean - 3 * sd || value > mean + 3 * sd 
-        ? filter(value, mean, sd) 
+    y: values.map(value =>
+      value < mean - 3 * sd || value > mean + 3 * sd
+        ? filter(value, mean, sd)
         : value
     ),
     type: 'scatter',
     mode: 'text+lines+markers',
     text: values.map(value => value.toFixed(2)),
     textposition: width < 768 ? 'top right' : 'top center',
-    textfont: { 
-      size: responsive.font.values, 
+    textfont: {
+      size: responsive.font.values,
     },
-    marker: { 
+    marker: {
       color: colors.primary,
       size: width < 768 ? 2 : 4,
       line: {
@@ -204,10 +204,10 @@ const ControlChart: React.FC<ControlChartProps> = ({
     yref: 'y',
     y0: mean + line.multiple * sd,
     y1: mean + line.multiple * sd,
-    line: { 
-      color: line.color, 
-      width: width < 768 ? 1 : 2, 
-      dash: 'dash' 
+    line: {
+      color: line.color,
+      width: width < 768 ? 1 : 2,
+      dash: 'dash'
     },
   }));
 
@@ -216,13 +216,13 @@ const ControlChart: React.FC<ControlChartProps> = ({
     height: responsive.height,
     plot_bgcolor: colors.surface,
     paper_bgcolor: colors.surface,
-    font: { 
-      family: 'Inter, system-ui, sans-serif', 
-      size: responsive.font.ticks, 
+    font: {
+      family: 'Inter, system-ui, sans-serif',
+      size: responsive.font.ticks,
       color: colors.textPrimary
     },
     title: {
-      text: `${name} - Nível ${level}`,
+      text: `${name} - Nível ${level.toString().toUpperCase()}`,
       font: {
         size: responsive.font.title,
         color: colors.textPrimary
@@ -262,19 +262,19 @@ const ControlChart: React.FC<ControlChartProps> = ({
   };
 
   return (
-      <Plot
-        useResizeHandler = {true}
-        style={{ width: '100%', backgroundColor: colors.surface }}
-        className='flex justify-center content-center p-4 rounded-xl shadow-md'
-        data={plotData}
-        layout={layout}
-        config={{ 
-          responsive: true, 
-          displayModeBar: false,
-          scrollZoom: false,
-          modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
-        }}
-      />
+    <Plot
+      useResizeHandler={true}
+      style={{ width: '95%', backgroundColor: colors.surface }}
+      className='flex justify-center items-center text-center content-center p-0 rounded-xl shadow-md'
+      data={plotData}
+      layout={layout}
+      config={{
+        responsive: true,
+        displayModeBar: false,
+        scrollZoom: false,
+        modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
+      }}
+    />
   );
 };
 

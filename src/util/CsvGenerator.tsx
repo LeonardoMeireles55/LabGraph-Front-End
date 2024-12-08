@@ -35,7 +35,7 @@ const CsvGenerator: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'data.
   return (
     <button
       onClick={generateCsv}
-      className={`text-white bg-green rounded-lg shadow-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 ${isGenerating ? 'opacity-50 cursor-not-allowed' : ''}`}
+      className={`text-white bg-green hover:scale-105 rounded-lg shadow-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 ${isGenerating ? 'opacity-50 cursor-not-allowed' : ''}`}
       disabled={isGenerating}
       aria-label="Exportar CSV"
     >

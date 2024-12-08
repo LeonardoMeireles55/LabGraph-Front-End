@@ -111,7 +111,7 @@ const calculateResponsiveLayout = (width: number, height: number) => {
   else if (width < breakpoints.md) {
     dimensions.width *= 0.9;
     dimensions.height *= 0.75;
-    dimensions.margin.l = 70;
+    // dimensions.margin.l = 70;
   }
   // Large screens
   else if (width < breakpoints.lg) {
@@ -120,7 +120,7 @@ const calculateResponsiveLayout = (width: number, height: number) => {
   }
   // Extra large screens
   else if (width < breakpoints.xl) {
-    dimensions.width *= 1;
+    dimensions.width *= 0.95;
     dimensions.height *= 0.7;
   }
   // XXL screens

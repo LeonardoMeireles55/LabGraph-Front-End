@@ -27,7 +27,7 @@ const AnalyticsTable = () => {
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
 
     return (
-        <div className="w-full h-screen flex justify-center items-center content-center mt-8 md:mt-8 bg-background p-4 md:p-8">
+        <div className="w-full h-screen flex justify-center items-center content-center mt-12 md:mt-8 bg-background p-4 md:p-8">
             <Head>
                 <title>{`LabGraph - ${list[0] || 'Quality-Lab-Pro'}`}</title>
             </Head>
@@ -42,9 +42,7 @@ const AnalyticsTable = () => {
                         list={list}
                     />
                     <ListingTable items={dataFetched} />
-                    <span className='mt-8 md:mt-8'>
-                        <Footer />
-                    </span>
+                    <Footer />
                 </div>
             </div>
         </div>

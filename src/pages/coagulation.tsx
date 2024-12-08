@@ -42,9 +42,7 @@ export default function Coagulation() {
                     </div>
                 </div>
                 {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} width={width} height={height} colors={colors.lightColors} />}
-                <span className='mt-16'>
-                    <Footer />
-                </span>
+                <Footer />
             </div>
         </div>
     );

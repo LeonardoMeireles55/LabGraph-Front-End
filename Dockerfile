@@ -1,33 +1,43 @@
-# Etapa 1: Build
-FROM node:20-alpine AS builder
-
+# Imagem base para dependências
+FROM node:20-alpine AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Copie apenas os arquivos necessários para instalar dependências
-COPY package*.json ./
-
-# Instale dependências apenas uma vez e use cache do Docker
+# Instala dependências
+COPY package.json package-lock.json* ./
 RUN npm ci
 
-# Copie os arquivos do projeto
-COPY . .
-
-# Execute o build da aplicação
-RUN npm run build
-
-# Etapa 2: Produção
-FROM node:20-slim AS runner
-
+# Etapa de build
+FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copie apenas os arquivos necessários da etapa de build
-COPY --from=builder /app/.next /app/.next
-COPY --from=builder /app/package*.json /app/
-COPY --from=builder /app/public /app/public
+# Copia dependências e código
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
-# Instale apenas dependências de produção
-RUN npm ci --omit=dev
+# Configura next.config.js para output standalone
+RUN npm run build
 
+# Imagem de produção
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+# Configurações de segurança e ambiente
+ENV NODE_ENV production
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copia arquivos necessários
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Muda para usuário não-root
+USER nextjs
+
+# Configurações de porta
 EXPOSE 3000
+ENV PORT 3000
 
-CMD ["npm", "start"]
+# Comando de start
+CMD ["node", "server.js"]

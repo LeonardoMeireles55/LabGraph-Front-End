@@ -7,28 +7,30 @@ interface CsvGeneratorProps {
 }
 
 const CsvGenerator: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'data.csv' }) => {
-  const [isGenerating, setIsGenerating] = useState(false); 
+  const [isGenerating, setIsGenerating] = useState(false);
+
   const generateCsv = () => {
-    if (isGenerating) return; 
+    if (isGenerating) return;
+    if (!jsonData) return;
     setIsGenerating(true);
 
     try {
       const csv = parse(jsonData);
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = URL.createObjectURL(blob);
-      
+
       const a = document.createElement('a');
       a.href = url;
       a.download = fileName;
       document.body.appendChild(a);
       a.click();
-      
+
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Erro ao gerar o CSV:', error);
     } finally {
-      setIsGenerating(false); 
+      setIsGenerating(false);
     }
   };
 

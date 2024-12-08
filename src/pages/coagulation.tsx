@@ -37,15 +37,14 @@ export default function Coagulation() {
             <NavBar jsonData={dataFetched} fileName={list[0]} />
             <div className="flex flex-col justify-center items-center content-center gap-8 md:gap-8 lg:gap-0 xl:gap-8 md w-screen h-4/6 md:w-5/6 lg:w-screen xl:max-w-7xl">
                 <div className="flex justify-around items-center content-center bg-background lg:p-4 rounded-lg lg:w-screen ">
-                    <div className="gap-1 mt-12">
-                        <div className="">
-                            {<TestSelector name={list[0]} level={1} setDataJson={setDataFetched} analyticsType={"coagulation-analytics"} list={list} />}
-                        </div>
+                    <div className="flex justify-center items-center content-center mt-16 bg-background lg:p-4 rounded-lg lg:w-screen ">
+                        {<TestSelector name={list[0]} level={1} setDataJson={setDataFetched} analyticsType={"coagulation-analytics"} list={list} />}
                     </div>
                 </div>
                 {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} width={width} height={height} colors={colors.lightColors} />}
-                <Footer />
-
+                <span className='mt-16'>
+                    <Footer />
+                </span>
             </div>
         </div>
     );

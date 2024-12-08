@@ -7,7 +7,7 @@ interface NavLink {
 }
 
 interface NavBarProps {
-  jsonData: Array<Record<string, any>>;
+  jsonData?: Array<Record<string, any>>;
   fileName?: string;
 }
 

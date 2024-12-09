@@ -18,6 +18,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
     { text: 'BIOQUÍMICA', url: '/biochemistry' },
     { text: 'COAGULAÇÃO', url: '/coagulation' },
     { text: 'HEMATOLOGIA', url: '/hematology' },
+    { text: 'RELATÓRIOS', url: '/reports' },
     { text: 'INFORMAÇÕES', url: 'https://github.com/LeonardoMeireles55/QualityLab-Pro-Backend' },
   ];
 

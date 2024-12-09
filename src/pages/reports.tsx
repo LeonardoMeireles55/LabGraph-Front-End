@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image'
 import { useEffect, useState } from "react";
 import Footer from '@/components/ui/Footer';
 import NavBar from '@/components/ui/NavBar';
@@ -78,6 +79,15 @@ const Reports = () => {
                     </select>
                     <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
                 </div>
+                <span className="border border-textSecondary rounded-xl mt-8 p-4 md:p-8 md:mt-8 flex justify-center items-center shadow-md">
+                    <Image
+                        className="rounded-xl object-cover"
+                        src="/lab.jpg"
+                        width={500}
+                        height={500}
+                        alt="Imagem do laboratório"
+                    />
+                </span>
             </main>
             <Footer />
         </div>

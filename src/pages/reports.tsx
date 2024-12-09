@@ -72,9 +72,9 @@ const Reports = () => {
                         value={analyticsType}
                         onChange={(e) => setAnalyticsType(e.target.value)}
                     >
-                        <option value={"biochemistry-analytics"}>biochemistry</option>
-                        <option value={"hematology-analytics"}>hematology</option>
-                        <option value={"coagulation-analytics"}>coagulation</option>
+                        <option value={"biochemistry-analytics"}>BIOQUÍMICA</option>
+                        <option value={"hematology-analytics"}>HEMATOLOGIA</option>
+                        <option value={"coagulation-analytics"}>COAGULAÇÃO</option>
                     </select>
                     <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
                 </div>

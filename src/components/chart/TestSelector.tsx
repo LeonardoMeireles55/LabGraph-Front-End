@@ -49,7 +49,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
   const baseUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/search/date-range?name=`;
   const meanAndDeviationUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/mean-standard-deviation?name=`;
   const url = `${baseUrl}${testFormatFix(testName)}&level=${testLevel}&startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
-  const urlMeanAndDeviation = `${meanAndDeviationUrl}${testFormatFix(testName)}&level=${testLevel}&dateStart=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
+  const urlMeanAndDeviation = `${meanAndDeviationUrl}${testFormatFix(testName)}&level=${testLevel}&startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
 
   const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing({
     url: url,

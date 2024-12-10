@@ -100,7 +100,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                             Desvio Padrão: <span className="text-textPrimary">{item.sd.toFixed(2)}</span>
                         </p>
                         <p className="text-[6px] font-semibold text-textSecondary">
-                            Médio: <span className="text-textPrimary">{item.mean.toFixed(2)}</span>
+                            Média: <span className="text-textPrimary">{item.mean.toFixed(2)}</span>
                         </p>
                         <p className="text-[6px] font-semibold text-textSecondary">
                             Data: <span className="text-textPrimary">{item.date}</span>

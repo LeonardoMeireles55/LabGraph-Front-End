@@ -62,7 +62,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
 
   return (
     <div className=''>
-      <div className="grid md:flex gap-1 mt-4 md:mt-2 text-textSecondary">
+      <div className="grid md:flex gap-2 mt-4 md:mt-2 text-textSecondary">
         <DateSelector
           initialDay={initialDay}
           initialMonth={initialMonth}

@@ -7,13 +7,13 @@ interface MonthSelectorProps {
 
 const MonthSelector: React.FC<MonthSelectorProps> = ({ selectedMonth, onMonthChange }) => {
   const months = [
-    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
   ];
 
   return (
     <select
-      className="bg-muted text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
+      className="bg-background border border-textSecondary/25 text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
       value={selectedMonth}
       onChange={(e) => onMonthChange(+e.target.value)}
     >

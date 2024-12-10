@@ -31,7 +31,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
           onMonthChange={setInitialMonth}
         />
         <select
-          className="bg-muted text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
+          className="bg-background border border-textSecondary/25 text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
           value={initialYear}
           onChange={(e) => setInitialYear(+e.target.value)}
         >
@@ -48,7 +48,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
           onMonthChange={setSecondMonth}
         />
         <select
-          className="bg-muted text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
+          className="bg-background border border-textSecondary/25 text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
           value={secondYear}
           onChange={(e) => setSecondYear(+e.target.value)}
         >

@@ -15,7 +15,7 @@ interface ListingTableProps {
 }
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
-    const ITEMS_PER_PAGE = 8; // Itens por página
+    const ITEMS_PER_PAGE = 12; // Itens por página
     const [currentPage, setCurrentPage] = useState(1);
 
     // Cálculo do total de páginas
@@ -37,10 +37,10 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
     };
 
     return (
-        <div className="w-full h-full md:mt-6">
+        <div className="w-full h-full md:mt-8">
             {/* Tabela no desktop */}
-            <table className="w-full border-collapse bg-surface shadow-md rounded-lg hidden md:table">
-                <thead className="bg-gridLines bg-opacity-10">
+            <table className="w-full border border-double border-textSecondary bg-background shadow-md rounded-lg hidden md:table">
+                <thead className="bg-muted ">
                     <tr>
                         <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
                             Teste
@@ -69,7 +69,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                     {currentItems.map((item, index) => (
                         <tr
                             key={index}
-                            className="hover:bg-primary hover:bg-opacity-5 transition-colors duration-200"
+                            className="hover:bg-textSecondary hover:bg-opacity-5 transition-colors duration-200"
                         >
                             <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.name}</td>
                             <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.level}</td>
@@ -122,13 +122,13 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 </div>
             )}
 
-            <div className="flex justify-center items-center mt-6 mb-6 space-x-2">
+            <div className="flex justify-center items-center mt-8 space-x-2">
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}
-                    className="px-2 py-1 text-xs md:text-base bg-primary text-white rounded-md hover:bg-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-4 py-2 text-xs md:text-base bg-textSecondary bg-opacity-50 text-white rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                 >
-                    Anterior
+                    &larr; {/* Seta para a esquerda */}
                 </button>
                 <span className="text-xs text-textSecondary">
                     Página {currentPage} de {totalPages}
@@ -136,9 +136,9 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 <button
                     onClick={goToNextPage}
                     disabled={currentPage === totalPages}
-                    className="px-2 py-1 text-xs md:text-base bg-primary text-white rounded-md hover:bg-primaryDark disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-4 py-2 text-xs md:text-base bg-textSecondary bg-opacity-50 text-white  rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                 >
-                    Próxima
+                    &rarr; {/* Seta para a direita */}
                 </button>
             </div>
         </div>

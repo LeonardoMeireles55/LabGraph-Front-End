@@ -35,6 +35,7 @@ interface ControlChartProps {
     sd1: string;
     sd2: string;
     sd3: string;
+    background: string;
   };
 }
 
@@ -214,8 +215,8 @@ const ControlChart: React.FC<ControlChartProps> = ({
   const layout: Partial<Layout> = {
     width: responsive.width,
     height: responsive.height,
-    plot_bgcolor: colors.surface,
-    paper_bgcolor: colors.surface,
+    plot_bgcolor: colors.background,
+    paper_bgcolor: colors.background,
     font: {
       family: 'Inter, system-ui, sans-serif',
       size: responsive.font.ticks,
@@ -262,20 +263,23 @@ const ControlChart: React.FC<ControlChartProps> = ({
   };
 
   return (
-    <Plot
-      useResizeHandler={true}
-      style={{ width: '95%', backgroundColor: colors.surface }}
-      className='flex justify-center items-center text-center content-center p-0 rounded-xl shadow-md'
-      data={plotData}
-      layout={layout}
-      config={{
-        responsive: true,
-        displayModeBar: false,
-        scrollZoom: false,
-        modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
-      }}
-    />
+    <div className='flex justify-center items-center text-center content-center p-6 md:p-8 border border-textSecondary/25 rounded-2xl shadow-md shadow-shadow hover:shadow-xl transition-all duration-300'>
+      <Plot
+        useResizeHandler={true}
+        style={{ width: '95%' }}
+        className='flex justify-center items-center text-center content-center'
+        data={plotData}
+        layout={layout}
+        config={{
+          responsive: true,
+          displayModeBar: false,
+          scrollZoom: false,
+          modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
+        }}
+      />
+    </div>
   );
+
 };
 
 export default ControlChart;

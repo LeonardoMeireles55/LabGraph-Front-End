@@ -10,7 +10,7 @@ interface MeanAndDeviationDisplayProps {
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({ mean, sd, ownMean, ownSd, unitValue }) => {
   return (
-    <div className="w-full flex flex-row text-xs gap-4 text-textSecondary font-light">
+    <div className="w-full flex flex-row text-xs gap-4 text-textPrimary font-light">
       <div className="flex flex-col">
         <span>Média Bula:</span>
         <span className="text-textPrimary">

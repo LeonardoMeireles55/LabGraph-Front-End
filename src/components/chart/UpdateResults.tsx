@@ -29,8 +29,8 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
   const postResults = useCallback(
     async (data: ProcessedData[]) => {
       const endpointUrl = analyticsType === 'biochemistry-analytics'
-        ? 'https://leomeireles-dev.xyz/api/biochemistry-analytics'
-        : 'https://leomeireles-dev.xyz/api/coagulation-analytics';
+        ? 'http://localhost/biochemistry-analytics'
+        : 'http://localhost/coagulation-analytics';
 
       try {
         const response = await fetch(endpointUrl, {
@@ -40,7 +40,6 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
         });
 
         if (response.ok) {
-          console.log('POST successful');
           setStatus(prev => ({ ...prev, message: 'Data successfully uploaded' }));
         } else {
           throw new Error(`POST failed. Status code: ${response.status}`);
@@ -95,7 +94,6 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
                 continue;
               }
             } catch (error) {
-              console.log(`Invalid value: ${valueTest}. Skipping entry.`);
               continue;
             }
 
@@ -225,7 +223,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
       />
       <label
         htmlFor="fileInput"
-        className={`bg-muted text-textSecondary rounded px-2 py-1 text-sm cursor-pointer hover:scale-110 ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''}`}
+        className={`bg-background border border-textSecondary/25 text-textSecondary rounded px-2 py-1 text-sm cursor-pointer hover:scale-110 ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''}`}
       >
         {status.isProcessing ? status.message : 'Atualizar'}
       </label>

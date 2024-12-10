@@ -39,11 +39,17 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
   const [secondDay, setSecondDay] = useState<number>(defaultDate.getDate() + 1);
   const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
   const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());
+  const formatToTwoDigits = (value: number) => String(value).padStart(2, '0');
+
+  const formatDateWithTime = (year: number, month: number, day: number) => {
+    const formattedDate = `${year}-${formatToTwoDigits(month)}-${formatToTwoDigits(day + 1)}`;
+    return `${formattedDate} 00:00:00`;
+  };
 
   const baseUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/search/date-range?name=`;
   const meanAndDeviationUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/mean-standard-deviation?name=`;
-  const url = `${baseUrl}${testFormatFix(testName)}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
-  const urlMeanAndDeviation = `${meanAndDeviationUrl}${testFormatFix(testName)}&level=${testLevel}&dateStart=${initialYear}-${initialMonth}-${initialDay}&dateEnd=${secondYear}-${secondMonth}-${secondDay}`;
+  const url = `${baseUrl}${testFormatFix(testName)}&level=${testLevel}&startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
+  const urlMeanAndDeviation = `${meanAndDeviationUrl}${testFormatFix(testName)}&level=${testLevel}&dateStart=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
 
   const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing({
     url: url,
@@ -56,7 +62,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
 
   return (
     <div className=''>
-      <div className="grid md:flex gap-2 text-textSecondary">
+      <div className="grid md:flex gap-1 mt-4 md:mt-2 text-textSecondary">
         <DateSelector
           initialDay={initialDay}
           initialMonth={initialMonth}
@@ -71,10 +77,10 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
           setSecondMonth={setSecondMonth}
           setSecondYear={setSecondYear}
         />
-        <div className="flex justify-start items-center gap-2">
+        <div className="flex justify-start items-center gap-1">
           <span className="text-xs md:text-sm font-medium">Teste:</span>
           <select
-            className="bg-muted text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
+            className="bg-background border border-textSecondary/25 text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
             value={testName}
             onChange={(e) => setTestName(e.target.value)}
           >
@@ -84,7 +90,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
           </select>
           <span className="text-xs md:text-sm font-medium">Nível:</span>
           <select
-            className="bg-muted text-textSecondary rounded p-0 text-xs md:px-2 md:py-1 md:text-sm"
+            className="bg-background border border-textSecondary/25 text-textSecondary rounded p-0 text-xs md:px-2 md:py-1 md:text-sm"
             value={testLevel}
             onChange={(e) => setTestLevel(Number(e.target.value))}
           >
@@ -93,7 +99,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
             <option value={3}>3</option>
           </select>
           <Link
-            className="bg-muted hover:scale-110 text-textSecondary rounded py-0 px-1 md:px-2 md:py-1 text-xs md:text-sm"
+            className="bg-background border border-textSecondary/25 hover:scale-110 text-textSecondary rounded py-0 px-1 md:px-2 md:py-1 text-xs md:text-sm"
             target="_blank"
             href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit"
           >

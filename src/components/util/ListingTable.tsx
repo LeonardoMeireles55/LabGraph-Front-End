@@ -52,7 +52,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                             Desvio Padrão
                         </th>
                         <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
-                            Médio
+                            Média
                         </th>
                         <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
                             Data

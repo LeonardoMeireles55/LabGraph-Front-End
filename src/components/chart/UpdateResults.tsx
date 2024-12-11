@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from 'react';
+import getStatusMessage from '../util/getStatusMessage';
+
 
 interface ProcessedData {
   date: string;
@@ -42,7 +44,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
         if (response.ok) {
           setStatus(prev => ({ ...prev, message: 'Data successfully uploaded' }));
         } else {
-          throw new Error(`POST failed. Status code: ${response.status}`);
+          throw new Error(`POST failed. Status code: ${getStatusMessage(response.status)}`);
         }
       } catch (error) {
         throw new Error(`Error posting results: ${error instanceof Error ? error.message : 'Unknown error'}`);

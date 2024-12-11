@@ -1,5 +1,6 @@
 import CsvGenerator from '@/components/util/CsvGenerator';
 import React, { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 interface NavLink {
   text: string;
@@ -38,6 +39,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
+            {/* <ThemeToggle /> */}
             {navLinks.map((link, index) => (
               <a
                 key={index}

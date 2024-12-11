@@ -6,7 +6,7 @@ import TestSelector from '@/components/chart/TestSelector';
 import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
 import Loading from '@/components/ui/Loading';
-import colors from '../styles/colors';
+import useColors from '@/hooks/useColors';
 
 interface ListingItem {
     name: string;
@@ -29,7 +29,10 @@ const list = [
 ]
 
 
+
 export default function Biochemistry() {
+
+    const colors = useColors();
 
     const [dataFetched, setDataFetched] = useState<ListingCollection>([]);
 
@@ -47,7 +50,7 @@ export default function Biochemistry() {
                         {<TestSelector name={list[0]} level={1} setDataJson={setDataFetched} analyticsType={"biochemistry-analytics"} list={list} />}
                     </div>
                 </div>
-                {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} width={width} height={height} colors={colors.lightColors} />}
+                {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
                 <Footer />
             </div>
         </div>

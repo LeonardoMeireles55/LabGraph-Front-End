@@ -6,7 +6,7 @@ import TestSelector from '@/components/chart/TestSelector';
 import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
 import Loading from '@/components/ui/Loading';
-import colors from '@/styles/colors';
+import useColors from '@/hooks/useColors';
 
 
 
@@ -29,6 +29,8 @@ export default function Coagulation() {
 
     const { width = 800, height = 600 } = useWindowDimensions();
 
+
+
     return (
         <div className="w-full min-h-svh flex justify-center items-center content-center flex-col bg-background p-2 md:p-0">
             <Head>
@@ -41,7 +43,7 @@ export default function Coagulation() {
                         {<TestSelector name={list[0]} level={1} setDataJson={setDataFetched} analyticsType={"coagulation-analytics"} list={list} />}
                     </div>
                 </div>
-                {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} width={width} height={height} colors={colors.lightColors} />}
+                {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
                 <Footer />
             </div>
         </div>

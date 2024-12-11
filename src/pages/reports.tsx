@@ -5,6 +5,7 @@ import Footer from '@/components/ui/Footer';
 import NavBar from '@/components/ui/NavBar';
 import DateSelector from '@/components/functional/DateSelector';
 import GenerateReports from '@/components/util/GenerateReports';
+import formatDateWithTime from '@/components/functional/formatDateWithTime';
 
 interface ListingItem {
     name: string;
@@ -17,8 +18,6 @@ interface ListingItem {
 }
 
 const Reports = () => {
-    const formatToTwoDigits = (value: number) => String(value).padStart(2, '0');
-
     const defaultDate = new Date();
 
     const [initialMonth, setInitialMonth] = useState<number>(defaultDate.getMonth());
@@ -30,7 +29,7 @@ const Reports = () => {
     const [analyticsType, setAnalyticsType] = useState<string>("biochemistry-analytics");
 
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
-    const baseUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/names/date-range?startDate=${initialYear}-${(initialMonth)}-${(initialDay)}&endDate=${secondYear}-${(secondMonth)}-${(secondDay)}`;
+    const baseUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
 
     useEffect(() => {
         const fetchData = async () => {

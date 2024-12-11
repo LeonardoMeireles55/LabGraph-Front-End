@@ -4,6 +4,7 @@ import UpdateResults from './UpdateResults';
 import DateSelector from '../functional/DateSelector';
 import useFetchListing from '@/hooks/useFetchListing';
 import Link from 'next/link';
+import formatDateWithTime from '../functional/formatDateWithTime';
 
 interface TestSelectorProps {
   list: string[];
@@ -39,12 +40,6 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
   const [secondDay, setSecondDay] = useState<number>(defaultDate.getDate() + 1);
   const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
   const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());
-  const formatToTwoDigits = (value: number) => String(value).padStart(2, '0');
-
-  const formatDateWithTime = (year: number, month: number, day: number) => {
-    const formattedDate = `${year}-${formatToTwoDigits(month)}-${formatToTwoDigits(day + 1)}`;
-    return `${formattedDate} 00:00:00`;
-  };
 
   const baseUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/search/date-range?name=`;
   const meanAndDeviationUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/mean-standard-deviation?name=`;

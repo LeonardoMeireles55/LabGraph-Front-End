@@ -44,6 +44,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
         if (response.ok) {
           setStatus(prev => ({ ...prev, message: 'Data successfully uploaded' }));
         } else {
+          alert(`Ocorreu um erro: ${getStatusMessage(response.status)}`);
           throw new Error(`POST failed. Status code: ${getStatusMessage(response.status)}`);
         }
       } catch (error) {

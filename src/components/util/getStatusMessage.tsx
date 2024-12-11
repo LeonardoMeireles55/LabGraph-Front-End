@@ -8,7 +8,7 @@ const getStatusMessage = (statusCode: number): string => {
         403: 'Acesso proibido',
         404: 'Recurso não encontrado',
         408: 'Tempo de requisição esgotado',
-        409: 'Conflito na requisição',
+        409: 'Valores ja existentes no banco de dados.',
         429: 'Muitas requisições',
         500: 'Erro interno do servidor',
         502: 'Erro de gateway',

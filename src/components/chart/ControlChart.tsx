@@ -23,15 +23,31 @@ const filter = (value: number, mean: number, sd: number) => {
   return value;
 };
 
+const CustomDot: React.FC<any> = ({ cx, cy, payload }) => {
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r={3} fill="var(--color-primary)" />
+      <text x={cx} y={cy - 10} fill="var(--color-text-primary)" fontSize={12} textAnchor="end">
+        {payload.rawValue.toFixed(2)}
+      </text>
+    </g>
+  );
+};
+
+
 const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const data = listing;
-  const { mean, sd, name, level } = data[0];
+  const { mean, sd, name, level, unit_value } = data[0];
 
   const chartData = data.map(entry => ({
     date: formatarDate(entry.date),
+    name: entry.name,
     value: filter(entry.value, mean, sd),
+    unitValue: unit_value,
     rawValue: entry.value,
   }));
+
+  console.log(chartData)
 
   const yAxisValues = [
     { value: mean - 3 * sd, label: '-3s', color: '#ff0000' },
@@ -44,34 +60,32 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   ];
 
   return (
-    <div className="flex justify-center items-center text-center content-center p-6 md:p-8 bg-background border border-textSecondary/5 rounded-2xl shadow-md shadow-shadow hover:shadow-xl transition-all duration-300">
+    <div className="flex justify-center items-center text-center content-center p-6 md:p-8 bg-background border border-borderColor rounded-2xl shadow-md shadow-shadow hover:shadow-xl">
       <div className="mb-6">
-        <h2 className="text-xl md:text-2xl font-semibold text-textPrimary">
+        <h2 className="text-md md:text-xl text-textSecondary">
           {name} - Level {level.toString().toUpperCase()}
         </h2>
       </div>
 
-      <div className="h-[250px] md:h-[350px] w-full">
+      <div className="h-[250px] md:h-[400px] w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="4 4" stroke="var(--color-grid-lines)" />
+          <LineChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
+            <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.5} stroke="false" />
             <XAxis
               dataKey="date"
               angle={window.innerWidth < 768 ? -25 : -45} // Ajuste o ângulo em telas menores
               textAnchor="end"
               height={70}
-              stroke="var(--color-text-secondary)"
-              tick={{ fill: 'var(--color-text-secondary)' }}
               tickFormatter={(date) => date}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
               domain={[mean - 3.0 * sd, mean + 3.0 * sd]}
-              stroke="var(--color-text-secondary)"
               ticks={yAxisValues.map(v => v.value)}
               axisLine={false}
               tickLine={false}
+              strokeWidth={5.0}
               tickFormatter={(value) => {
                 const matchingValue = yAxisValues.find(v => Math.abs(v.value - value) < 0.0001);
                 return matchingValue ? matchingValue.label : '';
@@ -81,12 +95,9 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
                   return (
-                    <div className="bg-background p-4 rounded shadow-md shadow-shadow border border-border">
-                      <p className=" ">
-                        DATA: {payload[0].payload.date}
-                      </p>
-                      <p className="">
-                        VALOR: {payload[0].payload.rawValue.toFixed(2)}
+                    <div className="bg-background text-xs p-2 rounded shadow-md shadow-shadow border border-border">
+                      <p className="">{`${payload[0].payload.name}`}</p>
+                      <p className="">{`${payload[0].payload.rawValue.toFixed(2)} ${payload[0].payload.unitValue}`}
                       </p>
                     </div>
                   );
@@ -94,14 +105,23 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 return null;
               }}
             />
-            <Line type="monotone" dataKey="value" strokeWidth={2} stroke="var(--color-primary)" activeDot={{ r: 4 }} />
+            <Line
+              type="linear"
+              dataKey="value"
+              stroke='var(--color-primary)'
+              strokeWidth={2.0}
+              activeDot={{ r: 6 }}
+              dot={<CustomDot />}
+            />
 
             {yAxisValues.map((line, index) => (
               <ReferenceLine
                 key={index}
                 y={line.value}
                 stroke={line.color}
-                strokeDasharray="3 3"
+                strokeDasharray="4 4"
+                strokeWidth={1.5}
+                strokeOpacity={0.5}
               />
             ))}
           </LineChart>

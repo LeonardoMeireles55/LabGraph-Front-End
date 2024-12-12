@@ -31,6 +31,7 @@
   --color-green: #10B981;
   --color-shadow: rgba(0, 0, 0, 0.08);
   --color-overlay: rgba(0, 0, 0, 0.04);
+  --border-color: #4B556340;
 }
 
 /* Tema Escuro */
@@ -55,6 +56,7 @@
   --color-green: #059669;
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-overlay: rgba(255, 255, 255, 0.05);
+  --border-color: #4B556340;
 }
 
 

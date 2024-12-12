@@ -75,7 +75,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
         <div className="flex justify-start items-center gap-1">
           <span className="text-xs md:text-sm font-medium">Teste:</span>
           <select
-            className="bg-background border border-textSecondary/25 text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
+            className="bg-background border border-borderColor text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
             value={testName}
             onChange={(e) => setTestName(e.target.value)}
           >
@@ -85,7 +85,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
           </select>
           <span className="text-xs md:text-sm font-medium">Nível:</span>
           <select
-            className="bg-background border border-textSecondary/25 text-textSecondary rounded p-0 text-xs md:px-2 md:py-1 md:text-sm"
+            className="bg-background border border-borderColor text-textSecondary rounded p-0 text-xs md:px-2 md:py-1 md:text-sm"
             value={testLevel}
             onChange={(e) => setTestLevel(Number(e.target.value))}
           >
@@ -94,7 +94,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
             <option value={3}>3</option>
           </select>
           <Link
-            className="bg-background border border-textSecondary/25 hover:scale-110 text-textSecondary rounded py-0 px-1 md:px-2 md:py-1 text-xs md:text-sm"
+            className="bg-background border border-borderColor hover:scale-110 text-textSecondary rounded py-0 px-1 md:px-2 md:py-1 text-xs md:text-sm"
             target="_blank"
             href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit"
           >

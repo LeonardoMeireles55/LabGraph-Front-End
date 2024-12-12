@@ -36,6 +36,7 @@ const config: Config = {
       sd3: 'var(--color-sd3)',
       meanLine: 'var(--color-mean-line)',
       navbar: 'var(--color-navbar)',
+      borderColor: 'var(--border-color);',
 
       // Tema Escuro
       dark: {
@@ -59,6 +60,7 @@ const config: Config = {
         sd3: 'var(--color-sd3)',
         meanLine: 'var(--color-mean-line)',
         navbar: 'var(--color-navbar)',
+        borderColor: 'var(--border-color);',
       },
     },
   },

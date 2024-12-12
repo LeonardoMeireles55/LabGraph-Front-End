@@ -1,14 +1,7 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
-import { Layout, Shape, ScatterData } from 'plotly.js';
 import formatarDate from '../functional/FormatDate';
-import Loading from '../ui/Loading';
 
-// Dynamic import with better typing
-const Plot = dynamic(() => import('react-plotly.js'), {
-  ssr: false,
-  loading: () => <div className="w-full h-64 flex items-center justify-center"><Loading /> </div>
-});
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 
 interface ListingItem {
   name: string;
@@ -22,264 +15,131 @@ interface ListingItem {
 
 interface ControlChartProps {
   listing: ListingItem[];
-  width: number;
-  height: number;
-  colors: {
-    primary: string;
-    textPrimary: string;
-    textSecondary: string;
-    surface: string;
-    border: string;
-    gridLines: string;
-    meanLine: string;
-    sd1: string;
-    sd2: string;
-    sd3: string;
-    background: string;
-  };
 }
 
-// Simplified filter function
 const filter = (value: number, mean: number, sd: number) => {
   if (value > mean + 3 * sd) return (mean + 3 * sd) + sd / 3;
   if (value < mean - 3 * sd) return (mean - 3 * sd) - sd / 3;
   return value;
 };
 
-// Enhanced responsive layout calculation
-const calculateResponsiveLayout = (width: number, height: number) => {
-  // More granular breakpoints
-  const breakpoints = {
-    xs: 480,
-    sm: 640,
-    md: 768,
-    lg: 1024,
-    xl: 1280,
-    xxl: 1600
-  };
-
-  // Default dimensions
-  let dimensions = {
-    width: width,
-    height: height,
-    margin: {
-      l: 80,
-      r: 50,
-      t: 80,
-      b: 80
-    },
-    font: {
-      title: 24,
-      axis: 16,
-      ticks: 12,
-      values: 12
-    }
-  };
-
-  // Adjust for very small screens
-  if (width < breakpoints.xs) {
-    dimensions = {
-      width: width * 0.95,
-      height: height * 0.7,
-      margin: {
-        l: 40,
-        r: 20,
-        t: 60,
-        b: 60
-      },
-      font: {
-        title: 14,
-        axis: 10,
-        ticks: 8,
-        values: 8
-      }
-    };
-  }
-  // Small screens
-  else if (width < breakpoints.sm) {
-    dimensions.width *= 0.95;
-    dimensions.height *= 0.8;
-    dimensions.margin = {
-      l: 50,
-      r: 30,
-      t: 70,
-      b: 70
-    };
-    dimensions.font.title = 16;
-    dimensions.font.axis = 12;
-  }
-  // Medium screens
-  else if (width < breakpoints.md) {
-    dimensions.width *= 0.9;
-    dimensions.height *= 0.75;
-    // dimensions.margin.l = 70;
-  }
-  // Large screens
-  else if (width < breakpoints.lg) {
-    dimensions.width *= 0.85;
-    dimensions.height *= 0.75;
-  }
-  // Extra large screens
-  else if (width < breakpoints.xl) {
-    dimensions.width *= 0.95;
-    dimensions.height *= 0.7;
-  }
-  // XXL screens
-  else {
-    dimensions.width = Math.min(width * 0.75, 1400);
-    dimensions.height = Math.min(height * 0.7, 900);
-  }
-
-  return dimensions;
+const CustomDot: React.FC<any> = ({ cx, cy, payload }) => {
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r={2} fill="var(--color-primary)" />
+      <text x={cx} y={cy - 10} fill="var(--color-text-primary)" className='text-[0.5rem] md:text-xs' textAnchor="end">
+        {payload.rawValue.toFixed(2)}
+      </text>
+    </g>
+  );
 };
 
-const ControlChart: React.FC<ControlChartProps> = ({
-  listing,
-  width,
-  height,
-  colors
-}) => {
+
+const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const data = listing;
-  const dates = data.map(entry => formatarDate(entry.date).toString());
-  const values = data.map(entry => entry.value);
-  const { mean, sd, name, level } = data[0];
+  const { mean, sd, name, level, unit_value } = data[0];
 
-  // Calculate responsive layout
-  const responsive = calculateResponsiveLayout(width, height);
-
-  // Prepare chart configuration
-  const yaxisRange = [mean - (3 * 1.2) * sd, mean + (3 * 1.2) * sd];
-  const yTickValues = [
-    mean - 3 * sd,
-    mean - 2 * sd,
-    mean - sd,
-    mean,
-    mean + sd,
-    mean + 2 * sd,
-    mean + 3 * sd
-  ];
-  const yTickText = ['-3s ', '-2s ', '-1s ', 'Média ', '+1s ', '+2s ', '+3s '];
-
-  const plotData: Partial<ScatterData>[] = [{
-    x: dates,
-    y: values.map(value =>
-      value < mean - 3 * sd || value > mean + 3 * sd
-        ? filter(value, mean, sd)
-        : value
-    ),
-    type: 'scatter',
-    mode: 'text+lines+markers',
-    text: values.map(value => value.toFixed(2)),
-    textposition: width < 768 ? 'top right' : 'top center',
-    textfont: {
-      size: responsive.font.values,
-    },
-    marker: {
-      color: colors.primary,
-      size: width < 768 ? 2 : 4,
-      line: {
-        width: 1
-      }
-    },
-    line: {
-      color: colors.primary,
-      width: width < 768 ? 1 : 2
-    },
-  }];
-
-  const lines = [
-    { multiple: 3, color: colors.sd3, legend: '3x SD' },
-    { multiple: 2, color: colors.sd2, legend: '2x SD' },
-    { multiple: 1, color: colors.sd1, legend: '1x SD' },
-    { multiple: 0, color: colors.meanLine, legend: 'mean' },
-    { multiple: -1, color: colors.sd1, legend: '-1x SD' },
-    { multiple: -2, color: colors.sd2, legend: '-2x SD' },
-    { multiple: -3, color: colors.sd3, legend: '-3x SD' },
-  ];
-
-  const shapes: Partial<Shape>[] = lines.map(line => ({
-    type: 'line' as const,
-    xref: 'paper',
-    x0: 0,
-    x1: 1,
-    yref: 'y',
-    y0: mean + line.multiple * sd,
-    y1: mean + line.multiple * sd,
-    line: {
-      color: line.color,
-      width: width < 768 ? 1 : 2,
-      dash: 'dash'
-    },
+  const chartData = data.map(entry => ({
+    date: formatarDate(entry.date),
+    name: entry.name,
+    value: filter(entry.value, mean, sd),
+    unitValue: unit_value,
+    rawValue: entry.value,
   }));
 
-  const layout: Partial<Layout> = {
-    width: responsive.width,
-    height: responsive.height,
-    plot_bgcolor: colors.background,
-    paper_bgcolor: colors.background,
-    font: {
-      family: 'Inter, system-ui, sans-serif',
-      size: responsive.font.ticks,
-      color: colors.textPrimary
-    },
-    title: {
-      text: `${name} - Nível ${level.toString().toUpperCase()}`,
-      font: {
-        size: responsive.font.title,
-        color: colors.textPrimary
-      },
-      y: 0.95
-    },
-    showlegend: false,
-    margin: responsive.margin,
-    xaxis: {
-      tickangle: width < 768 ? -60 : -45,
-      type: 'category',
-      color: colors.textPrimary,
-      tickfont: { size: responsive.font.ticks },
-      gridcolor: colors.gridLines,
-      gridwidth: 1,
-      showgrid: true,
-      zeroline: false,
-      title: {
-        font: { size: responsive.font.axis }
-      }
-    },
-    yaxis: {
-      title: {
-        font: { size: responsive.font.axis }
-      },
-      range: yaxisRange,
-      color: colors.textPrimary,
-      tickvals: yTickValues,
-      ticktext: yTickText,
-      tickfont: { size: responsive.font.ticks },
-      gridcolor: colors.gridLines,
-      gridwidth: 1,
-      showgrid: true,
-      zeroline: false
-    },
-    shapes: shapes,
-  };
+
+  const yAxisValues = [
+    { value: mean - 3 * sd, label: '-3s', color: 'var(--color-sd3)' },
+    { value: mean - 2 * sd, label: '-2s', color: 'var(--color-sd2)' },
+    { value: mean - sd, label: '-1s', color: 'var(--color-sd1)' },
+    { value: mean, label: 'Média', color: 'var(--color-mean-line)' },
+    { value: mean + sd, label: '+1s', color: 'var(--color-sd1)' },
+    { value: mean + 2 * sd, label: '+2s', color: 'var(--color-sd2)' },
+    { value: mean + 3 * sd, label: '+3s', color: 'var(--color-sd3)' },
+  ];
 
   return (
-    <div className='flex justify-center items-center text-center content-center p-6 md:p-8 border border-textSecondary/25 rounded-2xl shadow-md shadow-shadow hover:shadow-xl transition-all duration-300'>
-      <Plot
-        useResizeHandler={true}
-        style={{ width: '95%' }}
-        className='flex justify-center items-center text-center content-center'
-        data={plotData}
-        layout={layout}
-        config={{
-          responsive: true,
-          displayModeBar: false,
-          scrollZoom: false,
-          modeBarButtonsToRemove: ['zoom2d', 'pan2d', 'select2d', 'lasso2d']
-        }}
-      />
+    <div className='w-[95%] md:w-[80%] 2xl:w-full'>
+      <div className="p-0 bg-surface border border-borderColor rounded-2xl shadow-xl shadow-shadow">
+        <div className="mb-0 mt-8">
+          <h2 className="flex justify-center content-center items-center text-base md:text-2xl text-textSecondary">
+            {name} - Level {level.toString().toUpperCase()}
+          </h2>
+        </div>
+
+        <div className="h-[300px] md:min-h-[400px] w-[100%] flex justify-center content-center items-center p-0">
+          <ResponsiveContainer className='flex justify-center  content-center items-center p-0 m-0 bg-surface' width="98%" height="90%">
+            <LineChart data={chartData} margin={{ top: 40, right: 25, bottom: 40, left: 0 }}>
+              <CartesianGrid stroke="false" />
+              <XAxis
+                className="text-[0.5rem] md:text-xs text-white"
+                dataKey="date"
+                angle={-55}
+                textAnchor="end"
+                tickFormatter={(date) => date}
+                height={50}
+                width={50}
+                tickMargin={6}
+                axisLine={false}
+                tickLine={false}
+                stroke="var(--color-text-primary)"
+
+              />
+              <YAxis
+                className='text-[0.5rem] md:text-sm text-textPrimary'
+                domain={[mean - 3 * sd, mean + 3 * sd]}
+                textAnchor="end"
+                ticks={yAxisValues.map(v => v.value)}
+                width={50}
+                height={50}
+                tickMargin={6}
+                axisLine={false}
+                tickLine={false}
+                stroke="var(--color-text-primary)"
+                tickFormatter={(value) => {
+                  const matchingValue = yAxisValues.find(v => Math.abs(v.value - value) < 0.0001);
+                  return matchingValue ? matchingValue.label : '';
+                }}
+              />
+              <Tooltip
+                content={({ active, payload }) => {
+                  if (active && payload && payload.length) {
+                    return (
+                      <div className="bg-background text-xs text-textPrimary p-2  rounded shadow-md shadow-shadow border border-border">
+                        <p className="">{`${payload[0].payload.name}`}</p>
+                        <p className="">{`${payload[0].payload.rawValue.toFixed(2)} ${payload[0].payload.unitValue}`}
+                        </p>
+                      </div>
+                    );
+                  }
+                  return null;
+                }}
+              />
+              <Line
+                type="linear"
+                dataKey="value"
+                stroke='var(--color-primary)'
+                strokeWidth={1.2}
+                activeDot={{ r: 4 }}
+                dot={<CustomDot />}
+              />
+
+              {yAxisValues.map((line, index) => (
+                <ReferenceLine
+                  key={index}
+                  y={line.value}
+                  stroke={line.color}
+                  strokeDasharray="5 5"
+                  strokeWidth={1.1}
+                  strokeOpacity={1.0}
+                />
+              ))}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
     </div>
   );
-
 };
 
 export default ControlChart;

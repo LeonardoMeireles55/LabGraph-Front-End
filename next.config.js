@@ -3,6 +3,4 @@ const nextConfig = {
   reactStrictMode: false,
 }
 
-module.exports = {
-  output: 'standalone',
-}
+module.exports = nextConfig;

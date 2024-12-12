@@ -1,6 +1,6 @@
 {
   "name": "quality-lab-pro",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "date-fns": "^4.1.0",
     "json2csv": "^6.0.0-alpha.2",
+    "lucide-react": "^0.468.0",
     "next": "14.0.4",
     "plotly.js": "^2.28.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-plotly.js": "^2.6.0"
+    "react-plotly.js": "^2.6.0",
+    "recharts": "^2.14.1"
   },
   "devDependencies": {
     "@types/json2csv": "^5.0.7",

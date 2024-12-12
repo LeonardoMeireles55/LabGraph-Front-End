@@ -50,42 +50,47 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   console.log(chartData)
 
   const yAxisValues = [
-    { value: mean - 3 * sd, label: '-3s', color: '#ff0000' },
-    { value: mean - 2 * sd, label: '-2s', color: '#ff9900' },
-    { value: mean - sd, label: '-1s', color: '#ffc400' },
-    { value: mean, label: 'Média', color: '#00cc00' },
-    { value: mean + sd, label: '+1s', color: '#ffc400' },
-    { value: mean + 2 * sd, label: '+2s', color: '#ff9900' },
-    { value: mean + 3 * sd, label: '+3s', color: '#ff0000' },
+    { value: mean - 3 * sd, label: '-3s', color: 'var(--color-sd3)' },
+    { value: mean - 2 * sd, label: '-2s', color: 'var(--color-sd2)' },
+    { value: mean - sd, label: '-1s', color: 'var(--color-sd1)' },
+    { value: mean, label: 'Média', color: 'var(--color-mean-line)' },
+    { value: mean + sd, label: '+1s', color: 'var(--color-sd1)' },
+    { value: mean + 2 * sd, label: '+2s', color: 'var(--color-sd2)' },
+    { value: mean + 3 * sd, label: '+3s', color: 'var(--color-sd3)' },
   ];
 
   return (
-    <div className="flex justify-center items-center text-center content-center p-6 md:p-8 bg-background border border-borderColor rounded-2xl shadow-md shadow-shadow hover:shadow-xl">
+    <div className="flex flex-col justify-center items-center w-full p-8 bg-background border border-borderColor rounded-2xl shadow-md hover:shadow-xl">
       <div className="mb-6">
-        <h2 className="text-md md:text-xl text-textSecondary">
+        <h2 className="text-md md:text-2xl text-textSecondary">
           {name} - Level {level.toString().toUpperCase()}
         </h2>
       </div>
 
-      <div className="h-[250px] md:h-[400px] w-full">
+      <div className="h-[300px] md:min-h-[375px] w-[95%] p-0">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.5} stroke="false" />
+          <LineChart data={chartData} margin={{ top: 20, right: 30, bottom: 30, left: 40 }}>
+            <CartesianGrid strokeDasharray="4 4" strokeOpacity={0.5} stroke="true" />
             <XAxis
+              className="text-[0.5rem] md:text-xs"
               dataKey="date"
-              angle={window.innerWidth < 768 ? -25 : -45} // Ajuste o ângulo em telas menores
+              angle={-45}
               textAnchor="end"
-              height={70}
+              height={50}
               tickFormatter={(date) => date}
+              tickMargin={4} // Aumenta o espaço para evitar sobreposição com o eixo Y
               axisLine={false}
               tickLine={false}
             />
             <YAxis
-              domain={[mean - 3.0 * sd, mean + 3.0 * sd]}
+              className='text-[0.5rem] md:text-sm'
+              domain={[mean - 3 * sd, mean + 3 * sd]}
+              textAnchor="end"
+              height={50}
               ticks={yAxisValues.map(v => v.value)}
+              tickMargin={4}
               axisLine={false}
               tickLine={false}
-              strokeWidth={5.0}
               tickFormatter={(value) => {
                 const matchingValue = yAxisValues.find(v => Math.abs(v.value - value) < 0.0001);
                 return matchingValue ? matchingValue.label : '';
@@ -109,7 +114,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               type="linear"
               dataKey="value"
               stroke='var(--color-primary)'
-              strokeWidth={2.0}
+              strokeWidth={1.5}
               activeDot={{ r: 6 }}
               dot={<CustomDot />}
             />
@@ -120,8 +125,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 y={line.value}
                 stroke={line.color}
                 strokeDasharray="4 4"
-                strokeWidth={1.5}
-                strokeOpacity={0.5}
+                strokeWidth={2.0}
+                strokeOpacity={1.0}
               />
             ))}
           </LineChart>

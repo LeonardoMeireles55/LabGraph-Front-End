@@ -69,7 +69,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                     {currentItems.map((item, index) => (
                         <tr
                             key={index}
-                            className="hover:bg-textSecondary hover:bg-opacity-5 transition-colors duration-200"
+                            className="hover:bg-muted transition-colors duration-200"
                         >
                             <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.name}</td>
                             <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.level}</td>
@@ -126,7 +126,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 text-xs md:text-base bg-textSecondary bg-opacity-50 text-white rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+                    className="px-4 py-2 text-xs md:text-base bg-muted bg-opacity-100 text-white rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                 >
                     &larr; {/* Seta para a esquerda */}
                 </button>
@@ -136,7 +136,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 <button
                     onClick={goToNextPage}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 text-xs md:text-base bg-textSecondary bg-opacity-50 text-white  rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+                    className="px-4 py-2 text-xs md:text-base bg-border bg-opacity-100 text-white  rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                 >
                     &rarr; {/* Seta para a direita */}
                 </button>

@@ -44,7 +44,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
               <a
                 key={index}
                 href={link.url}
-                className="text-textSecondary hover:text-textPrimary text-sm font-medium transition-colors duration-300 relative group"
+                className="text-textSecondary hover:text-textPrimary text-sm font-normal transition-colors duration-300 relative group"
               >
                 {link.text}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
@@ -84,7 +84,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
             <a
               key={index}
               href={link.url}
-              className="block text-textSecondary hover:text-textPrimary text-sm font-medium transition-colors duration-300"
+              className="block text-textSecondary hover:text-textPrimary text-sm font-light transition-colors duration-300"
             >
               {link.text}
             </a>

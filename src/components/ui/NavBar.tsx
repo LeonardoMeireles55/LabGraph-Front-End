@@ -79,7 +79,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
       </div>
 
       <div
-        className={`md:hidden absolute w-full bg-surface shadow-lg transition-all duration-300 ${isMenuOpen ? 'max-h-64' : 'max-h-0'
+        className={`md:hidden absolute w-full bg-surface shadow-lg shadow-shadow transition-all duration-300 ${isMenuOpen ? 'max-h-64' : 'max-h-0'
           } overflow-hidden`}
       >
         <div className="px-4 py-3 space-y-2">

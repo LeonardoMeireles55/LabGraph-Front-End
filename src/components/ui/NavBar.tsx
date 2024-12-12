@@ -38,7 +38,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link, index) => (
               <a
                 key={index}
@@ -79,10 +79,10 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
       </div>
 
       <div
-        className={`md:hidden absolute w-full bg-background shadow-lg transition-all duration-300 ${isMenuOpen ? 'max-h-92' : 'max-h-0'
+        className={`md:hidden absolute w-full bg-surface shadow-lg transition-all duration-300 ${isMenuOpen ? 'max-h-64' : 'max-h-0'
           } overflow-hidden`}
       >
-        <div className="px-4 py-3 space-y-3">
+        <div className="px-4 py-3 space-y-2">
           {navLinks.map((link, index) => (
             <a
               key={index}
@@ -92,7 +92,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
               {link.text}
             </a>
           ))}
-          <div className="rounded-md bg-green w-full flex justify-start text-white text-sm font-medium transition-colors duration-300">
+          <div className="w-full flex justify-start text-sm font-medium p-0 transition-colors duration-300">
             <CsvGenerator jsonData={jsonData} fileName={fileName} />
           </div>
         </div>

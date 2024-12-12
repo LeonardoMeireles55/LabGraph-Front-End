@@ -53,7 +53,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
 
   useEffect(() => {
     setDataJson(listing);
-  }, [listing]);
+  }, [defaultDate]);
 
   return (
     <div className=''>

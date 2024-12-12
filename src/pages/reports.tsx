@@ -68,7 +68,7 @@ const Reports = () => {
                         setSecondYear={setSecondYear}
                     />
                     <select
-                        className="bg-muted text-textSecondary rounded p-0 text-xs md:px-2 md:py-1 md:text-sm"
+                        className="bg-background border border-border text-textSecondary rounded-md p-0 text-xs md:px-2 md:py-1 md:text-sm"
                         value={analyticsType}
                         onChange={(e) => setAnalyticsType(e.target.value)}
                     >
@@ -76,16 +76,19 @@ const Reports = () => {
                         <option value={"hematology-analytics"}>HEMATOLOGIA</option>
                         <option value={"coagulation-analytics"}>COAGULAÇÃO</option>
                     </select>
-                    <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
+                    <span className='flex justify-center border border-border rounded-md'>
+                        <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
+                    </span>
                 </div>
                 <span className="border border-textSecondary rounded-xl mt-8 p-4 md:p-8 md:mt-8 flex justify-center items-center shadow-md">
                     <Image
                         className="rounded-xl object-cover"
+                        fetchPriority="high"
                         src="/lab.jpg"
                         width={500}
                         height={500}
                         alt="Imagem do laboratório"
-                    />
+                        priority={true} />
                 </span>
             </main>
             <Footer />

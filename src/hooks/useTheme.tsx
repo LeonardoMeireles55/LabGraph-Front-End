@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useColors from './useColors';
 
 const useTheme = () => {
-    const [theme, setTheme] = useState<'light' | 'dark'>();  // Inicializa o estado com 'light'
+    const [theme, setTheme] = useState<'light' | 'dark'>();
     const { colors, changeTheme } = useColors();
 
 
@@ -11,23 +11,21 @@ const useTheme = () => {
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-            // Define o tema com base na preferência do usuário ou no tema salvo
             changeTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
             setTheme(savedTheme === 'dark' ? 'dark' : 'light');
         }
-    }, []);  // Esse efeito só é executado uma vez, ao montar o componente
+    }, []);
 
     useEffect(() => {
         if (theme) {
-            // Atualiza o localStorage e a tag HTML
             localStorage.setItem('theme', theme);
             if (theme === 'dark') {
-                document.documentElement.classList.add('dark'); // Adiciona a classe 'dark'
+                document.documentElement.classList.add('dark');
             } else {
-                document.documentElement.classList.remove('dark'); // Remove a classe 'dark'
+                document.documentElement.classList.remove('dark');
             }
         }
-    }, [theme]);
+    }, [changeTheme]);
 
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));

@@ -6,6 +6,7 @@
     padding: 0;
     margin: 0;
     outline: none;
+
   }
 
 /* globals.css */
@@ -16,7 +17,7 @@
   --color-accent: #F59E0B;
   --color-danger: #EF4444;
   --color-background: #F9FAFB;
-  --color-surface: #FFFFFF;
+  --color-surface: #f9fafa;
   --color-muted: #E5E7EB;
   --color-text-primary: #111827;
   --color-text-secondary: #4B5563;

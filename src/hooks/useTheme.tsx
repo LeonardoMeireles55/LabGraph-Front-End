@@ -29,7 +29,7 @@ const useTheme = () => {
         }
     }, [theme]);
 
-    return { theme, toggleTheme };
+    return { theme, toggleTheme, setTheme };
 };
 
 export default useTheme;

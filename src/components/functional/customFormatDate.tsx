@@ -1,4 +1,4 @@
-const formatDate = (dataString: string | number | Date): String => {
+const customFormatDate = (dataString: string | number | Date): String => {
     const dataObj = new Date(dataString);
     const mes = (dataObj.getMonth() + 1).toString().padStart(2, '0');
     const dia = dataObj.getDate().toString().padStart(2, '0');
@@ -9,4 +9,4 @@ const formatDate = (dataString: string | number | Date): String => {
     return `${dia}/${mes} ${hora}:${minutos}`;
 }
 
-export default formatDate;
+export default customFormatDate;

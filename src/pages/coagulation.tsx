@@ -39,7 +39,7 @@ export default function Coagulation() {
                         {<TestSelector name={list[0]} level={1} setDataJson={setDataFetched} analyticsType={"coagulation-analytics"} list={list} />}
                     </div>
                 </div>
-                {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
+                {/* {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />} */}
                 <Footer />
             </div>
         </div>

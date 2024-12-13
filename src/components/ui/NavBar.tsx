@@ -56,7 +56,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
             <ThemeToggle />
 
           </div>
-          <span className='md:hidden absolute right-11 top-4'>
+          <span className='md:hidden absolute right-11 top-2'>
             <ThemeToggle />
           </span>
           <button

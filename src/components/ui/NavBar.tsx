@@ -25,7 +25,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-100 bg-navbar xl:p-2 shadow-xl shadow-overlay">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-navbar xl:p-2 shadow-xl shadow-overlay">
       <div className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
@@ -50,12 +50,13 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
               </a>
             ))}
 
-            <div className="p-2 rounded-md">
+            <div className="p-2 hidden  md:block rounded-md">
               <CsvGenerator jsonData={jsonData} fileName={fileName} />
             </div>
             <ThemeToggle />
+
           </div>
-          <span className='md:hidden'>
+          <span className='md:hidden absolute right-12 top-4'>
             <ThemeToggle />
           </span>
           <button
@@ -87,7 +88,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
             <a
               key={index}
               href={link.url}
-              className="block text-textSecondary hover:text-textPrimary text-sm font-light transition-colors duration-300"
+              className="block text-textPrimary hover:text-textPrimary text-sm font-light transition-colors duration-300"
             >
               {link.text}
             </a>

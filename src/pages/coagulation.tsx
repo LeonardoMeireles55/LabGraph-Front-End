@@ -6,8 +6,6 @@ import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
 import Loading from '@/components/ui/Loading';
 
-
-
 interface ListingItem {
     name: string;
     level: number;
@@ -17,6 +15,7 @@ interface ListingItem {
     value: number;
     unit_value: string;
 }
+
 interface ListingCollection extends Array<ListingItem> { }
 
 const list = ["TAP-20", "TTPA"];

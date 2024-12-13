@@ -9,7 +9,6 @@
   }
 
 /* globals.css */
-
 :root {
   --color-primary: #3B82F6;
   --color-secondary: #10B981;
@@ -40,7 +39,7 @@
   --color-accent: #FF9F0D; 
   --color-danger: #FF4F4F;
   --color-background: #121D2C;
-  --color-surface: #1D2939; 
+  --color-surface: #1d2939; 
   --color-muted: #5A6A76; 
   --color-text-primary: #F0F1F4; 
   --color-text-secondary: #D1D5DB;

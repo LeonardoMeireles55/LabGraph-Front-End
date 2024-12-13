@@ -114,7 +114,6 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                         <p className="">{`${payload[0].payload.name}`}</p>
                         <p className="">{`${payload[0].payload.rawValue.toFixed(2)} ${payload[0].payload.unitValue}`}</p>
                         <p className="">{`${payload[0].payload.levelLot}`}</p>
-                        <p className="">{`${payload[0].payload.description}`}</p>
                       </div>
                     );
                   }

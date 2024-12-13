@@ -24,8 +24,8 @@
   --color-border: #D1D5DB;
   --color-mean-line: rgba(16, 185, 129, 0.8);
   --color-sd1: rgba(245, 158, 11, 0.8);
-  --color-sd2: rgba(239, 68, 68, 0.8);
-  --color-sd3: rgba(124, 58, 237, 0.8);
+  --color-sd2: #FF9F0D; 
+  --color-sd3: #FF4F4F;
   --color-navbar: #F3F4F6;
   --color-white: #FFFFFF;
   --color-green: #10B981;

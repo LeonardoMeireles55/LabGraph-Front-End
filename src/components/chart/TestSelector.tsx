@@ -94,7 +94,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
             <option value={3}>3</option>
           </select>
           <Link
-            className="bg-background border border-borderColor hover:scale-110 text-textSecondary rounded py-0 px-1 md:px-2 md:py-1 text-xs md:text-sm"
+            className="bg-background border border-borderColor hover:scale-110 text-textPrimary rounded py-0 px-1 md:px-2 md:py-1 text-sm md:text-sm"
             target="_blank"
             href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit"
           >

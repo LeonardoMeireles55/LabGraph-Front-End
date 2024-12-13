@@ -12,7 +12,7 @@ export default function Coagulation() {
     return (
         <LabGraph
             testList={list}
-            analyticsType="biochemitry-analytics"
+            analyticsType="biochemistry-analytics"
         />
     );
 }

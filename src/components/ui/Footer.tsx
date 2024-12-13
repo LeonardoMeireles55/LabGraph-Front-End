@@ -3,7 +3,7 @@ import Link from 'next/link';
 const Footer = (): JSX.Element => {
     return (
         <footer className="bg-background flex flex-col items-center justify-center py-4 md:py-6 text-textSecondary">
-            <div className="w-full max-w-screen-lg px-4 text-center">
+            <div className="max-w-screen-lg text-center">
                 <div className="text-xs md:text-sm mb-2">
                     &copy; {new Date().getFullYear()} <strong>LabGraph</strong>. Todos os direitos reservados.
                 </div>

@@ -57,7 +57,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
 
   return (
     <div className=''>
-      <div className="grid md:flex gap-2 mt-4 md:mt-2 text-textSecondary">
+      <div className="grid md:flex gap-1 mt-4 md:mt-4 text-textSecondary">
         <DateSelector
           initialDay={initialDay}
           initialMonth={initialMonth}
@@ -75,7 +75,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
         <div className="flex justify-start items-center gap-1">
           <span className="text-xs md:text-sm font-medium">Teste:</span>
           <select
-            className="bg-background border border-borderColor text-textSecondary rounded p-0 md:px-2 md:py-1 text-xs md:text-sm"
+            className="bg-background border border-borderColor text-textSecondary rounded p-0 text-xs md:text-sm"
             value={testName}
             onChange={(e) => setTestName(e.target.value)}
           >

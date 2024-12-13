@@ -19,7 +19,7 @@ export interface UseThemeReturn {
 const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
     const {
         storageKey = 'theme',
-        defaultTheme = 'light'
+        defaultTheme = 'dark'
     } = config;
 
     const [theme, setThemeState] = useState<Theme>(defaultTheme);

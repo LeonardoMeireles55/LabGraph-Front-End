@@ -5,12 +5,15 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 interface ListingItem {
   name: string;
+  level_lot: string;
+  test_lot: string;
   level: number;
   sd: number;
   mean: number;
   date: string;
   value: number;
   unit_value: string;
+  description: string;
 }
 
 interface ControlChartProps {
@@ -37,14 +40,16 @@ const CustomDot: React.FC<any> = ({ cx, cy, payload }) => {
 
 const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const data = listing;
-  const { mean, sd, name, level, unit_value } = data[0];
+  const { level_lot, mean, sd, name, level, unit_value, description } = data[0];
 
   const chartData = data.map(entry => ({
     date: formatarDate(entry.date),
+    levelLot: level_lot,
     name: entry.name,
     value: filter(entry.value, mean, sd),
     unitValue: unit_value,
     rawValue: entry.value,
+    description: description
   }));
 
 
@@ -107,8 +112,9 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                     return (
                       <div className="bg-background text-xs text-textPrimary p-2 rounded shadow-md shadow-shadow border border-border">
                         <p className="">{`${payload[0].payload.name}`}</p>
-                        <p className="">{`${payload[0].payload.rawValue.toFixed(2)} ${payload[0].payload.unitValue}`}
-                        </p>
+                        <p className="">{`${payload[0].payload.rawValue.toFixed(2)} ${payload[0].payload.unitValue}`}</p>
+                        <p className="">{`${payload[0].payload.levelLot}`}</p>
+                        <p className="">{`${payload[0].payload.description}`}</p>
                       </div>
                     );
                   }

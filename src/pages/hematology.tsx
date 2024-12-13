@@ -9,11 +9,14 @@ import Loading from '@/components/ui/Loading';
 interface ListingItem {
     name: string;
     level: number;
+    level_lot: string;
+    test_lot: string;
     sd: number;
     mean: number;
     date: string;
     value: number;
     unit_value: string;
+    description: string;
 }
 interface ListingCollection extends Array<ListingItem> { }
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Footer from '@/components/ui/Footer';
 import NavBar from '@/components/ui/NavBar';
 import ListingTable from '@/components/util/ListingTable';
-import DateSelector from '@/components/functional/DateSelector';
+import DateSelector from '@/components/ui/DateSelector';
 
 interface ListingItem {
     name: string;

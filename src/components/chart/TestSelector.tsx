@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import MeanAndDeviationDisplay from './MeanAndDeviationDisplay';
 import UpdateResults from './UpdateResults';
-import DateSelector from '../functional/DateSelector';
 import useFetchListing from '@/hooks/useFetchListing';
 import Link from 'next/link';
 import formatDateWithTime from '../functional/formatDateWithTime';
+import DateSelector from '../ui/DateSelector';
 
 interface TestSelectorProps {
   list: string[];

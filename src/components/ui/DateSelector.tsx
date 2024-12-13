@@ -1,6 +1,6 @@
 import React from 'react';
-import MonthSelector from './MonthSelector';
 import DaySelector from './DaySelector';
+import MonthSelector from './MonthSelector';
 
 interface DateSelectorProps {
   initialDay: number;

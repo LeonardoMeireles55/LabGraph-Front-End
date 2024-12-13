@@ -1,7 +1,7 @@
 import React from 'react';
-import formatarDate from '../functional/FormatDate';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
+import formatDate from '../functional/FormatDate';
 
 interface ListingItem {
   name: string;
@@ -43,7 +43,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const { level_lot, mean, sd, name, level, unit_value, description } = data[0];
 
   const chartData = data.map(entry => ({
-    date: formatarDate(entry.date),
+    date: formatDate(entry.date),
     levelLot: level_lot,
     name: entry.name,
     value: filter(entry.value, mean, sd),

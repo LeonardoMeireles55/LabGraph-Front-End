@@ -3,9 +3,9 @@ import Image from 'next/image'
 import { useEffect, useState } from "react";
 import Footer from '@/components/ui/Footer';
 import NavBar from '@/components/ui/NavBar';
-import DateSelector from '@/components/functional/DateSelector';
 import GenerateReports from '@/components/util/GenerateReports';
 import formatDateWithTime from '@/components/functional/formatDateWithTime';
+import DateSelector from '@/components/ui/DateSelector';
 
 interface ListingItem {
     name: string;

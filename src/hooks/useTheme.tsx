@@ -1,35 +1,105 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
-const useTheme = () => {
-    const [theme, setTheme] = useState<'light' | 'dark'>();
+export type Theme = 'light' | 'dark';
 
-    const toggleTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-    };
+interface ThemeConfig {
+    storageKey?: string;
+    defaultTheme?: Theme;
+}
+
+export interface UseThemeReturn {
+    theme: Theme;
+    toggleTheme: () => void;
+    setTheme: (theme: Theme) => void;
+    isDark: boolean;
+    isLight: boolean;
+    isLoaded: boolean;
+}
+
+const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
+    const {
+        storageKey = 'theme',
+        defaultTheme = 'light'
+    } = config;
+
+    const [theme, setThemeState] = useState<Theme>(defaultTheme);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-            setTheme(initialTheme === 'dark' ? 'dark' : 'light');
-        }
-    }, []);
-
-    useEffect(() => {
-        if (theme) {
-            localStorage.setItem('theme', theme);
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
     }, [theme]);
 
-    return { theme, toggleTheme, setTheme };
+    const getSystemPreference = useCallback((): Theme => {
+        if (typeof window === 'undefined') return defaultTheme;
+
+        try {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+        } catch (error) {
+            console.warn('Error detecting system theme preference:', error);
+            return defaultTheme;
+        }
+    }, [defaultTheme]);
+
+    const getSavedTheme = useCallback((): Theme | null => {
+        if (typeof window === 'undefined') return null;
+
+        try {
+            return localStorage.getItem(storageKey) as Theme | null;
+        } catch (error) {
+            console.warn('Error reading theme from localStorage:', error);
+            return null;
+        }
+    }, [storageKey]);
+
+    const setTheme = useCallback((newTheme: Theme) => {
+        try {
+            setThemeState(newTheme);
+            if (typeof window !== 'undefined') {
+                localStorage.setItem(storageKey, newTheme);
+            }
+        } catch (error) {
+            console.error('Error setting theme:', error);
+        }
+    }, [storageKey]);
+
+    const toggleTheme = useCallback(() => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    }, [theme, setTheme]);
+
+    useEffect(() => {
+        const savedTheme = getSavedTheme();
+        const initialTheme = savedTheme || getSystemPreference();
+        setTheme(initialTheme);
+        setIsLoaded(true);
+
+        if (typeof window !== 'undefined') {
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const handleChange = (e: MediaQueryListEvent) => {
+                if (!getSavedTheme()) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            };
+
+            mediaQuery.addEventListener('change', handleChange);
+            return () => mediaQuery.removeEventListener('change', handleChange);
+        }
+    }, [getSystemPreference, getSavedTheme, setTheme]);
+
+    return {
+        theme,
+        toggleTheme,
+        setTheme,
+        isDark: theme === 'dark',
+        isLight: theme === 'light',
+        isLoaded
+    };
 };
 
 export default useTheme;

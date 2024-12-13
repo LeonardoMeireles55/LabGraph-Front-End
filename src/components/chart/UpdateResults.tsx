@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import getStatusMessage from '../util/getStatusMessage';
+import getStatusMessage from '../util/GetStatusMessage';
 
 
 interface ProcessedData {

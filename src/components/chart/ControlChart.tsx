@@ -60,14 +60,14 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
 
   return (
     <div className='w-[95%] md:w-[80%] 2xl:w-full'>
-      <div className="p-0 bg-surface border border-borderColor rounded-2xl shadow-xl shadow-shadow">
-        <div className="mb-0 mt-8">
+      <div className="p-0 bg-surface border border-borderColor rounded-2xl shadow-md shadow-shadow">
+        <div className="mb-0 mt-2">
           <h2 className="flex justify-center content-center items-center text-base md:text-2xl text-textSecondary">
             {name} - Level {level.toString().toUpperCase()}
           </h2>
         </div>
 
-        <div className="h-[300px] md:min-h-[400px] w-[100%] flex justify-center content-center items-center p-0">
+        <div className="h-[300px] md:min-h-[400px] w-[100%] flex justify-center content-center items-center p-0 m-0">
           <ResponsiveContainer className='flex justify-center  content-center items-center p-0 m-0 bg-surface' width="98%" height="90%">
             <LineChart data={chartData} margin={{ top: 40, right: 25, bottom: 40, left: 0 }}>
               <CartesianGrid stroke="false" />
@@ -79,7 +79,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 tickFormatter={(date) => date}
                 height={50}
                 width={50}
-                tickMargin={6}
+                tickMargin={5}
                 axisLine={false}
                 tickLine={false}
                 stroke="var(--color-text-primary)"
@@ -92,7 +92,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 ticks={yAxisValues.map(v => v.value)}
                 width={50}
                 height={50}
-                tickMargin={6}
+                tickMargin={5}
                 axisLine={false}
                 tickLine={false}
                 stroke="var(--color-text-primary)"
@@ -105,7 +105,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     return (
-                      <div className="bg-background text-xs text-textPrimary p-2  rounded shadow-md shadow-shadow border border-border">
+                      <div className="bg-background text-xs text-textPrimary p-2 rounded shadow-md shadow-shadow border border-border">
                         <p className="">{`${payload[0].payload.name}`}</p>
                         <p className="">{`${payload[0].payload.rawValue.toFixed(2)} ${payload[0].payload.unitValue}`}
                         </p>

@@ -1,4 +1,3 @@
-import useWindowDimensions from '@/hooks/useWindowDimensions';
 import Head from 'next/head';
 import { useState } from "react";
 import Footer from '@/components/ui/Footer';
@@ -6,7 +5,6 @@ import TestSelector from '@/components/chart/TestSelector';
 import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
 import Loading from '@/components/ui/Loading';
-import useColors from '@/hooks/useColors';
 
 interface ListingItem {
     name: string;
@@ -32,11 +30,7 @@ const list = [
 
 export default function Biochemistry() {
 
-    const colors = useColors();
-
     const [dataFetched, setDataFetched] = useState<ListingCollection>([]);
-
-    const { width = 800, height = 600 } = useWindowDimensions();
 
     return (
         <div className="w-full min-h-svh flex justify-center items-center content-center flex-col bg-background p-2 md:p-0">
@@ -44,7 +38,7 @@ export default function Biochemistry() {
                 <title>{`LabGraph - ${list[0] || ''}`}</title>
             </Head>
             <NavBar jsonData={dataFetched} fileName={list[0]} />
-            <div className="flex flex-col justify-center items-center content-center gap-8 md:gap-8 lg:gap-0 xl:gap-8 md w-screen h-4/6 md:w-5/6 lg:w-screen xl:max-w-7xl">
+            <div className="flex flex-col justify-center items-center content-center gap-5 md:gap-4 lg:gap-0 xl:gap-8 md w-screen h-4/6 md:w-5/6 lg:w-screen xl:max-w-7xl">
                 <div className="flex justify-around items-center content-center bg-background lg:p-4 rounded-lg lg:w-screen ">
                     <div className="flex justify-center items-center content-center mt-16 bg-background lg:p-4 rounded-lg lg:w-screen ">
                         {<TestSelector name={list[0]} level={1} setDataJson={setDataFetched} analyticsType={"biochemistry-analytics"} list={list} />}

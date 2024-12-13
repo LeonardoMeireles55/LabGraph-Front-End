@@ -6,7 +6,6 @@
     padding: 0;
     margin: 0;
     outline: none;
-
   }
 
 /* globals.css */
@@ -35,29 +34,28 @@
   --border-color: #4B556340;
 }
 
-/* Tema Escuro Aprimorado */
 .dark {
-  --color-primary: #71a3ff; /* Azul mais vibrante */
-  --color-secondary: #2F8A7F; /* Verde mais forte */
-  --color-accent: #FF9F0D; /* Laranja mais quente */
-  --color-danger: #FF4F4F; /* Vermelho mais intenso */
-  --color-background: #121D2C; /* Fundo mais escuro */
-  --color-surface: #1D2939; /* Superfície mais escura */
-  --color-muted: #5A6A76; /* Cinza mais forte */
-  --color-text-primary: #F0F1F4; /* Texto claro e suave */
-  --color-text-secondary: #D1D5DB; /* Texto secundário mais suave */
-  --color-grid-lines: rgba(255, 255, 255, 0.15); /* Linhas de grade mais sutis */
-  --color-border: #3B4B5C; /* Borda mais escura */
-  --color-mean-line: rgba(16, 185, 129, 0.95); /* Linha média com mais contraste */
-  --color-sd1: rgba(255, 176, 39, 0.5); /* Mais brilho no laranja */
-  --color-sd2: rgb(255, 221, 0, 0.5); /* Vermelho mais vibrante */
-  --color-sd3: rgba(246, 92, 92, 0.5); /* Roxo mais intenso */
-  --color-navbar: #1A2532; /* Barra de navegação mais escura */
-  --color-white: #E5E7EB; /* Branco suave */
-  --color-green: #059669; /* Verde mais vibrante */
-  --color-shadow: rgba(155, 155, 155, 0.08); /* Sombra mais forte */
-  --color-overlay: rgba(255, 255, 255, 0.1); /* Sobreposição mais sutil */
-  --border-color: #F9FAFB; /* Cor de borda mais clara */
+  --color-primary: #71a3ff; 
+  --color-secondary: #2F8A7F; 
+  --color-accent: #FF9F0D; 
+  --color-danger: #FF4F4F;
+  --color-background: #121D2C;
+  --color-surface: #1D2939; 
+  --color-muted: #5A6A76; 
+  --color-text-primary: #F0F1F4; 
+  --color-text-secondary: #D1D5DB;
+  --color-grid-lines: rgba(255, 255, 255, 0.15);
+  --color-border: #3B4B5C; 
+  --color-mean-line: rgba(16, 185, 129, 0.95); 
+  --color-sd1: rgba(255, 176, 39, 0.5); 
+  --color-sd2: rgb(255, 221, 0, 0.5);
+  --color-sd3: rgba(246, 92, 92, 0.5); 
+  --color-navbar: #1D2939; 
+  --color-white: #E5E7EB;
+  --color-green: #059669; 
+  --color-shadow: rgba(155, 155, 155, 1.0); 
+  --color-overlay: rgba(255, 255, 255, 0.1);
+  --border-color: #F9FAFB; 
 }
 
 

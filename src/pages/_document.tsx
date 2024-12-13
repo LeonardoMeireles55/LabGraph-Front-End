@@ -5,10 +5,10 @@ export default function Document() {
   return (
     <Html lang="pt-br">
       <Head />
+      <Script src="/theme.js" strategy="beforeInteractive" />
       <body>
         <Main />
         <NextScript />
-        <Script src="/theme.js" strategy="beforeInteractive" />
       </body>
     </Html>
   )

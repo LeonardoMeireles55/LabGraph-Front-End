@@ -2,7 +2,7 @@ import useTheme from '@/hooks/useTheme';
 import React from 'react';
 
 const ThemeToggle: React.FC = () => {
-    const { theme, toggleTheme } = useTheme(); // Obtenha o tema atual e a função de alternância
+    const { theme, toggleTheme } = useTheme();
 
     return (
         <button
@@ -12,9 +12,6 @@ const ThemeToggle: React.FC = () => {
             <span className="text-lg hover:scale-110">
                 {theme === 'light' ? '🌞' : '🌙'}
             </span>
-            {/* <span className="text-sm font-medium">
-                {theme === 'light' ? 'Modo Escuro' : 'Modo Claro'}
-            </span> */}
         </button>
     );
 };

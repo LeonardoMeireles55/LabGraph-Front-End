@@ -1,11 +1,46 @@
-## LabGraph Project
+# LabGraph Project
 
-This project is a web application for visualizing laboratory test results using various charts and tables.
+A modern web application for visualizing and analyzing laboratory test results through interactive charts and tables. LabGraph provides comprehensive visualization tools for hematology, coagulation, and biochemistry test data.
 
-## Running the Development Server
+## Features
 
-To start the development server, run:
+- **Interactive Data Visualization**: Dynamic charts and graphs for better data interpretation
+- **Multiple Test Categories**:
+  - Hematology analysis
+  - Coagulation studies
+  - Biochemistry results
+- **Analytics Dashboard**: Comprehensive data analysis with filtering capabilities
+- **Dark/Light Mode**: Full theme support for comfortable viewing in any environment
 
+## Getting Started
+
+### Prerequisites
+
+- Node.js 16.x or higher
+- npm, yarn, pnpm, or bun package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/LeonardoMeireles55/Quality-lab-pro-react-plotly.git
+cd labgraph
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+### Development
+
+Start the development server:
 ```bash
 npm run dev
 # or
@@ -16,12 +51,11 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
 ## Building for Production
 
-To create an optimized production build:
-
+Create an optimized production build:
 ```bash
 npm run build
 # or
@@ -32,29 +66,57 @@ pnpm build
 bun build
 ```
 
-This will create a `build` directory with the production build of your application.
+The build output will be generated in the `build` directory.
+
+## Pages and Features
+
+### Hematology Dashboard
+- Comprehensive blood test result visualization
+- Trend analysis over time
+- Reference range comparisons
+
+### Coagulation Studies
+- Coagulation parameters tracking
+- Time-based analysis tools
+- Abnormality highlighting
+
+### Biochemistry Analysis
+- Metabolic panel visualization
+- Enzyme level tracking
+- Electrolyte balance monitoring
+
+### Analytics Table
+- Advanced data filtering capabilities
+- Date range selection
+- Export functionality
+- Customizable view options
 
 ## Deployment
 
-You can deploy the `build` directory to any hosting service like Vercel.
+The application can be deployed to various hosting platforms:
 
-## Pages
+1. **Vercel** (Recommended)
+   - Connect your repository
+   - Follow the automatic deployment process
 
-### Hematology
+2. **Other Platforms**
+   - Deploy the contents of the `build` directory
+   - Configure your server to serve the static files
 
-This page displays hematology test results.
+## Contributing
 
-### Coagulation
+We welcome contributions! Please see our contributing guidelines for more details.
 
-This page displays coagulation test results.
+## License
 
-### Biochemistry
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This page displays biochemistry test results.
+## Screenshots
 
-### Analytics Table
+The application supports both light and dark modes for optimal viewing experience in any environment.
 
-This page displays a table of analytics data with date range filtering.
+Light Mode:
+![Light Mode Dashboard](https://github.com/user-attachments/assets/c44ca7ba-61aa-4fd7-9f50-c529f20336c9)
 
-![image](https://github.com/user-attachments/assets/c44ca7ba-61aa-4fd7-9f50-c529f20336c9)
-![image](https://github.com/user-attachments/assets/31ca73d8-5b91-4084-b0fe-59abe204016e)
+Dark Mode:
+![Dark Mode Dashboard](https://github.com/user-attachments/assets/31ca73d8-5b91-4084-b0fe-59abe204016e)

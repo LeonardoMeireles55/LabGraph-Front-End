@@ -5,9 +5,6 @@ import TestSelector from '@/components/chart/TestSelector';
 import NavBar from '@/components/ui/NavBar';
 import ControlChart from '@/components/chart/ControlChart';
 import Loading from '@/components/ui/Loading';
-import useColors from '@/hooks/useColors';
-
-
 
 interface ListingItem {
     name: string;
@@ -27,9 +24,6 @@ const list = ['WBC', 'RBC', 'HGB', 'HCT', 'MCV', 'MCH', 'MCHC', 'RDW-CV', 'PLT',
 export default function Coagulation() {
 
     const [dataFetched, setDataFetched] = useState<ListingCollection>([]);
-
-    const colors = useColors();
-
 
     return (
         <div className="w-full min-h-svh flex justify-center items-center content-center flex-col bg-background p-2 md:p-0">

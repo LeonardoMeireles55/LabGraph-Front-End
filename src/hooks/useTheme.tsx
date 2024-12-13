@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
-import useColors from './useColors';
 
 const useTheme = () => {
     const [theme, setTheme] = useState<'light' | 'dark'>();
-    const { colors, changeTheme } = useColors();
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    };
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -11,10 +14,9 @@ const useTheme = () => {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
             const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-            changeTheme(initialTheme);
             setTheme(initialTheme === 'dark' ? 'dark' : 'light');
         }
-    }, [changeTheme]);
+    }, []);
 
     useEffect(() => {
         if (theme) {
@@ -26,12 +28,6 @@ const useTheme = () => {
             }
         }
     }, [theme]);
-
-    const toggleTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-        changeTheme(newTheme);
-    };
 
     return { theme, toggleTheme };
 };

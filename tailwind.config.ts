@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss'
-import colors from './src/styles/colors'
 
 const config: Config = {
   content: [
@@ -38,7 +37,6 @@ const config: Config = {
       navbar: 'var(--color-navbar)',
       borderColor: 'var(--border-color);',
 
-      // Tema Escuro
       dark: {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',

@@ -1,4 +1,4 @@
-const GetStatusMessage = (statusCode: number): string => {
+const getStatusMessage = (statusCode: number): string => {
     const statusMap: Record<number, string> = {
         200: 'Requisição bem-sucedida',
         201: 'Recurso criado com sucesso',
@@ -19,4 +19,4 @@ const GetStatusMessage = (statusCode: number): string => {
     return statusMap[statusCode] || 'Status HTTP desconhecido';
 };
 
-export default GetStatusMessage;
+export default getStatusMessage;

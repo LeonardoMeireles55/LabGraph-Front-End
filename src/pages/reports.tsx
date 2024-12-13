@@ -52,7 +52,7 @@ const Reports = () => {
             </Head>
             <NavBar jsonData={dataFetched} fileName={analyticsType} />
             <main className="flex-grow flex flex-col justify-center items-center mt-12 md:mt-8 bg-background p-4 md:p-8">
-                <div className="grid md:flex gap-2 text-textSecondary">
+                <div className="grid md:flex gap-2 mt-14 text-textSecondary">
                     <DateSelector
                         initialDay={initialDay}
                         initialMonth={initialMonth}
@@ -68,7 +68,7 @@ const Reports = () => {
                         setSecondYear={setSecondYear}
                     />
                     <select
-                        className="bg-background border border-border text-textSecondary rounded-md p-0 text-xs md:px-2 md:py-1 md:text-sm"
+                        className="bg-background border border-borderColor text-textSecondary rounded-md p-0 text-xs md:px-2 md:py-1 md:text-sm"
                         value={analyticsType}
                         onChange={(e) => setAnalyticsType(e.target.value)}
                     >
@@ -76,7 +76,7 @@ const Reports = () => {
                         <option value={"hematology-analytics"}>HEMATOLOGIA</option>
                         <option value={"coagulation-analytics"}>COAGULAÇÃO</option>
                     </select>
-                    <span className='flex justify-center border border-border rounded-md'>
+                    <span className='flex justify-center border border-borderColor text-textSecondary rounded-md'>
                         <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
                     </span>
                 </div>

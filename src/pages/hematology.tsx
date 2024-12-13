@@ -2,7 +2,7 @@ import LabGraph from '@/components/main/LabGraph';
 
 const list = ['WBC', 'RBC', 'HGB', 'HCT', 'MCV', 'MCH', 'MCHC', 'RDW-CV', 'PLT',
     'NEU#', 'LYM#', 'MON#', 'EOS#', 'BAS#', 'IMG#', 'NRBC%', 'NRBC#',
-    'NEU%', 'LYM%', 'MON%', 'EOS%', 'BAS%', 'IMG%'];
+    'NEU%', 'LYM%', 'MON%', 'EOS%', 'BAS%'];
 
 export default function Coagulation() {
     return (

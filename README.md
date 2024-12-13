@@ -1,15 +1,29 @@
 # LabGraph Project
 
-A modern web application for visualizing and analyzing laboratory test results through interactive charts and tables. LabGraph provides comprehensive visualization tools for hematology, coagulation, and biochemistry test data.
+A specialized web application for laboratory quality control management, implementing Westgard rules for statistical quality control (QC) in clinical laboratories. This tool provides comprehensive visualization and analysis capabilities for monitoring and managing quality control data across hematology, coagulation, and biochemistry testing.
 
 ## Features
 
-- **Interactive Data Visualization**: Dynamic charts and graphs for better data interpretation
+- **Westgard Rules Implementation**: 
+  - Automated quality control validation using Westgard multi-rules
+  - Real-time violation detection and alerting
+  - Statistical process control (SPC) monitoring
+  
+- **Interactive Quality Control Charts**: 
+  - Levey-Jennings charts for QC data visualization
+  - Dynamic charts and graphs for trend analysis
+  - Control limit calculations and display
+
 - **Multiple Test Categories**:
-  - Hematology analysis
-  - Coagulation studies
-  - Biochemistry results
-- **Analytics Dashboard**: Comprehensive data analysis with filtering capabilities
+  - Hematology QC analysis
+  - Coagulation QC studies
+  - Biochemistry QC results
+
+- **Analytics Dashboard**: 
+  - Comprehensive QC data analysis with filtering capabilities
+  - Statistical metrics and performance indicators
+  - Quality control violation tracking
+
 - **Dark/Light Mode**: Full theme support for comfortable viewing in any environment
 
 ## Getting Started
@@ -23,8 +37,8 @@ A modern web application for visualizing and analyzing laboratory test results t
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/LeonardoMeireles55/Quality-lab-pro-react-plotly.git
-cd labgraph
+git clone https://github.com/LeonardoMeireles55/LabGraph-Front-End.git
+cd LabGraph-Front-End
 ```
 
 2. Install dependencies:
@@ -71,25 +85,25 @@ The build output will be generated in the `build` directory.
 ## Pages and Features
 
 ### Hematology Dashboard
-- Comprehensive blood test result visualization
-- Trend analysis over time
-- Reference range comparisons
+- Quality control data visualization with Westgard rules
+- Trend analysis and violation detection
+- Reference range and control limit monitoring
 
 ### Coagulation Studies
-- Coagulation parameters tracking
-- Time-based analysis tools
-- Abnormality highlighting
+- Coagulation QC parameters tracking
+- Multi-rule quality control implementation
+- Abnormality and violation highlighting
 
 ### Biochemistry Analysis
-- Metabolic panel visualization
-- Enzyme level tracking
-- Electrolyte balance monitoring
+- Quality control monitoring for biochemistry tests
+- Control chart visualization
+- Statistical analysis of QC data
 
 ### Analytics Table
-- Advanced data filtering capabilities
-- Date range selection
-- Export functionality
-- Customizable view options
+- Advanced QC data filtering capabilities
+- Date range selection for trend analysis
+- Export functionality for reports and documentation
+- Customizable view options for different quality metrics
 
 ## Deployment
 

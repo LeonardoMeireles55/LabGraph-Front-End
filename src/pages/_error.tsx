@@ -1,4 +1,5 @@
 import React from 'react';
+export const runtime = 'edge';
 
 interface ErrorPageProps {
   statusCode: number;

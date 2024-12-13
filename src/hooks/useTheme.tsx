@@ -5,16 +5,16 @@ const useTheme = () => {
     const [theme, setTheme] = useState<'light' | 'dark'>();
     const { colors, changeTheme } = useColors();
 
-
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-            changeTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
-            setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+            const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            changeTheme(initialTheme);
+            setTheme(initialTheme === 'dark' ? 'dark' : 'light');
         }
-    }, []);
+    }, [changeTheme]);
 
     useEffect(() => {
         if (theme) {
@@ -25,12 +25,12 @@ const useTheme = () => {
                 document.documentElement.classList.remove('dark');
             }
         }
-    }, [changeTheme]);
+    }, [theme]);
 
     const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-        changeTheme(theme === 'light' ? 'dark' : 'light');
-
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        changeTheme(newTheme);
     };
 
     return { theme, toggleTheme };

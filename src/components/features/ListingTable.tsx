@@ -20,10 +20,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
 
     const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
 
-    const currentItems = items.slice(
-        (currentPage - 1) * ITEMS_PER_PAGE,
-        currentPage * ITEMS_PER_PAGE
-    );
+    const currentItems = items.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
     const goToNextPage = () => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -34,57 +31,65 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
     };
 
     return (
-        <div className="w-full h-full md:mt-8">
-            <table className="w-full border border-double border-textSecondary bg-background shadow-md rounded-lg hidden md:table">
-                <thead className="bg-muted ">
+        <div className="h-full w-full md:mt-8">
+            <table className="hidden w-full rounded-lg border border-double border-textSecondary bg-background shadow-md md:table">
+                <thead className="bg-muted">
                     <tr>
-                        <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
+                        <th className="border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs">
                             Teste
                         </th>
-                        <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
+                        <th className="border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs">
                             Nível
                         </th>
-                        <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
+                        <th className="border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs">
                             Desvio Padrão
                         </th>
-                        <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
+                        <th className="border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs">
                             Média
                         </th>
-                        <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
+                        <th className="border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs">
                             Data
                         </th>
-                        <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
+                        <th className="border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs">
                             Valores
                         </th>
-                        <th className="px-4 py-2 text-left text-[10px] md:text-xs font-semibold text-textSecondary uppercase tracking-wider border-b border-border">
+                        <th className="border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs">
                             Unidade
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentItems.map((item, index) => (
-                        <tr
-                            key={index}
-                            className="hover:bg-muted transition-colors duration-200"
-                        >
-                            <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.name}</td>
-                            <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.level}</td>
-                            <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.sd.toFixed(2)}</td>
-                            <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.mean.toFixed(2)}</td>
-                            <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.date}</td>
-                            <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.value.toFixed(2)}</td>
-                            <td className="px-4 py-3 text-[6px] md:text-sm text-textPrimary border-b border-border">{item.unit_value}</td>
+                        <tr key={index} className="transition-colors duration-200 hover:bg-muted">
+                            <td className="border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm">
+                                {item.name}
+                            </td>
+                            <td className="border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm">
+                                {item.level}
+                            </td>
+                            <td className="border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm">
+                                {item.sd.toFixed(2)}
+                            </td>
+                            <td className="border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm">
+                                {item.mean.toFixed(2)}
+                            </td>
+                            <td className="border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm">
+                                {item.date}
+                            </td>
+                            <td className="border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm">
+                                {item.value.toFixed(2)}
+                            </td>
+                            <td className="border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm">
+                                {item.unit_value}
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
-            <div className="md:hidden h-full grid grid-cols-2 gap-2 mt-4">
+            <div className="mt-4 grid h-full grid-cols-2 gap-2 md:hidden">
                 {currentItems.map((item, index) => (
-                    <div
-                        key={index}
-                        className="bg-surface border border-border rounded-lg shadow-md p-4"
-                    >
+                    <div key={index} className="rounded-lg border border-border bg-surface p-4 shadow-md">
                         <p className="text-[6px] font-semibold text-textSecondary">
                             Teste: <span className="text-textPrimary">{item.name}</span>
                         </p>
@@ -110,17 +115,13 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 ))}
             </div>
 
-            {items.length === 0 && (
-                <div className="text-center py-4 text-muted bg-background">
-                    No items to display
-                </div>
-            )}
+            {items.length === 0 && <div className="bg-background py-4 text-center text-muted">No items to display</div>}
 
-            <div className="flex justify-center items-center mt-8 space-x-2">
+            <div className="mt-8 flex items-center justify-center space-x-2">
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 text-xs md:text-base bg-muted bg-opacity-100 text-white rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+                    className="hover:bg-primaryDark rounded-md bg-muted bg-opacity-100 px-4 py-2 text-xs text-white transition-colors disabled:cursor-not-allowed disabled:opacity-25 md:text-base"
                 >
                     &larr;
                 </button>
@@ -130,7 +131,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 <button
                     onClick={goToNextPage}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 text-xs md:text-base bg-border bg-opacity-100 text-white  rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
+                    className="hover:bg-primaryDark rounded-md bg-border bg-opacity-100 px-4 py-2 text-xs text-white transition-colors disabled:cursor-not-allowed disabled:opacity-25 md:text-base"
                 >
                     &rarr;
                 </button>

@@ -1,20 +1,20 @@
 services:
-  quality-lab-pro-front-end:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - /app/node_modules 
-      - /app/public
-    stdin_open: true
-    tty: true
-    command: ["npm", "start"]
-    networks:
-      - qualitylab-net
+    quality-lab-pro-front-end:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '3000:3000'
+        environment:
+            - NODE_ENV=production
+        volumes:
+            - /app/node_modules
+            - /app/public
+        stdin_open: true
+        tty: true
+        command: ['npm', 'start']
+        networks:
+            - qualitylab-net
 networks:
-  qualitylab-net:
-    external: true
+    qualitylab-net:
+        external: true

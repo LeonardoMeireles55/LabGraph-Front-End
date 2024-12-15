@@ -6,9 +6,9 @@
     padding: 0;
     margin: 0;
     outline: none;
-  }
+}
 
-  html {
+html {
     height: 100%;
     background-color: var(--color-background);
 }
@@ -19,60 +19,59 @@ select {
 
 /* globals.css */
 :root {
-  --color-primary: #3B82F6;
-  --color-secondary: #10B981;
-  --color-accent: #F59E0B;
-  --color-danger: #EF4444;
-  --color-background: #F9FAFB;
-  --color-surface: #f9fafa;
-  --color-muted: #E5E7EB;
-  --color-text-primary: #111827;
-  --color-text-secondary: #4B5563;
-  --color-grid-lines: rgba(209, 213, 219, 0.5);
-  --color-border: #D1D5DB;
-  --color-mean-line: rgba(16, 185, 129, 0.8);
-  --color-sd1: rgba(245, 158, 11, 0.8);
-  --color-sd2: #FF9F0D; 
-  --color-sd3: #FF4F4F;
-  --color-navbar: #F3F4F6;
-  --color-white: #FFFFFF;
-  --color-green: #10B981;
-  --color-shadow: rgba(0, 0, 0, 0.08);
-  --color-overlay: rgba(0, 0, 0, 0.04);
-  --border-color: #4B556340;
+    --color-primary: #3b82f6;
+    --color-secondary: #10b981;
+    --color-accent: #f59e0b;
+    --color-danger: #ef4444;
+    --color-background: #f9fafb;
+    --color-surface: #f9fafa;
+    --color-muted: #e5e7eb;
+    --color-text-primary: #111827;
+    --color-text-secondary: #4b5563;
+    --color-grid-lines: rgba(209, 213, 219, 0.5);
+    --color-border: #d1d5db;
+    --color-mean-line: rgba(16, 185, 129, 0.8);
+    --color-sd1: rgba(245, 158, 11, 0.8);
+    --color-sd2: #ff9f0d;
+    --color-sd3: #ff4f4f;
+    --color-navbar: #f3f4f6;
+    --color-white: #ffffff;
+    --color-green: #10b981;
+    --color-shadow: rgba(0, 0, 0, 0.08);
+    --color-overlay: rgba(0, 0, 0, 0.04);
+    --border-color: #4b556340;
 }
 
 .dark {
-  --color-primary: #71a3ff; 
-  --color-secondary: #2F8A7F; 
-  --color-accent: #FF9F0D; 
-  --color-danger: #FF4F4F;
-  --color-background: #121D2C;
-  --color-surface: #1d2939; 
-  --color-muted: #5A6A76; 
-  --color-text-primary: #F0F1F4; 
-  --color-text-secondary: #D1D5DB;
-  --color-grid-lines: rgba(255, 255, 255, 0.15);
-  --color-border: #3B4B5C; 
-  --color-mean-line: rgba(16, 185, 129, 0.95); 
-  --color-sd1: rgba(255, 176, 39, 0.5); 
-  --color-sd2: rgb(255, 221, 0, 0.5);
-  --color-sd3: rgba(246, 92, 92, 0.5); 
-  --color-navbar: #1D2939; 
-  --color-white: #E5E7EB;
-  --color-green: #059669; 
-  --color-shadow: rgba(155, 155, 155, 1.0); 
-  --color-overlay: rgba(255, 255, 255, 0.1);
-  --border-color: #F9FAFB; 
+    --color-primary: #71a3ff;
+    --color-secondary: #2f8a7f;
+    --color-accent: #ff9f0d;
+    --color-danger: #ff4f4f;
+    --color-background: #121d2c;
+    --color-surface: #1d2939;
+    --color-muted: #5a6a76;
+    --color-text-primary: #f0f1f4;
+    --color-text-secondary: #d1d5db;
+    --color-grid-lines: rgba(255, 255, 255, 0.15);
+    --color-border: #3b4b5c;
+    --color-mean-line: rgba(16, 185, 129, 0.95);
+    --color-sd1: rgba(255, 176, 39, 0.5);
+    --color-sd2: rgb(255, 221, 0, 0.5);
+    --color-sd3: rgba(246, 92, 92, 0.5);
+    --color-navbar: #1d2939;
+    --color-white: #e5e7eb;
+    --color-green: #059669;
+    --color-shadow: rgba(155, 155, 155, 1);
+    --color-overlay: rgba(255, 255, 255, 0.1);
+    --border-color: #f9fafb;
 }
-
 
 @keyframes spin {
     to {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  
-  .animate-spin {
+}
+
+.animate-spin {
     animation: spin 1s linear infinite;
-  }
+}

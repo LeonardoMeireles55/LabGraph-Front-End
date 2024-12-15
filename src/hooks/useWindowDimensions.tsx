@@ -13,8 +13,8 @@ const useWindowDimensions = (): WindowDimentions => {
     useEffect(() => {
         function handleResize(): void {
             setWindowDimensions({
-                width: window.innerWidth * 5/6,
-                height: window.innerHeight * 3/4,
+                width: (window.innerWidth * 5) / 6,
+                height: (window.innerHeight * 3) / 4,
             });
         }
         handleResize();

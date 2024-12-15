@@ -13,7 +13,7 @@ const getStatusMessage = (statusCode: number): string => {
         500: 'Erro interno do servidor',
         502: 'Erro de gateway',
         503: 'Serviço indisponível',
-        504: 'Tempo de gateway esgotado'
+        504: 'Tempo de gateway esgotado',
     };
 
     return statusMap[statusCode] || 'Status HTTP desconhecido';

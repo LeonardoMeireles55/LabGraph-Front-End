@@ -1,35 +1,38 @@
 {
-  "name": "quality-lab-pro",
-  "version": "0.3.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "date-fns": "^4.1.0",
-    "json2csv": "^6.0.0-alpha.2",
-    "lucide-react": "^0.468.0",
-    "next": "14.0.4",
-    "plotly.js": "^2.28.0",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-plotly.js": "^2.6.0",
-    "recharts": "^2.14.1"
-  },
-  "devDependencies": {
-    "@types/json2csv": "^5.0.7",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@types/react-plotly.js": "^2.6.3",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
+    "name": "quality-lab-pro",
+    "version": "0.3.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "date-fns": "^4.1.0",
+        "json2csv": "^6.0.0-alpha.2",
+        "lucide-react": "^0.468.0",
+        "next": "14.0.4",
+        "plotly.js": "^2.28.0",
+        "prettier-plugin-organize-imports": "^4.1.0",
+        "react": "^18",
+        "react-dom": "^18",
+        "react-plotly.js": "^2.6.0",
+        "recharts": "^2.14.1"
+    },
+    "devDependencies": {
+        "@types/json2csv": "^5.0.7",
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "@types/react-plotly.js": "^2.6.3",
+        "autoprefixer": "^10.0.1",
+        "eslint": "^8",
+        "eslint-config-next": "14.0.4",
+        "postcss": "^8",
+        "prettier": "^3.4.2",
+        "prettier-plugin-tailwindcss": "^0.6.9",
+        "tailwindcss": "^3.3.0",
+        "typescript": "^5"
+    }
 }

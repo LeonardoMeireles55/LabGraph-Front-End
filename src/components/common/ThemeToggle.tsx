@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import useTheme from '@/hooks/useTheme';
+import { useEffect, useState } from 'react';
 
 const ThemeToggle = () => {
     const { theme, toggleTheme, isLoaded } = useTheme();
@@ -10,23 +10,16 @@ const ThemeToggle = () => {
     }, []);
 
     if (!mounted || !isLoaded) {
-        return (
-            <button
-                className="rounded-full p-2 w-10 h-10"
-                aria-label="Toggle theme"
-            />
-        );
+        return <button className="h-10 w-10 rounded-full p-2" aria-label="Toggle theme" />;
     }
 
     return (
         <button
             onClick={toggleTheme}
-            className="rounded-full p-2 hover:scale-110 transition-transform duration-200 focus:outline-none"
+            className="rounded-full p-2 transition-transform duration-200 hover:scale-110 focus:outline-none"
             aria-label="Toggle theme"
         >
-            <span className="text-xl">
-                {theme === 'light' ? '🌞' : '🌙'}
-            </span>
+            <span className="text-xl">{theme === 'light' ? '🌞' : '🌙'}</span>
         </button>
     );
 };

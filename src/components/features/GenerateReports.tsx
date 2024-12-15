@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { parse } from 'json2csv';
 import { Download, Loader2 } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface CsvGeneratorProps {
     jsonData: any | any[];
@@ -39,25 +39,10 @@ const GenerateReports: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'da
         <button
             onClick={generateCsv}
             disabled={isGenerating}
-            className={`
-          flex items-center justify-center 
-          px-1 py-1
-          text-textPrimary
-          rounded-lg 
-          focus:outline-none 
-          focus:ring-0 
-          transition-all 
-          duration-300 
-          ease-in-out
-          ${isGenerating ? 'cursor-not-allowed opacity-50' : 'hover:scale-105'}
-        `}
+            className={`flex items-center justify-center rounded-lg px-1 py-1 text-textPrimary transition-all duration-300 ease-in-out focus:outline-none focus:ring-0 ${isGenerating ? 'cursor-not-allowed opacity-50' : 'hover:scale-105'} `}
             aria-label="Export CSV"
         >
-            {isGenerating ? (
-                <Loader2 className="w-5 h-5 animate-spin mr-2" />
-            ) : (
-                <Download className="w-5 h-5 mr-2" />
-            )}
+            {isGenerating ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Download className="mr-2 h-5 w-5" />}
             <span>Gerar relátorio</span>
         </button>
     );

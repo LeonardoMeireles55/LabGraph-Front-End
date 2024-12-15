@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-interface ListingCollection extends Array<any> { }
+interface ListingCollection extends Array<any> {}
 interface UseFetchListingProps {
     url: string;
 }

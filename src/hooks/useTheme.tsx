@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
 
@@ -17,10 +17,7 @@ export interface UseThemeReturn {
 }
 
 const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
-    const {
-        storageKey = 'theme',
-        defaultTheme = 'light'
-    } = config;
+    const { storageKey = 'theme', defaultTheme = 'light' } = config;
 
     const [theme, setThemeState] = useState<Theme>(defaultTheme);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -37,9 +34,7 @@ const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
         if (typeof window === 'undefined') return defaultTheme;
 
         try {
-            return window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light';
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         } catch (error) {
             console.warn('Error detecting system theme preference:', error);
             return defaultTheme;
@@ -57,16 +52,19 @@ const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
         }
     }, [storageKey]);
 
-    const setTheme = useCallback((newTheme: Theme) => {
-        try {
-            setThemeState(newTheme);
-            if (typeof window !== 'undefined') {
-                localStorage.setItem(storageKey, newTheme);
+    const setTheme = useCallback(
+        (newTheme: Theme) => {
+            try {
+                setThemeState(newTheme);
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem(storageKey, newTheme);
+                }
+            } catch (error) {
+                console.error('Error setting theme:', error);
             }
-        } catch (error) {
-            console.error('Error setting theme:', error);
-        }
-    }, [storageKey]);
+        },
+        [storageKey]
+    );
 
     const toggleTheme = useCallback(() => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -98,7 +96,7 @@ const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
         setTheme,
         isDark: theme === 'dark',
         isLight: theme === 'light',
-        isLoaded
+        isLoaded,
     };
 };
 

@@ -64,7 +64,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   ];
 
   return (
-    <div className='w-[95%] md:w-[80%] 2xl:w-full'>
+    <div className='w-[98%] md:w-[80%] 2xl:w-full'>
       <div className="p-0 bg-surface border border-borderColor rounded-2xl shadow-md shadow-shadow">
         <div className="mb-0 mt-2">
           <h2 className="flex justify-center content-center items-center text-base md:text-2xl text-textSecondary">
@@ -73,7 +73,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
         </div>
 
         <div className="h-[300px] md:min-h-[400px] w-[100%] flex justify-center content-center items-center p-0 m-0">
-          <ResponsiveContainer className='flex justify-center  content-center items-center p-0 m-0 bg-surface' width="98%" height="90%">
+          <ResponsiveContainer className='flex justify-center  content-center items-center p-0 m-0 bg-surface' width="99%" height="90%">
             <LineChart data={chartData} margin={{ top: 40, right: 25, bottom: 40, left: 0 }}>
               <CartesianGrid stroke="false" />
               <XAxis

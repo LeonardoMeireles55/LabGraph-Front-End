@@ -64,7 +64,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                     <ResponsiveContainer
                         className="flex content-center items-center justify-center bg-surface"
                         width="99%"
-                        height="90%"
+                        height="95%"
                     >
                         <LineChart data={chartData} margin={{ top: 40, right: 25, bottom: 40, left: 0 }}>
                             <CartesianGrid stroke="false" />

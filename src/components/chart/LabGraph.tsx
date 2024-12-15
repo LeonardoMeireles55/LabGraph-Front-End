@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import Footer from '@/components/ui/Footer';
-import NavBar from '@/components/ui/NavBar';
-import Loading from '@/components/ui/Loading';
-import TestSelector from '@/components/chart/TestSelector';
+import Footer from '@/components/layouts/Footer';
+import NavBar from '@/components/layouts/NavBar';
+import Loading from '@/components/common/Loading';
+import TestSelector from '@/components/common/TestSelector';
 import ControlChart from '@/components/chart/ControlChart';
 
 interface ListingItem {

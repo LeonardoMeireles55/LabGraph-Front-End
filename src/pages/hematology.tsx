@@ -1,4 +1,4 @@
-import LabGraph from '@/components/main/LabGraph';
+import LabGraph from '@/components/chart/LabGraph';
 
 const list = ['WBC', 'RBC', 'HGB', 'HCT', 'MCV', 'MCH', 'MCHC', 'RDW-CV', 'PLT',
     'NEU#', 'LYM#', 'MON#', 'EOS#', 'BAS#', 'IMG#', 'NRBC%', 'NRBC#',

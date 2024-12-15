@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { useEffect, useState } from "react";
-import Footer from '@/components/ui/Footer';
-import NavBar from '@/components/ui/NavBar';
-import ListingTable from '@/components/util/ListingTable';
-import DateSelector from '@/components/ui/DateSelector';
+import Footer from '@/components/layouts/Footer';
+import NavBar from '@/components/layouts/NavBar';
+import ListingTable from '@/components/features/ListingTable';
+import DateSelector from '@/components/common/DateSelector';
 
 interface ListingItem {
     name: string;

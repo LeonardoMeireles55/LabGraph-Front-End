@@ -1,6 +1,6 @@
-import CsvGenerator from '@/components/util/CsvGenerator';
+import CsvGenerator from '@/components/features/CsvGenerator';
 import React, { useState } from 'react';
-import ThemeToggle from './ThemeToggle';
+import ThemeToggle from '../common/ThemeToggle';
 
 interface NavLink {
   text: string;

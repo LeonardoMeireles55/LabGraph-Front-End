@@ -1,24 +1,8 @@
 import React from 'react';
 
+import { ControlChartProps } from '../types/chartInterfaces';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
-import customFormatDate from '../functional/customFormatDate';
-
-interface ListingItem {
-  name: string;
-  level_lot: string;
-  test_lot: string;
-  level: number;
-  sd: number;
-  mean: number;
-  date: string;
-  value: number;
-  unit_value: string;
-  description: string;
-}
-
-interface ControlChartProps {
-  listing: ListingItem[];
-}
+import customFormatDate from '../utils/customFormatDate';
 
 const filter = (value: number, mean: number, sd: number) => {
   if (value > mean + 3 * sd) return (mean + 3 * sd) + sd / 3;

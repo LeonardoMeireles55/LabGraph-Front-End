@@ -15,19 +15,16 @@ interface ListingTableProps {
 }
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
-    const ITEMS_PER_PAGE = 12; // Itens por página
+    const ITEMS_PER_PAGE = 12;
     const [currentPage, setCurrentPage] = useState(1);
 
-    // Cálculo do total de páginas
     const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
 
-    // Determina os itens da página atual
     const currentItems = items.slice(
         (currentPage - 1) * ITEMS_PER_PAGE,
         currentPage * ITEMS_PER_PAGE
     );
 
-    // Manipuladores de navegação
     const goToNextPage = () => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
     };
@@ -38,7 +35,6 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
 
     return (
         <div className="w-full h-full md:mt-8">
-            {/* Tabela no desktop */}
             <table className="w-full border border-double border-textSecondary bg-background shadow-md rounded-lg hidden md:table">
                 <thead className="bg-muted ">
                     <tr>
@@ -83,7 +79,6 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 </tbody>
             </table>
 
-            {/* Cards no mobile */}
             <div className="md:hidden h-full grid grid-cols-2 gap-2 mt-4">
                 {currentItems.map((item, index) => (
                     <div
@@ -115,7 +110,6 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 ))}
             </div>
 
-            {/* Mensagem quando não houver itens */}
             {items.length === 0 && (
                 <div className="text-center py-4 text-muted bg-background">
                     No items to display
@@ -128,7 +122,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                     disabled={currentPage === 1}
                     className="px-4 py-2 text-xs md:text-base bg-muted bg-opacity-100 text-white rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                 >
-                    &larr; {/* Seta para a esquerda */}
+                    &larr;
                 </button>
                 <span className="text-xs text-textSecondary">
                     Página {currentPage} de {totalPages}
@@ -138,7 +132,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                     disabled={currentPage === totalPages}
                     className="px-4 py-2 text-xs md:text-base bg-border bg-opacity-100 text-white  rounded-md hover:bg-primaryDark disabled:opacity-25 disabled:cursor-not-allowed transition-colors"
                 >
-                    &rarr; {/* Seta para a direita */}
+                    &rarr;
                 </button>
             </div>
         </div>

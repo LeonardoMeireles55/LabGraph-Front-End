@@ -1,4 +1,4 @@
-import LabGraph from '@/components/main/LabGraph';
+import LabGraph from '@/components/chart/LabGraph';
 
 const list = [
     "ALB2", "ALP2S", "ALTL", "AMYL2", "ASTL", "BILD2",

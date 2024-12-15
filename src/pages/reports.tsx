@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image'
 import { useEffect, useState } from "react";
-import Footer from '@/components/ui/Footer';
-import NavBar from '@/components/ui/NavBar';
-import GenerateReports from '@/components/util/GenerateReports';
-import formatDateWithTime from '@/components/functional/formatDateWithTime';
-import DateSelector from '@/components/ui/DateSelector';
+import Footer from '@/components/layouts/Footer';
+import NavBar from '@/components/layouts/NavBar';
+import GenerateReports from '@/components/features/GenerateReports';
+import formatDateWithTime from '@/components/utils/formatDateWithTime';
+import DateSelector from '@/components/common/DateSelector';
 
 interface ListingItem {
     name: string;

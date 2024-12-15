@@ -1,24 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import getStatusMessage from '../util/getStatusMessage';
+import getStatusMessage from '../utils/getStatusMessage';
+import { ProcessedData, ProcessingStatus } from '../types/chartInterfaces';
 
 
-interface ProcessedData {
-  date: string;
-  level_lot: string;
-  test_lot: string;
-  level: string;
-  unit_value: string;
-  name: string;
-  value: string;
-  mean: string;
-  sd: string;
-}
 
-interface ProcessingStatus {
-  isProcessing: boolean;
-  message: string;
-  error?: string;
-}
 
 const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) => {
   const [status, setStatus] = useState<ProcessingStatus>({

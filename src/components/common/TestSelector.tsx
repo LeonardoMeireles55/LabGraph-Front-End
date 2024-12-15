@@ -1,30 +1,12 @@
 import { useEffect, useState } from 'react';
-import MeanAndDeviationDisplay from './MeanAndDeviationDisplay';
-import UpdateResults from './UpdateResults';
+import { TestSelectorProps } from '../types/chartInterfaces';
+import MeanAndDeviationDisplay from '../chart/MeanAndDeviationDisplay';
+import UpdateResults from '../features/UpdateResults';
 import useFetchListing from '@/hooks/useFetchListing';
 import Link from 'next/link';
-import formatDateWithTime from '../functional/formatDateWithTime';
-import DateSelector from '../ui/DateSelector';
+import DateSelector from './DateSelector';
+import generateUrlAnalyticsByNameAndDate from '../services/generateUrlAnalyticsByNameAndDate';
 
-interface TestSelectorProps {
-  list: string[];
-  analyticsType: string;
-  name: string;
-  level: number;
-  setDataJson: (data: any) => void;
-}
-
-const testFormatFix = (testName: string) => {
-  if (testName.includes('#')) {
-    return testName = testName.replace('#', '%23');
-  }
-  if (testName.includes('%')) {
-    return testName = testName.replace('%', '%25');
-  }
-
-  return testName;
-
-}
 
 
 const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, level, setDataJson }) => {
@@ -41,14 +23,26 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
   const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
   const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());
 
-  const baseUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/search/date-range?name=`;
-  const meanAndDeviationUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/mean-standard-deviation?name=`;
-  const url = `${baseUrl}${testFormatFix(testName)}&level=${testLevel}&startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
-  const urlMeanAndDeviation = `${meanAndDeviationUrl}${testFormatFix(testName)}&level=${testLevel}&startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
+  const analyticsProps = {
+    analyticsType,
+    name: testName,
+    level: testLevel,
+  }
+
+  const dateProps = {
+    initialDay,
+    initialMonth,
+    initialYear,
+    secondDay,
+    secondMonth,
+    secondYear,
+  };
+
+  const props = generateUrlAnalyticsByNameAndDate({ ...analyticsProps, date: dateProps });
 
   const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing({
-    url: url,
-    urlMeanAndDeviation: urlMeanAndDeviation,
+    url: props.url,
+    urlMeanAndDeviation: props.urlMeanAndDeviation,
   });
 
   useEffect(() => {

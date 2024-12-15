@@ -60,7 +60,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                     </h2>
                 </div>
 
-                <div className="m-0 flex h-[325px] w-[100%] content-center items-center justify-center p-0 md:min-h-[375px]">
+                <div className="m-0 flex h-[300px] w-[100%] content-center items-center justify-center p-0 md:min-h-[375px]">
                     <ResponsiveContainer
                         className="flex content-center items-center justify-center bg-surface"
                         width="99%"

@@ -34,7 +34,7 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
                 <Head>
                     <title>{`LabGraph - ${testList[0] || ''}`}</title>
                 </Head>
-                <div className="mt-8 flex h-full flex-col content-center justify-evenly rounded-lg bg-background sm:mt-0 md:mt-16 lg:mt-24">
+                <div className=" flex h-full flex-col content-center justify-evenly rounded-lg bg-background sm:mt-0 md:mt-16 lg:mt-24">
                     <div className="flex content-center justify-center rounded-lg bg-background">
                         <TestSelector
                             name={testList[0]}

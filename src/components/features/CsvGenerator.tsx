@@ -47,7 +47,7 @@ const CsvGenerator: React.FC<CsvGeneratorProps> = ({
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center space-y-1 ${className}`}>
+    <div className={`space-y-1 ${className}`}>
       <button
         onClick={generateCsv}
         disabled={isGenerating}

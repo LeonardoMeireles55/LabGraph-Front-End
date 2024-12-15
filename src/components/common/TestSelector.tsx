@@ -50,62 +50,62 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
   }, [listing, setDataJson]);
 
   return (
-    <div className=''>
-      <div className="grid md:flex gap-1 mt-4 md:mt-4 text-textSecondary">
-        <DateSelector
-          initialDay={initialDay}
-          initialMonth={initialMonth}
-          initialYear={initialYear}
-          secondDay={secondDay}
-          secondMonth={secondMonth}
-          secondYear={secondYear}
-          setInitialDay={setInitialDay}
-          setInitialMonth={setInitialMonth}
-          setInitialYear={setInitialYear}
-          setSecondDay={setSecondDay}
-          setSecondMonth={setSecondMonth}
-          setSecondYear={setSecondYear}
-        />
-        <div className="flex justify-start items-center gap-1">
-          <span className="text-xs md:text-sm font-medium">Teste:</span>
-          <select
-            className="bg-background border border-borderColor text-textSecondary rounded p-0 text-xs md:text-sm"
-            value={testName}
-            onChange={(e) => setTestName(e.target.value)}
-          >
-            {list.map((test) => (
-              <option key={test} value={test}>{test}</option>
-            ))}
-          </select>
-          <span className="text-xs md:text-sm font-medium">Nível:</span>
-          <select
-            className="bg-background border border-borderColor text-textSecondary rounded p-0 text-xs md:px-2 md:py-1 md:text-sm"
-            value={testLevel}
-            onChange={(e) => setTestLevel(Number(e.target.value))}
-          >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-          </select>
+    <div className="grid md:flex gap-1 text-textSecondary mt-4">
+      <DateSelector
+        initialDay={initialDay}
+        initialMonth={initialMonth}
+        initialYear={initialYear}
+        secondDay={secondDay}
+        secondMonth={secondMonth}
+        secondYear={secondYear}
+        setInitialDay={setInitialDay}
+        setInitialMonth={setInitialMonth}
+        setInitialYear={setInitialYear}
+        setSecondDay={setSecondDay}
+        setSecondMonth={setSecondMonth}
+        setSecondYear={setSecondYear}
+      />
+      <div className="flex flex-row justify-center items-center gap-1">
+        <span className=" md:text-sm font-medium">Teste:</span>
+        <select
+          className="bg-background border border-borderColor text-textSecondary rounded p-0 md:text-sm"
+          value={testName}
+          onChange={(e) => setTestName(e.target.value)}
+        >
+          {list.map((test) => (
+            <option key={test} value={test}>{test}</option>
+          ))}
+        </select>
+        <span className=" md:text-sm font-medium">Nível:</span>
+        <select
+          className="bg-background border border-borderColor text-textSecondary rounded p-0 md:px-2 md:py-1 md:text-sm"
+          value={testLevel}
+          onChange={(e) => setTestLevel(Number(e.target.value))}
+        >
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+        </select>
+        <span className='flex flex-row justify-center content-center items-center'>
           <Link
-            className="bg-background border border-borderColor hover:scale-110 text-textPrimary rounded py-0 px-1 md:px-2 md:py-1 text-sm md:text-sm"
+            className="bg-background border border-borderColor hover:scale-110 text-textPrimary rounded py-0 px-3 md:px-2 md:py-1 text-base"
             target="_blank"
             href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit"
           >
             &#10003;
           </Link>
-        </div>
+        </span>
+      </div>
 
-        <div className='hidden md:flex gap-0 w-full text-xs'>
-          <UpdateResults analyticsType={analyticsType} />
-          <MeanAndDeviationDisplay
-            mean={listing[0]?.mean}
-            sd={listing[0]?.sd}
-            ownMean={ownMeanValue}
-            ownSd={ownSdValue}
-            unitValue={unitValues}
-          />
-        </div>
+      <div className='hidden md:flex gap-0 w-full '>
+        <UpdateResults analyticsType={analyticsType} />
+        <MeanAndDeviationDisplay
+          mean={listing[0]?.mean}
+          sd={listing[0]?.sd}
+          ownMean={ownMeanValue}
+          ownSd={ownSdValue}
+          unitValue={unitValues}
+        />
       </div>
     </div>
   );

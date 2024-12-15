@@ -19,7 +19,7 @@ export default function Document() {
   return (
     <Html lang="pt-br" className="light">
       <Head />
-      <body>
+      <body className=''>
         <Main />
         <NextScript />
         <script

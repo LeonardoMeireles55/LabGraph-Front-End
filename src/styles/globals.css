@@ -8,6 +8,15 @@
     outline: none;
   }
 
+  html {
+    height: 100%;
+    background-color: var(--color-background);
+}
+
+select {
+    cursor: pointer;
+}
+
 /* globals.css */
 :root {
   --color-primary: #3B82F6;
@@ -57,15 +66,6 @@
   --border-color: #F9FAFB; 
 }
 
-
-
-html {
-    height: 100%;
-}
-
-select {
-    cursor: pointer;
-}
 
 @keyframes spin {
     to {

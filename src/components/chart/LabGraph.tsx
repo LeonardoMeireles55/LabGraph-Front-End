@@ -28,26 +28,25 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
 
     return (
-        <div className="w-full min-h-svh flex justify-center items-center content-center flex-col bg-background p-2 md:p-0">
+        <div className="w-full h-screen mt-8 md:mt-16 flex justify-evenly flex-col items-center bg-background">
             <Head>
                 <title>{`LabGraph - ${testList[0] || ''}`}</title>
             </Head>
             <NavBar jsonData={dataFetched} fileName={testList[0]} />
-            <div className="flex flex-col justify-center items-center content-center gap-5 md:gap-4 lg:gap-0 xl:gap-8 md w-screen h-4/6 md:w-5/6 lg:w-screen xl:max-w-7xl">
-                <div className="flex justify-around items-center content-center bg-background lg:p-4 rounded-lg lg:w-screen ">
-                    <div className="flex justify-center items-center content-center mt-16 bg-background lg:p-4 rounded-lg lg:w-screen ">
-                        <TestSelector
-                            name={testList[0]}
-                            level={1}
-                            setDataJson={setDataFetched}
-                            analyticsType={analyticsType}
-                            list={testList}
-                        />
-                    </div>
+            <div className="flex flex-col justify-center content-center bg-background rounded-lg">
+                <div className="justify-center content-center bg-background rounded-lg">
+                    <TestSelector
+                        name={testList[0]}
+                        level={1}
+                        setDataJson={setDataFetched}
+                        analyticsType={analyticsType}
+                        list={testList}
+                    />
+
                 </div>
-                {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
-                <Footer />
             </div>
+            {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
+            <Footer />
         </div>
     );
 };

@@ -9,6 +9,8 @@ export interface ListingItem {
     value: number;
     unit_value: string;
     description: string;
+    ownMeanValue: number;
+    ownSdValue: number;
 }
 
 export interface ControlChartProps {

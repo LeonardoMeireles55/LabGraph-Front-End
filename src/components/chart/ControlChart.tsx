@@ -64,7 +64,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                     <h2 className="mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl">
                         {name} - Level {level.toString().toUpperCase()}
                     </h2>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 transform">
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 transform">
                         <button
                             onClick={() => setUseOwnValues(!useOwnValues)}
                             className="group flex flex-col items-center transition-all duration-300"

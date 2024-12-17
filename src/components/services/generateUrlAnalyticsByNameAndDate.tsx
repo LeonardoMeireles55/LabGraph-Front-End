@@ -20,8 +20,8 @@ interface GenerateUrlAnalyticsByNameAndDate {
 const generateUrlAnalyticsByNameAndDate = (props: GenerateUrlAnalyticsByNameAndDate) => {
     const { analyticsType, name, level, date } = props;
 
-    const baseUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/search/date-range?name=`;
-    const meanAndDeviationUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/mean-standard-deviation?name=`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/search/date-range?name=`;
+    const meanAndDeviationUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/mean-standard-deviation?name=`;
 
     const startDate = formatDateWithTime(date.initialYear, date.initialMonth, date.initialDay);
     const endDate = formatDateWithTime(date.secondYear, date.secondMonth, date.secondDay);

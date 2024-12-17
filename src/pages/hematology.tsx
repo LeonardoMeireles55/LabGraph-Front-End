@@ -15,7 +15,6 @@ const list = [
     'MON#',
     'EOS#',
     'BAS#',
-    'IMG#',
     'NRBC%',
     'NRBC#',
     'NEU%',

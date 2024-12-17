@@ -70,8 +70,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                             className="group flex flex-col items-center transition-all duration-300"
                         >
                             <div className={`rounded-full p-2 transition-all duration-300 ${useOwnValues
-                                ? 'text-textSecondary hover:bg-textSecondary/20'
-                                : 'text-textPrimary hover:bg-textPrimary/20'
+                                ? 'text-textPrimary hover:bg-textPrimary/20'
+                                : 'text-textSecondary hover:bg-textSecondary/20'
                                 }`}>
                                 {useOwnValues ? (
                                     <TbFileDescription className="h-4 w-4 md:h-6 md:w-6" />
@@ -80,8 +80,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                 )}
                             </div>
                             <span className={`text-[8px] font-medium md:text-xs ${useOwnValues
-                                ? 'text-textSecondary'
-                                : 'text-textPrimary'
+                                ? 'text-textPrimary'
+                                : 'text-textSecondary'
                                 }`}>
                                 {useOwnValues ? 'Valor Bula' : 'Calculada'}
                             </span>

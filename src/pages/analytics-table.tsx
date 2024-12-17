@@ -141,7 +141,9 @@ const AnalyticsTable = () => {
                     )}
                 </div>
             </main>
-            <Footer />
+            <div className="mt-auto flex items-center justify-center">
+                <Footer />
+            </div>
         </div>
     );
 };

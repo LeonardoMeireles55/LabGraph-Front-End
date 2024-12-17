@@ -5,19 +5,8 @@ import Footer from '@/components/layouts/Footer';
 import NavBar from '@/components/layouts/NavBar';
 import Head from 'next/head';
 import { useState } from 'react';
+import { ListingItem } from '../types/chartInterfaces';
 
-interface ListingItem {
-    name: string;
-    level: number;
-    level_lot: string;
-    test_lot: string;
-    sd: number;
-    mean: number;
-    date: string;
-    value: number;
-    unit_value: string;
-    description: string;
-}
 
 interface LabGraphProps {
     testList: string[];

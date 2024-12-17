@@ -39,15 +39,22 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
         ...analyticsProps,
         date: dateProps,
     });
-
     const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing({
         url: props.url,
         urlMeanAndDeviation: props.urlMeanAndDeviation,
     });
 
     useEffect(() => {
-        setDataJson(listing);
-    }, [listing, setDataJson]);
+        if (listing) {
+            const updatedListing = listing.map(item => ({
+                ...item,
+                ownMeanValue,
+                ownSdValue,
+            }));
+            setDataJson(updatedListing);
+        }
+    }, [listing, ownMeanValue, ownSdValue, setDataJson]);
+
 
     return (
         <div className="mt-12 md:mt-4 lg:mt-4 grid gap-1 text-textSecondary md:flex">

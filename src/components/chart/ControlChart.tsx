@@ -29,8 +29,7 @@ const CustomDot: React.FC<any> = ({ cx, cy, payload }) => {
 
 const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     const data = listing;
-    const { level_lot, mean, sd, name, level, unit_value, description } = data[0];
-
+    const { level_lot, mean, sd, name, level, unit_value, description, ownMeanValue, ownSdValue } = data[0];
     const chartData = data.map((entry) => ({
         date: customFormatDate(entry.date),
         levelLot: level_lot,

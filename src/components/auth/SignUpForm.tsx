@@ -56,7 +56,7 @@ const SignUpForm = () => {
     };
 
     return (
-        <div className="w-full rounded-xl border border-borderColor bg-surface/80 backdrop-blur-sm p-8 shadow-xl">
+        <div className="w-full relative rounded-xl border border-borderColor bg-surface/80 p-8 shadow-xl">
             <div className="absolute right-4 top-4">
                 <ThemeToggle />
             </div>

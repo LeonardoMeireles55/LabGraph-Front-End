@@ -147,7 +147,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                 strokeWidth={1.2}
                                 activeDot={{ r: 4 }}
                                 dot={<CustomDot />}
-                                animationDuration={400}
+                                animationDuration={500}
                             />
 
                             {yAxisValues.map((line, index) => (

@@ -1,7 +1,7 @@
 Dockerfile
 node_modules
-    .log
+.log
 README.md
-    .git
-    .dockerignore
-    .gitignore
+.git
+.dockerignore
+.gitignore

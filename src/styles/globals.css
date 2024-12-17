@@ -7,10 +7,9 @@
     margin: 0;
     outline: none;
     transition:
-        background-color 0.3s ease-in-out,
-        color 0.3s ease-in-out,
-        border-color 0.3s ease-in-out,
-        box-shadow 0.3s ease-in-out;
+        background-color 0.1s ease-in-out,
+        color 0.1s ease-in-out,
+        border-color 0.1s ease-in-out,
 }
 
 html {
@@ -74,7 +73,7 @@ select {
     --transition-slow: all 0.5s ease-in-out;
     --transition-fast: all 0.15s ease-in-out;
 }
-
+/* 
 .transition-theme {
     transition: var(--transition-default);
 }
@@ -85,7 +84,7 @@ select {
 
 .transition-theme-fast {
     transition: var(--transition-fast);
-}
+} */
 
 @keyframes spin {
     to {

@@ -8,13 +8,18 @@ services:
         environment:
             - NODE_ENV=production
         volumes:
-            - /app/node_modules
-            - /app/public
+            - qualitylab_node_modules:/app/node_modules
+            - qualitylab_public:/app/public
         stdin_open: true
         tty: true
         command: ['npm', 'start']
         networks:
             - qualitylab-net
+
+volumes:
+    qualitylab_node_modules:
+    qualitylab_public:
+
 networks:
     qualitylab-net:
         external: true

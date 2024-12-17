@@ -27,6 +27,7 @@ COPY --from=builder /app/public /app/public
 
 # Instale apenas dependências de produção
 RUN npm ci --omit=dev
+RUN npm prune --production
 
 EXPOSE 3000
 

@@ -11,12 +11,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict' as const,
     path: '/',
-    maxAge: 0, // Set to 0 to delete the cookie
+    maxAge: 0,
   }
 
   res.setHeader(
     'Set-Cookie', 
-    serialize('tokenJWT', '', cookieOptions) // Empty value to clear the cookie
+    serialize('tokenJWT', '', cookieOptions)
   )
 
   return res.status(200).json({ success: true })

@@ -12,7 +12,7 @@ interface InputFieldProps {
 const InputField: React.FC<InputFieldProps> = ({ id, type, label, value, onChange, autocomplete }) => {
     return (
         <div className="space-y-1">
-            <label htmlFor={id}  className="block text-sm font-medium text-textPrimary">
+            <label htmlFor={id}  className="block text-sm font-medium text-bgText">
                 {label}
             </label>
             <input
@@ -21,7 +21,7 @@ const InputField: React.FC<InputFieldProps> = ({ id, type, label, value, onChang
                 autoComplete={autocomplete===undefined ? 'off' : 'current-password'}
                 value={value}
                 onChange={onChange}
-                className="w-full rounded-lg border border-borderColor p-3 text-[black] 
+                className="w-full rounded-lg border border-borderColor p-3 bg-surface text-bgText
                           outline-none focus:border-textPrimary"
                 required
             />

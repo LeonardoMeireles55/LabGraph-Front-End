@@ -6,8 +6,9 @@
     padding: 0;
     margin: 0;
     outline: none;
+    text-decoration: none;
     transition:
-        background-color 0.1s ease-in-out
+        background-color 0.1s ease-in-out;
 }
 
 html {
@@ -37,6 +38,8 @@ select {
     --color-sd3: rgba(220, 38, 38, 0.8);
     --color-navbar: #ffffff;
     --color-white: #ffffff;
+    --color-bg-text: #1e293b;
+
     --color-green: #10b981;
     --color-shadow: rgba(0, 0, 0, 0.2);
     --color-overlay: rgba(0, 0, 0, 0.05);
@@ -56,6 +59,7 @@ select {
     --color-muted: #334155;
     --color-text-primary: #f8fafc;
     --color-text-secondary: #f8fafc;
+    --color-bg-text: #f8fafc;
     --color-grid-lines: rgba(248, 250, 252, 0.1);
     --color-mean-line: rgba(56, 189, 248, 0.9);
     --color-sd1: rgba(251, 191, 36, 0.6);

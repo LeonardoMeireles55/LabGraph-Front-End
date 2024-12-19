@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/cookie": "^0.6.0",
+    "cookie": "^1.0.2",
     "date-fns": "^4.1.0",
     "json2csv": "^6.0.0-alpha.2",
     "lucide-react": "^0.468.0",

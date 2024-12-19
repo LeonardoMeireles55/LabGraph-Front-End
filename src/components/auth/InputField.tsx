@@ -21,8 +21,8 @@ const InputField: React.FC<InputFieldProps> = ({ id, type, label, value, onChang
                 autoComplete={autocomplete===undefined ? 'off' : 'current-password'}
                 value={value}
                 onChange={onChange}
-                className="w-full rounded-lg border border-borderColor bg-surface/50 p-3 text-textPrimary 
-                         placeholder-textSecondary/50 outline-none focus:border-textPrimary"
+                className="w-full rounded-lg border border-borderColor p-3 text-[black] 
+                          outline-none focus:border-textPrimary"
                 required
             />
         </div>

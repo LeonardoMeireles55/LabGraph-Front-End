@@ -14,8 +14,8 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
         async (data: ProcessedData[]) => {
             const endpointUrl =
                 analyticsType === 'biochemistry-analytics'
-                    ? 'https://leomeireles-dev.xyz/api/biochemistry-analytics'
-                    : 'https://leomeireles-dev.xyz/api/coagulation-analytics';
+                    ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/biochemistry-analytics`
+                    : `${process.env.NEXT_PUBLIC_API_BASE_URL}/coagulation-analytics`;
 
             try {
                 const response = await fetch(endpointUrl, {

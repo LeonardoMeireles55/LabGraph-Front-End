@@ -6,6 +6,7 @@ import SubmitButton from './SubmitButton';
 import Logo from '@/components/common/Logo';
 import Link from 'next/link';
 import ThemeToggle from '../common/ThemeToggle';
+import { middleware } from '@/middleware';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const LoginForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/signIn`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
@@ -25,7 +26,6 @@ const LoginForm = () => {
             const data = await response.json();
 
             if (response.ok) {
-                localStorage.setItem('token', data.token);
                 router.push('/');
             } else {
                 setError(data.message || 'Erro ao fazer login');

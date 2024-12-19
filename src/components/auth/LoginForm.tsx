@@ -6,7 +6,6 @@ import SubmitButton from './SubmitButton';
 import Logo from '@/components/common/Logo';
 import Link from 'next/link';
 import ThemeToggle from '../common/ThemeToggle';
-import { middleware } from '@/middleware';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -17,7 +16,7 @@ const LoginForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/login`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/signIn`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
@@ -26,10 +25,15 @@ const LoginForm = () => {
             const data = await response.json();
 
             if (response.ok) {
-                router.push('/');
-            } else {
-                setError(data.message || 'Erro ao fazer login');
-            }
+                await fetch('/api/login', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ token: data.tokenJWT }),
+                })
+                router.push('/hematology')
+              } else {
+                setError(data.message || 'Login failed')
+              }
         } catch (err) {
             setError('Erro ao conectar ao servidor');
         }
@@ -37,7 +41,7 @@ const LoginForm = () => {
 
     return (
         <div className="w-full relative rounded-xl border border-borderColor bg-surface/80 p-8 shadow-xl">
-            <div className="absolute right-4 top-4">
+            <div className="absolute right-4 top-4 z-50">
                 <ThemeToggle />
             </div>
             <div className="mb-8 text-center">
@@ -62,6 +66,7 @@ const LoginForm = () => {
                     id="password"
                     type="password"
                     label="Senha"
+                    autocomplete='current-password'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />

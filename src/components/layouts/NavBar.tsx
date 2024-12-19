@@ -1,11 +1,10 @@
 import CsvGenerator from '@/components/features/CsvGenerator';
 import React, { useState } from 'react';
 import ThemeToggle from '../common/ThemeToggle';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-interface NavLink {
-    text: string;
-    url: string;
-}
+
 
 interface NavBarProps {
     jsonData?: Array<Record<string, any>>;
@@ -13,9 +12,10 @@ interface NavBarProps {
 }
 
 const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
+    const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-    const navLinks: NavLink[] = [
+    const navLinks = [
         { text: 'BIOQUÍMICA', url: '/biochemistry' },
         { text: 'COAGULAÇÃO', url: '/coagulation' },
         { text: 'HEMATOLOGIA', url: '/hematology' },
@@ -24,6 +24,19 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
         {
             text: 'INFORMAÇÕES',
             url: 'https://github.com/LeonardoMeireles55/QualityLab-Pro-Backend',
+        },
+        {
+            text: 'SAIR',
+            url : '/login',
+            onClick: async () => {
+                try {
+                    const response = await fetch('/api/logout', { method: 'POST' });
+                    if(response.ok) router.push('/login');
+                    document.cookie = 'tokenJWT=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+                } catch (error) {
+                    console.error('Logout failed:', error);
+                }
+            }
         },
     ];
 
@@ -43,14 +56,15 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
 
                     <div className="hidden items-center gap-4 lg:flex xl:gap-6">
                         {navLinks.map((link, index) => (
-                            <a
+                            <Link
                                 key={index}
                                 href={link.url}
+                                onClick={link.onClick}
                                 className="transition-theme-fast group relative text-sm font-normal text-textPrimary hover:text-textPrimary xl:text-base"
                             >
                                 {link.text}
                                 <span className="transition-theme-fast absolute bottom-0 left-0 h-0.5 w-0 bg-primary group-hover:w-full"></span>
-                            </a>
+                            </Link>
                         ))}
 
                         <div className="hidden rounded-md p-2 lg:block">

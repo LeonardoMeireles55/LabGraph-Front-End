@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import MeanAndDeviationDisplay from '../chart/MeanAndDeviationDisplay';
 import UpdateResults from '../features/UpdateResults';
 import generateUrlAnalyticsByNameAndDate from '../services/generateUrlAnalyticsByNameAndDate';
-import { TestSelectorProps } from '../types/chartInterfaces';
+import { TestSelectorProps } from '../../types/chartInterfaces';
 import DateSelector from './DateSelector';
 
 const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, level, setDataJson }) => {

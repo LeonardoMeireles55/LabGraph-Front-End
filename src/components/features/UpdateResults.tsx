@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ProcessedData, ProcessingStatus } from '../types/chartInterfaces';
+import { ProcessedData, ProcessingStatus } from '../../types/chartInterfaces';
 import getStatusMessage from '../utils/getStatusMessage';
 
 const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) => {

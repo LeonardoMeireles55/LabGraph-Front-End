@@ -37,7 +37,7 @@ const AnalyticsTable = () => {
         return `${formattedDate} 00:00:00`;
     };
 
-    const baseUrl = `https://leomeireles-dev.xyz/api/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
 
     useEffect(() => {
         const fetchData = async () => {

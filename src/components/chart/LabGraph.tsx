@@ -5,7 +5,7 @@ import Footer from '@/components/layouts/Footer';
 import NavBar from '@/components/layouts/NavBar';
 import Head from 'next/head';
 import { useState } from 'react';
-import { ListingItem } from '../types/chartInterfaces';
+import { ListingItem } from '../../types/chartInterfaces';
 
 
 interface LabGraphProps {
@@ -19,12 +19,12 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
     return (
         <div className="h-screen">
             <NavBar jsonData={dataFetched} fileName={testList[0]} />
-            <div className="flex h-screen flex-col content-center items-center justify-center bg-background">
+            <div className="flex h-screen flex-col content-center items-center justify-center bg-background ">
                 <Head>
                     <title>{`LabGraph - ${testList[0] || ''}`}</title>
                 </Head>
-                <div className=" flex h-full flex-col content-center justify-evenly rounded-lg bg-background sm:mt-0 md:mt-16 lg:mt-24">
-                    <div className="flex content-center justify-center rounded-lg bg-background">
+                <div className="flex min-h-min flex-col content-center justify-center rounded-lg ">
+                    <div className=" flex content-center justify-center rounded-lg mb-8 md:mb-12 mt-10 md:mt-32">
                         <TestSelector
                             name={testList[0]}
                             level={1}

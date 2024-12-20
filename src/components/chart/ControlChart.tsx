@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ControlChartProps } from '../types/chartInterfaces';
+import { ControlChartProps } from '../../types/chartInterfaces';
 import customFormatDate from '../utils/customFormatDate';
 import { TbMathFunction, TbFileDescription } from 'react-icons/tb';
 
@@ -58,7 +58,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     ];
 
     return (
-        <div className="w-[98%] md:w-[75%]">
+        <div className="w-[98%] md:w-[90%] min-h-min mb-2">
             <div className="rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow">
                 <div className="relative flex flex-col items-center">
                     <h2 className="mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl">
@@ -89,7 +89,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                     </div>
                 </div>
 
-                <div className="m-0 flex h-[300px] w-[100%] content-center items-center justify-center p-0 md:min-h-[375px]">
+                <div className="flex h-[325px] w-[100%] content-center items-center justify-center md:min-h-[300px] lg:min-h-[350px] xl:min-h-[400px] 2xl:min-h-[500px]">
                     <ResponsiveContainer
                         className="flex content-center items-center justify-center bg-surface"
                         width="99%"

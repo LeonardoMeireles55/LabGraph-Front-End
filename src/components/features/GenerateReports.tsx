@@ -30,6 +30,7 @@ const GenerateReports: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'da
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         } catch (error: Error | any) {
+            console.log(error);
             alert('Erro ao gerar o CSV: ' + getStatusMessage(error.status));
         } finally {
             setIsGenerating(false);

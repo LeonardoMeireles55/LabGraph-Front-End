@@ -78,17 +78,18 @@ const AnalyticsTable = () => {
     ];
 
     return (
-        <div className="mt-8 flex min-h-screen flex-col bg-background">
+        <div className="min-h-min">
+
+        <div className="xl:mt-12 flex min-h-screen flex-col justify-evenly content-center items-center bg-background">
             <Head>
                 <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
             </Head>
             <NavBar jsonData={dataFetched} fileName={analyticsType} />
 
-            <main className="flex flex-grow flex-col items-center justify-center px-4 py-8 md:px-8">
                 <div className="w-full max-w-6xl space-y-4">
                     <div className="rounded-lg bg-background p-4 md:p-6">
                         <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-                            <div className="mt-8 w-full md:mt-8 md:w-auto">
+                            <div className="w-full md:w-auto">
                                 <DateSelector
                                     initialDay={initialDay}
                                     initialMonth={initialMonth}
@@ -139,7 +140,7 @@ const AnalyticsTable = () => {
                     </div>
 
                     {isLoading ? (
-                        <div className="flex h-64 items-center justify-center">
+                        <div className="flex justify-evenly items-center content-center">
                             <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-primary"></div>
                         </div>
                     ) : error ? (
@@ -150,10 +151,11 @@ const AnalyticsTable = () => {
                         <ListingTable items={dataFetched} />
                     )}
                 </div>
-            </main>
-            <div className="mt-auto flex items-center justify-center">
-                <Footer />
-            </div>
+                <div className="flex flex-col justify-end items-center">
+                    <Footer />
+                </div>
+                </div>
+
         </div>
     );
 };

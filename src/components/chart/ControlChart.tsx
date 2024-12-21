@@ -90,7 +90,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                     </div>
                 </div>
 
-                <div className="flex h-[325px] w-[100%] content-center items-center justify-center md:min-h-[300px] lg:min-h-[350px] xl:min-h-[325px] 2xl:min-h-[350px] 3xl:min-h-[400px]">
+                <div className="flex h-[275px] w-[100%] content-center items-center justify-center md:min-h-[225px] lg:min-h-[250px] xl:min-h-[275px]  2xl:min-h-[350px] 3xl:min-h-[400px]">
                     <ResponsiveContainer
                         className="flex content-center items-center justify-center bg-surface"
                         width="99%"

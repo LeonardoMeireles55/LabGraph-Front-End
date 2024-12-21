@@ -61,8 +61,8 @@ const Reports = () => {
                 <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
             </Head>
             <NavBar jsonData={dataFetched} fileName={analyticsType} />
-            <main className="mt-12 flex flex-grow flex-col items-center justify-center bg-background p-4 md:mt-8 md:p-8">
-                <div className="mt-14 grid gap-2 text-textSecondary md:flex">
+            <main className="flex flex-grow flex-col items-center justify-evenly bg-background xl:mt-8">
+                <div className="xl:mt-14 grid gap-2 text-textSecondary md:flex">
                     <DateSelector
                         initialDay={initialDay}
                         initialMonth={initialMonth}
@@ -78,7 +78,7 @@ const Reports = () => {
                         setSecondYear={setSecondYear}
                     />
                     <select
-                        className="rounded-md border border-borderColor bg-background p-0 text-xs text-textSecondary md:px-2 md:py-1 md:text-sm"
+                        className="rounded-md border border-borderColor bg-background p-0 text-xs text-textSecondary md:text-sm"
                         value={analyticsType}
                         onChange={(e) => setAnalyticsType(e.target.value)}
                     >
@@ -86,11 +86,11 @@ const Reports = () => {
                         <option value={'hematology-analytics'}>HEMATOLOGIA</option>
                         <option value={'coagulation-analytics'}>COAGULAÇÃO</option>
                     </select>
-                    <span className="flex justify-center rounded-md border border-borderColor text-textSecondary">
+                    <span className="flex justify-evenly rounded-md border border-borderColor text-textSecondary">
                         <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
                     </span>
                 </div>
-                <span className="mt-8 flex items-center justify-center rounded-xl border border-textSecondary p-4 shadow-md md:mt-8 md:p-8">
+                <span className="xl:w-1/3  rounded-xl border border-textPrimary p-4 shadow-md md:mt-4 xl:p-8">
                     <Image
                         className="rounded-xl object-cover"
                         fetchPriority="high"
@@ -106,9 +106,9 @@ const Reports = () => {
                     />
                 </span>
             </main>
-            <div className="mt-auto flex items-center justify-center">
-                <Footer />
-            </div>
+            <div className="mt-auto flex flex-col justify-end items-center content-end">
+                    <Footer />
+                </div>
         </div>
     );
 };

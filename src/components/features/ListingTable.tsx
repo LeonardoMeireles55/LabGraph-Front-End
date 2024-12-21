@@ -15,7 +15,7 @@ interface ListingTableProps {
 }
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
-    const ITEMS_PER_PAGE = 12;
+    const ITEMS_PER_PAGE = 8;
     const [currentPage, setCurrentPage] = useState(1);
 
     const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
@@ -31,7 +31,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
     };
 
     return (
-        <div className="h-full w-full md:mt-8">
+        <div className="flex flex-col justify-evenly h-full w-full">
             <table className="hidden w-full rounded-lg border border-double border-textSecondary bg-background shadow-md md:table">
                 <thead className="bg-muted">
                     <tr>
@@ -87,7 +87,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 </tbody>
             </table>
 
-            <div className="mt-4 grid h-full grid-cols-2 gap-2 md:hidden">
+            <div className="grid h-full grid-cols-2 gap-2 md:hidden">
                 {currentItems.map((item, index) => (
                     <div key={index} className="rounded-lg border border-border bg-surface p-4 shadow-md">
                         <p className="text-[6px] font-semibold text-textSecondary">

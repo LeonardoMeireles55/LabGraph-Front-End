@@ -57,13 +57,13 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
 
 
     return (
-        <div className="mt-12 md:mt-4 lg:mt-4 grid gap-1 text-textSecondary md:flex">
+        <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1   text-textSecondary xl:flex xl:justify-around items-center content-center">
             <DateSelector
                 initialDay={initialDay}
                 initialMonth={initialMonth}
                 initialYear={initialYear}
                 secondDay={secondDay}
-                secondMonth={secondMonth}
+                secondMonth={secondMonth}   
                 secondYear={secondYear}
                 setInitialDay={setInitialDay}
                 setInitialMonth={setInitialMonth}
@@ -72,10 +72,10 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
                 setSecondMonth={setSecondMonth}
                 setSecondYear={setSecondYear}
             />
-            <div className="flex flex-row items-center justify-center gap-1">
+            <div className="flex flex-row items-center content-center justify-between gap-1">
                 <span className="font-medium md:text-sm">Teste:</span>
                 <select
-                    className="rounded border border-borderColor bg-background p-0 text-textSecondary md:text-sm"
+                    className="rounded border border-borderColor bg-background p-0 xl:p-1 text-textSecondary md:text-sm"
                     value={testName}
                     onChange={(e) => setTestName(e.target.value)}
                 >
@@ -95,18 +95,16 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
                     <option value={2}>2</option>
                     <option value={3}>3</option>
                 </select>
-                <span className="flex flex-row content-center items-center justify-center">
+                <span className="flex flex-row content-center items-center justify-between">
                     <Link
-                        className="rounded border border-borderColor bg-background px-3 py-0 text-base text-textPrimary hover:scale-110 md:px-2 md:py-1"
+                        className="rounded border border-borderColor bg-background content-center items-center py-0 px-1 text-base text-textPrimary hover:scale-110 md:px-2 md:py-1"
                         target="_blank"
                         href="https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit"
                     >
                         &#10003;
                     </Link>
                 </span>
-            </div>
-
-            <div className="hidden w-full gap-0 md:flex">
+                <div className="hidden w-full md:flex">
                 <UpdateResults analyticsType={analyticsType} />
                 <MeanAndDeviationDisplay
                     mean={listing[0]?.mean}
@@ -115,6 +113,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
                     ownSd={ownSdValue}
                     unitValue={unitValues}
                 />
+            </div>
             </div>
         </div>
     );

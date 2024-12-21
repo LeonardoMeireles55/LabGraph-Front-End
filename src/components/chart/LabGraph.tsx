@@ -17,14 +17,14 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
 
     return (
-        <div className="h-screen">
+        <div className="min-h-min">
             <NavBar jsonData={dataFetched} fileName={testList[0]} />
-            <div className="flex h-screen flex-col content-center items-center justify-center bg-background ">
+            <div className="flex min-h-min flex-col content-center items-center justify-evenly bg-background ">
                 <Head>
                     <title>{`LabGraph - ${testList[0] || ''}`}</title>
                 </Head>
-                <div className="flex min-h-min flex-col content-center justify-center rounded-lg ">
-                    <div className=" flex content-center justify-center rounded-lg mb-8 md:mb-12 mt-10 md:mt-32">
+                <div className="flex flex-col">
+                    <div className="flex justify-evenly mb-6 xl:mb-8 mt-10 md:mt-24 xl:mt-32">
                         <TestSelector
                             name={testList[0]}
                             level={1}
@@ -33,15 +33,16 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
                             list={testList}
                         />
                     </div>
-                    <div className="flex w-screen flex-col items-center justify-between">
+                    <div className="flex w-screen min-h-full flex-col items-center justify-evenly">
                         {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
                     </div>
                 </div>
-                <div className="mt-auto">
-                    <Footer />
-                </div>
+            </div>
+            <div className="mt-4 xl:mt-4 h-16 flex flex-col justify-end items-center content-end">
+                <Footer />
             </div>
         </div>
+
     );
 };
 

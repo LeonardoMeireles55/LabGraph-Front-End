@@ -23,15 +23,25 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
     useEffect(() => {
         const fetchData = async () => {
             try {
+
+                const tokenResponse = await fetch('/api/get-token');
+                const { token } = await tokenResponse.json();
+
                 const response = await fetch(url, {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
                 });
                 const json = await checkResponse(response);
 
                 const responseMeanAndDeviation = await fetch(urlMeanAndDeviation, {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
                 });
                 const jsonMeanAndDeviation = await checkResponse(responseMeanAndDeviation);
 

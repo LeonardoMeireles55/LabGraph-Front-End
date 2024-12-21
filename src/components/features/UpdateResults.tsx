@@ -1,11 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { ProcessedData, ProcessingStatus } from '../../types/chartInterfaces';
 import getStatusMessage from '../utils/getStatusMessage';
-import { useAuth } from '@/hooks/useAuth';
 
 
 const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) => {
-    const { getToken} = useAuth();
     const [status, setStatus] = useState<ProcessingStatus>({
         isProcessing: false,
         message: '',
@@ -23,14 +21,17 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
                     ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/biochemistry-analytics`
                     : `${process.env.NEXT_PUBLIC_API_BASE_URL}/coagulation-analytics`;
 
-                    const token = getToken();
-
-
             try {
+
+                const tokenResponse = await fetch('/api/get-token');
+                const { token } = await tokenResponse.json();
+
                 const response = await fetch(endpointUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json',  'Authorization': `Bearer ${token}` },
-                   
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
                     body: JSON.stringify(data),
                 });
 
@@ -41,10 +42,10 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
                     }));
                 } else {
                     alert(`Ocorreu um erro: ${getStatusMessage(response.status)}`);
-                    throw new Error(`Status code: ${getStatusMessage(response.status)}`);
+                    throw new Error(`${getStatusMessage(response.status)}`);
                 }
             } catch (error) {
-                throw new Error(`Error posting results: ${error instanceof Error ? error.message : 'Unknown error'}`);
+                throw new Error(`${error instanceof Error ? error.message : 'Unknown error'}`);
             }
         },
         [analyticsType]

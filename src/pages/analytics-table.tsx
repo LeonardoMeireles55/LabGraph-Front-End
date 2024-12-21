@@ -78,18 +78,17 @@ const AnalyticsTable = () => {
     ];
 
     return (
-        <div className="min-h-min">
+        <div className="min-h-min bg-background">
 
-        <div className="xl:mt-12 flex min-h-screen flex-col justify-evenly content-center items-center bg-background">
+        <div className="xl:mt-12 mt-2 flex min-h-screen flex-col justify-evenly content-center items-center">
             <Head>
                 <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
             </Head>
             <NavBar jsonData={dataFetched} fileName={analyticsType} />
-
-                <div className="w-full max-w-6xl space-y-4">
-                    <div className="rounded-lg bg-background p-4 md:p-6">
-                        <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-                            <div className="w-full md:w-auto">
+                <div className="w-full max-w-7xl p-2">
+                    <div className="rounded-lg ">
+                        <div className="md:flex grid grid-cols-2  items-center justify-between content-center space-y-1 mb-2 xl:mb-6">
+                            <div className="w-full md:w-auto mt-16">
                                 <DateSelector
                                     initialDay={initialDay}
                                     initialMonth={initialMonth}
@@ -104,36 +103,26 @@ const AnalyticsTable = () => {
                                     setSecondMonth={setSecondMonth}
                                     setSecondYear={setSecondYear}
                                 />
-                            </div>
 
-                            <div className="relative w-full md:w-auto">
-                                <div className="relative">
-                                    <select
-                                        className="border-textSecondary/25 w-full appearance-none rounded-md border bg-background py-2 pl-3 pr-10 text-sm text-textSecondary focus:outline-none focus:ring-2 focus:ring-primary"
+                            <div className="flex flex-row gap-1 py-2 w-full">
+                            <label
+                        htmlFor="tests"
+                        className="text-textSecondary"
+                    >
+                        Teste:
+                    </label>
+                            <select
+                                        id="tests"
+                                        className="rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm"
                                         value={analyticsType}
                                         onChange={(e) => setAnalyticsType(e.target.value)}
                                     >
                                         {analyticsOptions.map((option) => (
-                                            <option key={option.value} value={option.value}>
+                                            <option  key={option.value} value={option.value}>
                                                 {option.label}
                                             </option>
                                         ))}
                                     </select>
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-textSecondary">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="20"
-                                            height="20"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        >
-                                            <path d="m6 9 6 6 6-6" />
-                                        </svg>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +133,7 @@ const AnalyticsTable = () => {
                             <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-primary"></div>
                         </div>
                     ) : error ? (
-                        <div className="relative rounded bg-danger px-4 py-3 text-white" role="alert">
+                        <div className="mtrelative rounded bg-danger px-4 py-3 text-white" role="alert">
                             {error}
                         </div>
                     ) : (

@@ -38,7 +38,7 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
                     </div>
                 </div>
             </div>
-            <div className="mt-4 xl:mt-4 h-16 flex flex-col justify-end items-center content-end">
+            <div className="mt-6 min-h-min xl:mt-8 flex flex-col justify-end items-center content-center">
                 <Footer />
             </div>
         </div>

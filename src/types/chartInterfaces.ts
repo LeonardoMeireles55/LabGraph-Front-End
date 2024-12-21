@@ -11,6 +11,7 @@ export interface ListingItem {
     description: string;
     ownMeanValue: number;
     ownSdValue: number;
+    rules?: string;
 }
 
 export interface ControlChartProps {

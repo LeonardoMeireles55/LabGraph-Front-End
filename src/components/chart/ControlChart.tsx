@@ -32,19 +32,20 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     const [useOwnValues, setUseOwnValues] = useState(false);
 
     const data = listing;
-    const { level_lot, mean, sd, name, level, unit_value, description, ownMeanValue, ownSdValue } = data[0];
+    const { mean, sd, name, level, unit_value, ownMeanValue, ownSdValue } = data[0];
 
     const activeMean = useOwnValues ? ownMeanValue : mean;
     const activeSd = useOwnValues ? ownSdValue : sd;
 
     const chartData = data.map((entry) => ({
         date: customFormatDate(entry.date),
-        levelLot: level_lot,
-        name: entry.name,
+        levelLot: entry.level_lot,
+        name: name,
         value: filter(entry.value, activeMean, activeSd),
         unitValue: unit_value,
         rawValue: entry.value,
-        description: description,
+        description: entry.description,
+        rules: entry.rules,
     }));
 
     const yAxisValues = [
@@ -131,9 +132,18 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                     if (active && payload && payload.length) {
                                         return (
                                             <div className="rounded border border-border bg-background p-2 text-xs text-textPrimary shadow-md shadow-shadow">
-                                                <p className="">{`${payload[0].payload.name}`}</p>
-                                                <p className="">{`${payload[0].payload.rawValue.toFixed(2)} ${payload[0].payload.unitValue}`}</p>
-                                                <p className="">{`${payload[0].payload.levelLot}`}</p>
+                                                {payload.map((item, index) => {
+                                                    const data = item.payload;
+                                                    return (
+                                                        <div key={index} className="mb-2 border-b border-border pb-2 last:border-0 last:pb-0">
+                                                            <p>Teste: {data.name}</p>
+                                                            <p>Valor: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
+                                                            <p>Lote: {data.levelLot}</p>
+                                                            <p>Descrição: {data.description}</p>
+                                                            <p>Regras: {data.rules}</p>
+                                                        </div>
+                                                    );
+                                                })}
                                             </div>
                                         );
                                     }

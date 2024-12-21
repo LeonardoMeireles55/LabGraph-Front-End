@@ -29,12 +29,22 @@ const Reports = () => {
     const [analyticsType, setAnalyticsType] = useState<string>('biochemistry-analytics');
 
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(baseUrl);
+                const tokenResponse = await fetch('/api/get-token');
+                const { token } = await tokenResponse.json();
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+
                 const result = await response.json();
                 setDataFetched(result);
             } catch (error) {
@@ -43,7 +53,7 @@ const Reports = () => {
         };
 
         fetchData();
-    }, [baseUrl]);
+    }, [url]);
 
     return (
         <div className="flex min-h-screen flex-col">

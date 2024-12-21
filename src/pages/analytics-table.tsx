@@ -37,14 +37,24 @@ const AnalyticsTable = () => {
         return `${formattedDate} 00:00:00`;
     };
 
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
 
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
             setError(null);
             try {
-                const response = await fetch(baseUrl);
+                const tokenResponse = await fetch('/api/get-token');
+                const { token } = await tokenResponse.json();
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -59,7 +69,7 @@ const AnalyticsTable = () => {
         };
 
         fetchData();
-    }, [baseUrl]);
+    }, [url]);
 
     const analyticsOptions = [
         { value: 'biochemistry-analytics', label: 'BIOQUÍMICA' },

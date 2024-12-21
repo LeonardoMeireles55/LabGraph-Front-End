@@ -56,12 +56,12 @@ const Reports = () => {
     }, [url]);
 
     return (
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col justify-evenly">
             <Head>
                 <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
             </Head>
             <NavBar jsonData={dataFetched} fileName={analyticsType} />
-            <main className="flex flex-grow flex-col items-center justify-evenly bg-background xl:mt-8">
+            <main className="flex flex-grow flex-col items-center justify-evenly bg-background mt-16 xl:mt-16">
                 <div className="xl:mt-14 grid gap-2 text-textSecondary md:flex">
                     <DateSelector
                         initialDay={initialDay}
@@ -78,7 +78,7 @@ const Reports = () => {
                         setSecondYear={setSecondYear}
                     />
                     <select
-                        className="rounded-md border border-borderColor bg-background p-0 text-xs text-textSecondary md:text-sm"
+                        className="rounded-md border border-borderColor bg-background text-xs text-textSecondary md:text-sm"
                         value={analyticsType}
                         onChange={(e) => setAnalyticsType(e.target.value)}
                     >
@@ -90,7 +90,7 @@ const Reports = () => {
                         <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
                     </span>
                 </div>
-                <span className="xl:w-1/3  rounded-xl border border-textPrimary p-4 shadow-md md:mt-4 xl:p-8">
+                <span className="xl:w-1/3 w-5/6 rounded-xl border border-textPrimary p-4 shadow-md md:mt-4 xl:p-8">
                     <Image
                         className="rounded-xl object-cover"
                         fetchPriority="high"
@@ -99,16 +99,17 @@ const Reports = () => {
                             width: '100%',
                             height: 'auto',
                           }}
-                          width={500}
-                          height={300}
+                          width={350}
+                          height={150}
                         alt="Imagem do laboratório"
                         priority={true}
                     />
                 </span>
-            </main>
-            <div className="mt-auto flex flex-col justify-end items-center content-end">
+                <div className="flex mt-16 flex-col justify-end items-center content-end">
                     <Footer />
                 </div>
+            </main>
+
         </div>
     );
 };

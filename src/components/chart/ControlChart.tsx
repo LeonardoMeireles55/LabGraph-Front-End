@@ -32,14 +32,14 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     const [useOwnValues, setUseOwnValues] = useState(false);
 
     const data = listing;
-    const { level_lot, mean, sd, name, level, unit_value, ownMeanValue, ownSdValue } = data[0];
+    const { mean, sd, name, level, unit_value, ownMeanValue, ownSdValue } = data[0];
 
     const activeMean = useOwnValues ? ownMeanValue : mean;
     const activeSd = useOwnValues ? ownSdValue : sd;
 
     const chartData = data.map((entry) => ({
         date: customFormatDate(entry.date),
-        levelLot: level_lot,
+        levelLot: entry.level_lot,
         name: name,
         value: filter(entry.value, activeMean, activeSd),
         unitValue: unit_value,
@@ -127,29 +127,29 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                     return matchingValue ? matchingValue.label : '';
                                 }}
                             />
-<Tooltip
-  content={({ active, payload }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="rounded border border-border bg-background p-2 text-xs text-textPrimary shadow-md shadow-shadow">
-          {payload.map((item, index) => {
-            const data = item.payload;
-            return (
-              <div key={index} className="mb-2 border-b border-border pb-2 last:border-0 last:pb-0">
-                <p>Data: {data.name}</p>
-                <p>Valor: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
-                <p>Lote: {data.levelLot}</p>
-                <p>Descrição: {data.description}</p>
-                <p>Regras: {data.rules}</p>
-              </div>
-            );
-          })}
-        </div>
-      );
-    }
-    return null;
-  }}
-/>
+                            <Tooltip
+                                content={({ active, payload }) => {
+                                    if (active && payload && payload.length) {
+                                        return (
+                                            <div className="rounded border border-border bg-background p-2 text-xs text-textPrimary shadow-md shadow-shadow">
+                                                {payload.map((item, index) => {
+                                                    const data = item.payload;
+                                                    return (
+                                                        <div key={index} className="mb-2 border-b border-border pb-2 last:border-0 last:pb-0">
+                                                            <p>Teste: {data.name}</p>
+                                                            <p>Valor: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
+                                                            <p>Lote: {data.levelLot}</p>
+                                                            <p>Descrição: {data.description}</p>
+                                                            <p>Regras: {data.rules}</p>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        );
+                                    }
+                                    return null;
+                                }}
+                            />
                             <Line
                                 type="linear"
                                 dataKey="value"

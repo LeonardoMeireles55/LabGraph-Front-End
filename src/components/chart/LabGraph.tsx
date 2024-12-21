@@ -24,7 +24,7 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
                     <title>{`LabGraph - ${testList[0] || ''}`}</title>
                 </Head>
                 <div className="flex flex-col">
-                    <div className="flex justify-evenly mb-6 xl:mb-8 mt-10 md:mt-24 xl:mt-32">
+                    <div className="flex justify-evenly mt-14 mb-8 xl:mb-8  md:mt-24 xl:mt-32">
                         <TestSelector
                             name={testList[0]}
                             level={1}

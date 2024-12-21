@@ -1,3 +1,4 @@
+import getStatusMessage from '@/components/utils/getStatusMessage';
 import { useEffect, useState } from 'react';
 
 interface ListingCollection extends Array<any> {}
@@ -17,8 +18,8 @@ const useFetchReport = ({ url }: UseFetchListingProps) => {
                 });
                 const json = await response.json();
                 setListing(json);
-            } catch (error) {
-                console.error('Error fetching data:', error);
+            } catch (error: Error | any) {
+                console.error('Error fetching data:', getStatusMessage(error.status));
             }
         };
 

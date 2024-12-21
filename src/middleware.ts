@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { GetStaticProps } from 'next';
 
 
 export function middleware(request: NextRequest) {

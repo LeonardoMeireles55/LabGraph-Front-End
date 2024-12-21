@@ -1,3 +1,4 @@
+import getStatusMessage from '@/components/utils/getStatusMessage';
 import { useEffect, useState } from 'react';
 
 interface ListingCollection extends Array<any> {}
@@ -14,7 +15,7 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
 
     const checkResponse = async (response: Response) => {
         if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
+            throw new Error(`Network response was not ok: ${getStatusMessage(response.status)}`);
         }
         return await response.json();
     };
@@ -43,8 +44,8 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
                 } else {
                     setUnitValues(null);
                 }
-            } catch (error) {
-                console.error('Error fetching data:', error);
+            } catch (error: Error | any) {
+                console.error('Error fetching data:', getStatusMessage(error.status));
             }
         };
 

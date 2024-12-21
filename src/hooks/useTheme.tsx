@@ -1,3 +1,4 @@
+import getStatusMessage from '@/components/utils/getStatusMessage';
 import { useCallback, useEffect, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
@@ -35,8 +36,8 @@ const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
 
         try {
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        } catch (error) {
-            console.warn('Error detecting system theme preference:', error);
+        } catch (error: Error | any) {
+            console.warn('Error detecting system theme preference:', getStatusMessage(error.status));
             return defaultTheme;
         }
     }, [defaultTheme]);
@@ -46,8 +47,8 @@ const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
 
         try {
             return localStorage.getItem(storageKey) as Theme | null;
-        } catch (error) {
-            console.warn('Error reading theme from localStorage:', error);
+        } catch (error: Error | any) {
+            console.warn('Error reading theme from localStorage:', getStatusMessage(error.status));
             return null;
         }
     }, [storageKey]);
@@ -59,8 +60,8 @@ const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
                 if (typeof window !== 'undefined') {
                     localStorage.setItem(storageKey, newTheme);
                 }
-            } catch (error) {
-                console.error('Error setting theme:', error);
+            } catch (error: Error | any) {
+                console.error('Error setting theme:', getStatusMessage(error.status));
             }
         },
         [storageKey]

@@ -1,6 +1,7 @@
 import { parse } from 'json2csv';
 import { Download, Loader2 } from 'lucide-react';
 import React, { useState } from 'react';
+import getStatusMessage from '../utils/getStatusMessage';
 
 interface CsvGeneratorProps {
     jsonData: any | any[];
@@ -28,8 +29,8 @@ const GenerateReports: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'da
 
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
-        } catch (error) {
-            console.error('Erro ao gerar o CSV:', error);
+        } catch (error: Error | any) {
+            alert('Erro ao gerar o CSV: ' + getStatusMessage(error.status));
         } finally {
             setIsGenerating(false);
         }

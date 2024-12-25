@@ -1,17 +1,14 @@
-import useFetchListing from '@/hooks/useFetchListing';
+import React, { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import MeanAndDeviationDisplay from '../chart/MeanAndDeviationDisplay';
 import UpdateResults from '../features/UpdateResults';
-import { TestSelectorProps } from '../../types/chartInterfaces';
+import generateUrlByNameAndDate from '../services/generateUrlByNameAndDate';
+import { TestSelectorProps2 } from '../../types/chartInterfaces';
 import DateSelector from './DateSelector';
-import generateUrlAnalyticsByNameAndDateAndLevel from '../services/generateUrlByNameAndDateAndLevel';
-import React from 'react';
+import useFetchDoubleListinig from '@/hooks/useFetchDoubleListinig';
+import MeanAndDeviationDisplay from '../chart/MeanAndDeviationDisplay';
 
-const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, level, setDataJson }) => {
+const TestSelector2: React.FC<TestSelectorProps2> = ({ list, analyticsType, name, setListinig }) => {
     const [testName, setTestName] = useState<string>(name);
-    const [testLevel, setTestLevel] = useState<number>(level || 1);
-
     const defaultDate = new Date();
 
     const [initialMonth, setInitialMonth] = useState<number>(defaultDate.getMonth() + 1);
@@ -24,7 +21,6 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
     const analyticsProps = {
         analyticsType,
         name: testName,
-        level: testLevel,
     };
 
     const dateProps = {
@@ -36,29 +32,48 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
         secondYear,
     };
 
-    const props = generateUrlAnalyticsByNameAndDateAndLevel({
+    const props = generateUrlByNameAndDate({
         ...analyticsProps,
         date: dateProps,
     });
-    const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing({
+
+    const {
+        listing,
+        listing2,
+        unitValues,
+        unitValues2,
+        ownMeanValue,
+        ownSdValue,
+        ownMeanValue2,
+        ownSdValue2,
+    } = useFetchDoubleListinig({
         url: props.url,
         urlMeanAndDeviation: props.urlMeanAndDeviation,
+        url2: props.url2,
+        urlMeanAndDeviation2: props.urlMeanAndDeviation2,
     });
 
     useEffect(() => {
-        if (listing) {
-            const updatedListing = listing.map(item => ({
-                ...item,
-                ownMeanValue,
-                ownSdValue,
-            }));
-            setDataJson(updatedListing);
+        if (listing && listing2) {
+            const updatedData = {
+                level1: listing.map(item => ({
+                    ...item,
+                    ownMeanValue,
+                    ownSdValue,
+                })),
+                level2: listing2.map(item => ({
+                    ...item,
+                    ownMeanValue: ownMeanValue2,
+                    ownSdValue: ownSdValue2,
+                }))
+            };
+            setListinig(updatedData);
         }
-    }, [listing, ownMeanValue, ownSdValue, setDataJson]);
+    }, [listing, listing2, ownMeanValue, ownSdValue, ownMeanValue2, ownSdValue2]);
 
 
     return (
-        <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1   text-textSecondary xl:flex xl:justify-around items-center content-center">
+        <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1  text-textSecondary xl:flex xl:justify-around items-center content-center">
             <DateSelector
                 initialDay={initialDay}
                 initialMonth={initialMonth}
@@ -86,11 +101,11 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
                         </option>
                     ))}
                 </select>
-                <span className="font-medium md:text-sm">Nível:</span>
+                <span className="font-medium md:text-sm ">Nível:</span>
                 <select
-                    className="rounded border border-borderColor bg-background p-0 text-textSecondary md:px-2 md:py-1 md:text-sm"
-                    value={testLevel}
-                    onChange={(e) => setTestLevel(Number(e.target.value))}
+                    className="rounded cursor-not-allowed border border-borderColor bg-background p-0 text-textSecondary md:px-2 md:py-1 md:text-sm"
+                    value={'1'}
+                    onChange={(e) => (Number(e.target.value))}
                 >
                     <option value={1}>1</option>
                     <option value={2}>2</option>
@@ -119,4 +134,5 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
         </div>
     );
 };
-export default React.memo(TestSelector);
+
+export default React.memo(TestSelector2);

@@ -1,4 +1,4 @@
-import LabGraph from '@/components/chart/LabGraph';
+import GraphWrapper from '@/components/chart/GraphWrapper';
 
 const list = [
     'ALB2',
@@ -29,6 +29,6 @@ const list = [
     'UREL',
 ];
 
-export default function Coagulation() {
-    return <LabGraph testList={list} analyticsType="biochemistry-analytics" />;
+export default function Biochemistry() {
+    return <GraphWrapper testList={list} analyticsType="biochemistry-analytics" />;
 }

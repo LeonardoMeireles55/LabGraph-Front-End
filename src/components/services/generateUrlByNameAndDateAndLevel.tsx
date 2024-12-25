@@ -17,7 +17,7 @@ interface GenerateUrlAnalyticsByNameAndDate {
     date: Dates;
 }
 
-const generateUrlAnalyticsByNameAndDate = (props: GenerateUrlAnalyticsByNameAndDate) => {
+const generateUrlAnalyticsByNameAndDateAndLevel = (props: GenerateUrlAnalyticsByNameAndDate) => {
     const { analyticsType, name, level, date } = props;
 
     const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/search/date-range?name=`;
@@ -32,4 +32,4 @@ const generateUrlAnalyticsByNameAndDate = (props: GenerateUrlAnalyticsByNameAndD
     return { url, urlMeanAndDeviation };
 };
 
-export default generateUrlAnalyticsByNameAndDate;
+export default generateUrlAnalyticsByNameAndDateAndLevel;

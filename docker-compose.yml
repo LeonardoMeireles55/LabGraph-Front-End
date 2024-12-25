@@ -8,7 +8,7 @@ services:
         environment:
             - NODE_ENV=production
         volumes:
-            - qualitylab_node_modules:/app/node_modules
+            # - qualitylab_node_modules:/app/node_modules
             - qualitylab_public:/app/public
         stdin_open: true
         tty: true

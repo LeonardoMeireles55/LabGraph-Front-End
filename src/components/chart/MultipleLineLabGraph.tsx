@@ -1,18 +1,32 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import Loading from '@/components/common/Loading';
-import TestSelector2 from '@/components/common/TestSelectorWithoutLevel';
+import TestSelectorWithoutLevel from '@/components/common/TestSelectorWithoutLevel';
 import Footer from '@/components/layouts/Footer';
 import Head from 'next/head';
-import { DualLineControlChartProps, DualLineLabGraphProps, ListingsData } from '../../types/chartInterfaces';
-import DualLineControlChart from './DualLineControlChart';
+import { MultipleLineGraphProps, ListingsData } from '../../types/chartInterfaces';
+import MultipleLineControlChart from './MultipleLineControlChart';
 import NavBar from '../layouts/NavBar';
 
-const DualLineLabGraph: React.FC<DualLineLabGraphProps> = ({ testList, analyticsType }) => {
-    const [listings, setListings] = useState<ListingsData>({ level1: [], level2: [] });
+const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, analyticsType, levelListSize }) => {
+    const [listings, setListings] = useState<ListingsData>({ level1: [], level2: [], level3: [] });
 
     const handleListingsUpdate = useCallback((data: ListingsData) => {
         setListings(data);
     }, []);
+
+    const transformedListings = useMemo(() => 
+        [listings.level1, listings.level2, listings.level3]
+            .filter((listing): listing is any[] => 
+                listing !== undefined && listing.length > 0
+            ),
+        [listings]
+    );
+
+    const isLoading = useMemo(() => {
+        const expectedLevels = Math.min(levelListSize, 3);
+        const availableLevels = transformedListings.length;
+        return availableLevels < expectedLevels;
+    }, [levelListSize, transformedListings]);
 
     return (
         <div className="min-h-min">
@@ -23,20 +37,18 @@ const DualLineLabGraph: React.FC<DualLineLabGraphProps> = ({ testList, analytics
                 </Head>
                 <div className="flex flex-col">
                     <div className="flex justify-evenly mt-14 mb-8 xl:mb-8  md:mt-24 xl:mt-32">
-                        <TestSelector2
+                        <TestSelectorWithoutLevel
                             name={testList[0]}
                             setListinig={handleListingsUpdate}
                             analyticsType={analyticsType}
-                            list={testList}
-                        />
+                            list={testList} levelListSize={levelListSize}                        />
                     </div>
                     <div className="flex w-screen min-h-full flex-col items-center justify-evenly">
-                        {!listings.level1.length || !listings.level2.length ? (
+                        {isLoading ? (
                             <Loading />
                         ) : (
-                            <DualLineControlChart
-                                listingOne={listings.level1}
-                                listingTwo={listings.level2}
+                            <MultipleLineControlChart
+                                listings={transformedListings}
                             />
                         )}
                     </div>
@@ -49,4 +61,4 @@ const DualLineLabGraph: React.FC<DualLineLabGraphProps> = ({ testList, analytics
     );
 };
 
-export default React.memo(DualLineLabGraph);
+export default React.memo(MultipleLineLabGraph);

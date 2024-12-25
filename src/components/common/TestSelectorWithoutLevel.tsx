@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import UpdateResults from '../features/UpdateResults';
 import generateUrlByNameAndDate from '../services/generateUrlByNameAndDate';
-import { TestSelectorProps2 } from '../../types/chartInterfaces';
+import { TestSelectorProps2, ListingsData } from '../../types/chartInterfaces';
 import DateSelector from './DateSelector';
-import useFetchDoubleListinig from '@/hooks/useFetchDoubleListinig';
+import useFetchListinigs from '@/hooks/useFetchListinigs';
 import MeanAndDeviationDisplay from '../chart/MeanAndDeviationDisplay';
 
-const TestSelector2: React.FC<TestSelectorProps2> = ({ list, analyticsType, name, setListinig }) => {
+const TestSelectorWithoutLevel: React.FC<TestSelectorProps2> = ({ levelListSize, list, analyticsType, name, setListinig }) => {
     const [testName, setTestName] = useState<string>(name);
     const defaultDate = new Date();
 
@@ -17,10 +17,12 @@ const TestSelector2: React.FC<TestSelectorProps2> = ({ list, analyticsType, name
     const [secondDay, setSecondDay] = useState<number>(defaultDate.getDate() + 1);
     const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
     const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());
+    const [selectedLevel, setSelectedLevel] = useState<number>(1);
 
     const analyticsProps = {
         analyticsType,
         name: testName,
+        levelsSize: levelListSize,
     };
 
     const dateProps = {
@@ -32,45 +34,44 @@ const TestSelector2: React.FC<TestSelectorProps2> = ({ list, analyticsType, name
         secondYear,
     };
 
-    const props = generateUrlByNameAndDate({
+    const { urls, meanDeviationUrls } = generateUrlByNameAndDate({
         ...analyticsProps,
         date: dateProps,
+        levelSize: levelListSize,
     });
 
     const {
-        listing,
-        listing2,
-        unitValues,
-        unitValues2,
-        ownMeanValue,
-        ownSdValue,
-        ownMeanValue2,
-        ownSdValue2,
-    } = useFetchDoubleListinig({
-        url: props.url,
-        urlMeanAndDeviation: props.urlMeanAndDeviation,
-        url2: props.url2,
-        urlMeanAndDeviation2: props.urlMeanAndDeviation2,
+        listings,
+        unitValuesList,
+        ownMeanValues,
+        ownSdValues,
+    } = useFetchListinigs({
+        urls,
+        meanDeviationUrls,
     });
 
     useEffect(() => {
-        if (listing && listing2) {
-            const updatedData = {
-                level1: listing.map(item => ({
-                    ...item,
-                    ownMeanValue,
-                    ownSdValue,
-                })),
-                level2: listing2.map(item => ({
-                    ...item,
-                    ownMeanValue: ownMeanValue2,
-                    ownSdValue: ownSdValue2,
-                }))
+        if (listings && listings.length >= 1) {
+            const updatedData: ListingsData = {
+                level1: [],
+                level2: [],
+                level3: [],
             };
+            
+            listings.forEach((listing, index) => {
+                if (listing && listing.length > 0) {
+                    const level = `level${index + 1}` as keyof ListingsData;
+                    updatedData[level] = listing.map(item => ({
+                        ...item,
+                        ownMeanValue: ownMeanValues[index],
+                        ownSdValue: ownSdValues[index],
+                    }));
+                }
+            });
+
             setListinig(updatedData);
         }
-    }, [listing, listing2, ownMeanValue, ownSdValue, ownMeanValue2, ownSdValue2]);
-
+    }, [listings, ownMeanValues, ownSdValues, unitValuesList, setListinig]);
 
     return (
         <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1  text-textSecondary xl:flex xl:justify-around items-center content-center">
@@ -101,16 +102,18 @@ const TestSelector2: React.FC<TestSelectorProps2> = ({ list, analyticsType, name
                         </option>
                     ))}
                 </select>
-                <span className="font-medium md:text-sm ">Nível:</span>
-                <select
-                    className="rounded cursor-not-allowed border border-borderColor bg-background p-0 text-textSecondary md:px-2 md:py-1 md:text-sm"
-                    value={'1'}
-                    onChange={(e) => (Number(e.target.value))}
+                {/* <span className="font-medium md:text-sm ">Nível:</span> */}
+                {/* <select
+                    className="rounded border border-borderColor bg-background p-0 text-textSecondary md:px-2 md:py-1 md:text-sm"
+                    value={selectedLevel}
+                    onChange={(e) => setSelectedLevel(Number(e.target.value))}
                 >
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                </select>
+                    {listings.map((_, index) => (
+                        <option key={index + 1} value={index + 1}>
+                            {index + 1}
+                        </option>
+                    ))}
+                </select> */}
                 <span className="flex flex-row content-center items-center justify-between">
                     <Link
                         className="rounded border border-borderColor bg-background content-center items-center py-0 px-1 text-base text-textPrimary hover:scale-110 md:px-2 md:py-1"
@@ -122,17 +125,17 @@ const TestSelector2: React.FC<TestSelectorProps2> = ({ list, analyticsType, name
                 </span>
                 <div className="hidden w-full md:flex">
                 <UpdateResults analyticsType={analyticsType} />
-                <MeanAndDeviationDisplay
-                    mean={listing[0]?.mean}
-                    sd={listing[0]?.sd}
-                    ownMean={ownMeanValue}
-                    ownSd={ownSdValue}
-                    unitValue={unitValues}
-                />
+                {/* <MeanAndDeviationDisplay
+                    mean={listings[selectedLevel - 1]?.[0]?.mean}
+                    sd={listings[selectedLevel - 1]?.[0]?.sd}
+                    ownMean={ownMeanValues[selectedLevel - 1]}
+                    ownSd={ownSdValues[selectedLevel - 1]}
+                    unitValue={unitValuesList[selectedLevel - 1]}
+                /> */}
             </div>
             </div>
         </div>
     );
 };
 
-export default React.memo(TestSelector2);
+export default React.memo(TestSelectorWithoutLevel);

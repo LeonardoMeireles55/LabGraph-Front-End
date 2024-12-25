@@ -30,5 +30,5 @@ const list = [
 ];
 
 export default function Biochemistry() {
-    return <GraphWrapper testList={list} analyticsType="biochemistry-analytics" />;
+    return <GraphWrapper testList={list} analyticsType="biochemistry-analytics" levelListSize={2} />;
 }

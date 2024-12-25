@@ -1,4 +1,4 @@
-import LabGraph from '@/components/chart/LabGraph';
+import GraphWrapper from '@/components/chart/GraphWrapper';
 
 const list = [
     'WBC',
@@ -24,6 +24,6 @@ const list = [
     'BAS%',
 ];
 
-export default function Coagulation() {
-    return <LabGraph testList={list} analyticsType="hematology-analytics" />;
+export default function Hematology() {
+    return <GraphWrapper testList={list} analyticsType="hematology-analytics" levelListSize={3} />;
 }

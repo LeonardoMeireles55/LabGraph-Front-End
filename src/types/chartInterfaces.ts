@@ -37,9 +37,11 @@ export interface TestSelectorProps {
 export interface ListingsData {
   level1: ListingItem[];
   level2: ListingItem[];
+  level3?: ListingItem[];
 }
 
 export interface TestSelectorProps2 {
+    levelListSize: number;
     list: string[];
     analyticsType: string;
     name: string;
@@ -64,17 +66,31 @@ export interface ProcessingStatus {
     error?: string;
 }
 
-export interface DualLineControlChartProps {
-    listingOne: ListingItem[];
-    listingTwo: ListingItem[];
+export interface MultipleLineChartProps {
+    listings: ListingItem[][];  // Changed to accept array of arrays of ListingItem
+    colors?: string[];
 }
 
 export interface LabGraphProps {
     testList: string[];
     analyticsType: string;
+    levelListSize: number;
 }
 
-export interface DualLineLabGraphProps {
+export interface MultipleLineGraphProps {
+    levelListSize: number;
     testList: string[];
     analyticsType: string;
+}
+
+export interface ListingData {
+    listing: any[];
+    unitValue: string | null;
+    ownMean: number | null;
+    ownSd: number | null;
+}
+
+export interface UrlConfig {
+    dataUrl: string;
+    meanDeviationUrl: string;
 }

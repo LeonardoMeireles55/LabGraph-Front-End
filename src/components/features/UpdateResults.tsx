@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { ProcessedData, ProcessingStatus } from '../../types/chartInterfaces';
 import getStatusMessage from '../utils/getStatusMessage';
+import { Upload } from 'lucide-react';
 
 
 const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) => {
@@ -233,9 +234,10 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
             />
             <label
                 htmlFor="fileInput"
+                title='Enviar arquivo CSV ou TXT'
                 className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 text-base text-textSecondary hover:scale-110 ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''}`}
             >
-                {status.isProcessing ? status.message : 'Atualizar'}
+                {status.isProcessing ? status.message : <Upload size={25} />}
             </label>
             {status.error && <p className="text-red-500 text-xs">{status.error}</p>}
         </div>

@@ -1,4 +1,4 @@
-import useFetchListing from '@/hooks/useFetchListing';
+import useFetchListinig from '@/hooks/useFetchListinig';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import MeanAndDeviationDisplay from '../chart/MeanAndDeviationDisplay';
@@ -40,7 +40,7 @@ const TestSelector: React.FC<TestSelectorProps> = ({ list, analyticsType, name, 
         ...analyticsProps,
         date: dateProps,
     });
-    const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing({
+    const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListinig({
         url: props.url,
         urlMeanAndDeviation: props.urlMeanAndDeviation,
     });

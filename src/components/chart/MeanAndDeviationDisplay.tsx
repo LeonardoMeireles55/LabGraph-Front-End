@@ -32,4 +32,4 @@ const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({ mean,
     );
 };
 
-export default MeanAndDeviationDisplay;
+export default React.memo(MeanAndDeviationDisplay);

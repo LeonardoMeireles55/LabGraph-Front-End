@@ -1,7 +1,7 @@
-import LabGraph from '@/components/chart/LabGraph';
+import GraphWrapper from "@/components/chart/GraphWrapper";
 
 const list = ['TAP-20', 'TTPA'];
 
 export default function Coagulation() {
-    return <LabGraph testList={list} analyticsType="coagulation-analytics" />;
+    return <GraphWrapper testList={list} analyticsType="coagulation-analytics" levelListSize={2} />;
 }

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import ThemeToggle from '../common/ThemeToggle';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useGraph } from '@/contexts/GraphContext';
+import { TbChartAreaLine, TbChartLine } from 'react-icons/tb';
 
 
 
@@ -14,6 +16,7 @@ interface NavBarProps {
 const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const { viewMode, toggleView } = useGraph();
 
     const navLinks = [
         { text: 'BIOQUÍMICA', url: '/biochemistry' },
@@ -22,16 +25,12 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
         { text: 'RELATÓRIOS', url: '/reports' },
         { text: 'TABELAS', url: '/analytics-table' },
         {
-            text: 'INFORMAÇÕES',
-            url: 'https://github.com/LeonardoMeireles55/QualityLab-Pro-Backend',
-        },
-        {
             text: 'SAIR',
-            url : '/login',
+            url: '/login',
             onClick: async () => {
                 try {
                     const response = await fetch('/api/logout', { method: 'POST' });
-                    if(response.ok) router.push('/login');
+                    if (response.ok) router.push('/login');
                     document.cookie = 'tokenJWT=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
                 } catch (error) {
                     console.error('Logout failed:', error);
@@ -67,30 +66,41 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
                             </Link>
                         ))}
 
+
+
                         <div className="hidden rounded-md p-2 lg:block">
                             <CsvGenerator jsonData={jsonData} fileName={fileName} />
                         </div>
+                        <button
+                            onClick={toggleView}
+                            className="flex items-center gap-2 rounded-full p-2 text-textPrimary hover:bg-surface/80"
+                            title={`${viewMode === 'single' ? 'Mudar para' : 'Voltar para'} ${viewMode === 'single' ? 'visão dupla' : 'visão única'}`}
+                        >
+                            {viewMode === 'single' ? (
+                                <TbChartAreaLine className="h-6 w-6" />
+                            ) : (
+                                <TbChartLine className="h-6 w-6" />
+                            )}
+                        </button>
                         <ThemeToggle />
                     </div>
+                    
 
                     <div className="flex items-center gap-4 lg:hidden">
                         <ThemeToggle />
                         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2" aria-label="Toggle menu">
                             <div className="space-y-2">
                                 <span
-                                    className={`block h-0.5 w-6 bg-textPrimary transition-transform duration-300 ${
-                                        isMenuOpen ? 'translate-y-2.5 rotate-45 transform' : ''
-                                    }`}
+                                    className={`block h-0.5 w-6 bg-textPrimary transition-transform duration-300 ${isMenuOpen ? 'translate-y-2.5 rotate-45 transform' : ''
+                                        }`}
                                 ></span>
                                 <span
-                                    className={`block h-0.5 w-6 bg-textPrimary transition-opacity duration-300 ${
-                                        isMenuOpen ? 'opacity-0' : ''
-                                    }`}
+                                    className={`block h-0.5 w-6 bg-textPrimary transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : ''
+                                        }`}
                                 ></span>
                                 <span
-                                    className={`block h-0.5 w-6 bg-textPrimary transition-transform duration-300 ${
-                                        isMenuOpen ? '-translate-y-2.5 -rotate-45 transform' : ''
-                                    }`}
+                                    className={`block h-0.5 w-6 bg-textPrimary transition-transform duration-300 ${isMenuOpen ? '-translate-y-2.5 -rotate-45 transform' : ''
+                                        }`}
                                 ></span>
                             </div>
                         </button>
@@ -99,9 +109,8 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
             </div>
 
             <div
-                className={`transition-theme fixed left-0 right-0 top-16 bg-surface shadow-lg shadow-shadow sm:top-20 lg:hidden ${
-                    isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
-                }`}
+                className={`transition-theme fixed left-0 right-0 top-16 bg-surface shadow-lg shadow-shadow sm:top-20 lg:hidden ${isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
+                    }`}
             >
                 <div className="space-y-0 px-6 py-4">
                     {navLinks.map((link, index) => (
@@ -113,6 +122,17 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
                             {link.text}
                         </a>
                     ))}
+                                            <button
+                            onClick={toggleView}
+                            className="flex items-center gap-2 rounded-full p-2 text-textPrimary hover:bg-surface/80"
+                            title={`${viewMode === 'single' ? 'Mudar para' : 'Voltar para'} ${viewMode === 'single' ? 'visão dupla' : 'visão única'}`}
+                        > Double View
+                            {viewMode === 'single' ? (
+                                <TbChartAreaLine className="h-6 w-6" />
+                            ) : (
+                                <TbChartLine className="h-6 w-6" />
+                            )}
+                        </button>
                     <div className="py-2">
                         <CsvGenerator jsonData={jsonData} fileName={fileName} />
                     </div>

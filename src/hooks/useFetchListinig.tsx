@@ -7,7 +7,7 @@ interface UseFetchListingProps {
     urlMeanAndDeviation: string;
 }
 
-const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => {
+const useFetchListinig = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => {
     const [listing, setListing] = useState<ListingCollection>([]);
     const [unitValues, setUnitValues] = useState<string | null>(null);
     const [ownMeanValue, setOwnMean] = useState<number | null>(null);
@@ -70,4 +70,4 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
     };
 };
 
-export default useFetchListing;
+export default useFetchListinig;

@@ -13,12 +13,12 @@ interface Dates {
 interface GenerateUrlAnalyticsByNameAndDate {
     analyticsType: string;
     name: string;
-    level: number;
     date: Dates;
+    levelSize: number;
 }
 
-const generateUrlAnalyticsByNameAndDate = (props: GenerateUrlAnalyticsByNameAndDate) => {
-    const { analyticsType, name, level, date } = props;
+const generateUrlByNameAndDate = (props: GenerateUrlAnalyticsByNameAndDate) => {
+    const { analyticsType, name, date, levelSize } = props;
 
     const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/search/date-range?name=`;
     const meanAndDeviationUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/mean-standard-deviation?name=`;
@@ -26,10 +26,15 @@ const generateUrlAnalyticsByNameAndDate = (props: GenerateUrlAnalyticsByNameAndD
     const startDate = formatDateWithTime(date.initialYear, date.initialMonth, date.initialDay);
     const endDate = formatDateWithTime(date.secondYear, date.secondMonth, date.secondDay);
 
-    const url = `${baseUrl}${testFormatFix(name)}&level=${level}&startDate=${startDate}&endDate=${endDate}`;
-    const urlMeanAndDeviation = `${meanAndDeviationUrl}${testFormatFix(name)}&level=${level}&startDate=${startDate}&endDate=${endDate}`;
+    const urls: string[] = [];
+    const meanDeviationUrls: string[] = [];
 
-    return { url, urlMeanAndDeviation };
+    for (let level = 1; level <= levelSize; level++) {
+        urls.push(`${baseUrl}${testFormatFix(name)}&level=${level}&startDate=${startDate}&endDate=${endDate}`);
+        meanDeviationUrls.push(`${meanAndDeviationUrl}${testFormatFix(name)}&level=${level}&startDate=${startDate}&endDate=${endDate}`);
+    }
+
+    return { urls, meanDeviationUrls };
 };
 
-export default generateUrlAnalyticsByNameAndDate;
+export default generateUrlByNameAndDate;

@@ -30,8 +30,22 @@ export interface TestSelectorProps {
     list: string[];
     analyticsType: string;
     name: string;
-    level: number;
+    level?: number;
     setDataJson: (data: any) => void;
+}
+
+export interface ListingsData {
+  level1: ListingItem[];
+  level2: ListingItem[];
+  level3?: ListingItem[];
+}
+
+export interface TestSelectorProps2 {
+    levelListSize: number;
+    list: string[];
+    analyticsType: string;
+    name: string;
+    setListinig: (data: ListingsData) => void;
 }
 
 export interface ProcessedData {
@@ -50,4 +64,33 @@ export interface ProcessingStatus {
     isProcessing: boolean;
     message: string;
     error?: string;
+}
+
+export interface MultipleLineChartProps {
+    listings: ListingItem[][];  // Changed to accept array of arrays of ListingItem
+    colors?: string[];
+}
+
+export interface LabGraphProps {
+    testList: string[];
+    analyticsType: string;
+    levelListSize: number;
+}
+
+export interface MultipleLineGraphProps {
+    levelListSize: number;
+    testList: string[];
+    analyticsType: string;
+}
+
+export interface ListingData {
+    listing: any[];
+    unitValue: string | null;
+    ownMean: number | null;
+    ownSd: number | null;
+}
+
+export interface UrlConfig {
+    dataUrl: string;
+    meanDeviationUrl: string;
 }

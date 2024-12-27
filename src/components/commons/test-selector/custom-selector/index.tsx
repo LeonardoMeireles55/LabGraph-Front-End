@@ -63,7 +63,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps2> = ({ levelListSize,
 
             setListinig(updatedData);
         }
-    }, [listings, ownMeanValues, ownSdValues, unitValuesList]);
+    }, [listings, ownMeanValues, ownSdValues, unitValuesList, setListinig]);
 
     return (
         <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1  text-textSecondary xl:flex xl:justify-around items-center content-center">

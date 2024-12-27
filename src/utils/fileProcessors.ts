@@ -13,14 +13,12 @@ export const processTextFile = async (file: File): Promise<FileProcessingResult>
         const content = await file.text();
         const lines = content.split('\n').map((line) => line.trim());
 
-        // Filter PCCC lines
         lines.forEach(line => {
             if (line.includes('PCCC1') || line.includes('PCCC2')) {
                 filteredLines.push(line);
             }
         });
 
-        // Sort by date
         const sortedLines = filteredLines.sort((a, b) => {
             const dateA = a.split(';')[4];
             const dateB = b.split(';')[4];

@@ -5,7 +5,7 @@ import Footer from '@/components/layouts/Footer';
 import Head from 'next/head';
 import { MultipleLineGraphProps, ListingsData } from '../../types/chartInterfaces';
 import MultipleLineControlChart from './MultipleLineControlChart';
-import NavBar from '../layouts/NavBar';
+import NavBar from '../layouts/nav-bar';
 
 const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, analyticsType, levelListSize }) => {
     const [listings, setListings] = useState<ListingsData>({ level1: [], level2: [], level3: [] });

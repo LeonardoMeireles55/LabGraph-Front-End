@@ -47,6 +47,8 @@ select {
     --transition-default: all 0.3s ease-in-out;
     --transition-slow: all 0.5s ease-in-out;
     --transition-fast: all 0.15s ease-in-out;
+    --color-sun: #fbbf24;
+    --color-moon: #94a3b8;
 }
 
 .dark {
@@ -74,6 +76,8 @@ select {
     --transition-default: all 0.3s ease-in-out;
     --transition-slow: all 0.5s ease-in-out;
     --transition-fast: all 0.15s ease-in-out;
+    --color-sun: #fbbf24;
+    --color-moon: #e2e8f0;
 }
 /* 
 .transition-theme {

@@ -6,7 +6,10 @@ const SubmitButton = ({ text = "Entrar" }: SubmitButtonProps) => {
     return (
         <button
             type="submit"
-            className="w-full rounded-lg bg-primary px-4 py-2 text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="w-full transform rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white 
+                     transition-all duration-200 ease-in-out hover:bg-primary/90 hover:shadow-lg 
+                     focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 
+                     active:scale-95 disabled:opacity-70"
         >
             {text}
         </button>

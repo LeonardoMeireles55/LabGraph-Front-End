@@ -2,7 +2,7 @@ import ControlChart from '@/components/chart/ControlChart';
 import Loading from '@/components/common/Loading';
 import TestSelector from '@/components/common/TestSelector';
 import Footer from '@/components/layouts/Footer';
-import NavBar from '@/components/layouts/NavBar';
+import NavBar from '@/components/layouts/nav-bar';
 import Head from 'next/head';
 import { useState } from 'react';
 import { ListingItem } from '../../types/chartInterfaces';

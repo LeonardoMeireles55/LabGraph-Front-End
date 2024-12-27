@@ -31,7 +31,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
   handleEndYearChange
 }) => {
   return (
-    <div className="space-y-1 md:space-y-2">
+    <div className="space-y-1 md:space-y-1">
       <SingleDateSelector
         label="De"
         day={startDay}

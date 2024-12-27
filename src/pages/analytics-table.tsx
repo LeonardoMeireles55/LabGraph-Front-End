@@ -84,10 +84,10 @@ const AnalyticsTable = () => {
                     <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
                 </Head>
                 <NavBar jsonData={dataFetched} fileName={analyticsType} />
-                <div className="w-full max-w-7xl p-2">
+                <div className="w-full max-w-7xl">
                     <div className="rounded-lg ">
-                        <div className="md:flex grid grid-cols-2  items-center justify-between content-center space-y-1 mb-2 xl:mb-6">
-                            <div className="w-full md:w-auto mt-16">
+                        <div className="md:flex grid grid-cols-2  items-center justify-start content-center  mb-1">
+                            <div className="w-full md:w-auto mt-8 md:mt-0">
                                 <DateSelector
                                     startDay={startDay}
                                     startMonth={startMonth}
@@ -103,7 +103,7 @@ const AnalyticsTable = () => {
                                     handleEndYearChange={handleEndYearChange}
                                 />
 
-                                <div className="flex flex-row gap-1 py-2 w-full">
+                                <div className="flex flex-row gap-1 py-1 w-full">
                                     <label
                                         htmlFor="tests"
                                         className="text-textSecondary"

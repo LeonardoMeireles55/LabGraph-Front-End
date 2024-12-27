@@ -15,7 +15,7 @@ interface ListingTableProps {
 }
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
-    const ITEMS_PER_PAGE = 8;
+    const ITEMS_PER_PAGE = 6;
     const [currentPage, setCurrentPage] = useState(1);
 
     const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
@@ -115,7 +115,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 ))}
             </div>
 
-            {items.length === 0 && <div className="bg-background py-4 text-center text-muted">No items to display</div>}
+            {items.length === 0 && <div className="bg-background py-2 text-center text-muted">No items to display</div>}
 
             <div className="mt-8 flex items-center justify-center space-x-2">
                 <button

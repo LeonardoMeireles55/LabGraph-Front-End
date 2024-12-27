@@ -50,7 +50,7 @@ const TestSelectorWithLevel: React.FC<TestSelectorProps> = ({ list, analyticsTyp
             }));
             setDataJson(updatedListing);
         }
-    }, [listing, ownMeanValue, ownSdValue, unitValues]);
+    }, [listing, ownMeanValue, ownSdValue, unitValues, setDataJson]);
 
     return (
         <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1 text-textSecondary xl:flex xl:justify-around items-center content-center">

@@ -101,7 +101,7 @@ const useFetchListinigs = ({ urls, meanDeviationUrls }: UseFetchListingProps) =>
         return () => {
             isSubscribed = false;
         };
-    }, [token, urls.join(','), meanDeviationUrls.join(',')]);
+    }, [token, urls.join(','), meanDeviationUrls.join(','), headers]);
 
     return {
         listings,

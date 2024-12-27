@@ -1,4 +1,4 @@
-import GraphWrapper from "@/components/chart/GraphWrapper";
+import GraphWrapper from "@/components/charts";
 
 const list = ['TAP-20', 'TTPA'];
 

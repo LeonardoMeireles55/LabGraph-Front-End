@@ -46,6 +46,8 @@ const config: Config = {
             meanLine: 'var(--color-mean-line)',
             navbar: 'var(--color-navbar)',
             borderColor: 'var(--border-color);',
+            sun: 'var(--color-sun)',
+            moon: 'var(--color-moon)',
 
             dark: {
                 primary: 'var(--color-primary)',
@@ -70,6 +72,8 @@ const config: Config = {
                 meanLine: 'var(--color-mean-line)',
                 navbar: 'var(--color-navbar)',
                 borderColor: 'var(--border-color);',
+                sun: 'var(--color-sun)',
+                moon: 'var(--color-moon)',
             },
         },
     },

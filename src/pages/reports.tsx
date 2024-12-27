@@ -1,35 +1,38 @@
-import DateSelector from '@/components/common/DateSelector';
-import GenerateReports from '@/components/features/GenerateReports';
-import Footer from '@/components/layouts/Footer';
-import NavBar from '@/components/layouts/NavBar';
-import formatDateWithTime from '@/components/utils/formatDateWithTime';
+import GenerateReports from '@/components/features/generate-reports';
+import Footer from '@/components/ui/footer';
+import NavBar from '@/components/ui/navigation-bar';
+import formatDateWithTime from '@/components/commons/date-selector/constants/formatDateWithTime';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { ListingItem } from '@/types/chartInterfaces';
+import useDateSelector from '@/components/commons/date-selector/hooks/useDateSelector';
+import DateSelector from '@/components/commons/date-selector';
 
-interface ListingItem {
-    name: string;
-    level: number;
-    sd: number;
-    mean: number;
-    date: string;
-    value: number;
-    unit_value: string;
-}
 
-const Reports = () => {
-    const defaultDate = new Date();
-
-    const [initialMonth, setInitialMonth] = useState<number>(defaultDate.getMonth());
-    const [secondMonth, setSecondMonth] = useState<number>(defaultDate.getMonth() + 1);
-    const [initialDay, setInitialDay] = useState<number>(1);
-    const [secondDay, setSecondDay] = useState<number>(defaultDate.getDate() + 1);
-    const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
-    const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());
+const ReportsPage = () => {
     const [analyticsType, setAnalyticsType] = useState<string>('biochemistry-analytics');
+        const {
+            startDay,
+            startMonth,
+            startYear,
+            endDay,
+            endMonth,
+            endYear,
+            handleStartDayChange,
+            handleStartMonthChange,
+            handleStartYearChange,
+            handleEndDayChange,
+            handleEndMonthChange,
+            handleEndYearChange
+        } = useDateSelector();
 
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(initialYear, initialMonth, initialDay)}&endDate=${formatDateWithTime(secondYear, secondMonth, secondDay)}`;
+    const url = 
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/
+    ${analyticsType}${process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS}
+    startDate=${formatDateWithTime(startYear, startMonth, startDay)}
+    &endDate=${formatDateWithTime(endYear, endMonth, endDay)}`;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,18 +67,18 @@ const Reports = () => {
             <main className="flex flex-grow flex-col items-center justify-evenly bg-background mt-16 xl:mt-16">
                 <div className="xl:mt-14 grid gap-2 text-textSecondary md:flex">
                     <DateSelector
-                        initialDay={initialDay}
-                        initialMonth={initialMonth}
-                        initialYear={initialYear}
-                        secondDay={secondDay}
-                        secondMonth={secondMonth}
-                        secondYear={secondYear}
-                        setInitialDay={setInitialDay}
-                        setInitialMonth={setInitialMonth}
-                        setInitialYear={setInitialYear}
-                        setSecondDay={setSecondDay}
-                        setSecondMonth={setSecondMonth}
-                        setSecondYear={setSecondYear}
+                        startDay={startDay}
+                        startMonth={startMonth}
+                        startYear={startYear}
+                        endDay={endDay}
+                        endMonth={endMonth}
+                        endYear={endYear}
+                        handleStartDayChange={handleStartDayChange}
+                        handleStartMonthChange={handleStartMonthChange}
+                        handleStartYearChange={handleStartYearChange}
+                        handleEndDayChange={handleEndDayChange}
+                        handleEndMonthChange={handleEndMonthChange}
+                        handleEndYearChange={handleEndYearChange}
                     />
                     <select
                         className="rounded-md border border-borderColor bg-background text-xs text-textSecondary md:text-sm"
@@ -114,4 +117,4 @@ const Reports = () => {
     );
 };
 
-export default Reports;
+export default ReportsPage;

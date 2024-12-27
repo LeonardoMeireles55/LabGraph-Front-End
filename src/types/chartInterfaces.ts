@@ -67,7 +67,7 @@ export interface ProcessingStatus {
 }
 
 export interface MultipleLineChartProps {
-    listings: ListingItem[][];  // Changed to accept array of arrays of ListingItem
+    listings: ListingItem[][];
     colors?: string[];
 }
 

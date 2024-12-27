@@ -1,9 +1,8 @@
-
 export default interface Dates {
-    initialDay: number;
-    initialMonth: number;
-    initialYear: number;
-    secondDay: number;
-    secondMonth: number;
-    secondYear: number;
+    startDay: number;
+    startMonth: number;
+    startYear: number;
+    endDay: number;
+    endMonth: number;
+    endYear: number;
 }

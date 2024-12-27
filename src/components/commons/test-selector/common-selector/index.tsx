@@ -1,79 +1,73 @@
+import React, { useEffect, useState } from 'react';
 import useFetchListinig from '@/components/charts/single-line/hooks/useFetchListinig';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import MeanAndDeviationDisplay from '../../../charts/mean-deviation';
 import UpdateResults from '../../../features/update-results';
 import { TestSelectorProps } from '../../../../types/chartInterfaces';
-import DateSelector from '../../date-selector';
 import urlAnalyticsByNameAndDateAndLevel from '../../../utils/helpers/urlAnalyticsByNameAndDateAndLevel';
-import React from 'react';
+import useDateSelector from '../../date-selector/hooks/useDateSelector';
+import DateSelector from '../../date-selector';
 
 const TestSelectorWithLevel: React.FC<TestSelectorProps> = ({ list, analyticsType, name, level, setDataJson }) => {
     const [testName, setTestName] = useState<string>(name);
     const [testLevel, setTestLevel] = useState<number>(level || 1);
 
-    const defaultDate = new Date();
+    const {
+        startDay,
+        startMonth,
+        startYear,
+        endDay,
+        endMonth,
+        endYear,
+        handleStartDayChange,
+        handleStartMonthChange,
+        handleStartYearChange,
+        handleEndDayChange,
+        handleEndMonthChange,
+        handleEndYearChange
+    } = useDateSelector();
 
-    const [initialMonth, setInitialMonth] = useState<number>(defaultDate.getMonth() + 1);
-    const [secondMonth, setSecondMonth] = useState<number>(defaultDate.getMonth() + 1);
-    const [initialDay, setInitialDay] = useState<number>(1);
-    const [secondDay, setSecondDay] = useState<number>(defaultDate.getDate() + 1);
-    const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
-    const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());
 
-    const analyticsProps = {
+    const props = urlAnalyticsByNameAndDateAndLevel({
         analyticsType,
         name: testName,
         level: testLevel,
-    };
-
-    const dateProps = {
-        initialDay,
-        initialMonth,
-        initialYear,
-        secondDay,
-        secondMonth,
-        secondYear,
-    };
-
-    const props = urlAnalyticsByNameAndDateAndLevel({
-        ...analyticsProps,
-        date: dateProps,
+        date: { startDay, startMonth, startYear, endDay, endMonth, endYear },
     });
+
     const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListinig({
         url: props.url,
         urlMeanAndDeviation: props.urlMeanAndDeviation,
     });
 
+
     useEffect(() => {
         if (listing) {
-            const updatedListing = listing.map(item => ({
+            const updatedListing = listing.map((item) => ({
                 ...item,
                 ownMeanValue,
                 ownSdValue,
             }));
             setDataJson(updatedListing);
         }
-    }, [listing, ownMeanValue, ownSdValue, setDataJson]);
-
+    }, [listing, ownMeanValue, ownSdValue, unitValues]);
 
     return (
-        <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1   text-textSecondary xl:flex xl:justify-around items-center content-center">
+        <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1 text-textSecondary xl:flex xl:justify-around items-center content-center">
             <DateSelector
-                initialDay={initialDay}
-                initialMonth={initialMonth}
-                initialYear={initialYear}
-                secondDay={secondDay}
-                secondMonth={secondMonth}   
-                secondYear={secondYear}
-                setInitialDay={setInitialDay}
-                setInitialMonth={setInitialMonth}
-                setInitialYear={setInitialYear}
-                setSecondDay={setSecondDay}
-                setSecondMonth={setSecondMonth}
-                setSecondYear={setSecondYear}
-            />
-            <div className="flex flex-row items-center content-center justify-between gap-1">
+                startDay={startDay}
+                startMonth={startMonth}
+                startYear={startYear}
+                endDay={endDay}
+                endMonth={endMonth}
+                endYear={endYear}
+                handleStartDayChange={handleStartDayChange}
+                handleStartMonthChange={handleStartMonthChange}
+                handleStartYearChange={handleStartYearChange}
+                handleEndDayChange={handleEndDayChange}
+                handleEndMonthChange={handleEndMonthChange}
+                handleEndYearChange={handleEndYearChange}
+            />            <div className="flex flex-row items-center content-center justify-between gap-1">
                 <span className="font-medium md:text-sm">Teste:</span>
                 <select
                     className="rounded border border-borderColor bg-background p-0 xl:p-1 text-textSecondary md:text-sm"
@@ -106,17 +100,18 @@ const TestSelectorWithLevel: React.FC<TestSelectorProps> = ({ list, analyticsTyp
                     </Link>
                 </span>
                 <div className="hidden w-full md:flex">
-                <UpdateResults analyticsType={analyticsType} />
-                <MeanAndDeviationDisplay
-                    mean={listing[0]?.mean}
-                    sd={listing[0]?.sd}
-                    ownMean={ownMeanValue}
-                    ownSd={ownSdValue}
-                    unitValue={unitValues}
-                />
-            </div>
+                    <UpdateResults analyticsType={analyticsType} />
+                    <MeanAndDeviationDisplay
+                        mean={listing[0]?.mean}
+                        sd={listing[0]?.sd}
+                        ownMean={ownMeanValue}
+                        ownSd={ownSdValue}
+                        unitValue={unitValues}
+                    />
+                </div>
             </div>
         </div>
     );
 };
-export default React.memo(TestSelectorWithLevel);
+
+export default TestSelectorWithLevel;

@@ -5,6 +5,7 @@ interface DaySelectorProps {
     onDayChange: (day: number) => void;
 }
 
+
 const DaySelector: React.FC<DaySelectorProps> = ({ selectedDay, onDayChange }) => {
     return (
         <select

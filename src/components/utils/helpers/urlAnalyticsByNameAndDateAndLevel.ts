@@ -8,8 +8,8 @@ const urlAnalyticsByNameAndDateAndLevel = (props: UrlAnalyticsByNameAndDateLevel
     const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/search/date-range?name=`;
     const meanAndDeviationUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/mean-standard-deviation?name=`;
 
-    const startDate = formatDateWithTime(date.initialYear, date.initialMonth, date.initialDay);
-    const endDate = formatDateWithTime(date.secondYear, date.secondMonth, date.secondDay);
+    const startDate = formatDateWithTime(date.startYear, date.startMonth, date.startDay);
+    const endDate = formatDateWithTime(date.endYear, date.endMonth, date.endDay);
 
     const url = `${baseUrl}${testFormatFix(name)}&level=${level}&startDate=${startDate}&endDate=${endDate}`;
     const urlMeanAndDeviation = `${meanAndDeviationUrl}${testFormatFix(name)}&level=${level}&startDate=${startDate}&endDate=${endDate}`;

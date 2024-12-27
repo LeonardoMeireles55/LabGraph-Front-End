@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useMemo } from 'react';
 import Loading from '@/components/utils/components/loading';
-import TestSelectorWithoutLevel from '@/components/commons/TestSelectorWithoutLevel';
+import TestSelectorWithoutLevel from '@/components/commons/test-selector/custom-selector';
 import Head from 'next/head';
 import { MultipleLineGraphProps, ListingsData } from '../../../types/chartInterfaces';
 import Footer from '../../ui/footer';

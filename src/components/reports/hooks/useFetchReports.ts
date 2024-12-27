@@ -6,7 +6,7 @@ interface UseFetchListingProps {
     url: string;
 }
 
-const useFetchReport = ({ url }: UseFetchListingProps) => {
+const useFetchReports = ({ url }: UseFetchListingProps) => {
     const [listing, setListing] = useState<ListingCollection>([]);
 
     useEffect(() => {
@@ -31,4 +31,4 @@ const useFetchReport = ({ url }: UseFetchListingProps) => {
     };
 };
 
-export default useFetchReport;
+export default useFetchReports;

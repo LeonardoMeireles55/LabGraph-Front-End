@@ -4,37 +4,31 @@ import UpdateResults from '../../../features/update-results';
 import urlByNameAndDate from '../../../utils/helpers/urlByNameAndDate';
 import { TestSelectorProps2, ListingsData } from '../../../../types/chartInterfaces';
 import useFetchListinigs from '@/components/charts/multiple-line/hooks/useFetchListinigs';
-import DateSelector from '@/components/commons/date-selector';
+import DateSelector from '../../date-selector';
+import useDateSelector from '../../date-selector/hooks/useDateSelector';
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps2> = ({ levelListSize, list, analyticsType, name, setListinig }) => {
     const [testName, setTestName] = useState<string>(name);
-    const defaultDate = new Date();
+    const {
+        startDay,
+        startMonth,
+        startYear,
+        endDay,
+        endMonth,
+        endYear,
+        handleStartDayChange,
+        handleStartMonthChange,
+        handleStartYearChange,
+        handleEndDayChange,
+        handleEndMonthChange,
+        handleEndYearChange
+    } = useDateSelector();
 
-    const [initialMonth, setInitialMonth] = useState<number>(defaultDate.getMonth() + 1);
-    const [secondMonth, setSecondMonth] = useState<number>(defaultDate.getMonth() + 1);
-    const [initialDay, setInitialDay] = useState<number>(1);
-    const [secondDay, setSecondDay] = useState<number>(defaultDate.getDate() + 1);
-    const [initialYear, setInitialYear] = useState<number>(defaultDate.getFullYear());
-    const [secondYear, setSecondYear] = useState<number>(defaultDate.getFullYear());
-
-    const analyticsProps = {
-        analyticsType,
-        name: testName,
-        levelsSize: levelListSize,
-    };
-
-    const dateProps = {
-        initialDay,
-        initialMonth,
-        initialYear,
-        secondDay,
-        secondMonth,
-        secondYear,
-    };
 
     const { urls, meanDeviationUrls } = urlByNameAndDate({
-        ...analyticsProps,
-        date: dateProps,
+        analyticsType,
+        name: testName,
+        date: { startDay, startMonth, startYear, endDay, endMonth, endYear },
         levelSize: levelListSize,
     });
 
@@ -55,7 +49,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps2> = ({ levelListSize,
                 level2: [],
                 level3: [],
             };
-            
+
             listings.forEach((listing, index) => {
                 if (listing && listing.length > 0) {
                     const level = `level${index + 1}` as keyof ListingsData;
@@ -69,23 +63,23 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps2> = ({ levelListSize,
 
             setListinig(updatedData);
         }
-    }, [listings, ownMeanValues, ownSdValues, unitValuesList, setListinig]);
+    }, [listings, ownMeanValues, ownSdValues, unitValuesList]);
 
     return (
         <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1  text-textSecondary xl:flex xl:justify-around items-center content-center">
             <DateSelector
-                initialDay={initialDay}
-                initialMonth={initialMonth}
-                initialYear={initialYear}
-                secondDay={secondDay}
-                secondMonth={secondMonth}   
-                secondYear={secondYear}
-                setInitialDay={setInitialDay}
-                setInitialMonth={setInitialMonth}
-                setInitialYear={setInitialYear}
-                setSecondDay={setSecondDay}
-                setSecondMonth={setSecondMonth}
-                setSecondYear={setSecondYear}
+                startDay={startDay}
+                startMonth={startMonth}
+                startYear={startYear}
+                endDay={endDay}
+                endMonth={endMonth}
+                endYear={endYear}
+                handleStartDayChange={handleStartDayChange}
+                handleStartMonthChange={handleStartMonthChange}
+                handleStartYearChange={handleStartYearChange}
+                handleEndDayChange={handleEndDayChange}
+                handleEndMonthChange={handleEndMonthChange}
+                handleEndYearChange={handleEndYearChange}
             />
             <div className="flex flex-row items-center content-center justify-between gap-1">
                 <span className="font-medium md:text-sm">Teste:</span>
@@ -110,9 +104,8 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps2> = ({ levelListSize,
                     </Link>
                 </span>
                 <div className="hidden w-full md:flex">
-                <UpdateResults analyticsType={analyticsType} />
-
-            </div>
+                    <UpdateResults analyticsType={analyticsType} />
+                </div>
             </div>
         </div>
     );

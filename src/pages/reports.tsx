@@ -1,8 +1,8 @@
-import DateSelector from '@/components/commons/DateSelector';
-import GenerateReports from '@/components/features/GenerateReports';
-import Footer from '@/components/layouts/Footer';
-import NavBar from '@/components/layouts/NavigationBar';
-import formatDateWithTime from '@/components/utils/formatDateWithTime';
+import DateSelector from '@/components/commons/date-selector';
+import GenerateReports from '@/components/features/generate-reports';
+import Footer from '@/components/ui/footer';
+import NavBar from '@/components/ui/navigation-bar';
+import formatDateWithTime from '@/components/commons/date-selector/constants/formatDateWithTime';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';

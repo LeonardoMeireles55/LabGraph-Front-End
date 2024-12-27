@@ -1,7 +1,7 @@
-import DateSelector from '@/components/commons/DateSelector';
-import ListingTable from '@/components/features/ListingTable';
-import Footer from '@/components/layouts/Footer';
-import NavBar from '@/components/layouts/NavigationBar';
+import DateSelector from '@/components/commons/date-selector';
+import ListingTable from '@/components/features/listing-table';
+import Footer from '@/components/ui/footer';
+import NavBar from '@/components/ui/navigation-bar';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 

@@ -1,4 +1,4 @@
-import getStatusMessage from '@/components/utils/getStatusMessage';
+import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 import { useEffect, useState } from 'react';
 
 interface ListingCollection extends Array<any> {}

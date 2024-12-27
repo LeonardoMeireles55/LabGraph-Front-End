@@ -1,22 +1,13 @@
 import Link from 'next/link';
-import { JSX } from 'react';
+import { FC } from 'react';
 
-const Footer = (): JSX.Element => {
+const Footer: FC = () => {
     return (
-        <footer className="bg-background text-textSecondary">
-            <div className="text-sm md:text-base">
-                &copy; {new Date().getFullYear()} <strong>LabGraph</strong>. Todos os direitos reservados.
-            </div>
-            <div className="flex flex-col items-center justify-center space-y-0 text-[10px] md:flex-row md:space-x-4     md:space-y-0 md:text-sm">
-                <Link href="/#" className="text-textSecondary transition-colors hover:text-primary">
-                    Sobre
-                </Link>
-                <Link href="/#" className="text-textSecondary transition-colors hover:text-primary">
-                    Termos de Uso
-                </Link>
-                <Link href="/#" className="text-textSecondary transition-colors hover:text-primary">
-                    Política de Privacidade
-                </Link>
+        <footer className="fixed bottom-0 w-full bg-background p-4 text-textSecondary">
+            <div className="container mx-auto flex items-center justify-center space-y-2 md:flex-row md:space-y-0">
+                <div className="text-sm md:text-base">
+                    &copy; {new Date().getFullYear()} <strong>LabGraph</strong>. Todos os direitos reservados.
+                </div>
             </div>
         </footer>
     );

@@ -1,10 +1,10 @@
 import { useAuth } from '@/hooks/useAuth';
 import InputField from './InputField';
-import ErrorMessage from '../common/ErrorMessage';
+import ErrorMessage from '../commons/ErrorMessage';
 import SubmitButton from './SubmitButton';
-import Logo from '@/components/common/Logo';
+import Logo from '@/components/commons/Logo';
 import Link from 'next/link';
-import ThemeToggle from '../common/ThemeToggle';
+import ThemeToggle from '../commons/ThemeToggle';
 
 const LoginForm = () => {
     const { formData, error, handleChange, handleSubmit } = useAuth(true);

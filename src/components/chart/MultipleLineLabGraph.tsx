@@ -1,11 +1,11 @@
 import React, { useCallback, useState, useMemo } from 'react';
-import Loading from '@/components/common/Loading';
-import TestSelectorWithoutLevel from '@/components/common/TestSelectorWithoutLevel';
-import Footer from '@/components/layouts/Footer';
+import Loading from '@/components/commons/Loading';
+import TestSelectorWithoutLevel from '@/components/commons/TestSelectorWithoutLevel';
 import Head from 'next/head';
 import { MultipleLineGraphProps, ListingsData } from '../../types/chartInterfaces';
 import MultipleLineControlChart from './MultipleLineControlChart';
-import NavBar from '../layouts/nav-bar';
+import Footer from '../layouts/Footer';
+import NavBar from '../layouts/NavigationBar';
 
 const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, analyticsType, levelListSize }) => {
     const [listings, setListings] = useState<ListingsData>({ level1: [], level2: [], level3: [] });

@@ -1,11 +1,11 @@
 import ControlChart from '@/components/chart/ControlChart';
-import Loading from '@/components/common/Loading';
-import TestSelector from '@/components/common/TestSelector';
-import Footer from '@/components/layouts/Footer';
-import NavBar from '@/components/layouts/nav-bar';
+import Loading from '@/components/commons/Loading';
+import TestSelector from '@/components/commons/TestSelector';
 import Head from 'next/head';
 import { useState } from 'react';
 import { ListingItem } from '../../types/chartInterfaces';
+import Footer from '../layouts/Footer';
+import NavBar from '../layouts/NavigationBar';
 
 
 interface LabGraphProps {

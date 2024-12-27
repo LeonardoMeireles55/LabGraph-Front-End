@@ -2,13 +2,9 @@ import Link from 'next/link';
 import CsvGenerator from "@/components/features/CsvGenerator";
 import ViewToggleButton from "./ViewToggleButton";
 import navLinks from '../constants/navLinks';
+import MobileMenuProps from "../types/nav.type";
 
-interface MobileMenuProps {
-    isMenuOpen: boolean;
-    onLogout: () => void;
-    jsonData?: Array<Record<string, any>>;
-    fileName?: string;
-}
+
 
 const MobileMenu = ({ isMenuOpen, onLogout, jsonData, fileName }: MobileMenuProps) => (
     <div className={`fixed left-0 right-0 top-[4rem] bg-surface p-4 shadow-lg shadow-shadow sm:top-20 lg:hidden ${

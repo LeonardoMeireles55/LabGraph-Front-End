@@ -1,4 +1,7 @@
-const navLinks: NavLink[] = [
+
+import type { NavLinkProps } from "../types/nav.type";
+
+const navLinks: NavLinkProps[] = [
     { text: 'BIOQUÍMICA', url: '/biochemistry' },
     { text: 'COAGULAÇÃO', url: '/coagulation' },
     { text: 'HEMATOLOGIA', url: '/hematology' },

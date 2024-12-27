@@ -4,11 +4,8 @@ import ViewToggleButton from "./ViewToggleButton";
 import { useRouter } from "next/router";
 import navLinks from "../constants/navLinks";
 import handleLogout from "../constants/handleLogout";
+import { NavLinksComponentProps } from "../types/nav.type";
 
-interface NavLinksComponentProps {
-    jsonData?: Array<Record<string, any>>;
-    fileName?: string;
-}
 
 const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ jsonData, fileName }) => {
     const router = useRouter();

@@ -1,4 +1,5 @@
 import GraphWrapper from '@/components/chart/GraphWrapper';
+import Footer from '@/components/layouts/Footer';
 
 const list = [
     'ALB2',

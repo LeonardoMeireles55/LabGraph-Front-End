@@ -33,7 +33,7 @@
     "**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "src/components/layouts/footer/index.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,10 +1,10 @@
-import ThemeToggle from '../../common/ThemeToggle';
-import NavLogo from './NavLogo';
-import handleLogout from './handleLogout';
+import ThemeToggle from '../../commons/ThemeToggle';
 import { useState } from 'react';
-import MobileMenu from './MobileMenu';
-import router, { useRouter } from 'next/router';
+import router from 'next/router';
 import NavLinksComponent from './components/NavLinksComponent';
+import handleLogout from './constants/handleLogout';
+import NavLogo from './components/NavLogo';
+import MobileMenu from './components/MobileMenu';
 
 
 const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {

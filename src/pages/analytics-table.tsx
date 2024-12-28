@@ -1,9 +1,9 @@
-import DateSelector from '@/components/commons/date-selector';
-import useDateSelector from '@/components/commons/date-selector/hooks/useDateSelector';
+import DateSelector from '@/components/shared/date-selector';
+import useDateSelector from '@/components/shared/date-selector/hooks/useDateSelector';
 import ListingTable from '@/components/features/listing-table';
 import Footer from '@/components/ui/footer';
 import NavBar from '@/components/ui/navigation-bar';
-import { ListingItem } from '@/types/chartInterfaces';
+import { ListingItem } from '@/components/charts/types/Chart';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 

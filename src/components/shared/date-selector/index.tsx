@@ -1,20 +1,8 @@
 import React from 'react';
 import SingleDateSelector from './components/SingleDateSelector';
+import { DateSelectorProps } from './types/dateSelectorProps';
 
-interface DateSelectorProps {
-  startDay: number;
-  startMonth: number;
-  startYear: number;
-  endDay: number;
-  endMonth: number;
-  endYear: number;
-  handleStartDayChange: (day: number) => void;
-  handleStartMonthChange: (month: number) => void;
-  handleStartYearChange: (year: number) => void;
-  handleEndDayChange: (day: number) => void;
-  handleEndMonthChange: (month: number) => void;
-  handleEndYearChange: (year: number) => void;
-}
+
 
 const DateSelector: React.FC<DateSelectorProps> = ({
   startDay,

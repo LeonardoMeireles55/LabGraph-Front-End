@@ -1,5 +1,5 @@
-import { ProcessedData } from '../types/chartInterfaces';
-import { FileProcessingResult } from '../types/fileProcessing';
+import { ProcessedData } from '../components/charts/types/Chart';
+import { FileProcessingResult } from '../components/features/types/FileProcessing';
 import { MAX_VALUE, CSV_MINIMUM_COLUMNS } from '../constants/fileProcessing';
 
 export const cleanValue = (value: string) => value.replace(/"/g, '').trim();

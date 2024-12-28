@@ -1,9 +1,9 @@
 import ControlChart from '@/components/charts/single-line/components/ControlChart';
 import Loading from '@/components/utils/components/loading';
-import TestSelectorWithLevel from '@/components/commons/test-selector/common-selector';
+import TestSelectorWithLevel from '@/components/shared/test-selector/common-selector';
 import Head from 'next/head';
 import { useState } from 'react';
-import { ListingItem } from '../../../types/chartInterfaces';
+import { ListingItem } from '../types/Chart';
 import Footer from '../../ui/footer';
 import NavBar from '../../ui/navigation-bar';
 

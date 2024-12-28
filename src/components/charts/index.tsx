@@ -1,5 +1,5 @@
 import React from 'react';
-import { LabGraphProps } from '../../types/chartInterfaces';
+import { LabGraphProps } from './types/Chart';
 import LabGraph from './single-line';
 import MultipleLineLabGraph from './multiple-line';
 import { useGraph } from '@/contexts/GraphContext';

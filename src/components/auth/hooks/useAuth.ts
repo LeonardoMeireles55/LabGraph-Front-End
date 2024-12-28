@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { AuthFormData } from '@/types/auth';
+import { AuthFormData } from '@/components/auth/types/Auth';
 import { authService } from '@/services/auth';
 
 export const useAuth = (isLogin: boolean) => {

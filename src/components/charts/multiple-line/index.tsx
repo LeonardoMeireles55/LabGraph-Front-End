@@ -1,8 +1,8 @@
 import React, { useCallback, useState, useMemo } from 'react';
 import Loading from '@/components/utils/components/loading';
-import TestSelectorWithoutLevel from '@/components/commons/test-selector/custom-selector';
+import TestSelectorWithoutLevel from '@/components/shared/test-selector/custom-selector';
 import Head from 'next/head';
-import { MultipleLineGraphProps, ListingsData } from '../../../types/chartInterfaces';
+import { MultipleLineGraphProps, ListingsData } from '../types/Chart';
 import Footer from '../../ui/footer';
 import NavBar from '../../ui/navigation-bar';
 import MultipleLineControlChart from './components/MultipleLineControlChart';

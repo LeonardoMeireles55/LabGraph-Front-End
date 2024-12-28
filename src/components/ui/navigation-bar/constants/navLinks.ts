@@ -1,5 +1,5 @@
 
-import type { NavLinkProps } from "../types/nav.type";
+import type { NavLinkProps } from "../types/NavigationBar";
 
 const navLinks: NavLinkProps[] = [
     { text: 'BIOQUÍMICA', url: '/biochemistry' },

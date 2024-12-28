@@ -1,8 +1,5 @@
-interface YearSelectorProps {
-    selectedYear: number;
-    onYearChange: (year: number) => void;
-  }
-  
+import { YearSelectorProps } from "../types/dateSelectorProps";
+
   const YearSelector: React.FC<YearSelectorProps> = ({ selectedYear, onYearChange }) => {
     const years = [2023, 2024, 2025];
     return (

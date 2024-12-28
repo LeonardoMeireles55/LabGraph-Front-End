@@ -1,5 +1,5 @@
 import React from 'react';
-import { MeanAndDeviationDisplayProps } from '../../../types/chartInterfaces';
+import { MeanAndDeviationDisplayProps } from '../types/Chart';
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({ mean, sd, ownMean, ownSd, unitValue }) => {
     return (

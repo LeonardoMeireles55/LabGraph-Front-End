@@ -1,13 +1,13 @@
 import GenerateReports from '@/components/features/generate-reports';
 import Footer from '@/components/ui/footer';
 import NavBar from '@/components/ui/navigation-bar';
-import formatDateWithTime from '@/components/commons/date-selector/constants/formatDateWithTime';
+import formatDateWithTime from '@/components/shared/date-selector/constants/formatDateWithTime';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { ListingItem } from '@/types/chartInterfaces';
-import useDateSelector from '@/components/commons/date-selector/hooks/useDateSelector';
-import DateSelector from '@/components/commons/date-selector';
+import { ListingItem } from '@/components/charts/types/Chart';
+import useDateSelector from '@/components/shared/date-selector/hooks/useDateSelector';
+import DateSelector from '@/components/shared/date-selector';
 
 
 const ReportsPage = () => {

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import UpdateResults from '../../../features/update-results';
 import urlByNameAndDate from '../../../utils/helpers/urlByNameAndDate';
-import { TestSelectorProps2, ListingsData } from '../../../../types/chartInterfaces';
+import { ListingsData } from '../../../charts/types/Chart';
 import useFetchListinigs from '@/components/charts/multiple-line/hooks/useFetchListinigs';
 import DateSelector from '../../date-selector';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
+import { TestSelectorProps } from '../types/Selector';
 
-const TestSelectorWithoutLevel: React.FC<TestSelectorProps2> = ({ levelListSize, list, analyticsType, name, setListinig }) => {
+const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({ levelListSize, list, analyticsType, name, setListinig }) => {
     const [testName, setTestName] = useState<string>(name);
     const {
         startDay,

@@ -26,13 +26,7 @@ export interface MeanAndDeviationDisplayProps {
     unitValue: string | null;
 }
 
-export interface TestSelectorProps {
-    list: string[];
-    analyticsType: string;
-    name: string;
-    level?: number;
-    setDataJson: (data: any) => void;
-}
+
 
 export interface ListingsData {
   level1: ListingItem[];
@@ -40,13 +34,6 @@ export interface ListingsData {
   level3?: ListingItem[];
 }
 
-export interface TestSelectorProps2 {
-    levelListSize: number;
-    list: string[];
-    analyticsType: string;
-    name: string;
-    setListinig: (data: ListingsData) => void;
-}
 
 export interface ProcessedData {
     date: string;

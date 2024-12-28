@@ -11,7 +11,6 @@ export default function useDateSelector() {
   const [endMonth, setEndMonth] = useState<number>(defaultDate.getMonth() + 1);
   const [endYear, setEndYear] = useState<number>(defaultDate.getFullYear());
 
-  // Date Update Handlers
   const handleStartDayChange = (day: number) => setStartDay(day);
   const handleStartMonthChange = (month: number) => setStartMonth(month);
   const handleStartYearChange = (year: number) => setStartYear(year);

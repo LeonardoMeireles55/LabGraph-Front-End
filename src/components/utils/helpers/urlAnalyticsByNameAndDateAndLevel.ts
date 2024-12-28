@@ -1,4 +1,4 @@
-import formatDateWithTime from '../../commons/date-selector/constants/formatDateWithTime';
+import formatDateWithTime from '../../shared/date-selector/constants/formatDateWithTime';
 import testFormatFix from './testFormatFix';
 import UrlAnalyticsByNameAndDateLevelProps from '../types/urlAnalyticsByNameAndDateLevelProps';
 

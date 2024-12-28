@@ -1,9 +1,6 @@
 import React from 'react';
+import { MonthSelectorProps } from '../types/dateSelectorProps';
 
-interface MonthSelectorProps {
-    selectedMonth: number;
-    onMonthChange: (month: number) => void;
-}
 
 const MonthSelector: React.FC<MonthSelectorProps> = ({ selectedMonth, onMonthChange }) => {
     const months = [

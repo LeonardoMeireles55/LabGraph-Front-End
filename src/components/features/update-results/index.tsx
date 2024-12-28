@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Upload } from 'lucide-react';
-import { ProcessingStatus } from '../../../types/chartInterfaces';
+import { ProcessingStatus } from '../../charts/types/Chart';
 import { processTextFile, processCsvFile } from '../../../utils/fileProcessors';
 import { API_ENDPOINTS } from '../../../constants/fileProcessing';
 import getStatusMessage from '../../utils/helpers/getStatusMessage';

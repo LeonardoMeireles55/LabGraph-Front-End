@@ -1,9 +1,6 @@
 import React from 'react';
+import { DaySelectorProps } from '../types/dateSelectorProps';
 
-interface DaySelectorProps {
-    selectedDay: number;
-    onDayChange: (day: number) => void;
-}
 
 
 const DaySelector: React.FC<DaySelectorProps> = ({ selectedDay, onDayChange }) => {

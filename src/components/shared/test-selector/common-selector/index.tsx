@@ -3,10 +3,10 @@ import useFetchListinig from '@/components/charts/single-line/hooks/useFetchList
 import Link from 'next/link';
 import MeanAndDeviationDisplay from '../../../charts/mean-deviation';
 import UpdateResults from '../../../features/update-results';
-import { TestSelectorProps } from '../../../../types/chartInterfaces';
 import urlAnalyticsByNameAndDateAndLevel from '../../../utils/helpers/urlAnalyticsByNameAndDateAndLevel';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
 import DateSelector from '../../date-selector';
+import { TestSelectorProps } from '../types/Selector';
 
 const TestSelectorWithLevel: React.FC<TestSelectorProps> = ({ list, analyticsType, name, level, setDataJson }) => {
     const [testName, setTestName] = useState<string>(name);

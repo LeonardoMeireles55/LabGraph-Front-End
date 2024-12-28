@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputFieldProps } from '@/types/auth';
+import { InputFieldProps } from '@/components/auth/types/Auth';
 
 const InputField: React.FC<InputFieldProps> = ({ id, type, label, value, onChange, autocomplete }) => {
     return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ControlChartProps } from '../../../../types/chartInterfaces';
-import customFormatDate from '../../../commons/date-selector/constants/customFormatDate';
+import { ControlChartProps } from '../../types/Chart';
+import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { TbMathFunction, TbFileDescription } from 'react-icons/tb';
 
 const filter = (value: number, mean: number, sd: number) => {

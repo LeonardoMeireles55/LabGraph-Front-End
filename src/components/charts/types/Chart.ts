@@ -14,9 +14,31 @@ export interface ListingItem {
     rules?: string;
 }
 
+export interface GroupedListing {
+    level: string;
+    values: ListingItem[];
+  }
+
 export interface ControlChartProps {
     listing: ListingItem[];
 }
+
+export interface MeanStdDevValue {
+    mean: number;
+    standardDeviation: number;
+  }
+
+export interface LevelGroupResponse {
+    genericValuesGroupByLevel: {
+      level: string;
+      values: ListingItem[];
+    };
+    meanAndStandardDeviationRecordGroupByLevel: {
+      level: string;
+      values: MeanStdDevValue[];
+    };
+  }
+  
 
 export interface MeanAndDeviationDisplayProps {
     mean: number;
@@ -26,14 +48,13 @@ export interface MeanAndDeviationDisplayProps {
     unitValue: string | null;
 }
 
-
-
-export interface ListingsData {
-  level1: ListingItem[];
-  level2: ListingItem[];
-  level3?: ListingItem[];
-}
-
+export interface MeanAndSdResponse {
+    level: string;
+    meanAndSd: {
+      mean: number;
+      standardDeviation: number;
+    };
+  }
 
 export interface ProcessedData {
     date: string;
@@ -54,7 +75,7 @@ export interface ProcessingStatus {
 }
 
 export interface MultipleLineChartProps {
-    listings: ListingItem[][];
+    listings: LevelGroupResponse[];
     colors?: string[];
 }
 
@@ -75,9 +96,4 @@ export interface ListingData {
     unitValue: string | null;
     ownMean: number | null;
     ownSd: number | null;
-}
-
-export interface UrlConfig {
-    dataUrl: string;
-    meanDeviationUrl: string;
 }

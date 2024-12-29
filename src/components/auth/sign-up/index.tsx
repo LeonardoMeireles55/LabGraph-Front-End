@@ -6,6 +6,7 @@ import Logo from '@/components/ui/logo';
 import Link from 'next/link';
 import ThemeToggle from '@/components/ui/theme';
 import ErrorMessage from '@/components/utils/components/error-message';
+import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 
 const SignUpForm = () => {
     const [formData, setFormData] = useState({
@@ -48,10 +49,11 @@ const SignUpForm = () => {
             if (response.ok) {
                 router.push('/login');
             } else {
-                setError(data.message || 'Erro ao criar conta');
+                setError(getStatusMessage(data.message) || 'Erro ao criar conta');
             }
         } catch (err) {
-            setError('Erro ao conectar ao servidor');
+            setError('Erro ao conectar ao servidor. Tente novamente mais tarde.');
+            console.error('Sign up error:', err);
         }
     };
 

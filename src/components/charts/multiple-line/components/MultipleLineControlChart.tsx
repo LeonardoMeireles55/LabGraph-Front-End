@@ -191,7 +191,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
                                         const date = data.date;
 
                                         return (
-                                            <div className="rounded border border-border bg-background p-2 text-xs text-textPrimary shadow-md shadow-shadow">
+                                            <div className="rounded border border-border bg-background p-2 text-[0.5rem] md:text-[0.65rem] text-textPrimary shadow-md shadow-shadow">
                                                 <p className="font-semibold border-b border-border pb-1 mb-2">Data: {date}</p>
                                                 {payload.map((entry, index) => {
                                                     const valueKey = `value${index + 1}`;
@@ -255,7 +255,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
                                 content={renderLegend}
                                 verticalAlign="bottom"
                                 align="center"
-                                wrapperStyle={{ paddingTop: '10px' }}
+                                wrapperStyle={{ paddingTop: '20px' }}
                             />
                         </LineChart>
                     </ResponsiveContainer>

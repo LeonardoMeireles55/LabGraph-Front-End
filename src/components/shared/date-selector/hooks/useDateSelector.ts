@@ -3,7 +3,7 @@ import { useState } from 'react';
 export default function useDateSelector() {
   const defaultDate = new Date();
   
-  const [startDay, setStartDay] = useState<number>(15);
+  const [startDay, setStartDay] = useState<number>(defaultDate.getDate());
   const [startMonth, setStartMonth] = useState<number>(defaultDate.getMonth());
   const [startYear, setStartYear] = useState<number>(defaultDate.getFullYear());
   

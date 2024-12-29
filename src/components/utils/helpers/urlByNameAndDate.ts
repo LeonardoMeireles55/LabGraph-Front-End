@@ -1,5 +1,5 @@
 import formatDateWithTime from '../../shared/date-selector/constants/formatDateWithTime';
-import UrlAnalyticsByNameAndDateProps from '../types/urlAnalyticsByNameAndDateProps';
+import { UrlAnalyticsByNameAndDateProps } from '../types/urlAnalyticsByNameAndDateProps';
 import testFormatFix from './testFormatFix';
 
 

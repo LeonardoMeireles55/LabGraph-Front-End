@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import UpdateResults from '../../../features/update-results';
-import urlByNameAndDate from '../../../utils/helpers/urlByNameAndDate';
-import { ListingsData } from '../../../charts/types/Chart';
-import useFetchListinigs from '@/components/charts/multiple-line/hooks/useFetchListinigs';
 import DateSelector from '../../date-selector';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
 import { TestSelectorProps } from '../types/Selector';
+import urlByNameAndDateNew from '@/components/utils/helpers/urlByNameAndDateNew';
+import useFetchListiningGrouped from '@/components/charts/multiple-line/hooks/useFetchListiningGrouped';
 
-const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({ levelListSize, list, analyticsType, name, setListinig }) => {
+const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({ list, analyticsType ,name, setListinig }) => {
     const [testName, setTestName] = useState<string>(name);
     const {
         startDay,
@@ -25,46 +24,24 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({ levelListSize, 
         handleEndYearChange
     } = useDateSelector();
 
-
-    const { urls, meanDeviationUrls } = urlByNameAndDate({
-        analyticsType,
+    
+    const { url } = urlByNameAndDateNew({
         name: testName,
         date: { startDay, startMonth, startYear, endDay, endMonth, endYear },
-        levelSize: levelListSize,
+        analyticsType,
     });
+
+
 
     const {
-        listings,
-        unitValuesList,
-        ownMeanValues,
-        ownSdValues,
-    } = useFetchListinigs({
-        urls,
-        meanDeviationUrls,
-    });
+        listing,
+    } = useFetchListiningGrouped(url);
 
     useEffect(() => {
-        if (listings && listings.length >= 1) {
-            const updatedData: ListingsData = {
-                level1: [],
-                level2: [],
-                level3: [],
-            };
+        setListinig(listing);
+    }, [url, listing, setListinig]);
 
-            listings.forEach((listing, index) => {
-                if (listing && listing.length > 0) {
-                    const level = `level${index + 1}` as keyof ListingsData;
-                    updatedData[level] = listing.map(item => ({
-                        ...item,
-                        ownMeanValue: ownMeanValues[index],
-                        ownSdValue: ownSdValues[index],
-                    }));
-                }
-            });
-
-            setListinig(updatedData);
-        }
-    }, [listings, ownMeanValues, ownSdValues, unitValuesList, setListinig]);
+    
 
     return (
         <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1  text-textSecondary xl:flex xl:justify-around items-center content-center">

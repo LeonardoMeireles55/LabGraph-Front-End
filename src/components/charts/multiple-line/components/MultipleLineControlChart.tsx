@@ -40,15 +40,15 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
         ["var(--color-primary)", "var(--color-secondary)", "var(--color-accent)"],
         []
     );
-
+    
     const lineColors = colors || defaultColors;
-    const firstDataset = listings[0];
+    const firstDataset = listings[0].genericValuesGroupByLevel.values;
     const dataPoints = firstDataset[0];
 
     const activeValues = useMemo(() =>
         listings.map((listing) => ({
-            mean: useOwnValues ? listing[0].ownMeanValue : listing[0].mean,
-            sd: useOwnValues ? listing[0].ownSdValue : listing[0].sd
+            mean: useOwnValues ? listing.meanAndStandardDeviationRecordGroupByLevel.values[0].mean : listing.genericValuesGroupByLevel.values[0].mean,
+            sd: useOwnValues ? listing.meanAndStandardDeviationRecordGroupByLevel.values[0].standardDeviation : listing.genericValuesGroupByLevel.values[0].sd
         })),
         [listings, useOwnValues]
     );
@@ -60,7 +60,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
             };
 
             listings.forEach((listing, listingIndex) => {
-                const currentValue = listing[index]?.value;
+                const currentValue = listing.genericValuesGroupByLevel.values[index]?.value;
                 const { mean, sd } = activeValues[listingIndex];
 
                 if (currentValue !== undefined) {
@@ -69,10 +69,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
 
                     entry[`value${listingIndex + 1}`] = filteredValue;
                     entry[`rawValue${listingIndex + 1}`] = currentValue;
-                    entry[`levelLot${listingIndex + 1}`] = listing[index].level_lot;
-                    entry[`name${listingIndex + 1}`] = listing[index].name;
-                    entry[`description${listingIndex + 1}`] = listing[index].description;
-                    entry[`rules${listingIndex + 1}`] = listing[index].rules;
+                    entry[`levelLot${listingIndex + 1}`] = listing.genericValuesGroupByLevel.values[index].level_lot;
+                    entry[`name${listingIndex + 1}`] = listing.genericValuesGroupByLevel.values[index].name;
+                    entry[`description${listingIndex + 1}`] = listing.genericValuesGroupByLevel.values[index].description;
+                    entry[`rules${listingIndex + 1}`] = listing.genericValuesGroupByLevel.values[index].rules;
                     entry[`mean${listingIndex + 1}`] = mean;
                     entry[`sd${listingIndex + 1}`] = sd;
                 }

@@ -1,17 +1,16 @@
-import { ListingsData } from "@/components/charts/types/Chart";
+import { LevelGroupResponse, ListingItem } from "@/components/charts/types/Chart";
 
-export interface TestSelectorProps {
+export interface CommonTestSelectorProps {
     list: string[];
     analyticsType: string;
     name: string;
-    level?: number;
-    setDataJson: (data: any) => void;
+    level: number;
+    setListingItem: (data: ListingItem[]) => void;
 }
 
 export interface TestSelectorProps {
-    levelListSize: number;
-    list: string[];
     analyticsType: string;
+    list: string[];
     name: string;
-    setListinig: (data: ListingsData) => void;
+    setListinig: (data: LevelGroupResponse[]) => void;
 }

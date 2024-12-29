@@ -28,7 +28,7 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
                         <TestSelectorWithLevel
                             name={testList[0]}
                             level={1}
-                            setDataJson={setDataFetched}
+                            setListingItem={setDataFetched}
                             analyticsType={analyticsType}
                             list={testList}
                         />

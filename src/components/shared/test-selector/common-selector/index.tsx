@@ -6,9 +6,10 @@ import UpdateResults from '../../../features/update-results';
 import urlAnalyticsByNameAndDateAndLevel from '../../../utils/helpers/urlAnalyticsByNameAndDateAndLevel';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
 import DateSelector from '../../date-selector';
-import { TestSelectorProps } from '../types/Selector';
+import { CommonTestSelectorProps } from '../types/Selector';
+import { ListingItem } from '@/components/charts/types/Chart';
 
-const TestSelectorWithLevel: React.FC<TestSelectorProps> = ({ list, analyticsType, name, level, setDataJson }) => {
+const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({ list, analyticsType, name, level, setListingItem: SetListingItem }) => {
     const [testName, setTestName] = useState<string>(name);
     const [testLevel, setTestLevel] = useState<number>(level || 1);
 
@@ -43,14 +44,14 @@ const TestSelectorWithLevel: React.FC<TestSelectorProps> = ({ list, analyticsTyp
 
     useEffect(() => {
         if (listing) {
-            const updatedListing = listing.map((item) => ({
+            const updatedListing: ListingItem[] = listing.map((item) => ({
                 ...item,
                 ownMeanValue,
                 ownSdValue,
             }));
-            setDataJson(updatedListing);
+            SetListingItem(updatedListing);
         }
-    }, [listing, ownMeanValue, ownSdValue, unitValues, setDataJson]);
+    }, [listing, ownMeanValue, ownSdValue, unitValues, SetListingItem]);
 
     return (
         <div className="mt-12 xl:w-full md:mt-4 lg:mt-4 grid gap-1 text-textSecondary xl:flex xl:justify-around items-center content-center">

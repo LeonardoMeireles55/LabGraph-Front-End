@@ -12,7 +12,6 @@ const useFetchListinig = ({ url, urlMeanAndDeviation }: UseFetchListingProps) =>
     const [unitValues, setUnitValues] = useState<string | null>(null);
     const [ownMeanValue, setOwnMean] = useState<number | null>(null);
     const [ownSdValue, setOwnSd] = useState<number | null>(null);
-    const [onLoad, setOnLoad] = useState<boolean>(false);
 
     const checkResponse = async (response: Response) => {
         if (!response.ok) {

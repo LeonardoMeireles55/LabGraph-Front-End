@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from 'recharts';
-import { MultipleLineChartProps } from '../../types/Chart';
+import { ListingItem, MultipleLineChartProps } from '../../types/Chart';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { TbMathFunction, TbFileDescription } from 'react-icons/tb';
 
@@ -22,76 +22,100 @@ const CustomDot: React.FC<any> = ({ cx, cy, payload, dataKey, color }) => {
             <circle cx={cx} cy={cy} r={2} fill={color} />
             <text
                 x={cx}
-                y={cy - 10}
+                // y={cy - 10}
                 fill="var(--color-text-primary)"
                 className="text-[0.5rem] md:text-xs"
-                textAnchor="end"
+                textAnchor="center"
             >
-                {value?.toFixed(2)}
+                {/* {value} */}
             </text>
         </g>
     );
 };
 
-const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, colors }) => {
+const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
+    const [isLoading, setIsLoading] = useState(true);
     const [useOwnValues, setUseOwnValues] = useState(false);
+
+    
+
+    useEffect(() => {
+        if (listings.length > 0 && listings[0]?.genericValuesGroupByLevel?.values.length > 0) {
+            setIsLoading(false);
+        }
+    }, [listings]);
+
+
 
     const defaultColors = useMemo(() =>
         ["var(--color-primary)", "var(--color-secondary)", "var(--color-accent)"],
         []
     );
     
-    const lineColors = colors || defaultColors;
+    const lineColors = defaultColors;
     const firstDataset = listings[0].genericValuesGroupByLevel.values;
     const dataPoints = firstDataset[0];
 
-    const activeValues = useMemo(() =>
-        listings.map((listing) => ({
+    const activeValues = listings.map((listing) => ({
             mean: useOwnValues ? listing.meanAndStandardDeviationRecordGroupByLevel.values[0].mean : listing.genericValuesGroupByLevel.values[0].mean,
             sd: useOwnValues ? listing.meanAndStandardDeviationRecordGroupByLevel.values[0].standardDeviation : listing.genericValuesGroupByLevel.values[0].sd
-        })),
-        [listings, useOwnValues]
-    );
+        }));
+        
 
-    const chartData = useMemo(() =>
-        firstDataset.map((_, index) => {
-            const entry: any = {
-                date: customFormatDate(firstDataset[index].date),
-            };
-
-            listings.forEach((listing, listingIndex) => {
-                const currentValue = listing.genericValuesGroupByLevel.values[index]?.value;
-                const { mean, sd } = activeValues[listingIndex];
-
-                if (currentValue !== undefined) {
-                    const normalizedValue = normalizeValue(currentValue, mean, sd);
-                    const filteredValue = filter(normalizedValue, 0, 1);
-
-                    entry[`value${listingIndex + 1}`] = filteredValue;
-                    entry[`rawValue${listingIndex + 1}`] = currentValue;
-                    entry[`levelLot${listingIndex + 1}`] = listing.genericValuesGroupByLevel.values[index].level_lot;
-                    entry[`name${listingIndex + 1}`] = listing.genericValuesGroupByLevel.values[index].name;
-                    entry[`description${listingIndex + 1}`] = listing.genericValuesGroupByLevel.values[index].description;
-                    entry[`rules${listingIndex + 1}`] = listing.genericValuesGroupByLevel.values[index].rules;
-                    entry[`mean${listingIndex + 1}`] = mean;
-                    entry[`sd${listingIndex + 1}`] = sd;
+        const chartData = useMemo(() => {
+            if (!listings || listings.length === 0 || firstDataset.length === 0) {
+                return [];
+            }
+        
+            const dateSet = new Set();
+            const uniqueEntries: any[] = [];
+        
+            firstDataset.forEach((_, index) => {
+                const date = customFormatDate(firstDataset[index].date).toString();
+                
+                if (dateSet.has(date)) {
+                    return;
                 }
+                dateSet.add(date);
+        
+                const entry: any = { date };
+        
+                listings.forEach((listing, listingIndex) => {
+                    const values = listing.genericValuesGroupByLevel?.values[index];
+                    if (values) {
+                        const currentValue = values.value;
+                        const { mean, sd } = activeValues[listingIndex];
+        
+                        if (currentValue) {
+                            const normalizedValue = normalizeValue(currentValue, mean, sd);
+                            const filteredValue = filter(normalizedValue, 0, 1);
+        
+                            entry[`value${listingIndex + 1}`] = filteredValue;
+                            entry[`levelLot${listingIndex + 1}`] = values.level_lot;
+                            entry[`name${listingIndex + 1}`] = values.name;
+                            entry[`description${listingIndex + 1}`] = values.description;
+                            entry[`rules${listingIndex + 1}`] = values.rules;
+                            entry[`mean${listingIndex + 1}`] = mean;
+                            entry[`sd${listingIndex + 1}`] = sd;
+                        }
+                    }
+                });
+        
+                uniqueEntries.push(entry);
             });
-
-            return entry;
-        }),
-        [firstDataset, listings, activeValues]
-    );
-
-    const yAxisValues = [
-        { value: -3, label: '-3s', color: 'var(--color-sd3)' },
-        { value: -2, label: '-2s', color: 'var(--color-sd2)' },
-        { value: -1, label: '-1s', color: 'var(--color-sd1)' },
-        { value: 0, label: 'Média', color: 'var(--color-mean-line)' },
-        { value: 1, label: '+1s', color: 'var(--color-sd1)' },
-        { value: 2, label: '+2s', color: 'var(--color-sd2)' },
-        { value: 3, label: '+3s', color: 'var(--color-sd3)' },
-    ];
+        
+            return uniqueEntries;
+        }, [listings, firstDataset, activeValues]);
+        
+        const yAxisValues = useMemo(() => [
+            { value: -3, label: '-3s', color: 'var(--color-sd3)' },
+            { value: -2, label: '-2s', color: 'var(--color-sd2)' },
+            { value: -1, label: '-1s', color: 'var(--color-sd1)' },
+            { value: 0, label: 'Média', color: 'var(--color-mean-line)' },
+            { value: 1, label: '+1s', color: 'var(--color-sd1)' },
+            { value: 2, label: '+2s', color: 'var(--color-sd2)' },
+            { value: 3, label: '+3s', color: 'var(--color-sd3)' },
+        ], []);
 
     const renderLegend = (props: any) => {
         const { payload } = props;
@@ -155,7 +179,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
                         height="95%">
                         <LineChart data={chartData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
                             <CartesianGrid stroke="false" />
-                            <XAxis
+                            <XAxis 
                                 className="text-[0.3rem] text-textPrimary md:text-xs"
                                 dataKey="date"
                                 angle={-55}
@@ -168,9 +192,9 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
                                 tickLine={false}
                                 stroke="var(--color-text-primary)"
                             />
-                            <YAxis
+                            <YAxis 
                                 className="text-[0.5rem] text-textPrimary md:text-xs"
-                                domain={[0 - 3 * 1, 0 + 3 * 1]}
+                                domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
                                 textAnchor="end"
                                 ticks={yAxisValues.map((v) => v.value)}
                                 width={50}
@@ -235,9 +259,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
                                     dataKey={`value${index + 1}`}
                                     name={`Nível ${index + 1}`}
                                     stroke={lineColors[index]}
-                                    strokeWidth={1.2}
-                                    activeDot={{ r: 4 }}
-                                    dot={<CustomDot color={lineColors[index]} />}
+                                    strokeWidth={1.1}
+                                    dot={false}
+                                    activeDot={{ color: lineColors[index], r: 3 }}
+                                    // dot={<CustomDot color={lineColors[index]} />}
                                     animationDuration={500}
                                 />
                             ))}
@@ -247,7 +272,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
                                     y={line.value}
                                     stroke={line.color}
                                     strokeDasharray="5 5"
-                                    strokeWidth={1.1}
+                                    strokeWidth={1.0}
                                     strokeOpacity={1.0}
                                 />
                             ))}
@@ -265,4 +290,4 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings, 
     );
 };
 
-export default React.memo(MultipleLineControlChart);
+export default MultipleLineControlChart;

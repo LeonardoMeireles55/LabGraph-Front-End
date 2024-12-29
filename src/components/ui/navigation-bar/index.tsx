@@ -3,6 +3,7 @@ import { useState } from 'react';
 import router from 'next/router';
 import NavLinksComponent from './components/NavLinksComponent';
 import handleLogout from './constants/handleLogout';
+import { NavBarProps } from './types/NavigationBar';
 import NavLogo from './components/NavLogo';
 import MobileMenu from './components/MobileMenu';
 

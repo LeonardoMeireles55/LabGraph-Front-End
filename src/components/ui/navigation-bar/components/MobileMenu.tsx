@@ -2,7 +2,7 @@ import Link from 'next/link';
 import CsvGenerator from "@/components/features/csv-generator";
 import ViewToggleButton from "./ViewToggleButton";
 import navLinks from '../constants/navLinks';
-import MobileMenuProps from "../types/NavigationBar";
+import { MobileMenuProps } from '../types/NavigationBar';
 
 
 

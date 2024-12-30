@@ -2,6 +2,49 @@
 
 A specialized web application for laboratory quality control management, implementing Westgard rules for statistical quality control (QC) in clinical laboratories. This tool provides comprehensive visualization and analysis capabilities for monitoring and managing quality control data across hematology, coagulation, and biochemistry testing.
 
+## Project Structure
+```
+├──public
+│   ├── favicon.ico
+│   ├── lab.jpg
+│   ├── next.svg
+│   └── vercel.svg
+├── src
+│   ├── components
+│   │   ├── auth
+│   │   ├── charts
+│   │   ├── features
+│   │   ├── reports
+│   │   ├── shared
+│   │   ├── ui
+│   │   └── utils
+│   ├── constants
+│   │   └── fileProcessing.ts
+│   ├── contexts
+│   │   └── GraphContext.tsx
+│   ├── middleware.ts
+│   ├── pages
+│   │   ├── _app.tsx
+│   │   ├── _document.tsx
+│   │   ├── analytics-table.tsx
+│   │   ├── api
+│   │   ├── biochemistry.tsx
+│   │   ├── coagulation.tsx
+│   │   ├── hematology.tsx
+│   │   ├── index.tsx
+│   │   ├── login.tsx
+│   │   ├── reports.tsx
+│   │   └── signup.tsx
+│   ├── services
+│   │   └── auth.ts
+│   ├── styles
+│   │   └── globals.css
+│   └── utils
+│       ├── fileProcessors.ts
+│       └── validation.ts
+
+```
+
 ## Features
 
 - **Westgard Rules Implementation**:
@@ -127,6 +170,8 @@ The application can be deployed to various hosting platforms:
 2. **Other Platforms**
     - Deploy the contents of the `build` directory
     - Configure your server to serve the static files
+
+
 
 ## License
 

@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
+import { ListingTableProps } from '../types/ListiningTable';
 
-interface ListingItem {
-    name: string;
-    level: number;
-    sd: number;
-    mean: number;
-    date: string;
-    value: number;
-    unit_value: string;
-}
-
-interface ListingTableProps {
-    items: ListingItem[];
-}
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
-    const ITEMS_PER_PAGE = 6;
+
+    const ITEMS_PER_PAGE = 12;
     const [currentPage, setCurrentPage] = useState(1);
 
     const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
@@ -31,8 +20,8 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
     };
 
     return (
-        <div className="flex flex-col justify-evenly h-full w-full">
-            <table className="hidden w-full rounded-lg border border-double border-textSecondary bg-background shadow-md md:table">
+        <div className="flex flex-col justify-between h-full w-full">
+            <table className="hidden rounded-lg border border-double border-textSecondary bg-background shadow-md md:table">
                 <thead className="bg-muted">
                     <tr>
                         <th className="border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs">
@@ -87,9 +76,9 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 </tbody>
             </table>
 
-            <div className="grid h-full grid-cols-2 gap-2 md:hidden">
+            <div className="grid gap-4 px-2 grid-cols-4 text-center justify-center content-center md:hidden">
                 {currentItems.map((item, index) => (
-                    <div key={index} className="rounded-lg border border-border bg-surface p-4 shadow-md">
+                    <div key={index} className="rounded-md border border-border bg-surface p-2 shadow-md">
                         <p className="text-[6px] font-semibold text-textSecondary">
                             Teste: <span className="text-textPrimary">{item.name}</span>
                         </p>
@@ -117,7 +106,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
 
             {items.length === 0 && <div className="bg-background py-2 text-center text-muted">No items to display</div>}
 
-            <div className="mt-8 flex items-center justify-center space-x-2">
+            <div className="mt-8 md:mt-6 flex items-center justify-center space-x-2">
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}

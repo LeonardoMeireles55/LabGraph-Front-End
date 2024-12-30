@@ -10,15 +10,15 @@ const filter = (value: number, mean: number, sd: number) => {
     return value;
 };
 
-const CustomDot: React.FC<any> = ({ cx, cy, payload }) => {
+const CustomDot: React.FC<any> = ({ cx, cy, payload, colors }) => {
     return (
         <g>
-            <circle cx={cx} cy={cy} r={2} fill="var(--color-primary)" />
+            <circle cx={cx} cy={cy} r={3} fill={colors} />
             <text
                 x={cx}
                 y={cy - 10}
-                fill="var(--color-text-primary)"
-                className="text-[0.5rem] md:text-xs"
+                fill='var(--color-text-primary)'
+                className="text-[0.5rem] md:text-xs text-textPrimary"
                 textAnchor="end"
             >
                 {payload.rawValue.toFixed(2)}
@@ -36,6 +36,19 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
 
     const activeMean = useOwnValues ? ownMeanValue : mean;
     const activeSd = useOwnValues ? ownSdValue : sd;
+
+    const getColorByLevel = (level: string) => {
+        switch (level) {
+          case "low":
+            return 'var(--color-primary)';
+          case "normal":
+            return 'var(--color-secondary)';
+          case "high":
+            return 'var(--color-accent)';
+          default:
+            return 'var(--color-primary)';
+        }
+      };
 
     const chartData = data.map((entry) => ({
         date: customFormatDate(entry.date),
@@ -62,7 +75,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
         <div className="w-[98%] md:w-[90%] min-h-min mb-2">
             <div className="rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow">
                 <div className="relative flex flex-col items-center">
-                    <h2 className="mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl">
+                    <h2 className="mt-2 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl">
                         {name} - Level {level.toString().toUpperCase()}
                     </h2>
                     <div className="absolute right-2 top-1/2 -translate-y-1/2 transform">
@@ -96,7 +109,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                         width="99%"
                         height="95%"
                     >
-                        <LineChart data={chartData} margin={{ top: 40, right: 25, bottom: 40, left: 0 }}>
+                        <LineChart data={chartData} margin={{ top: 40, right: 25, bottom: 40, left: 25 }}>
                             <CartesianGrid stroke="false" />
                             <XAxis
                                 className="text-[0.5rem] text-white md:text-xs"
@@ -112,8 +125,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                 stroke="var(--color-text-primary)"
                             />
                             <YAxis
-                                className="text-[0.5rem] text-textPrimary md:text-sm"
-                                domain={[activeMean - 3 * activeSd, activeMean + 3 * activeSd]}
+                                className="text-[0.5rem] text-secondary md:text-sm"
+                                domain={[activeMean - 3.2 * activeSd, activeMean + 3.2 * activeSd]}
                                 textAnchor="end"
                                 ticks={yAxisValues.map((v) => v.value)}
                                 width={50}
@@ -136,6 +149,13 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                                     const data = item.payload;
                                                     return (
                                                         <div key={index} className="mb-2 border-b border-border pb-2 last:border-0 last:pb-0">
+                                                                                                                            <div className="flex items-center gap-2 mb-1">
+                                                                    <div
+                                                                        className="w-3 h-3 rounded-full"
+                                                                        style={{ backgroundColor: ('var(--color-primary)') }}
+                                                                    />
+                                                                    <span className="font-medium">Nível {level.toString().toUpperCase()}</span>
+                                                                </div>
                                                             <p>Teste: {data.name}</p>
                                                             <p>Valor: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
                                                             <p>Lote: {data.levelLot}</p>
@@ -153,11 +173,13 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                             <Line
                                 type="linear"
                                 dataKey="value"
-                                stroke="var(--color-primary)"
+                                stroke={getColorByLevel(level.toString())}
                                 strokeWidth={1.2}
                                 activeDot={{ r: 4 }}
-                                dot={<CustomDot />}
-                                animationDuration={500}
+                                dot={<CustomDot 
+                                    colors={getColorByLevel(level.toString())}
+                                />}
+                                animationDuration={250}
                             />
 
                             {yAxisValues.map((line, index) => (

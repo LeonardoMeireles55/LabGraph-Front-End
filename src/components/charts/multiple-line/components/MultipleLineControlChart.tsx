@@ -1,12 +1,12 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from 'recharts';
 import { MultipleLineChartProps } from '../../types/Chart';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { TbMathFunction, TbFileDescription } from 'react-icons/tb';
 
 const filter = (value: number, mean: number, sd: number) => {
-    if (value > mean + 3 * sd) return mean + 3 * sd + sd / 3;
-    if (value < mean - 3 * sd) return mean - 3 * sd - sd / 3;
+    if (value > mean + 3 * sd) return mean + 3 * sd;
+    if (value < mean - 3 * sd) return mean - 3 * sd;
     return value;
 };
 
@@ -24,25 +24,11 @@ const CustomDot: React.FC<any> = ({ cx, cy, color }) => {
 };
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
-    const [isLoading, setIsLoading] = useState(true);
+
     const [useOwnValues, setUseOwnValues] = useState(false);
 
-    
-
-    useEffect(() => {
-        if (listings.length > 0 && listings[0]?.genericValuesGroupByLevel?.values.length > 0) {
-            setIsLoading(false);
-        }
-    }, [listings]);
-
-
-
-    const defaultColors = useMemo(() =>
-        ["var(--color-primary)", "var(--color-secondary)", "var(--color-accent)"],
-        []
-    );
-    
-    const lineColors = defaultColors;
+       
+    const lineColors =  ["var(--color-primary)", "var(--color-secondary)", "var(--color-accent)"];
     const firstDataset = listings[0].genericValuesGroupByLevel.values;
     const dataPoints = firstDataset[0];
 
@@ -52,7 +38,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
         }));
         
 
-        const chartData = useMemo(() => {
+        const chartData = (): any[] => {
+
             if (!listings || listings.length === 0 || firstDataset.length === 0) {
                 return [];
             }
@@ -95,7 +82,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
             });
         
             return uniqueEntries;
-        }, [listings, firstDataset, activeValues]);
+        }
         
         const yAxisValues = useMemo(() => [
             { value: -3, label: '-3s', color: 'var(--color-sd3)' },
@@ -167,7 +154,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                         className="flex content-center items-center justify-center bg-surface"
                         width="99%"
                         height="95%">
-                        <LineChart data={chartData} margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+                        <LineChart data={chartData()} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
                             <CartesianGrid stroke="false" />
                             <XAxis 
                                 className="text-[0.3rem] text-textPrimary md:text-xs"
@@ -184,7 +171,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                             />
                             <YAxis 
                                 className="text-[0.5rem] text-textPrimary md:text-xs"
-                                domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
+                                domain={[0 - 3.5 * 1, 0 + 3.5* 1]}
                                 textAnchor="end"
                                 ticks={yAxisValues.map((v) => v.value)}
                                 width={50}
@@ -249,11 +236,11 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                     dataKey={`value${index + 1}`}
                                     name={`Nível ${index}`}
                                     stroke={lineColors[index]}
-                                    strokeWidth={1.1}
+                                    strokeWidth={1.0}
                                     connectNulls={true}
                                     activeDot={{ color: lineColors[index], r: 3 }}
                                     dot={<CustomDot color={lineColors[index]} />}
-                                    animationDuration={500}
+                                    animationDuration={250}
                                 />
                             ))}
                             {yAxisValues.map((line, index) => (
@@ -269,8 +256,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                             <Legend
                                 content={renderLegend}
                                 verticalAlign="bottom"
-                                align="center"
-                                wrapperStyle={{ paddingTop: '20px' }}
+                                wrapperStyle={{ paddingTop: '10px' }}
                             />
                         </LineChart>
                     </ResponsiveContainer>

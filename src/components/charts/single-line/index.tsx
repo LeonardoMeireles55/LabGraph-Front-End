@@ -3,15 +3,11 @@ import Loading from '@/components/utils/components/loading';
 import TestSelectorWithLevel from '@/components/shared/test-selector/common-selector';
 import Head from 'next/head';
 import { useState } from 'react';
-import { ListingItem } from '../types/Chart';
+import { LabGraphProps, ListingItem } from '../types/Chart';
 import Footer from '../../ui/footer';
 import NavBar from '../../ui/navigation-bar';
 
 
-interface LabGraphProps {
-    testList: string[];
-    analyticsType: string;
-}
 
 const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
@@ -34,7 +30,7 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
                         />
                     </div>
                     <div className="flex w-screen min-h-full flex-col items-center justify-evenly">
-                        {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
+                        {!dataFetched[0] ?  <Loading /> : <ControlChart listing={dataFetched} />}
                     </div>
                 </div>
             </div>

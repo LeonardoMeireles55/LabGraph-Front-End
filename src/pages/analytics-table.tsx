@@ -6,6 +6,7 @@ import NavBar from '@/components/ui/navigation-bar';
 import { ListingItem } from '@/components/charts/types/Chart';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import formatDateWithTime from '@/components/shared/date-selector/constants/formatDateWithTime';
 
 const AnalyticsTable = () => {
     const {
@@ -28,13 +29,6 @@ const AnalyticsTable = () => {
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-
-    const formatToTwoDigits = (value: number) => String(value).padStart(2, '0');
-
-    const formatDateWithTime = (year: number, month: number, day: number) => {
-        const formattedDate = `${year}-${formatToTwoDigits(month)}-${formatToTwoDigits(day + 1)}`;
-        return `${formattedDate} 00:00:00`;
-    };
 
     const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatDateWithTime(endYear, endMonth, endDay)}`;
 
@@ -78,16 +72,15 @@ const AnalyticsTable = () => {
 
     return (
         <div className="min-h-min bg-background">
-
-            <div className="xl:mt-12 mt-2 flex min-h-screen flex-col justify-evenly content-center items-center">
+            <div className="flex min-h-screen flex-col justify-evenly content-center items-center">
                 <Head>
                     <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
                 </Head>
                 <NavBar jsonData={dataFetched} fileName={analyticsType} />
                 <div className="w-full max-w-7xl">
-                    <div className="rounded-lg ">
-                        <div className="md:flex grid grid-cols-2  items-center justify-start content-center  mb-1">
-                            <div className="w-full md:w-auto mt-8 md:mt-0">
+                    <div className="">
+                        <div className="md:flex grid grid-cols-2 items-center justify-start content-center mt-16 mb-4 md:mb-6">
+                            <div className="w-full md:w-auto mt-4 md:mt-8">
                                 <DateSelector
                                     startDay={startDay}
                                     startMonth={startMonth}
@@ -128,7 +121,7 @@ const AnalyticsTable = () => {
                     </div>
 
                     {isLoading ? (
-                        <div className="flex justify-evenly items-center content-center">
+                        <div className="flex justify-center items-center content-center">
                             <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-primary"></div>
                         </div>
                     ) : error ? (

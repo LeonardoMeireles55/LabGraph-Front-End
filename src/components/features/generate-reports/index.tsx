@@ -9,6 +9,7 @@ interface CsvGeneratorProps {
 }
 
 const GenerateReports: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'data.csv' }) => {
+    
     const [isGenerating, setIsGenerating] = useState(false);
 
     const generateCsv = () => {

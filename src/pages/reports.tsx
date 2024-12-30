@@ -29,10 +29,7 @@ const ReportsPage = () => {
 
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
     const url = 
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/
-    ${analyticsType}${process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS}
-    startDate=${formatDateWithTime(startYear, startMonth, startDay)}
-    &endDate=${formatDateWithTime(endYear, endMonth, endDay)}`;
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS}startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatDateWithTime(endYear, endMonth, endDay)}`;
 
     useEffect(() => {
         const fetchData = async () => {

@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from 'recharts';
-import { ListingItem, MultipleLineChartProps } from '../../types/Chart';
+import { MultipleLineChartProps } from '../../types/Chart';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { TbMathFunction, TbFileDescription } from 'react-icons/tb';
 
@@ -14,21 +14,11 @@ const normalizeValue = (value: number, mean: number, sd: number) => {
     return (value - mean) / (sd || 1);
 };
 
-const CustomDot: React.FC<any> = ({ cx, cy, payload, dataKey, color }) => {
-    const value = payload[`raw${dataKey}`];
+const CustomDot: React.FC<any> = ({ cx, cy, color }) => {
 
     return (
         <g>
-            <circle cx={cx} cy={cy} r={2} fill={color} />
-            <text
-                x={cx}
-                // y={cy - 10}
-                fill="var(--color-text-primary)"
-                className="text-[0.5rem] md:text-xs"
-                textAnchor="center"
-            >
-                {/* {value} */}
-            </text>
+            <circle cx={cx} cy={cy} r={2.5} fill={color} />
         </g>
     );
 };
@@ -257,12 +247,12 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                     key={index}
                                     type="linear"
                                     dataKey={`value${index + 1}`}
-                                    name={`Nível ${index + 1}`}
+                                    name={`Nível ${index}`}
                                     stroke={lineColors[index]}
                                     strokeWidth={1.1}
-                                    dot={false}
+                                    connectNulls={true}
                                     activeDot={{ color: lineColors[index], r: 3 }}
-                                    // dot={<CustomDot color={lineColors[index]} />}
+                                    dot={<CustomDot color={lineColors[index]} />}
                                     animationDuration={500}
                                 />
                             ))}

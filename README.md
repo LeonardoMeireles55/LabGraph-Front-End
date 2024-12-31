@@ -181,10 +181,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 The application supports both light and dark modes for optimal viewing experience in any environment.
 
-### Light Mode:
+![image](https://github.com/user-attachments/assets/861b601c-53cd-4bd6-a12a-96ccc5ed0dce)
 
-![Light Mode Dashboard](https://github.com/user-attachments/assets/c44ca7ba-61aa-4fd7-9f50-c529f20336c9)
-
-### Dark Mode:
-
-![Dark Mode Dashboard](https://github.com/user-attachments/assets/31ca73d8-5b91-4084-b0fe-59abe204016e)

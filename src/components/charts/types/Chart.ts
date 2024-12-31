@@ -14,6 +14,14 @@ export interface ListingItem {
     rules?: string;
 }
 
+
+export interface ListingCollection extends Array<any> {}
+
+export interface UseFetchListingProps {
+    url: string;
+    urlMeanAndDeviation: string;
+}
+
 export interface GroupedListing {
     level: string;
     values: ListingItem[];

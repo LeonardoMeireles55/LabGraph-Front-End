@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     
     const token = request.cookies.get('tokenJWT')?.value;
     const isLoginPage = request.nextUrl.pathname === '/login';
@@ -23,9 +23,4 @@ export const config = {
     matcher: [
         '/((?!api|_next/static|_next/image|favicon.ico|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico).*)',
     ],
-};
-
-export const requestHandler = (tokenJWT: String) => {
-    const token = tokenJWT.split(' ')[1];
-    return token;
 };

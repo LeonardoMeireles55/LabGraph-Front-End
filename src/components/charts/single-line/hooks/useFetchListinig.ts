@@ -1,11 +1,8 @@
+import checkResponse from '@/components/utils/helpers/checkResponse';
 import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 import { useEffect, useState } from 'react';
+import { ListingCollection, UseFetchListingProps } from '../../types/Chart';
 
-interface ListingCollection extends Array<any> {}
-interface UseFetchListingProps {
-    url: string;
-    urlMeanAndDeviation: string;
-}
 
 const useFetchListinig = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => {
     const [listing, setListing] = useState<ListingCollection>([]);
@@ -13,12 +10,6 @@ const useFetchListinig = ({ url, urlMeanAndDeviation }: UseFetchListingProps) =>
     const [ownMeanValue, setOwnMean] = useState<number | null>(null);
     const [ownSdValue, setOwnSd] = useState<number | null>(null);
 
-    const checkResponse = async (response: Response) => {
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${getStatusMessage(response.status)}`);
-        }
-        return await response.json();
-    };
 
     useEffect(() => {
         const fetchData = async () => {

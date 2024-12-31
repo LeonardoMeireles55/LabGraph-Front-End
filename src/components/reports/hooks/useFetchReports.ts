@@ -1,3 +1,4 @@
+import checkResponse from '@/components/utils/helpers/checkResponse';
 import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 import { useEffect, useState } from 'react';
 
@@ -16,7 +17,7 @@ const useFetchReports = ({ url }: UseFetchListingProps) => {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                 });
-                const json = await response.json();
+                const json =  await checkResponse(response);
                 setListing(json);
             } catch (error: Error | any) {
                 console.error('Error fetching data:', getStatusMessage(error.status));

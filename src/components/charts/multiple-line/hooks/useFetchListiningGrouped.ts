@@ -1,6 +1,7 @@
 import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 import { useEffect, useState } from 'react';
 import { LevelGroupResponse } from '../../types/Chart';
+import checkResponse from '@/components/utils/helpers/checkResponse';
 
 
 const useFetchListiningGrouped = (url: string) => {
@@ -20,7 +21,7 @@ const useFetchListiningGrouped = (url: string) => {
               }
             });
 
-          const listingData = await listingResponse.json() as LevelGroupResponse[];
+          const listingData =  await checkResponse(listingResponse) as LevelGroupResponse[];
   
           setListing(listingData);
           

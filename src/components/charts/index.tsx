@@ -10,9 +10,7 @@ const GraphWrapper: React.FC<LabGraphProps> = ({ testList, analyticsType, levelL
     const Graph = viewMode === 'single' ? LabGraph : MultipleLineLabGraph;
 
     return (
-        <div className="relative w-full">
             <Graph levelListSize={levelListSize} testList={testList} analyticsType={analyticsType}   />
-        </div>
     );
 };
 

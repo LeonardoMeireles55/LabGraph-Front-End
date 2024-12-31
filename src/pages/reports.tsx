@@ -1,13 +1,13 @@
 import GenerateReports from '@/components/features/generate-reports';
 import Footer from '@/components/ui/footer';
 import NavBar from '@/components/ui/navigation-bar';
-import formatDateWithTime from '@/components/shared/date-selector/constants/formatDateWithTime';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { ListingItem } from '@/components/charts/types/Chart';
 import useDateSelector from '@/components/shared/date-selector/hooks/useDateSelector';
 import DateSelector from '@/components/shared/date-selector';
+import { formatDateWithTime, formatEndDateWithTime } from '@/components/shared/date-selector/constants/formatDateWithTime';
 
 
 const ReportsPage = () => {
@@ -29,7 +29,7 @@ const ReportsPage = () => {
 
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
     const url = 
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS}startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatDateWithTime(endYear, endMonth, endDay)}`;
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS}startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}`;
 
     useEffect(() => {
         const fetchData = async () => {

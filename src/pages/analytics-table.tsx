@@ -6,7 +6,7 @@ import NavBar from '@/components/ui/navigation-bar';
 import { ListingItem } from '@/components/charts/types/Chart';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import formatDateWithTime from '@/components/shared/date-selector/constants/formatDateWithTime';
+import { formatDateWithTime, formatEndDateWithTime } from '@/components/shared/date-selector/constants/formatDateWithTime';
 
 const AnalyticsTable = () => {
     const {
@@ -30,7 +30,7 @@ const AnalyticsTable = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatDateWithTime(endYear, endMonth, endDay)}`;
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}`;
 
     useEffect(() => {
         const fetchData = async () => {

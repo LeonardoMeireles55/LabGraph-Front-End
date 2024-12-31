@@ -1,4 +1,4 @@
-import formatDateWithTime from '../../shared/date-selector/constants/formatDateWithTime';
+import { formatDateWithTime, formatEndDateWithTime } from '../../shared/date-selector/constants/formatDateWithTime';
 import { UrlAnalyticsByNameAndDateProps } from '../types/urlAnalyticsByNameAndDateProps';
 import testFormatFix from './testFormatFix';
 
@@ -10,7 +10,7 @@ const urlByNameAndDate = (props: UrlAnalyticsByNameAndDateProps) => {
     const meanAndDeviationUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/mean-standard-deviation?name=`;
 
     const startDate = formatDateWithTime(date.startYear, date.startMonth, date.startDay);
-    const endDate = formatDateWithTime(date.endYear, date.endMonth, date.endDay);
+    const endDate = formatEndDateWithTime(date.endYear, date.endMonth, date.endDay);
 
     const urls: string[] = [];
     const meanDeviationUrls: string[] = [];

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from 'recharts';
-import { MultipleLineChartProps } from '../../types/Chart';
+import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { TbMathFunction, TbFileDescription } from 'react-icons/tb';
 
@@ -10,8 +10,10 @@ const filter = (value: number, mean: number, sd: number) => {
     return value;
 };
 
+
 const normalizeValue = (value: number, mean: number, sd: number) => {
-    return (value - mean) / (sd || 1);
+ 
+    return (filter(value, mean, sd) - mean) / (sd || 1);
 };
 
 const CustomDot: React.FC<any> = ({ cx, cy, color }) => {
@@ -23,67 +25,49 @@ const CustomDot: React.FC<any> = ({ cx, cy, color }) => {
     );
 };
 
+
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
 
     const [useOwnValues, setUseOwnValues] = useState(false);
+    
+    const lineColors = ["var(--color-primary)", "var(--color-secondary)", "var(--color-accent)"];
 
-       
-    const lineColors =  ["var(--color-primary)", "var(--color-secondary)", "var(--color-accent)"];
-    const firstDataset = listings[0].genericValuesGroupByLevel.values;
-    const dataPoints = firstDataset[0];
+    const chartData = useMemo(() => {
+        if (!listings || listings.length === 0) return [];
 
-    const activeValues = listings.map((listing) => ({
-            mean: useOwnValues ? listing.meanAndStandardDeviationRecordGroupByLevel.values[0].mean : listing.genericValuesGroupByLevel.values[0].mean,
-            sd: useOwnValues ? listing.meanAndStandardDeviationRecordGroupByLevel.values[0].standardDeviation : listing.genericValuesGroupByLevel.values[0].sd
-        }));
-        
+        const maxLength = Math.max(
+            ...listings.map(level => level.genericValuesGroupByLevel.values.length)
+        );
 
-        const chartData = (): any[] => {
+        return Array.from({ length: maxLength }).map((_, index) => {
+            const entry: any = {};
 
-            if (!listings || listings.length === 0 || firstDataset.length === 0) {
-                return [];
-            }
-        
-            const dateSet = new Set();
-            const uniqueEntries: any[] = [];
-        
-            firstDataset.forEach((_, index) => {
-                const date = customFormatDate(firstDataset[index].date).toString();
-                
-                if (dateSet.has(date)) {
-                    return;
-                }
-                dateSet.add(date);
-        
-                const entry: any = { date };
-        
-                listings.forEach((listing, listingIndex) => {
-                    const values = listing.genericValuesGroupByLevel?.values[index];
-                    if (values) {
-                        const currentValue = values.value;
-                        const { mean, sd } = activeValues[listingIndex];
-        
-                        if (currentValue) {
-                            const normalizedValue = normalizeValue(currentValue, mean, sd);
-                            const filteredValue = filter(normalizedValue, 0, 1);
-        
-                            entry[`value${listingIndex + 1}`] = filteredValue;
-                            entry[`levelLot${listingIndex + 1}`] = values.level_lot;
-                            entry[`name${listingIndex + 1}`] = values.name;
-                            entry[`description${listingIndex + 1}`] = values.description;
-                            entry[`rules${listingIndex + 1}`] = values.rules;
-                            entry[`mean${listingIndex + 1}`] = mean;
-                            entry[`sd${listingIndex + 1}`] = sd;
-                        }
+            listings.forEach((level, levelIndex) => {
+                const values = level.genericValuesGroupByLevel.values[index];
+                const ownValues = level.genericValuesGroupByLevel.values[index];
+                if (values) {
+                    if (levelIndex === 0) {
+                        entry.date = customFormatDate(values.date);
                     }
-                });
-        
-                uniqueEntries.push(entry);
+
+                    const { mean, standardDeviation }: MeanStdDevValue = { mean: values.mean, standardDeviation: values.sd };
+
+                    const levelNum = levelIndex + 1;
+                    entry[`value${levelNum}`] = normalizeValue(values.value, mean, standardDeviation);
+                    entry[`rawValue${levelNum}`] = values.value.toFixed(2)
+                    entry[`levelLot${levelNum}`] = values.level_lot;
+                    entry[`name${levelNum}`] = values.name;
+                    entry[`description${levelNum}`] = values.description;
+                    entry[`rules${levelNum}`] = values.rules;
+                    entry[`mean${levelNum}`] = useOwnValues? ownValues.mean : mean;
+                    entry[`sd${levelNum}`] = useOwnValues? ownValues.sd : standardDeviation;
+                }
             });
-        
-            return uniqueEntries;
-        }
-        
+
+            return entry;
+        });
+    }, [listings, useOwnValues]);
+    
         const yAxisValues = useMemo(() => [
             { value: -3, label: '-3s', color: 'var(--color-sd3)' },
             { value: -2, label: '-2s', color: 'var(--color-sd2)' },
@@ -122,7 +106,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
             <div className="rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow">
                 <div className="relative flex flex-col items-center">
                     <h2 className="mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl">
-                        {dataPoints.name}
+                        {listings[0].genericValuesGroupByLevel.values[0].name}
                     </h2>
                     <div className="absolute right-2 top-1/2 -translate-y-1/2 transform">
                         <button
@@ -154,7 +138,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                         className="flex content-center items-center justify-center bg-surface"
                         width="99%"
                         height="95%">
-                        <LineChart data={chartData()} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
+                        <LineChart data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
                             <CartesianGrid stroke="false" />
                             <XAxis 
                                 className="text-[0.3rem] text-textPrimary md:text-xs"
@@ -203,7 +187,6 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                                     const rulesKey = `rules${index + 1}`;
 
                                                     if (data[valueKey]) {
-                                                        const rawValue = data[rawValueKey];
                                                         return (
                                                             <div key={index} className={index > 0 ? "mt-2 border-t border-border pt-2" : ""}>
                                                                 <div className="flex items-center gap-2 mb-1">
@@ -214,7 +197,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                                                     <span className="font-medium">Nível {index + 1}</span>
                                                                 </div>
                                                                 <p>Teste: {data[nameKey]}</p>
-                                                                <p>Valor: {rawValue?.toFixed(2)}</p>
+                                                                <p>Valor: {data[rawValueKey]}</p>
                                                                 <p>Lote: {data[levelLotKey]}</p>
                                                                 <p>Descrição: {data[descriptionKey]}</p>
                                                                 {data[rulesKey] && <p>Regras: {data[rulesKey]}</p>}
@@ -233,7 +216,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                 <Line
                                     key={index}
                                     type="linear"
-                                    dataKey={`value${index + 1}`}
+                                    dataKey={`value${index +1}`}
                                     name={`Nível ${index}`}
                                     stroke={lineColors[index]}
                                     strokeWidth={1.0}

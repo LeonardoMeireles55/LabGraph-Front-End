@@ -5,6 +5,8 @@ export interface ListingItem {
     level: string;
     sd: number;
     mean: number;
+    ownMeanValue: number;
+    ownSdValue: number;
     date: string;
     value: number;
     unit_value: string;

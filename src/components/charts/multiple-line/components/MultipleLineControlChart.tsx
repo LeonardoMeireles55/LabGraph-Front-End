@@ -12,25 +12,18 @@ const filter = (value: number, mean: number, sd: number) => {
 
 
 const normalizeValue = (value: number, mean: number, sd: number) => {
- 
+
     return (filter(value, mean, sd) - mean) / (sd || 1);
-};
-
-const CustomDot: React.FC<any> = ({ cx, cy, color }) => {
-
-    return (
-        <g>
-            <circle cx={cx} cy={cy} r={2.5} fill={color} />
-        </g>
-    );
 };
 
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
 
     const [useOwnValues, setUseOwnValues] = useState(false);
-    
-    const lineColors = ["var(--color-primary)", "var(--color-secondary)", "var(--color-accent)"];
+
+    const lineColors = ["var(--color-primary)", "var(--color-accent)", "var(--color-secondary)"];
+    const levels = listings.map((level) => level.genericValuesGroupByLevel.level);
+
 
     const chartData = useMemo(() => {
         if (!listings || listings.length === 0) return [];
@@ -42,41 +35,52 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
         return Array.from({ length: maxLength }).map((_, index) => {
             const entry: any = {};
 
-            listings.forEach((level, levelIndex) => {
-                const values = level.genericValuesGroupByLevel.values[index];
-                const ownValues = level.genericValuesGroupByLevel.values[index];
-                if (values) {
-                    if (levelIndex === 0) {
-                        entry.date = customFormatDate(values.date);
-                    }
+            for (let levelIndex = 0; levelIndex < listings.length; levelIndex++) {
+                const data = listings[levelIndex];
+                const values = data.genericValuesGroupByLevel.values[index];
+                const ouwnMean = data.meanAndStandardDeviationRecordGroupByLevel.values[0].mean;
+                const ouwnSd = data.meanAndStandardDeviationRecordGroupByLevel.values[0].standardDeviation;
 
-                    const { mean, standardDeviation }: MeanStdDevValue = { mean: values.mean, standardDeviation: values.sd };
+
+
+                if (values) {
+
+                    const { mean, standardDeviation }: MeanStdDevValue = useOwnValues
+                        ? { mean: ouwnMean, standardDeviation: ouwnSd }
+                        : { mean: values.mean, standardDeviation: values.sd };
+
+                    entry.date = customFormatDate(values.date);
+
 
                     const levelNum = levelIndex + 1;
+
                     entry[`value${levelNum}`] = normalizeValue(values.value, mean, standardDeviation);
+                    entry[`date${levelNum}`] = customFormatDate(values.date);
+                    entry[`level${levelNum}`] = values.level;
                     entry[`rawValue${levelNum}`] = values.value.toFixed(2)
                     entry[`levelLot${levelNum}`] = values.level_lot;
                     entry[`name${levelNum}`] = values.name;
                     entry[`description${levelNum}`] = values.description;
                     entry[`rules${levelNum}`] = values.rules;
-                    entry[`mean${levelNum}`] = useOwnValues? ownValues.mean : mean;
-                    entry[`sd${levelNum}`] = useOwnValues? ownValues.sd : standardDeviation;
+                    entry[`mean${levelNum}`] = mean;
+                    entry[`sd${levelNum}`] = standardDeviation;
                 }
-            });
+            }
 
             return entry;
         });
     }, [listings, useOwnValues]);
-    
-        const yAxisValues = useMemo(() => [
-            { value: -3, label: '-3s', color: 'var(--color-sd3)' },
-            { value: -2, label: '-2s', color: 'var(--color-sd2)' },
-            { value: -1, label: '-1s', color: 'var(--color-sd1)' },
-            { value: 0, label: 'Média', color: 'var(--color-mean-line)' },
-            { value: 1, label: '+1s', color: 'var(--color-sd1)' },
-            { value: 2, label: '+2s', color: 'var(--color-sd2)' },
-            { value: 3, label: '+3s', color: 'var(--color-sd3)' },
-        ], []);
+
+    const yAxisValues = useMemo(() => [
+        { value: -3, label: '-3s', color: 'var(--color-sd3)' },
+        { value: -2, label: '-2s', color: 'var(--color-sd2)' },
+        { value: -1, label: '-1s', color: 'var(--color-sd1)' },
+        { value: 0, label: 'Média', color: 'var(--color-mean-line)' },
+        { value: 1, label: '+1s', color: 'var(--color-sd1)' },
+        { value: 2, label: '+2s', color: 'var(--color-sd2)' },
+        { value: 3, label: '+3s', color: 'var(--color-sd3)' },
+    ], []);
+
 
     const renderLegend = (props: any) => {
         const { payload } = props;
@@ -93,7 +97,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                             style={{ backgroundColor: entry.color }}
                         />
                         <span className="text-textPrimary">
-                            {`Nível ${index + 1}`}
+                            {`${levels[index].toUpperCase()}`}
                         </span>
                     </div>
                 ))}
@@ -138,26 +142,32 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                         className="flex content-center items-center justify-center bg-surface"
                         width="99%"
                         height="95%">
-                        <LineChart data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
+                        <LineChart  data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
                             <CartesianGrid stroke="false" />
-                            <XAxis 
+                            <XAxis
+                                allowDuplicatedCategory={true}
+                                allowDataOverflow={true}
+                                padding={{ left: 5, right: 0 }}
                                 className="text-[0.3rem] text-textPrimary md:text-xs"
                                 dataKey="date"
+                                // ticks={chartData.map((entry) => entry.date)}
                                 angle={-55}
                                 textAnchor="end"
-                                tickFormatter={(date) => date}
-                                height={50}
-                                width={50}
-                                tickMargin={5}
+                                height={80}
+                                tickMargin={15}
                                 axisLine={false}
                                 tickLine={false}
                                 stroke="var(--color-text-primary)"
+                                scale="auto"
+                                type="category"
+                                
                             />
-                            <YAxis 
+                            <YAxis
                                 className="text-[0.5rem] text-textPrimary md:text-xs"
-                                domain={[0 - 3.5 * 1, 0 + 3.5* 1]}
+                                domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
                                 textAnchor="end"
                                 ticks={yAxisValues.map((v) => v.value)}
+                                dataKey='sd'
                                 width={50}
                                 height={50}
                                 tickMargin={5}
@@ -172,13 +182,12 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                             <Tooltip
                                 content={({ active, payload }) => {
                                     if (active && payload && payload.length) {
-                                        const data = payload[0].payload;
-                                        const date = data.date;
-
                                         return (
                                             <div className="rounded border border-border bg-background p-2 text-[0.5rem] md:text-[0.65rem] text-textPrimary shadow-md shadow-shadow">
-                                                <p className="font-semibold border-b border-border pb-1 mb-2">Data: {date}</p>
                                                 {payload.map((entry, index) => {
+                                                    const data = entry.payload;
+                                                    const date = `date${index + 1}`;
+                                                    const level = `level${index + 1}`;
                                                     const valueKey = `value${index + 1}`;
                                                     const rawValueKey = `rawValue${index + 1}`;
                                                     const levelLotKey = `levelLot${index + 1}`;
@@ -188,14 +197,15 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
                                                     if (data[valueKey]) {
                                                         return (
-                                                            <div key={index} className={index > 0 ? "mt-2 border-t border-border pt-2" : ""}>
+                                                            <div key={index} className={"mt-2 border-t border-border pt-2"}>
                                                                 <div className="flex items-center gap-2 mb-1">
                                                                     <div
                                                                         className="w-3 h-3 rounded-full"
                                                                         style={{ backgroundColor: entry.stroke }}
                                                                     />
-                                                                    <span className="font-medium">Nível {index + 1}</span>
+                                                                    <span className="font-medium">{data[level].toUpperCase()}</span>
                                                                 </div>
+                                                                <p>Data: {data[date]}</p>
                                                                 <p>Teste: {data[nameKey]}</p>
                                                                 <p>Valor: {data[rawValueKey]}</p>
                                                                 <p>Lote: {data[levelLotKey]}</p>
@@ -216,14 +226,19 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                 <Line
                                     key={index}
                                     type="linear"
-                                    dataKey={`value${index +1}`}
+                                    dataKey={`value${index + 1}`}
                                     name={`Nível ${index}`}
                                     stroke={lineColors[index]}
                                     strokeWidth={1.0}
                                     connectNulls={true}
                                     activeDot={{ color: lineColors[index], r: 3 }}
-                                    dot={<CustomDot color={lineColors[index]} />}
-                                    animationDuration={250}
+                                    dot={{
+                                        fill: lineColors[index],
+                                        stroke: lineColors[index],
+                                        r: 2,
+                                        strokeWidth: 1,
+                                        className: 'text-textPrimary'
+                                    }}                                    animationDuration={250}
                                 />
                             ))}
                             {yAxisValues.map((line, index) => (
@@ -239,7 +254,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                             <Legend
                                 content={renderLegend}
                                 verticalAlign="bottom"
-                                wrapperStyle={{ paddingTop: '10px' }}
+                                wrapperStyle={{ paddingBottom: '0px' }}
                             />
                         </LineChart>
                     </ResponsiveContainer>

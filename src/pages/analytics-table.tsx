@@ -71,8 +71,8 @@ const AnalyticsTable = () => {
     ];
 
     return (
-        <div className="min-h-min bg-background">
-            <div className="flex min-h-screen flex-col justify-evenly content-center items-center">
+        <div className="min-h bg-background">
+            <div className="flex min-h flex-col justify-center content-center items-center">
                 <Head>
                     <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
                 </Head>
@@ -80,7 +80,7 @@ const AnalyticsTable = () => {
                 <div className="w-full max-w-7xl">
                     <div className="">
                         <div className="md:flex grid grid-cols-2 items-center justify-start content-center mt-16 mb-4 md:mb-6">
-                            <div className="w-full md:w-auto mt-4 md:mt-8">
+                            <div className="w-full md:w-auto mt-4 md:mt-16">
                                 <DateSelector
                                     startDay={startDay}
                                     startMonth={startMonth}

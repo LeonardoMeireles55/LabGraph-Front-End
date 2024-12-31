@@ -20,7 +20,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
     };
 
     return (
-        <div className="flex flex-col justify-between h-full w-full">
+        <div className="flex flex-col justify-between h-min w-full">
             <table className="hidden rounded-lg border border-double border-textSecondary bg-background shadow-md md:table">
                 <thead className="bg-muted">
                     <tr>
@@ -106,7 +106,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
 
             {items.length === 0 && <div className="bg-background py-2 text-center text-muted">No items to display</div>}
 
-            <div className="mt-8 md:mt-6 flex items-center justify-center space-x-2">
+            <div className="mt-0 md:mt-0 h-[150px] flex items-center justify-center space-x-2">
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}

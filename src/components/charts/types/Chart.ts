@@ -2,15 +2,13 @@ export interface ListingItem {
     name: string;
     level_lot: string;
     test_lot: string;
-    level: number;
+    level: string;
     sd: number;
     mean: number;
     date: string;
     value: number;
     unit_value: string;
     description: string;
-    ownMeanValue: number;
-    ownSdValue: number;
     rules?: string;
 }
 

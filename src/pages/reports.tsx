@@ -57,7 +57,7 @@ const ReportsPage = () => {
                 <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
             </Head>
             <NavBar jsonData={dataFetched} fileName={analyticsType} />
-            <main className="flex flex-grow flex-col items-center justify-evenly bg-background mt-16 xl:mt-16">
+            <main className="flex flex-grow flex-col items-center content-center justify-evenly bg-background mt-16 xl:mt-16">
                 <div className="xl:mt-14 grid gap-2 text-textSecondary md:flex">
                     <DateSelector
                         startDay={startDay}
@@ -69,10 +69,12 @@ const ReportsPage = () => {
                         handleFullStartDate={handleFullStartDate}
                         handleFullEndDate={handleFullEndDate}
                     />
+                    <div className='flex justify-evenly gap-2'>
                     <select
                         className="rounded-md border border-borderColor bg-background text-xs text-textSecondary md:text-sm"
                         value={analyticsType}
                         onChange={(e) => setAnalyticsType(e.target.value)}
+                        aria-label='dasdass'
                     >
                         <option value={'biochemistry-analytics'}>BIOQUÍMICA</option>
                         <option value={'hematology-analytics'}>HEMATOLOGIA</option>
@@ -81,6 +83,8 @@ const ReportsPage = () => {
                     <span className="flex justify-evenly rounded-md border border-borderColor text-textSecondary">
                         <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
                     </span>
+                    </div>
+                   
                 </div>
                 <span className="xl:w-1/3 w-5/6 rounded-xl border border-textPrimary p-4 shadow-md md:mt-4 xl:p-8">
                     <Image

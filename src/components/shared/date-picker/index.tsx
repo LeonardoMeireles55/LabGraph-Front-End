@@ -1,5 +1,5 @@
 import { DatePicker } from "@nextui-org/date-picker";
-import { today, getLocalTimeZone } from "@internationalized/date";
+import { CalendarDate } from "@internationalized/date";
 
 export default function DatePickerHelper({startDay, startMonth, startYear, endDay, endMonth, endYear,
     handleFullStartDate, handleFullEndDate }: {
@@ -19,9 +19,8 @@ export default function DatePickerHelper({startDay, startMonth, startYear, endDa
 
 
     return (
-        <div className="w-full max-w-xl flex flex-row gap-4">
-            <div className="w-full flex flex-col gap-1">
-                <h3>De:</h3>
+        <div className="w-full max-w-xl flex flex-row gap-4 text-sm md:text-md">
+            <div className="w-full flex flex-col gap-0">
                 <DatePicker
 
                      className="border border-borderColor rounded-md"
@@ -30,21 +29,16 @@ export default function DatePickerHelper({startDay, startMonth, startYear, endDa
                     //     calendarContent: ['text-textSecondary, bg-surface rounded-xl'],
                     // }}
                     aria-label="De:"
-                    value={today(getLocalTimeZone()).set({
-                        year: startYear,
-                        month: startMonth,
-                        day: startDay
-                    })}
+                    value={new CalendarDate(startYear, startMonth + 1, (startDay))}
                     onChange={(val) => {
                         if (val) {
-                            const jsDate = new Date(val.year, val.month, val.day);
+                            const jsDate = new Date(val.year, val.month - 1, val.day);
                             handleFullStartDate(jsDate)
                         }
                     }}
                 />
             </div>
-            <div className="w-full flex flex-col gap-1">
-                <h3>Até</h3>
+            <div className="w-full flex flex-col gap-0">
                 <DatePicker
                 className="border border-borderColor rounded-md"
                     // classNames={{
@@ -53,14 +47,10 @@ export default function DatePickerHelper({startDay, startMonth, startYear, endDa
 
                     // }}
                     aria-label="Até"
-                    value={today(getLocalTimeZone()).set({
-                        year: endYear,
-                        month: endMonth,
-                        day: endDay
-                    })}
+                    value={new CalendarDate(endYear, endMonth + 1, endDay)}
                     onChange={(val) => {
                         if (val) {
-                            const jsDate = new Date(val.year, val.month, val.day);
+                            const jsDate = new Date(val.year, val.month - 1, val.day);
                             handleFullEndDate(jsDate)
 
                         }

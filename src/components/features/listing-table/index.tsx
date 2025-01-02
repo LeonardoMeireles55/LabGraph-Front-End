@@ -20,7 +20,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
     };
 
     return (
-        <div className="flex flex-col justify-between h-min w-full">
+        <div className="flex flex-col justify-center h-min w-full">
             <table className="hidden rounded-lg border border-double border-textSecondary bg-background shadow-md md:table">
                 <thead className="bg-muted">
                     <tr>
@@ -76,7 +76,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 </tbody>
             </table>
 
-            <div className="grid gap-4 px-2 grid-cols-4 text-center justify-center content-center md:hidden">
+            <div className="grid gap-4 px-2 grid-cols-4 md:hidden">
                 {currentItems.map((item, index) => (
                     <div key={index} className="rounded-md border border-border bg-surface p-2 shadow-md">
                         <p className="text-[6px] font-semibold text-textSecondary">

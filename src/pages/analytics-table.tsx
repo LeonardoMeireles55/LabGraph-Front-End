@@ -73,9 +73,9 @@ const AnalyticsTable = () => {
                     <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
                 </Head>
                 <NavBar jsonData={dataFetched} fileName={analyticsType} />
-                <div className="w-full max-w-7xl">
-                    <div className="md:flex grid grid-cols-3 items-center justify-start content-center mt-16 mb-4 md:mb-6">
-                        <div className="w-full md:w-auto mt-4 md:mt-8">
+                <div className="w-full max-w-7xl text-xs">
+                    <div className="md:flex  items-center justify-start content-center mt-16 mb-4 md:mb-6">
+                        <div className="md:w-auto mt-4 md:mt-8 flex flex-col md:flex-row gap-2">
                             <DateSelector
                                 startDay={startDay}
                                 startMonth={startMonth}
@@ -86,32 +86,39 @@ const AnalyticsTable = () => {
                                 handleFullStartDate={handleFullStartDate}
                                 handleFullEndDate={handleFullEndDate}
                             />
-                            <div className="p-2">
-                                <label
-                                    htmlFor="tests"
-                                    className="text-textSecondary"
-                                >
+                            <div className=" flex flex-row">
+                                <div className=" p-2 md:p-4 py-2 rounded-xl border border-borderColor">
+                                    <h2 className="text-sm font-medium text-textPrimary ">
+                                        Analíto:
+                                    </h2>
+                                    <label
+                                        htmlFor="tests"
+                                        className="text-textSecondary"
+                                    >
 
-                                </label>
-                                <select
-                                    id="tests"
-                                    className="rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm"
-                                    value={analyticsType}
-                                    onChange={(e) => setAnalyticsType(e.target.value)}
-                                >
-                                    {analyticsOptions.map((option) => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </select>
+                                    </label>
+                                    <select
+                                        id="tests"
+                                        className="rounded  bg-background text-textSecondary md:px-2 md:py-1 md:text-sm"
+                                        value={analyticsType}
+                                        onChange={(e) => setAnalyticsType(e.target.value)}
+                                    >
+                                        {analyticsOptions.map((option) => (
+                                            <option key={option.value} value={option.value}>
+                                                {option.label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
+                    </div>
+
+
+                </div>
                 {isLoading ? (
-                    <div className="flex justify-center items-center content-center">
+                    <div className="flex justify-center">
                         <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-primary"></div>
                     </div>
                 ) : error ? (
@@ -119,12 +126,15 @@ const AnalyticsTable = () => {
                         {error}
                     </div>
                 ) :
-                    <div className='md:w-3/4'>
+                                        <div className='w-full md:w-3/4'>
                         < ListingTable items={dataFetched} />
 
-                    </div>
+                </div>
+
 
                 }
+
+
             </div>
             <div className="flex flex-col justify-end items-center">
                 <Footer />

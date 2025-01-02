@@ -5,10 +5,10 @@ export default function useDateSelector() {
   const startDate = new Date();
 
   const [startDay, setStartDay] = useState<number>(startDate.getDate() - 1);
-  const [startMonth, setStartMonth] = useState<number>(startDate.getMonth() + 1);
+  const [startMonth, setStartMonth] = useState<number>(startDate.getMonth());
   const [startYear, setStartYear] = useState<number>(startDate.getFullYear());
   
-  const [endDay, setEndDay] = useState<number>(endDate.getDate() + 1);
+  const [endDay, setEndDay] = useState<number>(endDate.getDate());
   const [endMonth, setEndMonth] = useState<number>(endDate.getMonth() + 1);
   const [endYear, setEndYear] = useState<number>(endDate.getFullYear());
 
@@ -16,7 +16,7 @@ export default function useDateSelector() {
     setStartDay(date.getDate());
     setStartMonth(date.getMonth());
     setStartYear(date.getFullYear());
-    console.log('calling')
+    console.log(date.getDate())
 }
 
 const handleFullEndDate = (date: Date): void => {

@@ -15,7 +15,7 @@ const Loading: React.FC = () => {
         <div className="flex flex-col items-center justify-center gap-4">
             <div className="spinner border-blue-500 h-12 w-12 animate-spin rounded-full border-t-4 text-primary" />
             {showMessage && (
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 text-textPrimary text-sm">
                     Tente selecionar outra data.
                 </p>
             )}

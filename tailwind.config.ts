@@ -1,3 +1,4 @@
+import { nextui } from '@nextui-org/react';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -5,6 +6,8 @@ const config: Config = {
         './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+        "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+
     ],
     theme: {
         screens: {
@@ -77,7 +80,53 @@ const config: Config = {
             },
         },
     },
-    plugins: [],
+    plugins: [
+        nextui({
+            layout: {
+                disabledOpacity: "0.3", // opacity-[0.3]
+                radius: {
+                  small: "2px", // rounded-small
+                  medium: "4px", // rounded-medium
+                  large: "6px", // rounded-large
+                },
+                borderWidth: {
+                  small: "1px", // border-small
+                  medium: "1px", // border-medium
+                  large: "2px", // border-large
+                },
+              },
+          themes: {
+            light: {
+              colors: {
+                default: "#4f46e5",
+                background: "#f8fafc",
+                foreground: "#1e293b",
+                primary: {
+                  DEFAULT: "#4f46e5",
+                },
+                secondary: {
+                  DEFAULT: "#4f46e5",
+                },
+              },
+            },
+            dark: {
+              colors: {
+                content1: "#334155",
+                default: "#334155",
+                
+                background: "#0f172a",
+                foreground:"#f8fafc",
+                primary: {
+                  DEFAULT: "#818cf8",
+                },
+                secondary: {
+                  DEFAULT: "#38bdf8",
+                },
+              },
+            },
+          },
+        }),
+      ],
 };
 
 export default config;

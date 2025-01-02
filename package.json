@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@internationalized/date": "^3.6.0",
+    "@nextui-org/date-picker": "^2.3.8",
+    "@nextui-org/react": "^2.6.10",
     "@types/cookie": "^0.6.0",
     "cookie": "^1.0.2",
     "date-fns": "^4.1.0",

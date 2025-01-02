@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleDateSelector from './components/SingleDateSelector';
+import Selector from './components/Selector';
 import { DateSelectorProps } from './types/dateSelectorProps';
 
 
@@ -11,33 +11,20 @@ const DateSelector: React.FC<DateSelectorProps> = ({
   endDay,
   endMonth,
   endYear,
-  handleStartDayChange,
-  handleStartMonthChange,
-  handleStartYearChange,
-  handleEndDayChange,
-  handleEndMonthChange,
-  handleEndYearChange
+  handleFullStartDate,
+  handleFullEndDate
 }) => {
   return (
-    <div className="space-y-1 md:space-y-1">
-      <SingleDateSelector
-        label="De"
-        day={startDay}
-        month={startMonth}
-        year={startYear}
-        onDayChange={handleStartDayChange}
-        onMonthChange={handleStartMonthChange}
-        onYearChange={handleStartYearChange}
-      />
-      <SingleDateSelector
-        label="Até"
-        day={endDay}
-        month={endMonth}
-        year={endYear}
-        onDayChange={handleEndDayChange}
-        onMonthChange={handleEndMonthChange}
-        onYearChange={handleEndYearChange}
-      />
+    <div className="">
+      <Selector
+        startDay={startDay}
+        startMonth={startMonth}
+        startYear={startYear}
+        endDay={endDay}
+        endMonth={endMonth}
+        endYear={endYear}
+        handleFullStartDate={handleFullStartDate}
+        handleFullEndDate={handleFullEndDate} />
     </div>
   );
 };

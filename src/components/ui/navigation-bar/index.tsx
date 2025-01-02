@@ -15,7 +15,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
 
 
     return (
-        <nav className="fixed left-0 top-0 z-50 w-full bg-navbar shadow-xl shadow-overlay">
+        <nav className="fixed left-0 top-0 z-50 w-full bg-navbar shadow-sm shadow-bgText">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between sm:h-20">
                     <NavLogo />

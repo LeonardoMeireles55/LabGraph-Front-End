@@ -19,12 +19,8 @@ const ReportsPage = () => {
             endDay,
             endMonth,
             endYear,
-            handleStartDayChange,
-            handleStartMonthChange,
-            handleStartYearChange,
-            handleEndDayChange,
-            handleEndMonthChange,
-            handleEndYearChange
+            handleFullStartDate,
+            handleFullEndDate
         } = useDateSelector();
 
     const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
@@ -70,12 +66,8 @@ const ReportsPage = () => {
                         endDay={endDay}
                         endMonth={endMonth}
                         endYear={endYear}
-                        handleStartDayChange={handleStartDayChange}
-                        handleStartMonthChange={handleStartMonthChange}
-                        handleStartYearChange={handleStartYearChange}
-                        handleEndDayChange={handleEndDayChange}
-                        handleEndMonthChange={handleEndMonthChange}
-                        handleEndYearChange={handleEndYearChange}
+                        handleFullStartDate={handleFullStartDate}
+                        handleFullEndDate={handleFullEndDate}
                     />
                     <select
                         className="rounded-md border border-borderColor bg-background text-xs text-textSecondary md:text-sm"

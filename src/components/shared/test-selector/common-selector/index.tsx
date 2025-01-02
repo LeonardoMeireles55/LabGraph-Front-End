@@ -20,12 +20,9 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({ list, analyt
         endDay,
         endMonth,
         endYear,
-        handleStartDayChange,
-        handleStartMonthChange,
-        handleStartYearChange,
-        handleEndDayChange,
-        handleEndMonthChange,
-        handleEndYearChange
+        handleFullStartDate,
+        handleFullEndDate
+
     } = useDateSelector();
 
 
@@ -64,12 +61,10 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({ list, analyt
                 endDay={endDay}
                 endMonth={endMonth}
                 endYear={endYear}
-                handleStartDayChange={handleStartDayChange}
-                handleStartMonthChange={handleStartMonthChange}
-                handleStartYearChange={handleStartYearChange}
-                handleEndDayChange={handleEndDayChange}
-                handleEndMonthChange={handleEndMonthChange}
-                handleEndYearChange={handleEndYearChange}
+                handleFullStartDate={handleFullStartDate}
+                handleFullEndDate={handleFullEndDate}
+        
+
             />            <div className="flex flex-row items-center content-center justify-between gap-1">
                 <span className="font-medium md:text-sm">Teste:</span>
                 <select

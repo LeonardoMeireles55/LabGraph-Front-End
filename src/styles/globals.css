@@ -31,7 +31,7 @@ select {
     --color-text-primary: #0f172a;
     --color-text-secondary: #475569;
     --color-grid-lines: rgba(203, 213, 225, 0.5);
-    --color-border: #cbd5e1;
+    --color-border: #475569;
     --color-mean-line: rgba(14, 165, 233, 0.8);
     --color-sd1: rgba(245, 158, 11, 0.8);
     --color-sd2: rgba(249, 115, 22, 0.8);
@@ -71,7 +71,7 @@ select {
     --color-white: #f8fafc;
     --color-green: #34d399;
     --color-shadow: rgba(0255, 255, 255, 0.2);
-    --color-overlay: rgba(255, 255, 255, 0.2);
+    --color-overlay: rgba(255, 255, 255, 0.808);
     --border-color: rgba(248, 250, 252, 0.5);
     --transition-default: all 0.3s ease-in-out;
     --transition-slow: all 0.5s ease-in-out;

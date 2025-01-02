@@ -16,12 +16,8 @@ const AnalyticsTable = () => {
         endDay,
         endMonth,
         endYear,
-        handleStartDayChange,
-        handleStartMonthChange,
-        handleStartYearChange,
-        handleEndDayChange,
-        handleEndMonthChange,
-        handleEndYearChange
+        handleFullStartDate,
+        handleFullEndDate
     } = useDateSelector();
 
     const [analyticsType, setAnalyticsType] = useState<string>('biochemistry-analytics');
@@ -78,66 +74,63 @@ const AnalyticsTable = () => {
                 </Head>
                 <NavBar jsonData={dataFetched} fileName={analyticsType} />
                 <div className="w-full max-w-7xl">
-                    <div className="">
-                        <div className="md:flex grid grid-cols-2 items-center justify-start content-center mt-16 mb-4 md:mb-6">
-                            <div className="w-full md:w-auto mt-4 md:mt-16">
-                                <DateSelector
-                                    startDay={startDay}
-                                    startMonth={startMonth}
-                                    startYear={startYear}
-                                    endDay={endDay}
-                                    endMonth={endMonth}
-                                    endYear={endYear}
-                                    handleStartDayChange={handleStartDayChange}
-                                    handleStartMonthChange={handleStartMonthChange}
-                                    handleStartYearChange={handleStartYearChange}
-                                    handleEndDayChange={handleEndDayChange}
-                                    handleEndMonthChange={handleEndMonthChange}
-                                    handleEndYearChange={handleEndYearChange}
-                                />
+                    <div className="md:flex grid grid-cols-3 items-center justify-start content-center mt-16 mb-4 md:mb-6">
+                        <div className="w-full md:w-auto mt-4 md:mt-8">
+                            <DateSelector
+                                startDay={startDay}
+                                startMonth={startMonth}
+                                startYear={startYear}
+                                endDay={endDay}
+                                endMonth={endMonth}
+                                endYear={endYear}
+                                handleFullStartDate={handleFullStartDate}
+                                handleFullEndDate={handleFullEndDate}
+                            />
+                            <div className="p-2">
+                                <label
+                                    htmlFor="tests"
+                                    className="text-textSecondary"
+                                >
 
-                                <div className="flex flex-row gap-1 py-1 w-full">
-                                    <label
-                                        htmlFor="tests"
-                                        className="text-textSecondary"
-                                    >
-                                        Teste:
-                                    </label>
-                                    <select
-                                        id="tests"
-                                        className="rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm"
-                                        value={analyticsType}
-                                        onChange={(e) => setAnalyticsType(e.target.value)}
-                                    >
-                                        {analyticsOptions.map((option) => (
-                                            <option key={option.value} value={option.value}>
-                                                {option.label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
+                                </label>
+                                <select
+                                    id="tests"
+                                    className="rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm"
+                                    value={analyticsType}
+                                    onChange={(e) => setAnalyticsType(e.target.value)}
+                                >
+                                    {analyticsOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {isLoading ? (
-                        <div className="flex justify-center items-center content-center">
-                            <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-primary"></div>
-                        </div>
-                    ) : error ? (
-                        <div className="mtrelative rounded bg-danger px-4 py-3 text-white" role="alert">
-                            {error}
-                        </div>
-                    ) : (
-                        <ListingTable items={dataFetched} />
-                    )}
-                </div>
-                <div className="flex flex-col justify-end items-center">
-                    <Footer />
-                </div>
+                {isLoading ? (
+                    <div className="flex justify-center items-center content-center">
+                        <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-primary"></div>
+                    </div>
+                ) : error ? (
+                    <div className="mtrelative rounded bg-danger px-4 py-3 text-white" role="alert">
+                        {error}
+                    </div>
+                ) :
+                    <div className='md:w-3/4'>
+                        < ListingTable items={dataFetched} />
+
+                    </div>
+
+                }
             </div>
-
+            <div className="flex flex-col justify-end items-center">
+                <Footer />
+            </div>
         </div>
+
     );
 };
 

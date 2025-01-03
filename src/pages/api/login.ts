@@ -10,7 +10,7 @@ interface SuccessResponse {
   success: boolean;
 }
 
-const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+const TOKEN_SECONDS = 3600;
 
 export default function handler(
   req: NextApiRequest,
@@ -40,7 +40,7 @@ export default function handler(
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict' as const,
       path: '/',
-      maxAge: ONE_DAY_IN_SECONDS,
+      maxAge: TOKEN_SECONDS,
     };
 
     try {

@@ -14,7 +14,16 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  return NextResponse.next();
+  const response = await NextResponse.next();
+  
+  if (response.status === 403) {
+    // Clear the token cookie if we get a 403
+    const response = NextResponse.redirect(new URL('/login', request.url));
+    response.cookies.delete('tokenJWT');
+    return response;
+  }
+
+  return response;
 }
 
 export const config = {

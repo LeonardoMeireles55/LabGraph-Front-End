@@ -13,6 +13,7 @@ import {
 } from 'recharts';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart';
+import useWindowDimensions from '../../../ui/hooks/useWindowDimensions';
 
 const filter = (value: number, mean: number, sd: number) => {
   if (value > mean + 3 * sd) return mean + 3 * sd;
@@ -26,6 +27,7 @@ const normalizeValue = (value: number, mean: number, sd: number) => {
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
+  const { width: windowWidth } = useWindowDimensions();
 
   const lineColors = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)'];
   const levels = listings.map((level) => level.genericValuesGroupByLevel.level);
@@ -134,30 +136,26 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
           </div>
         </div>
 
-        <div className='flex h-[225px] w-[100%] content-center items-center justify-center md:min-h-[250px] xl:min-h-[325px] 2xl:min-h-[350px] 3xl:min-h-[500px]'>
+        <div className='flex h-[250px]  content-center items-center justify-center md:min-h-[250px] xl:min-h-[325px] 2xl:min-h-[350px] 3xl:min-h-[500px]'>
           <ResponsiveContainer
-            className='flex content-center items-center justify-center bg-surface'
-            width='99%'
-            height='95%'
+            className='flex items-center content-center justify-center bg-surface'
+            width='98%'
+            height='98%'
           >
-            <LineChart data={chartData} margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
+            <LineChart data={chartData} margin={{ }}>
               <CartesianGrid stroke='false' />
               <XAxis
-                allowDuplicatedCategory={true}
-                allowDataOverflow={true}
-                padding={{ left: 5, right: 0 }}
-                className='text-[0.3rem] text-textPrimary md:text-xs'
+                className='text-[0.5rem] text-textPrimary md:text-xs'
                 dataKey='date'
-                // ticks={chartData.map((entry) => entry.date)}
-                angle={-55}
+                angle={-60}
                 textAnchor='end'
-                height={80}
-                tickMargin={15}
+                tickFormatter={(date) => date}
+                height={75}
+                width={0}
+                tickMargin={0}
                 axisLine={false}
                 tickLine={false}
                 stroke='var(--color-text-primary)'
-                scale='auto'
-                type='category'
               />
               <YAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
@@ -165,9 +163,9 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                 textAnchor='end'
                 ticks={yAxisValues.map((v) => v.value)}
                 dataKey='sd'
-                width={50}
-                height={50}
-                tickMargin={5}
+                width={windowWidth < 768 ? 30 : 50}
+                height={0}
+                tickMargin={0}
                 axisLine={false}
                 tickLine={false}
                 stroke='var(--color-text-primary)'
@@ -179,19 +177,28 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               <Tooltip
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
+                    const uniqueEntries = payload.filter((entry, index, self) => 
+                      index === self.findIndex((e) => (
+                        e.dataKey && entry.dataKey && (
+                        e.payload[`date${e.dataKey.toString().slice(-1)}`] === entry.payload[`date${entry.dataKey.toString().slice(-1)}`] &&
+                        e.payload[`level${e.dataKey.toString().slice(-1)}`] === entry.payload[`level${entry.dataKey.toString().slice(-1)}`])
+                      ))
+                    );
+              
                     return (
-                      <div className='rounded border border-border bg-background p-2 text-[0.5rem] text-textPrimary shadow-md shadow-shadow md:text-[0.65rem]'>
-                        {payload.map((entry, index) => {
+                      <div className='rounded border border-border bg-background p-1 text-[0.5rem] text-textPrimary shadow-md shadow-shadow md:text-[0.65rem]'>
+                        {uniqueEntries.map((entry, index) => {
+                          const dataKeyIndex = entry.dataKey?.toString().slice(-1) ?? '';
                           const data = entry.payload;
-                          const date = `date${index + 1}`;
-                          const level = `level${index + 1}`;
-                          const valueKey = `value${index + 1}`;
-                          const rawValueKey = `rawValue${index + 1}`;
-                          const levelLotKey = `levelLot${index + 1}`;
-                          const nameKey = `name${index + 1}`;
-                          const descriptionKey = `description${index + 1}`;
-                          const rulesKey = `rules${index + 1}`;
-
+                          const date = `date${dataKeyIndex}`;
+                          const level = `level${dataKeyIndex}`;
+                          const valueKey = `value${dataKeyIndex}`;
+                          const rawValueKey = `rawValue${dataKeyIndex}`;
+                          const levelLotKey = `levelLot${dataKeyIndex}`;
+                          const nameKey = `name${dataKeyIndex}`;
+                          const descriptionKey = `description${dataKeyIndex}`;
+                          const rulesKey = `rules${dataKeyIndex}`;
+              
                           if (data[valueKey]) {
                             return (
                               <div key={index} className={'mt-2 border-t border-border pt-2'}>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
 import {
   CartesianGrid,
+  Legend,
   Line,
   LineChart,
   ReferenceLine,
@@ -12,6 +13,7 @@ import {
 } from 'recharts';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { ControlChartProps } from '../../types/Chart';
+import useWindowDimensions from '@/components/ui/hooks/useWindowDimensions';
 
 const filter = (value: number, mean: number, sd: number) => {
   if (value > mean + 3 * sd) return mean + 3 * sd + sd / 3;
@@ -36,8 +38,14 @@ const CustomDot: React.FC<any> = ({ cx, cy, payload, colors }) => {
   );
 };
 
+
+
 const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
+
+
+
   const [useOwnValues, setUseOwnValues] = useState(false);
+  const { width: windowWidth } = useWindowDimensions();
 
   const data = listing;
   const { mean, sd, name, level, unit_value, ownMeanValue, ownSdValue } = data[0];
@@ -79,14 +87,30 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     { value: activeMean + 3 * activeSd, label: '+3s', color: 'var(--color-sd3)' },
   ];
 
+
+  const renderLegend = (props: any) => {
+    const { payload } = props;
+  
+    return (
+      <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
+        {payload.map((entry: any, index: number) => (
+          <div key={`legend-${index}`} className='flex items-center gap-2'>
+            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: entry.color }} />
+            <span className='text-textPrimary'>{`${level.toUpperCase()}`}</span>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='border shadow-md rounded-2xl border-borderColor bg-surface shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='flex items-center content-center justify-center mt-2 text-base text-textSecondary md:text-2xl'>
-            {name} - Level {level.toString().toUpperCase()}
+        <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl'>
+        {name} - Level {level.toString().toUpperCase()}
           </h2>
-          <div className='absolute transform -translate-y-1/2 right-2 top-1/2'>
+          <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
             <button
               onClick={() => setUseOwnValues(!useOwnValues)}
               className='flex flex-col items-center transition-all duration-300 group'
@@ -112,36 +136,35 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
             </button>
           </div>
         </div>
-
-        <div className='flex h-[225px] w-[100%] content-center items-center justify-center md:min-h-[250px] xl:min-h-[325px] 2xl:min-h-[350px] 3xl:min-h-[500px]'>
+        <div className='flex h-[250px]  content-center items-center justify-center md:min-h-[250px] xl:min-h-[325px] 2xl:min-h-[350px] 3xl:min-h-[500px]'>
           <ResponsiveContainer
             className='flex items-center content-center justify-center bg-surface'
-            width='99%'
-            height='95%'
+            width='98%'
+            height='98%'
           >
-            <LineChart data={chartData} margin={{ top: 20, right: 25, bottom: 20, left: 0 }}>
+            <LineChart data={chartData} margin={{ }}>
               <CartesianGrid stroke='false' />
               <XAxis
-                className='text-[0.5rem] text-white md:text-xs'
+                className='text-[0.5rem] text-textPrimary md:text-xs'
                 dataKey='date'
-                angle={-55}
+                angle={-60}
                 textAnchor='end'
                 tickFormatter={(date) => date}
-                height={50}
-                width={50}
-                tickMargin={5}
+                height={75}
+                width={0}
+                tickMargin={0}
                 axisLine={false}
                 tickLine={false}
                 stroke='var(--color-text-primary)'
               />
               <YAxis
-                className='text-[0.5rem] text-secondary md:text-sm'
-                domain={[activeMean - 3.2 * activeSd, activeMean + 3.2 * activeSd]}
+                className='text-[0.5rem] text-textPrimary md:text-xs'
+                domain={[activeMean - 3.5 * activeSd, activeMean + 3.5 * activeSd]}
                 textAnchor='end'
                 ticks={yAxisValues.map((v) => v.value)}
-                width={50}
-                height={50}
-                tickMargin={5}
+                width={windowWidth < 768 ? 30 : 40} // 768px is Tailwind's md breakpoint
+                height={0}
+                tickMargin={0}
                 axisLine={false}
                 tickLine={false}
                 stroke='var(--color-text-primary)'
@@ -189,8 +212,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 type='linear'
                 dataKey='value'
                 stroke={getColorByLevel(level.toString())}
-                strokeWidth={1.2}
-                activeDot={{ r: 4 }}
+                strokeWidth={1.0}
+                activeDot={{ r: 3 }}
                 dot={<CustomDot colors={getColorByLevel(level.toString())} />}
                 animationDuration={250}
               />
@@ -201,10 +224,15 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                   y={line.value}
                   stroke={line.color}
                   strokeDasharray='5 5'
-                  strokeWidth={1.1}
+                  strokeWidth={1.0}
                   strokeOpacity={1.0}
                 />
               ))}
+                <Legend
+                              content={renderLegend}
+                              verticalAlign='bottom'
+                              wrapperStyle={{ paddingBottom: '0px' }}
+                            />
             </LineChart>
           </ResponsiveContainer>
         </div>

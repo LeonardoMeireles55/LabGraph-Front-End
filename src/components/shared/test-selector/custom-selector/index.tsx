@@ -42,7 +42,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   }, [url, listing, setListinig]);
 
   return (
-    <div className='mt-12 grid content-center items-center gap-1 text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
+    <div className='mt-12 grid content-center items-center gap-4 text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
       <DateSelector
         startDay={startDay}
         startMonth={startMonth}
@@ -57,10 +57,10 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
         handleEndMonthChange={handleEndMonthChange}
         handleEndYearChange={handleEndYearChange}
       />
-      <div className='flex flex-row content-center items-center justify-between gap-1'>
-        <span className='font-medium md:text-sm'>Teste:</span>
+      <div className='flex flex-row content-center items-center justify-between gap-3'>
+        <span className='font-medium text-sm'>Teste:</span>
         <select
-          className='rounded border border-borderColor bg-background p-0 text-textSecondary md:text-sm xl:p-1'
+          className='rounded-md border border-borderColor bg-background px-3 py-1.5 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
           value={testName}
           onChange={(e) => setTestName(e.target.value)}
         >
@@ -72,7 +72,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
         </select>
         <span className='flex flex-row content-center items-center justify-between'>
           <Link
-            className='content-center items-center rounded border border-borderColor bg-background px-1 py-0 text-base text-textPrimary hover:scale-110 md:px-2 md:py-1'
+            className='inline-flex items-center justify-center rounded-md border border-borderColor bg-background px-3 py-1.5 text-sm font-medium text-textPrimary shadow-sm transition-all duration-200 hover:scale-105 hover:bg-background/90 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
             target='_blank'
             href='https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit'
           >

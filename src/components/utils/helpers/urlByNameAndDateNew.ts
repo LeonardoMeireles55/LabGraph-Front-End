@@ -1,17 +1,19 @@
-import {formatDateWithTime, formatEndDateWithTime} from '../../shared/date-selector/constants/formatDateWithTime';
+import {
+  formatDateWithTime,
+  formatEndDateWithTime,
+} from '../../shared/date-selector/constants/formatDateWithTime';
 import { UrlAnalyticsByNameAndDatePropsNew } from '../types/urlAnalyticsByNameAndDateProps';
 import testFormatFix from './testFormatFix';
 
-
 const urlByNameAndDateNew = (props: UrlAnalyticsByNameAndDatePropsNew) => {
-    const { name, date, analyticsType } = props;
+  const { name, date, analyticsType } = props;
 
-    const startDate = formatDateWithTime(date.startYear, date.startMonth, date.startDay);
-    const endDate = formatEndDateWithTime(date.endYear, date.endMonth, date.endDay);
+  const startDate = formatDateWithTime(date.startYear, date.startMonth, date.startDay);
+  const endDate = formatEndDateWithTime(date.endYear, date.endMonth, date.endDay);
 
-    const url = (`${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${process.env.NEXT_PUBLIC_API_BASE_URL_RESULTS_GROUPED}${testFormatFix(name)}&startDate=${startDate}&endDate=${endDate}`);
+  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${process.env.NEXT_PUBLIC_API_BASE_URL_RESULTS_GROUPED}${testFormatFix(name)}&startDate=${startDate}&endDate=${endDate}`;
 
-    return { url };
+  return { url };
 };
 
 export default urlByNameAndDateNew;

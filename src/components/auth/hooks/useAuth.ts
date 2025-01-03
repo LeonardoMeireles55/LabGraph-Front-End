@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { AuthFormData } from '@/components/auth/types/Auth';
 import { authService } from '@/services/auth';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 interface ValidationError {
   field: string;
@@ -21,7 +21,7 @@ export const useAuth = (isLogin: boolean) => {
 
   const validateForm = (): ValidationError[] => {
     const errors: ValidationError[] = [];
-    
+
     if (!formData.email) {
       errors.push({ field: 'email', message: 'Email é obrigatório' });
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -48,9 +48,9 @@ export const useAuth = (isLogin: boolean) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError('');
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     }));
   };
 
@@ -62,19 +62,19 @@ export const useAuth = (isLogin: boolean) => {
     try {
       const validationErrors = validateForm();
       if (validationErrors.length > 0) {
-        setError(validationErrors.map(err => err.message).join(', '));
+        setError(validationErrors.map((err) => err.message).join(', '));
         return;
       }
 
       const response = isLogin
-        ? await authService.signIn({ 
-            email: formData.email.trim(), 
-            password: formData.password 
+        ? await authService.signIn({
+            email: formData.email.trim(),
+            password: formData.password,
           })
-        : await authService.signUp({ 
-            email: formData.email.trim(), 
-            password: formData.password, 
-            username: formData.username?.trim() ?? '' 
+        : await authService.signUp({
+            email: formData.email.trim(),
+            password: formData.password,
+            username: formData.username?.trim() ?? '',
           });
 
       if (response.tokenJWT) {

@@ -1,9 +1,7 @@
-
 export interface NavLinksComponentProps {
   jsonData?: Array<Record<string, any>>;
   fileName?: string;
 }
-
 
 export interface MobileMenuProps {
   isMenuOpen: boolean;

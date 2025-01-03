@@ -1,7 +1,7 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 
 export default function Document() {
-    const setThemeScript = `
+  const setThemeScript = `
     (function() {
       try {
         const theme = localStorage.getItem('theme');
@@ -16,18 +16,18 @@ export default function Document() {
     })();
   `;
 
-    return (
-        <Html lang="pt-br" className="light">
-            <Head />
-            <body className="">
-                <Main />
-                <NextScript />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: setThemeScript,
-                    }}
-                />
-            </body>
-        </Html>
-    );
+  return (
+    <Html lang='pt-br' className='light'>
+      <Head />
+      <body className=''>
+        <Main />
+        <NextScript />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: setThemeScript,
+          }}
+        />
+      </body>
+    </Html>
+  );
 }

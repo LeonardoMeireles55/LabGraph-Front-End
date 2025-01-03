@@ -3,16 +3,16 @@ import { useState } from 'react';
 export default function useDateSelector() {
   const endDate = new Date();
   const startDate = new Date();
+  startDate.setDate(endDate.getDate() - 30);
 
-  const [startDay, setStartDay] = useState<number>(startDate.getDate() - 1);
+  const [startDay, setStartDay] = useState<number>(startDate.getDate());
   const [startMonth, setStartMonth] = useState<number>(startDate.getMonth() + 1);
   const [startYear, setStartYear] = useState<number>(startDate.getFullYear());
-  
-  const [endDay, setEndDay] = useState<number>(endDate.getDate() + 1);
+
+  const [endDay, setEndDay] = useState<number>(endDate.getDate());
   const [endMonth, setEndMonth] = useState<number>(endDate.getMonth() + 1);
   const [endYear, setEndYear] = useState<number>(endDate.getFullYear());
 
- 
   const handleStartDayChange = (day: number) => {
     setStartDay(day);
   };
@@ -22,7 +22,6 @@ export default function useDateSelector() {
   };
 
   const handleStartMonthChange = (month: number) => {
-    
     setStartMonth(month);
   };
 

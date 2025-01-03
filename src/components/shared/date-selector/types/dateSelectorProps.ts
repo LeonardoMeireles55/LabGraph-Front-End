@@ -18,12 +18,10 @@ export interface DaySelectorProps {
   onDayChange: (day: number) => void;
 }
 
-
 export interface MonthSelectorProps {
-    selectedMonth: number;
-    onMonthChange: (month: number) => void;
+  selectedMonth: number;
+  onMonthChange: (month: number) => void;
 }
-
 
 export interface SingleDateSelectorProps {
   label: string;

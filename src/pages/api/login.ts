@@ -20,7 +20,7 @@ export default function handler(
     console.error(`Invalid method: ${req.method}`);
     return res.status(405).json({
       message: 'Method not allowed. Only POST requests are accepted.',
-      status: 405
+      status: 405,
     });
   }
 
@@ -31,7 +31,7 @@ export default function handler(
       console.error('Invalid or missing token in request body');
       return res.status(400).json({
         message: 'Invalid token provided',
-        status: 400
+        status: 400,
       });
     }
 
@@ -44,15 +44,12 @@ export default function handler(
     };
 
     try {
-      res.setHeader(
-        'Set-Cookie',
-        serialize('tokenJWT', token, cookieOptions)
-      );
+      res.setHeader('Set-Cookie', serialize('tokenJWT', token, cookieOptions));
     } catch (cookieError) {
       console.error('Error setting cookie:', cookieError);
       return res.status(500).json({
         message: 'Failed to set authentication cookie',
-        status: 500
+        status: 500,
       });
     }
 
@@ -61,7 +58,7 @@ export default function handler(
     console.error('Login error:', error);
     return res.status(500).json({
       message: error instanceof Error ? error.message : 'Internal server error',
-      status: 500
+      status: 500,
     });
   }
 }

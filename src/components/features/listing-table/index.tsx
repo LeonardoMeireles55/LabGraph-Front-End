@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { ListingTableProps } from '../types/ListiningTable';
+import useWindowDimensions from '@/components/ui/hooks/useWindowDimensions';
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
-  const ITEMS_PER_PAGE = 12;
+  const { width: windowWidth } = useWindowDimensions();
   const [currentPage, setCurrentPage] = useState(1);
+
+
+  const ITEMS_PER_PAGE = windowWidth < 720 ? 12 : 7;
 
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
 

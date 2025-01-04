@@ -206,7 +206,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
                           if (data[valueKey]) {
                             return (
-                              <div key={index} className={'mt-2 border-t border-border pt-2'}>
+                              <div key={index} className={'border-border pt-2'}>
                                 <div className='mb-1 flex items-center gap-2'>
                                   <div
                                     className='h-3 w-3 rounded-full'

@@ -31,10 +31,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
   const lineColors = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)'];
 
-  if (!listings || listings.length === 0) return [];
-
-  const levels = listings.map((level) => level.groupedValuesByLevel.level);
-
+  const levels = useMemo(() => {
+    if (!listings || listings.length === 0) return [];
+    return listings.map((level) => level.groupedValuesByLevel.level);
+  }, [listings]);
 
   const chartData = useMemo(() => {
     if (!listings || listings.length === 0) return [];
@@ -90,6 +90,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
     ],
     []
   );
+
+  if (!listings || listings.length === 0) return null;
 
   const renderLegend = (props: any) => {
     const { payload } = props;

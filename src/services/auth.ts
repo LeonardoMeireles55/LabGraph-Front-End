@@ -1,5 +1,4 @@
 import { AuthFormData } from '@/components/auth/types/Auth';
-import checkResponse from '@/components/utils/helpers/checkResponse';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -10,7 +9,7 @@ export const authService = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
     });
-    return await checkResponse(response);
+    return await response.json();
   },
 
   async signUp(userData: Omit<AuthFormData, 'confirmPassword'>) {
@@ -19,7 +18,7 @@ export const authService = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
     });
-    return await checkResponse(response);
+    return await response.json();
   },
 
   async setSession(token: string) {

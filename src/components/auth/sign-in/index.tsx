@@ -10,7 +10,7 @@ const LoginForm = () => {
   const { formData, error, handleChange, handleSubmit } = useAuth(true);
 
   return (
-    <div className='bg-surface/80 w-full max-w-md transform rounded-xl border border-borderColor p-8 shadow-xl backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-2xl sm:p-10'>
+    <div className='w-full max-w-md transform rounded-xl border border-borderColor p-8 shadow-xl backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-2xl sm:p-10'>
       <div className='absolute right-4 top-4 z-50'>
         <ThemeToggle />
       </div>
@@ -18,7 +18,7 @@ const LoginForm = () => {
         <div className='mb-6 flex justify-center text-textSecondary opacity-95 transition-transform duration-300 ease-in-out hover:scale-105'>
           <Logo className='h-20 w-auto' />
         </div>
-        <h1 className='to-primary/70 bg-gradient-to-r from-primary bg-clip-text text-4xl font-bold text-textPrimary sm:text-5xl'>
+        <h1 className='bg-clip-text text-4xl font-bold text-textPrimary sm:text-5xl'>
           LabGraph
         </h1>
         <p className='mt-3 text-textSecondary'>Faça login para continuar</p>
@@ -38,7 +38,6 @@ const LoginForm = () => {
           id='password'
           type='password'
           label='Senha'
-          autocomplete='current-password'
           value={formData.password}
           onChange={handleChange}
         />
@@ -55,7 +54,7 @@ const LoginForm = () => {
           </label>
           <Link
             href='#'
-            className='hover:text-primary/80 text-primary transition-colors duration-200'
+            className='text-primary transition-colors duration-200'
           >
             Esqueceu a senha?
           </Link>
@@ -67,7 +66,7 @@ const LoginForm = () => {
           Não tem uma conta?{' '}
           <Link
             href='/signup'
-            className='hover:text-primary/80 font-medium text-primary transition-colors duration-200'
+            className='font-medium text-primary transition-colors duration-200'
           >
             Registre-se
           </Link>

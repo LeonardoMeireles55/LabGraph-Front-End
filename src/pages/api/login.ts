@@ -28,10 +28,18 @@ export default function handler(
     const { token } = req.body;
 
     if (!token || typeof token !== 'string') {
-      console.error('Invalid or missing token in request body');
+      console.error('Token missing or not a string');
       return res.status(400).json({
-        message: 'Invalid token provided',
+        message: 'Invalid or missing token',
         status: 400,
+      });
+    }
+
+    if (token.split('.').length !== 3) {
+      console.error('Malformed token provided');
+      return res.status(401).json({
+        message: 'Malformed token',
+        status: 401,
       });
     }
 
@@ -55,9 +63,9 @@ export default function handler(
 
     return res.status(200).json({ success: true });
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('Unexpected error during login:', error);
     return res.status(500).json({
-      message: error instanceof Error ? error.message : 'Internal server error',
+      message: 'Internal server error',
       status: 500,
     });
   }

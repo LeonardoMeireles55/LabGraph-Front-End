@@ -17,13 +17,13 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className='bg-surface/80 rounded-full p-2 hover:bg-surface focus:outline-none'
+      className='rounded-full p-2 hover:bg-surface focus:outline-none'
       aria-label='Toggle theme'
     >
       {theme === 'light' ? (
-        <Sun className='hover:scale-115 h-7 w-7 text-sun' />
+        <Sun className='hover:scale-115 h-7 w-7 text-textPrimary' />
       ) : (
-        <Moon className='hover:scale-115 h-7 w-7 text-moon' />
+        <Moon className='hover:scale-115 h-7 w-7 text-textPrimary' />
       )}
     </button>
   );

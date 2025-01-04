@@ -90,7 +90,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
 
   const renderLegend = (props: any) => {
     const { payload } = props;
-  
+
     return (
       <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
         {payload.map((entry: any, index: number) => (
@@ -107,8 +107,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='border shadow-md rounded-2xl border-borderColor bg-surface shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-        <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl'>
-        {name} - Level {level.toString().toUpperCase()}
+          <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl'>
+            {name} - Level {level.toString().toUpperCase()}
           </h2>
           <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
             <button
@@ -116,22 +116,23 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               className='flex flex-col items-center transition-all duration-300 group'
             >
               <div
-                className={`rounded-full p-2 transition-all duration-300 ${
-                  useOwnValues
-                    ? 'hover:bg-textPrimary/20 text-textPrimary'
-                    : 'hover:bg-textSecondary/20 text-textSecondary'
-                }`}
+                className={`rounded-full p-2 transition-all duration-300 ${useOwnValues
+                  ? 'hover:bg-textPrimary/20 text-textPrimary'
+                  : 'hover:bg-textSecondary/20 text-textSecondary'
+                  }`}
               >
                 {useOwnValues ? (
-                  <TbFileDescription className='w-4 h-4 md:h-6 md:w-6' />
-                ) : (
                   <TbMathFunction className='w-4 h-4 md:h-6 md:w-6' />
+
+                ) : (
+                  <TbFileDescription className='w-4 h-4 md:h-6 md:w-6' />
+
                 )}
               </div>
               <span
                 className={`text-[8px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
               >
-                {useOwnValues ? 'Valor Bula' : 'Calculada'}
+                {useOwnValues ? 'Calculada' : 'Valor Bula'}
               </span>
             </button>
           </div>
@@ -142,7 +143,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
             width='98%'
             height='98%'
           >
-            <LineChart data={chartData} margin={{ }}>
+            <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
               <XAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
@@ -228,11 +229,11 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                   strokeOpacity={1.0}
                 />
               ))}
-                <Legend
-                              content={renderLegend}
-                              verticalAlign='bottom'
-                              wrapperStyle={{ paddingBottom: '0px' }}
-                            />
+              <Legend
+                content={renderLegend}
+                verticalAlign='bottom'
+                wrapperStyle={{ paddingBottom: '0px' }}
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>

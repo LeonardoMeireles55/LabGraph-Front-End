@@ -30,13 +30,17 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
   const { width: windowWidth } = useWindowDimensions();
 
   const lineColors = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)'];
-  const levels = listings.map((level) => level.genericValuesGroupByLevel.level);
+
+  if (!listings || listings.length === 0) return [];
+
+  const levels = listings.map((level) => level.groupedValuesByLevel.level);
+
 
   const chartData = useMemo(() => {
     if (!listings || listings.length === 0) return [];
 
     const maxLength = Math.max(
-      ...listings.map((level) => level.genericValuesGroupByLevel.values.length)
+      ...listings.map((level) => level.groupedValuesByLevel.values.length)
     );
 
     return Array.from({ length: maxLength }).map((_, index) => {
@@ -44,9 +48,9 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
       for (let levelIndex = 0; levelIndex < listings.length; levelIndex++) {
         const data = listings[levelIndex];
-        const values = data.genericValuesGroupByLevel.values[index];
-        const ouwnMean = data.meanAndStandardDeviationRecordGroupByLevel.values[0].mean;
-        const ouwnSd = data.meanAndStandardDeviationRecordGroupByLevel.values[0].standardDeviation;
+        const values = data.groupedValuesByLevel.values[index];
+        const ouwnMean = data.groupedMeanAndStdRecordByLevel.values[0].mean;
+        const ouwnSd = data.groupedMeanAndStdRecordByLevel.values[0].standardDeviation;
 
         if (values) {
           const { mean, standardDeviation }: MeanStdDevValue = useOwnValues
@@ -107,7 +111,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
           <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl'>
-            {listings[0].genericValuesGroupByLevel.values[0].name}
+            {listings[0].groupedValuesByLevel.values[0].name}
           </h2>
           <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
             <button
@@ -115,11 +119,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               className='group flex flex-col items-center transition-all duration-300'
             >
               <div
-                className={`rounded-full p-2 transition-all duration-300 ${
-                  useOwnValues
-                    ? 'hover:bg-textPrimary/20 text-textPrimary'
-                    : 'hover:bg-textSecondary/20 text-textSecondary'
-                }`}
+                className={`rounded-full p-2 transition-all duration-300 ${useOwnValues
+                  ? 'hover:bg-textPrimary/20 text-textPrimary'
+                  : 'hover:bg-textSecondary/20 text-textSecondary'
+                  }`}
               >
                 {useOwnValues ? (
                   <TbFileDescription className='h-4 w-4 md:h-6 md:w-6' />
@@ -142,7 +145,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
             width='98%'
             height='98%'
           >
-            <LineChart data={chartData} margin={{ }}>
+            <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
               <XAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
@@ -177,14 +180,14 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               <Tooltip
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
-                    const uniqueEntries = payload.filter((entry, index, self) => 
+                    const uniqueEntries = payload.filter((entry, index, self) =>
                       index === self.findIndex((e) => (
                         e.dataKey && entry.dataKey && (
-                        e.payload[`date${e.dataKey.toString().slice(-1)}`] === entry.payload[`date${entry.dataKey.toString().slice(-1)}`] &&
-                        e.payload[`level${e.dataKey.toString().slice(-1)}`] === entry.payload[`level${entry.dataKey.toString().slice(-1)}`])
+                          e.payload[`date${e.dataKey.toString().slice(-1)}`] === entry.payload[`date${entry.dataKey.toString().slice(-1)}`] &&
+                          e.payload[`level${e.dataKey.toString().slice(-1)}`] === entry.payload[`level${entry.dataKey.toString().slice(-1)}`])
                       ))
                     );
-              
+
                     return (
                       <div className='rounded border border-border bg-background p-1 text-[0.5rem] text-textPrimary shadow-md shadow-shadow md:text-[0.65rem]'>
                         {uniqueEntries.map((entry, index) => {
@@ -198,7 +201,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                           const nameKey = `name${dataKeyIndex}`;
                           const descriptionKey = `description${dataKeyIndex}`;
                           const rulesKey = `rules${dataKeyIndex}`;
-              
+
                           if (data[valueKey]) {
                             return (
                               <div key={index} className={'mt-2 border-t border-border pt-2'}>

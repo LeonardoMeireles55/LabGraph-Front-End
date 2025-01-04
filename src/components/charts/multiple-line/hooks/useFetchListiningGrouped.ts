@@ -24,8 +24,8 @@ const useFetchListiningGrouped = (url: string) => {
 
         setListing(listingData);
 
-        if (listingData.length > 0 && listingData[0].genericValuesGroupByLevel.values.length > 0) {
-          setUnitValues(listingData[0].genericValuesGroupByLevel.values[0].unit_value);
+        if (listingData.length > 0 && listingData[0].groupedValuesByLevel.values.length > 0) {
+          setUnitValues(listingData[0].groupedValuesByLevel.values[0].unit_value);
         }
       } catch (error) {
         console.error('Error fetching data:', getStatusMessage((error as any).status));

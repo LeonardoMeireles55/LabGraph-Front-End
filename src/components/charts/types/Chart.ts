@@ -36,11 +36,11 @@ export interface MeanStdDevValue {
 }
 
 export interface LevelGroupResponse {
-  genericValuesGroupByLevel: {
+  groupedValuesByLevel: {
     level: string;
     values: ListingItem[];
   };
-  meanAndStandardDeviationRecordGroupByLevel: {
+  groupedMeanAndStdRecordByLevel: {
     level: string;
     values: MeanStdDevValue[];
   };

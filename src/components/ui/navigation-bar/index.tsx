@@ -16,7 +16,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='flex h-16 items-center justify-between sm:h-20'>
           <NavLogo />
-          <NavLinksComponent />
+          <NavLinksComponent fileName={fileName} jsonData={jsonData} />
           <span className='hidden lg:flex'>
             <ThemeToggle />
           </span>
@@ -31,15 +31,14 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
                 {[0, 1, 2].map((i) => (
                   <span
                     key={i}
-                    className={`block h-0.5 w-6 bg-textPrimary transition-all duration-300 ${
-                      isMenuOpen && i === 0
+                    className={`block h-0.5 w-6 bg-textPrimary transition-all duration-300 ${isMenuOpen && i === 0
                         ? 'translate-y-2.5 rotate-45'
                         : isMenuOpen && i === 1
                           ? 'opacity-0'
                           : isMenuOpen && i === 2
                             ? '-translate-y-2.5 -rotate-45'
                             : ''
-                    }`}
+                      }`}
                   />
                 ))}
               </div>

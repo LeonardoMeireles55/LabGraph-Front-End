@@ -56,10 +56,12 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const getColorByLevel = (level: string) => {
     switch (level) {
       case 'low':
+      case 'PCCC1':
         return 'var(--color-primary)';
       case 'normal':
         return 'var(--color-secondary)';
       case 'high':
+      case 'PCCC2':
         return 'var(--color-accent)';
       default:
         return 'var(--color-primary)';
@@ -95,7 +97,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
       <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
         {payload.map((entry: any, index: number) => (
           <div key={`legend-${index}`} className='flex items-center gap-2'>
-            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: entry.color }} />
+            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: getColorByLevel(level.toString()) }} />
             <span className='text-textPrimary'>{`${level.toUpperCase()}`}</span>
           </div>
         ))}
@@ -189,7 +191,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                               <div className='flex items-center gap-2 mb-1'>
                                 <div
                                   className='w-3 h-3 rounded-full'
-                                  style={{ backgroundColor: 'var(--color-primary)' }}
+                                  style={{ backgroundColor: getColorByLevel(level.toString()) }}
                                 />
                                 <span className='font-medium'>
                                   Nível {level.toString().toUpperCase()}

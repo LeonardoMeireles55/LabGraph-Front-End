@@ -22,7 +22,7 @@ select {
   --color-mean-line: rgba(46, 125, 50, 1.0);    
   --color-sd1: rgba(30, 136, 229, 0.8);         
   --color-sd2: rgba(236, 64, 122, 0.8);        
-  --color-sd3: rgba(216, 27, 96, 0.8);         
+  --color-sd3: rgba(220, 38, 38, 1.0);         
   --color-primary: rgba(25, 88, 143, 1);
   --color-secondary: rgba(14, 165, 233, 1.0);
   --color-accent: rgba(245, 158, 11, 1.0);
@@ -50,7 +50,7 @@ select {
   --color-mean-line: rgba(165, 214, 167, 1.0); 
   --color-sd1: rgba(100, 181, 246, 0.8);       
   --color-sd2: rgba(244, 143, 177, 0.8);        
-  --color-sd3: rgba(229, 115, 115, 0.8);    
+  --color-sd3: rgba(239, 68, 68, 1.0);    
   --color-primary: rgba(129, 140, 248, 1.0);
   --color-secondary: rgba(56, 189, 248, 1.0);
   --color-accent: rgba(251, 191, 36, 1.0);
@@ -71,18 +71,6 @@ select {
   --color-sun: rgba(251, 191, 36, 1.0);
   --color-moon: rgba(226, 232, 240, 1.0);
 }
-/* 
-.transition-theme {
-    transition: var(--transition-default);
-}
-
-.transition-theme-slow {
-    transition: var(--transition-slow);
-}
-
-.transition-theme-fast {
-    transition: var(--transition-fast);
-} */
 
 @keyframes spin {
   to {
@@ -93,3 +81,4 @@ select {
 .animate-spin {
   animation: spin 1s linear infinite;
 }
+

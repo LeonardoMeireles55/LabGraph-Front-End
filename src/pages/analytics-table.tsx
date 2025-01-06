@@ -105,7 +105,7 @@ const AnalyticsTable = () => {
                   </label>
                   <select
                     id='tests'
-                    className='rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm'
+                    className='mt-1 rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm focus:outline-none focus:ring-2 focus:ring-borderColor/30'
                     value={analyticsType}
                     onChange={(e) => setAnalyticsType(e.target.value)}
                   >

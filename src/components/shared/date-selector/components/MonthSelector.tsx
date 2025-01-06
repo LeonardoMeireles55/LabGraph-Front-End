@@ -19,7 +19,7 @@ const MonthSelector: React.FC<MonthSelectorProps> = ({ selectedMonth, onMonthCha
 
   return (
     <select
-      className='rounded border border-borderColor bg-background p-0 text-textSecondary md:px-2 md:py-1 md:text-sm'
+      className='rounded border border-borderColor bg-background p-0 text-textSecondary md:px-2 md:py-1 md:text-sm focus:outline-none focus:ring-2 focus:ring-borderColor/30'
       value={selectedMonth}
       onChange={(e) => onMonthChange(+e.target.value)}
     >

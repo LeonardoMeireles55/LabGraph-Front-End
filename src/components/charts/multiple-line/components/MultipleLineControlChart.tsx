@@ -14,16 +14,8 @@ import {
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart';
 import useWindowDimensions from '../../../ui/hooks/useWindowDimensions';
+import normalizeValue from '../../constants/normalizeValue';
 
-const filter = (value: number, mean: number, sd: number) => {
-  if (value > mean + 3 * sd) return mean + 3 * sd;
-  if (value < mean - 3 * sd) return mean - 3 * sd;
-  return value;
-};
-
-const normalizeValue = (value: number, mean: number, sd: number) => {
-  return (filter(value, mean, sd) - mean) / (sd || 1);
-};
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
@@ -127,15 +119,17 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                   }`}
               >
                 {useOwnValues ? (
-                  <TbFileDescription className='h-4 w-4 md:h-6 md:w-6' />
-                ) : (
                   <TbMathFunction className='h-4 w-4 md:h-6 md:w-6' />
+
+                ) : (
+                  <TbFileDescription className='h-4 w-4 md:h-6 md:w-6' />
+
                 )}
               </div>
               <span
                 className={`text-[8px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
               >
-                {useOwnValues ? 'Valor Bula' : 'Calculada'}
+                {useOwnValues ? 'Calculada' : 'Valor Bula'}
               </span>
             </button>
           </div>

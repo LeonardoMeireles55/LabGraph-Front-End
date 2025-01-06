@@ -14,12 +14,9 @@ import {
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { ControlChartProps } from '../../types/Chart';
 import useWindowDimensions from '@/components/ui/hooks/useWindowDimensions';
+import filter from '../../constants/filter';
+import getColorByLevel from '../../constants/getColorByLevel';
 
-const filter = (value: number, mean: number, sd: number) => {
-  if (value > mean + 3 * sd) return mean + 3 * sd + sd / 3;
-  if (value < mean - 3 * sd) return mean - 3 * sd - sd / 3;
-  return value;
-};
 
 const CustomDot: React.FC<any> = ({ cx, cy, payload, colors }) => {
   return (
@@ -53,21 +50,19 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const activeMean = useOwnValues ? ownMeanValue : mean;
   const activeSd = useOwnValues ? ownSdValue : sd;
 
-  const getColorByLevel = (level: string) => {
-    switch (level) {
-      case 'low':
-      case 'PCCC1':
-        return 'var(--color-primary)';
-      case 'normal':
-      case "Normal C. Assayed":
-        return 'var(--color-secondary)';
-      case 'high':
-      case 'PCCC2':
-      case "Low Abn C. Assayed":
-        return 'var(--color-accent)';
-      default:
-        return 'var(--color-primary)';
-    }
+  const renderLegend = (props: any) => {
+    const { payload } = props;
+
+    return (
+      <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
+        {payload.map((entry: any, index: number) => (
+          <div key={`legend-${index}`} className='flex items-center gap-2'>
+            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: getColorByLevel(level.toString()) }} />
+            <span className='text-textPrimary'>{`${level.toUpperCase()}`}</span>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   const chartData = data.map((entry) => ({
@@ -92,20 +87,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   ];
 
 
-  const renderLegend = (props: any) => {
-    const { payload } = props;
 
-    return (
-      <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
-        {payload.map((entry: any, index: number) => (
-          <div key={`legend-${index}`} className='flex items-center gap-2'>
-            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: getColorByLevel(level.toString()) }} />
-            <span className='text-textPrimary'>{`${level.toUpperCase()}`}</span>
-          </div>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>

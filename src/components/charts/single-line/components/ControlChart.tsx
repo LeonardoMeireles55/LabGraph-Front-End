@@ -54,7 +54,6 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const activeSd = useOwnValues ? ownSdValue : sd;
 
   const getColorByLevel = (level: string) => {
-    console.log('level', level);
     switch (level) {
       case 'low':
       case 'PCCC1':

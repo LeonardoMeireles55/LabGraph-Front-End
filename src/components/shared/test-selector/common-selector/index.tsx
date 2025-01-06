@@ -8,6 +8,7 @@ import urlAnalyticsByNameAndDateAndLevel from '../../../utils/helpers/urlAnalyti
 import DateSelector from '../../date-selector';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
 import { CommonTestSelectorProps } from '../types/Selector';
+import { CheckCircle } from 'lucide-react';
 
 const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   list,
@@ -58,7 +59,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   }, [listing, ownMeanValue, ownSdValue, unitValues, SetListingItem]);
 
   return (
-    <div className='mt-12 grid content-center items-center gap-4 text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
+    <div className='mt-12 grid content-start items-start gap-1 text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
       <DateSelector
         startDay={startDay}
         startMonth={startMonth}
@@ -73,48 +74,53 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
         handleEndMonthChange={handleEndMonthChange}
         handleEndYearChange={handleEndYearChange}
       />
-      <div className='flex flex-row content-center items-center justify-between gap-3'>
-        <span className='font-medium text-sm'>Teste:</span>
-        <select
-          className='rounded-md border border-borderColor bg-background px-3 py-1.5 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
-          value={testName}
-          onChange={(e) => setTestName(e.target.value)}
-        >
-          {list.map((test) => (
-            <option key={test} value={test}>
-              {test}
-            </option>
-          ))}
-        </select>
-        <span className='font-medium text-sm'>Nível:</span>
-        <select
-          className='rounded-md border border-borderColor bg-background px-3 py-1.5 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
-          value={testLevel}
-          onChange={(e) => setTestLevel(Number(e.target.value))}
-        >
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-        </select>
-        <span className='flex flex-row content-center items-center justify-between'>
-          <Link
-            className='inline-flex items-center justify-center rounded-md border border-borderColor bg-background px-3 py-1.5 text-sm font-medium text-textPrimary shadow-sm transition-all duration-200 hover:scale-105 hover:bg-background/90 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
-            target='_blank'
-            href='https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit'
+      <div className='mt-2 md:mt-0 grid grid-cols-1 content-start items-start justify-start gap-2 md:flex-row'>
+        <div className='flex flex-row items-center gap-2'>
+          <span className='font-medium text-sm'>Teste:</span>
+          <select
+            className='rounded-md border border-borderColor bg-background md:px-2 md:py-1 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+            value={testName}
+            onChange={(e) => setTestName(e.target.value)}
           >
-            &#10003;
-          </Link>
-        </span>
-        <div className='hidden w-full md:flex'>
+            {list.map((test) => (
+              <option key={test} value={test}>
+                {test}
+              </option>
+            ))}
+          </select>
+          <span className='font-medium text-sm'>Nível:</span>
+          <select
+            className='rounded-md border border-borderColor bg-background md:px-2 md:py-1 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+            value={testLevel}
+            onChange={(e) => setTestLevel(Number(e.target.value))}
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+          </select>
+          <span className='flex flex-row content-center items-center justify-center'>
+            <Link
+              className='inline-flex items-center justify-center rounded-md border border-borderColor bg-background px-1 py-0.5 md:px-2 md:py-1 text-sm font-medium text-textPrimary shadow-sm transition-all duration-200 hover:scale-105 hover:bg-background/90 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+              target='_blank'
+              href='https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit'
+            >
+              <span className='hidden md:inline px-1 py-0.5 md-p-0'>
+                <CheckCircle size={18} />
+              </span>
+              <span className='inline md:hidden px-1 py-0.5 md-p-0'>
+                <CheckCircle size={14} />
+              </span>
+            </Link>
+          </span>
           <UpdateResults analyticsType={analyticsType} />
-          <MeanAndDeviationDisplay
-            mean={listing[0]?.mean}
-            sd={listing[0]?.sd}
-            ownMean={ownMeanValue}
-            ownSd={ownSdValue}
-            unitValue={unitValues}
-          />
         </div>
+        <MeanAndDeviationDisplay
+          mean={listing[0]?.mean}
+          sd={listing[0]?.sd}
+          ownMean={ownMeanValue}
+          ownSd={ownSdValue}
+          unitValue={unitValues}
+        />
       </div>
     </div>
   );

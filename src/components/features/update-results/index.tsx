@@ -14,11 +14,10 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
   const postResults = useCallback(
     async (data: any) => {
       try {
-        const endpointUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${
-          analyticsType === 'biochemistry-analytics'
-            ? API_ENDPOINTS.biochemistry
-            : API_ENDPOINTS.coagulation
-        }`;
+        const endpointUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${analyticsType === 'biochemistry-analytics'
+          ? API_ENDPOINTS.biochemistry
+          : API_ENDPOINTS.coagulation
+          }`;
 
         const tokenResponse = await fetch('/api/get-token');
         const { token } = await tokenResponse.json();
@@ -90,11 +89,17 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
       <label
         htmlFor='fileInput'
         title='Enviar arquivo CSV ou TXT'
-        className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 text-base text-textSecondary hover:scale-110 ${
-          status.isProcessing ? 'cursor-not-allowed opacity-50' : ''
-        }`}
+        className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 text-base text-textSecondary hover:scale-110 ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''
+          }`}
       >
-        {status.isProcessing ? status.message : <Upload size={25} />}
+        <span className='hidden md:inline'>
+          {status.isProcessing ? status.message : <Upload size={22} />}
+
+        </span>
+        <span className='inline md:hidden'>
+          {status.isProcessing ? status.message : <Upload size={18} />}
+
+        </span>
       </label>
       {status.error && <p className='text-red-500 text-xs'>{status.error}</p>}
     </div>

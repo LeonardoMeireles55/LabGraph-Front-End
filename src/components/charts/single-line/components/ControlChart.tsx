@@ -54,14 +54,17 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const activeSd = useOwnValues ? ownSdValue : sd;
 
   const getColorByLevel = (level: string) => {
+    console.log('level', level);
     switch (level) {
       case 'low':
       case 'PCCC1':
         return 'var(--color-primary)';
       case 'normal':
+      case "Normal C. Assayed":
         return 'var(--color-secondary)';
       case 'high':
       case 'PCCC2':
+      case "Low Abn C. Assayed":
         return 'var(--color-accent)';
       default:
         return 'var(--color-primary)';

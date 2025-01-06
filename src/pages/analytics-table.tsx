@@ -33,7 +33,7 @@ const AnalyticsTable = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/names/date-range?startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}`;
+  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/date-range?startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}`;
 
   useEffect(() => {
     const fetchData = async () => {

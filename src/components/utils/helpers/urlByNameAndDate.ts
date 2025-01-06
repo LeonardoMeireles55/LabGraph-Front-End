@@ -8,8 +8,8 @@ import testFormatFix from './testFormatFix';
 const urlByNameAndDate = (props: UrlAnalyticsByNameAndDateProps) => {
   const { analyticsType, name, date, levelSize } = props;
 
-  const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/search/date-range?name=`;
-  const meanAndDeviationUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/results/mean-standard-deviation?name=`;
+  const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/name-and-level-date-range?name=`;
+  const meanAndDeviationUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/mean-standard-deviation?name=`;
 
   const startDate = formatDateWithTime(date.startYear, date.startMonth, date.startDay);
   const endDate = formatEndDateWithTime(date.endYear, date.endMonth, date.endDay);

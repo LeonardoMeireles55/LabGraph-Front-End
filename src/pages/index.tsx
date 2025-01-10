@@ -1,5 +1,5 @@
-import Biochemistry from './biochemistry';
+import Hematology from './hematology';
 
 export default function Home() {
-  return Biochemistry();
+  return Hematology();
 }

@@ -17,7 +17,6 @@ export async function middleware(request: NextRequest) {
   const response = await NextResponse.next();
   
   if (response.status === 403) {
-    // Clear the token cookie if we get a 403
     const response = NextResponse.redirect(new URL('/login', request.url));
     response.cookies.delete('tokenJWT');
     return response;

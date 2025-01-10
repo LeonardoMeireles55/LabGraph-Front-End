@@ -6,6 +6,7 @@ import UpdateResults from '../../../features/update-results';
 import DateSelector from '../../date-selector';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
 import { TestSelectorProps } from '../types/Selector';
+import { CheckCircle } from 'lucide-react';
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   list,
@@ -60,7 +61,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
       <div className='flex flex-row content-center items-center justify-between gap-3'>
         <span className='font-medium text-sm'>Teste:</span>
         <select
-          className='rounded-md border border-borderColor bg-background px-3 py-1.5 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+          className='rounded-md border border-borderColor bg-background px-0.5 py-0.5 md:px-2 md:py-1 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
           value={testName}
           onChange={(e) => setTestName(e.target.value)}
         >
@@ -70,13 +71,18 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
             </option>
           ))}
         </select>
-        <span className='flex flex-row content-center items-center justify-between'>
+        <span className='flex flex-row content-center items-center justify-center'>
           <Link
-            className='inline-flex items-center justify-center rounded-md border border-borderColor bg-background px-3 py-1.5 text-sm font-medium text-textPrimary shadow-sm transition-all duration-200 hover:scale-105 hover:bg-background/90 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+            className='flex items-center justify-center rounded-md border border-borderColor bg-background px-2 py-0.5 md:px-2 md:py-1 text-sm font-medium text-textSecondary shadow-sm transition-all duration-200 hover:scale-110 hover:bg-background/90 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
             target='_blank'
             href='https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit'
           >
-            &#10003;
+            <span className='hidden md:inline px-0.5 py-0.5'>
+              <CheckCircle size={19} />
+            </span>
+            <span className='inline md:hidden px-0.5 py-0.5'>
+              <CheckCircle size={17} />
+            </span>
           </Link>
         </span>
         <div className='hidden w-full md:flex'>

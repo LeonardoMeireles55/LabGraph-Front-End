@@ -146,11 +146,11 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               <XAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 dataKey='date'
-                angle={-60}
+                angle={-55}
                 textAnchor='end'
                 tickFormatter={(date) => date}
-                height={75}
-                width={0}
+                height={windowWidth < 768 ? 40 : 60}
+                width={windowWidth < 768 ? 30 : 40}
                 tickMargin={0}
                 axisLine={false}
                 tickLine={false}

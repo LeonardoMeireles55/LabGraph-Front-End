@@ -134,11 +134,11 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               <XAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 dataKey='date'
-                angle={-60}
+                angle={-55}
                 textAnchor='end'
                 tickFormatter={(date) => date}
-                height={75}
-                width={0}
+                height={windowWidth < 768 ? 40 : 60}
+                width={windowWidth < 768 ? 30 : 40}
                 tickMargin={0}
                 axisLine={false}
                 tickLine={false}
@@ -149,7 +149,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 domain={[activeMean - 3.5 * activeSd, activeMean + 3.5 * activeSd]}
                 textAnchor='end'
                 ticks={yAxisValues.map((v) => v.value)}
-                width={windowWidth < 768 ? 30 : 40} // 768px is Tailwind's md breakpoint
+                width={windowWidth < 768 ? 30 : 40}
                 height={0}
                 tickMargin={0}
                 axisLine={false}
@@ -218,7 +218,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               <Legend
                 content={renderLegend}
                 verticalAlign='bottom'
-                wrapperStyle={{ paddingBottom: '0px' }}
+                wrapperStyle={{ padding: '0px' }}
               />
             </LineChart>
           </ResponsiveContainer>

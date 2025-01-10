@@ -89,15 +89,15 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
       <label
         htmlFor='fileInput'
         title='Enviar arquivo CSV ou TXT'
-        className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 text-base text-textSecondary hover:scale-110 ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''
+        className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 md:px-2 md:py-1 text-base text-textSecondary hover:scale-110 ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''
           }`}
       >
-        <span className='hidden md:inline'>
-          {status.isProcessing ? status.message : <Upload size={22} />}
+        <span className='hidden md:inline py-0.5'>
+          {status.isProcessing ? status.message : <Upload size={21} />}
 
         </span>
-        <span className='inline md:hidden'>
-          {status.isProcessing ? status.message : <Upload size={18} />}
+        <span className='inline md:hidden py-0.5'>
+          {status.isProcessing ? status.message : <Upload size={17} />}
 
         </span>
       </label>

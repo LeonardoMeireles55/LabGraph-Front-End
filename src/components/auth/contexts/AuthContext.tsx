@@ -13,6 +13,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const router = useRouter();
 
     const validateToken = useCallback(async () => {
+        if (router.pathname === '/login') return;
         try {
             const response = await fetch('/api/validate-token');
             const data = await response.json();

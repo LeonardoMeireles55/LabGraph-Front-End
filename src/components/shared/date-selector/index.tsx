@@ -19,7 +19,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
   return (
     <div className='space-y-1 md:space-y-1'>
       <SingleDateSelector
-        label='De'
+        label='From'
         day={startDay}
         month={startMonth}
         year={startYear}
@@ -28,7 +28,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
         onYearChange={handleStartYearChange}
       />
       <SingleDateSelector
-        label='Até'
+        label='To'
         day={endDay}
         month={endMonth}
         year={endYear}

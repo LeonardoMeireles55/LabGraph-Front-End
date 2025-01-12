@@ -8,7 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 
 const SignUpForm = () => {
 
-  const { formData, error, handleChange, handleSubmit } = useAuth(true);
+  const { formData, error, handleChange, handleSubmit } = useAuth(false);
 
   return (
     <div className='relative w-full rounded-xl border border-borderColor p-8 shadow-xl'>

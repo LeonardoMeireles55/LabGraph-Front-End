@@ -8,7 +8,7 @@ const ViewToggleButton = () => {
     <button
       onClick={toggleView}
       className='flex items-center gap-2 rounded-full p-2 text-textPrimary'
-      title={`${viewMode === 'single' ? 'Mudar para' : 'Voltar para'} ${viewMode === 'single' ? 'visão dupla' : 'visão única'}`}
+      title={`${viewMode === 'single' ? 'Switch to' : 'Back to'} ${viewMode === 'single' ? 'multi line' : 'line'}`}
     >
       {viewMode === 'single' ? (
         <TbChartAreaLine className='h-7 w-7' />

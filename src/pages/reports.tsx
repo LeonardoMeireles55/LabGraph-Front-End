@@ -49,7 +49,7 @@ const ReportsPage = () => {
         const result = await response.json();
         setDataFetched(result);
       } catch (error) {
-        console.error('Erro ao buscar dados:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -83,9 +83,9 @@ const ReportsPage = () => {
             value={analyticsType}
             onChange={(e) => setAnalyticsType(e.target.value)}
           >
-            <option value={'biochemistry-analytics'}>BIOQUÍMICA</option>
-            <option value={'hematology-analytics'}>HEMATOLOGIA</option>
-            <option value={'coagulation-analytics'}>COAGULAÇÃO</option>
+            <option value={'biochemistry-analytics'}>BIOCHEMISTRY</option>
+            <option value={'hematology-analytics'}>HEMATOLOGY</option>
+            <option value={'coagulation-analytics'}>COAGULATION</option>
           </select>
           <span className='flex border rounded-md justify-evenly border-borderColor text-textSecondary'>
             <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
@@ -102,7 +102,7 @@ const ReportsPage = () => {
             }}
             width={350}
             height={150}
-            alt='Imagem do laboratório'
+            alt='Laboratory image'
             priority={true}
           />
         </span>

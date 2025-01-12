@@ -8,7 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 
 const SignUpForm = () => {
 
-    const { formData, error, handleChange, handleSubmit } = useAuth(true);
+  const { formData, error, handleChange, handleSubmit } = useAuth(true);
 
   return (
     <div className='relative w-full rounded-xl border border-borderColor p-8 shadow-xl'>
@@ -19,8 +19,8 @@ const SignUpForm = () => {
         <div className='mb-4 flex justify-center text-textSecondary opacity-95'>
           <Logo className='h-20 w-auto' />
         </div>
-        <h1 className='text-4xl font-bold text-textPrimary'>Criar Conta</h1>
-        <p className='mt-2 text-textSecondary'>Preencha os dados para se registrar</p>
+        <h1 className='text-4xl font-bold text-textPrimary'>Create Account</h1>
+        <p className='mt-2 text-textSecondary'>Fill in the details to register</p>
       </div>
 
       {error && <ErrorMessage message={error} />}
@@ -29,7 +29,7 @@ const SignUpForm = () => {
         <InputField
           id='username'
           type='text'
-          label='Nome de usuário'
+          label='Username'
           value={formData.username}
           onChange={handleChange}
         />
@@ -43,24 +43,24 @@ const SignUpForm = () => {
         <InputField
           id='password'
           type='password'
-          label='Senha'
+          label='Password'
           value={formData.password}
           onChange={handleChange}
         />
         <InputField
           id='confirmPassword'
           type='password'
-          label='Confirmar senha'
+          label='Confirm Password'
           value={formData.confirmPassword ?? ''}
           onChange={handleChange}
         />
 
-        <SubmitButton text='Criar conta' />
+        <SubmitButton text='Create Account' />
 
         <p className='mt-4 text-center text-sm text-textSecondary'>
-          Já tem uma conta?{' '}
+          Already have an account?{' '}
           <Link href='/login' className='text-primary'>
-            Fazer login
+            Sign in
           </Link>
         </p>
       </form>

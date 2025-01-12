@@ -16,7 +16,6 @@ import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart';
 import useWindowDimensions from '../../../ui/hooks/useWindowDimensions';
 import normalizeValue from '../../constants/normalizeValue';
 
-
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
   const { width: windowWidth } = useWindowDimensions();
@@ -75,7 +74,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
       { value: -3, label: '-3s', color: 'var(--color-sd3)' },
       { value: -2, label: '-2s', color: 'var(--color-sd2)' },
       { value: -1, label: '-1s', color: 'var(--color-sd1)' },
-      { value: 0, label: 'Média', color: 'var(--color-mean-line)' },
+      { value: 0, label: 'Mean', color: 'var(--color-mean-line)' },
       { value: 1, label: '+1s', color: 'var(--color-sd1)' },
       { value: 2, label: '+2s', color: 'var(--color-sd2)' },
       { value: 3, label: '+3s', color: 'var(--color-sd3)' },
@@ -129,7 +128,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               <span
                 className={`text-[8px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
               >
-                {useOwnValues ? 'Calculada' : 'Valor Bula'}
+                {useOwnValues ? 'Calculated' : 'Reference Value'}
               </span>
             </button>
           </div>
@@ -208,12 +207,12 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                   />
                                   <span className='font-medium'>{data[level].toUpperCase()}</span>
                                 </div>
-                                <p>Data: {data[date]}</p>
-                                <p>Teste: {data[nameKey]}</p>
-                                <p>Valor: {data[rawValueKey]}</p>
-                                <p>Lote: {data[levelLotKey]}</p>
-                                <p>Descrição: {data[descriptionKey]}</p>
-                                {data[rulesKey] && <p>Regras: {data[rulesKey]}</p>}
+                                <p>Date: {data[date]}</p>
+                                <p>Test: {data[nameKey]}</p>
+                                <p>Value: {data[rawValueKey]}</p>
+                                <p>Lot: {data[levelLotKey]}</p>
+                                <p>Description: {data[descriptionKey]}</p>
+                                {data[rulesKey] && <p>Rules: {data[rulesKey]}</p>}
                               </div>
                             );
                           }

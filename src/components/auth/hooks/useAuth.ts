@@ -23,23 +23,23 @@ export const useAuth = (isLogin: boolean) => {
     const errors: ValidationError[] = [];
 
     if (!formData.email) {
-      errors.push({ field: 'email', message: 'Email é obrigatório' });
+      errors.push({ field: 'email', message: 'Email is required' });
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.push({ field: 'email', message: 'Email inválido' });
+      errors.push({ field: 'email', message: 'Invalid email' });
     }
 
     if (!formData.password) {
-      errors.push({ field: 'password', message: 'Senha é obrigatória' });
+      errors.push({ field: 'password', message: 'Password is required' });
     } else if (formData.password.length < 6) {
-      errors.push({ field: 'password', message: 'Senha deve ter no mínimo 6 caracteres' });
+      errors.push({ field: 'password', message: 'Password must be at least 6 characters' });
     }
 
     if (!isLogin) {
       if (!formData.username) {
-        errors.push({ field: 'username', message: 'Nome de usuário é obrigatório' });
+        errors.push({ field: 'username', message: 'Username is required' });
       }
       if (formData.password !== formData.confirmPassword) {
-        errors.push({ field: 'confirmPassword', message: 'As senhas não coincidem' });
+        errors.push({ field: 'confirmPassword', message: 'Passwords do not match' });
       }
     }
 
@@ -81,14 +81,14 @@ export const useAuth = (isLogin: boolean) => {
         await authService.setSession(response.tokenJWT);
         router.push('/hematology');
       } else {
-        throw new Error(response.message || (isLogin ? 'Falha no login' : 'Erro ao criar conta'));
+        throw new Error(response.message || (isLogin ? 'Login failed' : 'Error creating account'));
       }
     } catch (err) {
       console.error('Auth error:', err);
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError('Erro ao conectar ao servidor. Tente novamente mais tarde.');
+        setError('Error connecting to the server. Please try again later.');
       }
     } finally {
       setLoading(false);

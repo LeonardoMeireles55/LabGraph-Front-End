@@ -30,25 +30,28 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
         <thead className='bg-muted'>
           <tr>
             <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Teste
+              Date
             </th>
             <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Nível
+              Test
             </th>
             <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Desvio Padrão
+              Level
             </th>
             <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Média
+              Lot
             </th>
             <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Data
+              Standard Deviation
             </th>
             <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Valores
+              Mean
             </th>
             <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Unidade
+              Values
+            </th>
+            <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
+              Unit
             </th>
           </tr>
         </thead>
@@ -56,19 +59,22 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
           {currentItems.map((item, index) => (
             <tr key={index} className='transition-colors duration-200 hover:bg-muted'>
               <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
+                {item.date}
+              </td>
+              <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
                 {item.name}
               </td>
               <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
                 {item.level}
               </td>
               <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
+                {item.level_lot}
+              </td>
+              <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
                 {item.sd.toFixed(2)}
               </td>
               <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
                 {item.mean.toFixed(2)}
-              </td>
-              <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
-                {item.date}
               </td>
               <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
                 {item.value.toFixed(2)}
@@ -85,25 +91,25 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
         {currentItems.map((item, index) => (
           <div key={index} className='p-2 border rounded-md shadow-md border-border bg-surface'>
             <p className='text-[6px] font-semibold text-textSecondary'>
-              Teste: <span className='text-textPrimary'>{item.name}</span>
+              Test: <span className='text-textPrimary'>{item.name}</span>
             </p>
             <p className='text-[6px] font-semibold text-textSecondary'>
-              Nível: <span className='text-textPrimary'>{item.level}</span>
+              Level: <span className='text-textPrimary'>{item.level}</span>
             </p>
             <p className='text-[6px] font-semibold text-textSecondary'>
-              Desvio Padrão: <span className='text-textPrimary'>{item.sd.toFixed(2)}</span>
+              Standard Deviation: <span className='text-textPrimary'>{item.sd.toFixed(2)}</span>
             </p>
             <p className='text-[6px] font-semibold text-textSecondary'>
-              Média: <span className='text-textPrimary'>{item.mean.toFixed(2)}</span>
+              Mean: <span className='text-textPrimary'>{item.mean.toFixed(2)}</span>
             </p>
             <p className='text-[6px] font-semibold text-textSecondary'>
-              Data: <span className='text-textPrimary'>{item.date}</span>
+              Date: <span className='text-textPrimary'>{item.date}</span>
             </p>
             <p className='text-[6px] font-semibold text-textSecondary'>
-              Valores: <span className='text-textPrimary'>{item.value.toFixed(2)}</span>
+              Values: <span className='text-textPrimary'>{item.value.toFixed(2)}</span>
             </p>
             <p className='text-[6px] font-semibold text-textSecondary'>
-              Unidade: <span className='text-textPrimary'>{item.unit_value}</span>
+              Unit: <span className='text-textPrimary'>{item.unit_value}</span>
             </p>
           </div>
         ))}
@@ -122,7 +128,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
           &larr;
         </button>
         <span className='text-xs text-textSecondary'>
-          Página {currentPage} de {totalPages}
+          Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={goToNextPage}

@@ -5,7 +5,7 @@ const NavLogo = () => (
     </div>
     <div className='flex flex-col'>
       <span className='text-lg font-bold text-textPrimary sm:text-xl'>LabGraph</span>
-      <span className='-mt-1 text-[10px] text-textSecondary sm:text-xs'>versão 0.6</span>
+      <span className='-mt-1 text-[10px] text-textSecondary sm:text-xs'>version 0.7</span>
     </div>
   </div>
 );

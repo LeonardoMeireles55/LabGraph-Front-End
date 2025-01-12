@@ -57,8 +57,8 @@ const AnalyticsTable = () => {
         const result = await response.json();
         setDataFetched(result);
       } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-        setError('Não foi possível carregar os dados. Por favor, tente novamente.');
+        console.error('Error fetching data:', error);
+        setError('Unable to load data. Please try again.');
       } finally {
         setIsLoading(false);
       }
@@ -68,9 +68,9 @@ const AnalyticsTable = () => {
   }, [url]);
 
   const analyticsOptions = [
-    { value: 'biochemistry-analytics', label: 'BIOQUÍMICA' },
-    { value: 'hematology-analytics', label: 'HEMATOLOGIA' },
-    { value: 'coagulation-analytics', label: 'COAGULAÇÃO' },
+    { value: 'biochemistry-analytics', label: 'BIOCHEMISTRY' },
+    { value: 'hematology-analytics', label: 'HEMATOLOGY' },
+    { value: 'coagulation-analytics', label: 'COAGULATION' },
   ];
 
   return (
@@ -101,7 +101,7 @@ const AnalyticsTable = () => {
 
                 <div className='flex w-full flex-row gap-1 py-1'>
                   <label htmlFor='tests' className='text-textSecondary'>
-                    Teste:
+                    Test:
                   </label>
                   <select
                     id='tests'

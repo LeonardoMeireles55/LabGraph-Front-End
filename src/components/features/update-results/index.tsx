@@ -88,7 +88,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
       />
       <label
         htmlFor='fileInput'
-        title='Enviar arquivo CSV ou TXT'
+        title='Send analytics results TXT or CSV file'
         className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 md:px-2 md:py-1 text-base text-textSecondary hover:scale-110 ${status.isProcessing ? 'cursor-not-allowed opacity-50' : ''
           }`}
       >

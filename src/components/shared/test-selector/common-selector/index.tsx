@@ -76,7 +76,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
       />
       <div className='mt-2 md:mt-0 grid grid-cols-1 content-start items-start justify-start gap-2 md:flex-row'>
         <div className='flex flex-row items-center gap-2'>
-          <span className='font-medium text-sm'>Teste:</span>
+          <span className='font-medium text-sm'>Test:</span>
           <select
             className='rounded-md border border-borderColor bg-background md:px-2 md:py-1 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
             value={testName}
@@ -88,7 +88,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
               </option>
             ))}
           </select>
-          <span className='font-medium text-sm'>Nível:</span>
+          <span className='font-medium text-sm'>Level:</span>
           <select
             className='rounded-md border border-borderColor bg-background py-0.5 md:px-1 md:py-1 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
             value={testLevel}

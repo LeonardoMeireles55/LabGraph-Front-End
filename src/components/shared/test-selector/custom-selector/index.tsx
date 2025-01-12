@@ -59,7 +59,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
         handleEndYearChange={handleEndYearChange}
       />
       <div className='flex flex-row content-center items-center justify-between gap-3'>
-        <span className='font-medium text-sm'>Teste:</span>
+        <span className='font-medium text-sm'>Test:</span>
         <select
           className='rounded-md border border-borderColor bg-background px-0.5 py-0.5 md:px-2 md:py-1 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
           value={testName}

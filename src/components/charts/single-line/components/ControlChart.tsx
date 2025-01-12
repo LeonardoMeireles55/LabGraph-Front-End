@@ -17,7 +17,6 @@ import useWindowDimensions from '@/components/ui/hooks/useWindowDimensions';
 import filter from '../../constants/filter';
 import getColorByLevel from '../../constants/getColorByLevel';
 
-
 const CustomDot: React.FC<any> = ({ cx, cy, payload, colors }) => {
   return (
     <g>
@@ -35,12 +34,7 @@ const CustomDot: React.FC<any> = ({ cx, cy, payload, colors }) => {
   );
 };
 
-
-
 const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
-
-
-
   const [useOwnValues, setUseOwnValues] = useState(false);
   const { width: windowWidth } = useWindowDimensions();
 
@@ -80,14 +74,11 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     { value: activeMean - 3 * activeSd, label: '-3s', color: 'var(--color-sd3)' },
     { value: activeMean - 2 * activeSd, label: '-2s', color: 'var(--color-sd2)' },
     { value: activeMean - activeSd, label: '-1s', color: 'var(--color-sd1)' },
-    { value: activeMean, label: 'Média', color: 'var(--color-mean-line)' },
+    { value: activeMean, label: 'Mean', color: 'var(--color-mean-line)' },
     { value: activeMean + activeSd, label: '+1s', color: 'var(--color-sd1)' },
     { value: activeMean + 2 * activeSd, label: '+2s', color: 'var(--color-sd2)' },
     { value: activeMean + 3 * activeSd, label: '+3s', color: 'var(--color-sd3)' },
   ];
-
-
-
 
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
@@ -109,16 +100,14 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               >
                 {useOwnValues ? (
                   <TbMathFunction className='w-4 h-4 md:h-6 md:w-6' />
-
                 ) : (
                   <TbFileDescription className='w-4 h-4 md:h-6 md:w-6' />
-
                 )}
               </div>
               <span
                 className={`text-[8px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
               >
-                {useOwnValues ? 'Calculada' : 'Valor Bula'}
+                {useOwnValues ? 'Calculated' : 'Reference Value'}
               </span>
             </button>
           </div>
@@ -178,14 +167,14 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                   style={{ backgroundColor: getColorByLevel(level.toString()) }}
                                 />
                                 <span className='font-medium'>
-                                  Nível {level.toString().toUpperCase()}
+                                  Level {level.toString().toUpperCase()}
                                 </span>
                               </div>
-                              <p>Teste: {data.name}</p>
-                              <p>Valor: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
-                              <p>Lote: {data.levelLot}</p>
-                              <p>Descrição: {data.description}</p>
-                              <p>Regras: {data.rules}</p>
+                              <p>Test: {data.name}</p>
+                              <p>Value: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
+                              <p>Lot: {data.levelLot}</p>
+                              <p>Description: {data.description}</p>
+                              <p>Rules: {data.rules}</p>
                             </div>
                           );
                         })}

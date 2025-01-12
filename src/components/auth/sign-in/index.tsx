@@ -21,7 +21,7 @@ const LoginForm = () => {
         <h1 className='bg-clip-text text-4xl font-bold text-textPrimary sm:text-5xl'>
           LabGraph
         </h1>
-        <p className='mt-3 text-textSecondary'>Faça login para continuar</p>
+        <p className='mt-3 text-textSecondary'>Sign in to continue</p>
       </div>
 
       {error && <ErrorMessage message={error} />}
@@ -37,7 +37,7 @@ const LoginForm = () => {
         <InputField
           id='password'
           type='password'
-          label='Senha'
+          label='Password'
           value={formData.password}
           onChange={handleChange}
         />
@@ -49,26 +49,26 @@ const LoginForm = () => {
               className='rounded border-borderColor text-primary transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-primary focus:ring-offset-0'
             />
             <span className='text-textSecondary transition-colors duration-200 hover:text-textPrimary'>
-              Lembrar-me
+              Remember me
             </span>
           </label>
           <Link
             href='#'
             className='text-primary transition-colors duration-200'
           >
-            Esqueceu a senha?
+            Forgot password?
           </Link>
         </div>
 
         <SubmitButton />
 
         <p className='mt-6 text-center text-sm text-textSecondary'>
-          Não tem uma conta?{' '}
+          Don&apos;t have an account?{' '}
           <Link
             href='/signup'
             className='font-medium text-primary transition-colors duration-200'
           >
-            Registre-se
+            Sign up
           </Link>
         </p>
       </form>

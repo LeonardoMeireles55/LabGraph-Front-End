@@ -12,7 +12,7 @@ const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ jsonData, fileNam
 
   return (
     <div className='hidden items-center gap-6 lg:flex xl:gap-8 px-6 py-3'>
-      {[...navLinks, { text: 'SAIR', url: '/login', onClick: onLogout }].map((link, index) => (
+      {[...navLinks, { text: 'EXIT', url: '/login', onClick: onLogout }].map((link, index) => (
         <Link
           key={index}
           href={link.url}

@@ -1,5 +1,6 @@
 services:
     quality-lab-pro-front-end:
+        image: leonardomeireles55/quality-lab-pro-front-end:latest
         build:
             context: .
             dockerfile: Dockerfile

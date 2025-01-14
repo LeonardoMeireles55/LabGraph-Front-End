@@ -11,62 +11,40 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
     message: '',
   });
 
-  const postResults = useCallback(
-    async (data: any) => {
-      try {
-        const endpointUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${analyticsType === 'biochemistry-analytics'
-          ? API_ENDPOINTS.biochemistry
-          : API_ENDPOINTS.coagulation
-          }`;
-
-        const tokenResponse = await fetch('/api/get-token');
-        const { token } = await tokenResponse.json();
-
-        const response = await fetch(endpointUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(data),
-        });
-
-        if (!response.ok) {
-          throw new Error(getStatusMessage(response.status));
-        }
-
-        setStatus((prev) => ({
-          ...prev,
-          message: 'Data successfully uploaded',
-        }));
-      } catch (error) {
-        throw new Error(`${error instanceof Error ? error.message : 'Unknown error'}`);
-      }
-    },
-    [analyticsType]
-  );
+  const postResults = useCallback(async (data: any) => {
+    try {
+      const endpoint = analyticsType === 'biochemistry-analytics'
+        ? API_ENDPOINTS.biochemistry
+        : API_ENDPOINTS.coagulation;
+      const endpointUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`;
+      const { token } = await (await fetch('/api/get-token')).json();
+      const response = await fetch(endpointUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error(getStatusMessage(response.status));
+      setStatus((prev) => ({ ...prev, message: 'Data successfully uploaded' }));
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : 'Unknown error');
+    }
+  }, [analyticsType]);
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
     setStatus({ isProcessing: true, message: 'Processing file...' });
-
     try {
       const result = file.name.endsWith('.csv')
         ? await processCsvFile(file)
         : await processTextFile(file);
-
-      if (result.success && result.data) {
-        await postResults(result.data);
-      } else {
-        throw new Error(result.error);
-      }
-
-      setStatus({
-        isProcessing: false,
-        message: 'Processing complete!',
-      });
+      if (!result.success || !result.data) throw new Error(result.error);
+      await postResults(result.data);
+      setStatus({ isProcessing: false, message: 'Processing complete!' });
+      window.location.reload();
     } catch (error) {
       setStatus({
         isProcessing: false,
@@ -101,7 +79,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
 
         </span>
       </label>
-      {status.error && <p className='text-red-500 text-xs'>{status.error}</p>}
+      {status.error && <p className='ml-2 text-textPrimary md:text-white md:py-2 md:px-1 md:bg-danger rounded-3xl text-xs'>{status.error}</p>}
     </div>
   );
 };

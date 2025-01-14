@@ -214,6 +214,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
         </div>
       </div>
     </div>
+
   );
 };
 

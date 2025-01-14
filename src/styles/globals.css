@@ -26,7 +26,8 @@ select {
   --color-primary: rgba(25, 88, 143, 1);
   --color-secondary: rgba(14, 165, 233, 1.0);
   --color-accent: rgba(245, 158, 11, 1.0);
-  --color-danger: rgba(220, 38, 38, 1.0);
+    --color-danger: rgba(239, 68, 68, 1.0);
+
   --color-background: rgba(248, 250, 252, 1.0);
   --color-surface: rgba(255, 255, 255, 1.0);
   --color-muted: rgba(226, 232, 240, 1.0);
@@ -54,10 +55,10 @@ select {
   --color-primary: rgba(129, 140, 248, 1.0);
   --color-secondary: rgba(56, 189, 248, 1.0);
   --color-accent: rgba(251, 191, 36, 1.0);
-  --color-danger: rgba(239, 68, 68, 1.0);
   --color-background: rgba(15, 23, 42, 1.0);
   --color-surface: rgba(30, 41, 59, 1.0);
   --color-muted: rgba(51, 65, 85, 1.0);
+    --color-danger: rgba(220, 38, 38, 1.0);
   --color-text-primary: rgba(248, 250, 252, 1.0);
   --color-text-secondary: rgba(248, 250, 252, 1.0);
   --color-bg-text: rgba(248, 250, 252, 1.0);

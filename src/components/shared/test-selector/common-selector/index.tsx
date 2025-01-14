@@ -55,6 +55,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
         ownSdValue,
       }));
       SetListingItem(updatedListing);
+      console.log('updatedListing...');
     }
   }, [listing, ownMeanValue, ownSdValue, unitValues, SetListingItem]);
 

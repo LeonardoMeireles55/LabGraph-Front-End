@@ -8,7 +8,7 @@ const getStatusMessage = (statusCode: number): string => {
     403: 'Access forbidden',
     404: 'Resource not found',
     408: 'Request timeout',
-    409: 'Conflict: Duplicate values in the database',
+    409: 'Conflict: Duplicate values',
     429: 'Too many requests',
     500: 'Internal server error',
     502: 'Bad gateway',

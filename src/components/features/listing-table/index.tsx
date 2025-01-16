@@ -53,6 +53,9 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
             <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
               Unit
             </th>
+            <th className='border-b border-border px-4 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
+              Rules
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -82,6 +85,9 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
               <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
                 {item.unit_value}
               </td>
+              <td className='border-b border-border px-4 py-3 text-[6px] text-textPrimary md:text-sm'>
+                {item.rules}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -110,6 +116,9 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
             </p>
             <p className='text-[6px] font-semibold text-textSecondary'>
               Unit: <span className='text-textPrimary'>{item.unit_value}</span>
+            </p>
+            <p className='text-[6px] font-semibold text-textSecondary'>
+              Rules: <span className='text-textPrimary'>{item.rules}</span>
             </p>
           </div>
         ))}

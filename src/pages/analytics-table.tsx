@@ -31,7 +31,7 @@ const AnalyticsTable = () => {
 
   const [level, setLevel] = useState<string>('1');
 
-  const [isFiltered, setFiltered] = useState<boolean>(true);
+  const [isFiltered, setFiltered] = useState<boolean>(false);
 
   const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
 
@@ -79,9 +79,10 @@ const AnalyticsTable = () => {
   ];
 
   const levelOptions = [
-    { value: 'PCCC1', label: 'PCCC1' },
-    { value: '2', label: 'Level 2' },
-    { value: '3', label: 'Level 3' },
+    { value: '0', label: 'All Levels' },
+    { value: '1', label: '1' },
+    { value: '2', label: '2' },
+    { value: '3', label: '3' },
   ]
 
   return (
@@ -131,7 +132,10 @@ const AnalyticsTable = () => {
                       id='level'
                       className='mt-1 rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm focus:outline-none focus:ring-2 focus:ring-borderColor/30'
                       value={level}
-                      onChange={(e) => setLevel(e.target.value)}>
+                      onChange={(e) => {
+                        setLevel(e.target.value);
+                        setFiltered(e.target.value !== '0');
+                      }}>
                       {levelOptions.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}

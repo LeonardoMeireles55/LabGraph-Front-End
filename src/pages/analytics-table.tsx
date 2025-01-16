@@ -29,11 +29,16 @@ const AnalyticsTable = () => {
 
   const [analyticsType, setAnalyticsType] = useState<string>('biochemistry-analytics');
 
+  const [level, setLevel] = useState<string>('1');
+
+  const [isFiltered, setFiltered] = useState<boolean>(false);
+
   const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/date-range?startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}`;
+  const url = isFiltered ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/level-date-range?level=${level}&startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}` : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/date-range?startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,6 +77,13 @@ const AnalyticsTable = () => {
     { value: 'hematology-analytics', label: 'HEMATOLOGY' },
     { value: 'coagulation-analytics', label: 'COAGULATION' },
   ];
+
+  const levelOptions = [
+    { value: '0', label: 'All Levels' },
+    { value: '1', label: '1' },
+    { value: '2', label: '2' },
+    { value: '3', label: '3' },
+  ]
 
   return (
     <div className='min-h bg-background'>
@@ -115,6 +127,22 @@ const AnalyticsTable = () => {
                       </option>
                     ))}
                   </select>
+                  <label htmlFor='level' className='text-textSecondary'>
+                    <select
+                      id='level'
+                      className='mt-1 rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+                      value={level}
+                      onChange={(e) => {
+                        setLevel(e.target.value);
+                        setFiltered(e.target.value !== '0');
+                      }}>
+                      {levelOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
                 </div>
               </div>
             </div>

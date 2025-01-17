@@ -2,7 +2,7 @@ interface SubmitButtonProps {
   text?: string;
 }
 
-const SubmitButton = ({ text = 'Entrar' }: SubmitButtonProps) => {
+const SubmitButton = ({ text }: SubmitButtonProps) => {
   return (
     <button
       type='submit'

@@ -1,4 +1,5 @@
 import { AuthFormData } from '@/components/auth/types/Auth';
+import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 import { authService } from '@/services/auth';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -81,7 +82,9 @@ export const useAuth = (isLogin: boolean) => {
         await authService.setSession(response.tokenJWT);
         router.push('/hematology');
       } else {
-        throw new Error(response.message || (isLogin ? 'Login failed' : 'Error creating account'));
+        throw new Error(
+          getStatusMessage(response.status) ?? 'An error occurred. Please try again later.'
+        );
       }
     } catch (err) {
       console.error('Auth error:', err);

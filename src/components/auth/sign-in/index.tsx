@@ -60,7 +60,7 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        <SubmitButton />
+        <SubmitButton text='Sign-in' />
 
         <p className='mt-6 text-center text-sm text-textSecondary'>
           Don&apos;t have an account?{' '}

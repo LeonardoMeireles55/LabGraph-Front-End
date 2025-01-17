@@ -24,9 +24,9 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
       - name: Build and push Docker image
-        # run: |
-        #   docker-compose -f docker-compose.build.yml build
-        #   docker-compose -f docker-compose.build.yml push
+        run: |
+          docker-compose -f docker-compose.build.yml build
+          docker-compose -f docker-compose.build.yml push
 
   deploy:
     runs-on: [self-hosted, linux, x64, frontend]

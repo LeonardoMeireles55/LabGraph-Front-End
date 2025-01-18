@@ -1,76 +1,71 @@
 import { ListingItem } from '@/components/charts/types/Chart';
 import ListingTable from '@/components/features/listing-table';
 import DateSelector from '@/components/shared/date-selector';
-import {
-  formatDateWithTime,
-  formatEndDateWithTime,
-} from '@/components/shared/date-selector/constants/formatDateWithTime';
 import useDateSelector from '@/components/shared/date-selector/hooks/useDateSelector';
 import Footer from '@/components/ui/footer';
 import NavBar from '@/components/ui/navigation-bar';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 
 const AnalyticsTable = () => {
+  const dateSelector = useDateSelector();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage] = useState(7);
+  const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics');
+  const [level, setLevel] = useState('0');
+  const [isFiltered, setFiltered] = useState(false);
+
   const {
-    startDay,
-    startMonth,
-    startYear,
-    endDay,
-    endMonth,
-    endYear,
-    handleStartDayChange,
-    handleStartMonthChange,
-    handleStartYearChange,
-    handleEndDayChange,
-    handleEndMonthChange,
-    handleEndYearChange,
-  } = useDateSelector();
-
-  const [analyticsType, setAnalyticsType] = useState<string>('biochemistry-analytics');
-
-  const [level, setLevel] = useState<string>('1');
-
-  const [isFiltered, setFiltered] = useState<boolean>(false);
-
-  const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const url = isFiltered ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/level-date-range?level=${level}&startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}` : `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/date-range?startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(endYear, endMonth, endDay)}`;
+    data: dataFetched,
+    links: _links,
+    isLoading,
+    error,
+    fetchData,
+    buildUrl
+  } = useAnalyticsData({
+    analyticsType,
+    level,
+    startDate: {
+      day: dateSelector.startDay,
+      month: dateSelector.startMonth,
+      year: dateSelector.startYear,
+    },
+    endDate: {
+      day: dateSelector.endDay,
+      month: dateSelector.endMonth,
+      year: dateSelector.endYear,
+    },
+    itemsPerPage,
+    currentPage,
+  });
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const tokenResponse = await fetch('/api/get-token');
-        const { token } = await tokenResponse.json();
+    const url = buildUrl(isFiltered);
+    fetchData(url);
+  }, [isFiltered, analyticsType]);
 
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
+  // Helper functions
+  const getPageNumberFromUrl = (url: string) => {
+    const params = new URLSearchParams(url.split('?')[1]);
+    return parseInt(params.get('page') || '0');
+  };
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const result = await response.json();
-        setDataFetched(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('Unable to load data. Please try again.');
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const getCurrentPageNumber = () => _links?.['current-page']?.href ?
+    getPageNumberFromUrl(_links['current-page'].href) : 0;
 
-    fetchData();
-  }, [url]);
+  const getLastPageNumber = () => _links?.['last']?.href ?
+    getPageNumberFromUrl(_links['last'].href) : 0;
+
+  const handlePageChange = async (url: string): Promise<void> => {
+    await fetchData(url);
+  };
+
+  const handleNavigation = (url: string | undefined) => {
+    if (url) {
+      handlePageChange(url);
+    }
+  };
 
   const analyticsOptions = [
     { value: 'biochemistry-analytics', label: 'BIOCHEMISTRY' },
@@ -96,20 +91,7 @@ const AnalyticsTable = () => {
           <div className=''>
             <div className='mb-4 mt-16 grid grid-cols-2 content-center items-center justify-start md:mb-6 md:flex'>
               <div className='mt-4 w-full md:mt-16 md:w-auto'>
-                <DateSelector
-                  startDay={startDay}
-                  startMonth={startMonth}
-                  startYear={startYear}
-                  endDay={endDay}
-                  endMonth={endMonth}
-                  endYear={endYear}
-                  handleStartDayChange={handleStartDayChange}
-                  handleStartMonthChange={handleStartMonthChange}
-                  handleStartYearChange={handleStartYearChange}
-                  handleEndDayChange={handleEndDayChange}
-                  handleEndMonthChange={handleEndMonthChange}
-                  handleEndYearChange={handleEndYearChange}
-                />
+                <DateSelector {...dateSelector} />
 
                 <div className='flex w-full flex-row gap-1 py-1'>
                   <label htmlFor='tests' className='text-textSecondary'>
@@ -157,8 +139,31 @@ const AnalyticsTable = () => {
               {error}
             </div>
           ) : (
-            <ListingTable items={dataFetched} />
+            <ListingTable
+              items={dataFetched}
+              pageInfos={_links}
+              onPageChange={handlePageChange}
+            />
           )}
+        </div>
+        <div className='flex items-center justify-center py-4 space-x-2'>
+          <button
+            onClick={() => handleNavigation(_links?.['prev']?.href)}
+            disabled={!_links?.['prev']?.href}
+            className='px-4 py-2 text-xs text-white transition-colors bg-opacity-100 rounded-md hover:bg-primaryDark bg-muted disabled:cursor-not-allowed disabled:opacity-25 md:text-base'
+          >
+            &larr;
+          </button>
+          <span className='text-xs text-textSecondary'>
+            Page {getCurrentPageNumber() + 1} of {getLastPageNumber() + 1}
+          </span>
+          <button
+            onClick={() => handleNavigation(_links?.['next']?.href)}
+            disabled={!_links?.['next']?.href}
+            className='px-4 py-2 text-xs text-white transition-colors bg-opacity-100 rounded-md hover:bg-primaryDark bg-border disabled:cursor-not-allowed disabled:opacity-25 md:text-base'
+          >
+            &rarr;
+          </button>
         </div>
         <div className='flex flex-col items-center justify-end'>
           <Footer />

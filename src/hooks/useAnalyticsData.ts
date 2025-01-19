@@ -1,11 +1,14 @@
 import { ListingItem } from '@/components/charts/types/Chart';
-import { formatDateWithTime, formatEndDateWithTime } from '@/components/shared/date-selector/constants/formatDateWithTime';
+import {
+  formatDateWithTime,
+  formatEndDateWithTime,
+} from '@/components/shared/date-selector/constants/formatDateWithTime';
 import { useState } from 'react';
 
 interface Links {
-  'last'?: { href: string };
-  'next'?: { href: string };
-  'prev'?: { href: string };
+  last?: { href: string };
+  next?: { href: string };
+  prev?: { href: string };
   'current-page'?: { href: string };
 }
 
@@ -67,7 +70,7 @@ export const useAnalyticsData = ({
     if (isFiltered) {
       return `${baseUrl}/level-date-range?level=${level}&startDate=${startDateFormatted}&endDate=${endDateFormatted}&page=${currentPage}&sort=date,desc`;
     }
-    
+
     return `${baseUrl}/date-range?startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`;
   };
 

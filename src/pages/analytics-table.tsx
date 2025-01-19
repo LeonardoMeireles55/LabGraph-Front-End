@@ -1,4 +1,3 @@
-import { ListingItem } from '@/components/charts/types/Chart';
 import ListingTable from '@/components/features/listing-table';
 import DateSelector from '@/components/shared/date-selector';
 import useDateSelector from '@/components/shared/date-selector/hooks/useDateSelector';
@@ -10,7 +9,7 @@ import { useAnalyticsData } from '@/hooks/useAnalyticsData';
 
 const AnalyticsTable = () => {
   const dateSelector = useDateSelector();
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage] = useState(0);
   const [itemsPerPage] = useState(7);
   const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics');
   const [level, setLevel] = useState('0');
@@ -43,7 +42,19 @@ const AnalyticsTable = () => {
   useEffect(() => {
     const url = buildUrl(isFiltered);
     fetchData(url);
-  }, [isFiltered, analyticsType]);
+  }, [
+    isFiltered,
+    analyticsType,
+    level,
+    dateSelector.startDay,
+    dateSelector.startMonth,
+    dateSelector.startYear,
+    dateSelector.endDay,
+    dateSelector.endMonth,
+    dateSelector.endYear,
+    itemsPerPage,
+    currentPage
+  ]);
 
   // Helper functions
   const getPageNumberFromUrl = (url: string) => {
@@ -74,7 +85,7 @@ const AnalyticsTable = () => {
   ];
 
   const levelOptions = [
-    { value: '0', label: 'All Levels' },
+    { value: '0', label: '-' },
     { value: '1', label: '1' },
     { value: '2', label: '2' },
     { value: '3', label: '3' },

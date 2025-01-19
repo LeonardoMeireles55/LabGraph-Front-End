@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ListingTableProps } from '../types/ListiningTable';
-import useWindowDimensions from '@/components/ui/hooks/useWindowDimensions';
 
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {

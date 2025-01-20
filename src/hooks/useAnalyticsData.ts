@@ -10,6 +10,8 @@ interface Links {
   next?: { href: string };
   prev?: { href: string };
   'current-page'?: { href: string };
+  currentPage?: { href: string };
+  totalPages?: { href: string };
 }
 
 interface UseAnalyticsDataProps {
@@ -19,6 +21,7 @@ interface UseAnalyticsDataProps {
   endDate: { day: number; month: number; year: number };
   itemsPerPage: number;
   currentPage: number;
+  totalPages?: number;
 }
 
 export const useAnalyticsData = ({
@@ -33,6 +36,7 @@ export const useAnalyticsData = ({
   const [links, setLinks] = useState<Links>({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [totalPages, setTotalPages] = useState(0);
 
   const fetchData = async (url: string) => {
     setIsLoading(true);
@@ -53,7 +57,8 @@ export const useAnalyticsData = ({
       }
 
       const result = await response.json();
-      setData(result._embedded.analyticsRecordList);
+      setData(result._embedded?.analyticsRecordList || result);
+      setTotalPages(result._links.totalPages.href);
       setLinks(result._links);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to fetch data');
@@ -81,5 +86,6 @@ export const useAnalyticsData = ({
     error,
     fetchData,
     buildUrl,
+    totalPages,
   };
 };

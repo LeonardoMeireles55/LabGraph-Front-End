@@ -5,16 +5,15 @@ export interface PageLinks {
   next?: { href: string };
   last?: { href: string };
   'current-page'?: { href: string };
+  currentPage?: { href: string };
+  totalPages?: { href: string };
   prev?: { href: string };
 }
 
 export interface ListingTableProps {
-
   items: ListingItem[];
 
   pageInfos: any;
 
   onPageChange: (url: string) => Promise<void>;
-
 }
-

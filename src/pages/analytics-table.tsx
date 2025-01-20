@@ -20,9 +20,7 @@ const AnalyticsTable = () => {
 
   const { width } = useWindowDimensions();
 
-  useEffect(() => {
-    setItemsPerPage(width < 768 ? 6 : 11);
-  }, []);
+
 
   const {
     data: dataFetched,
@@ -69,6 +67,10 @@ const AnalyticsTable = () => {
   const handlePageChange = async (url: string): Promise<void> => {
     await fetchData(url);
   };
+
+  useEffect(() => {
+    setItemsPerPage(width > 768 ? 11 : 6);
+  }, [fetchData, width]);
 
   const analyticsOptions = [
     { value: 'biochemistry-analytics', label: 'BIOCHEMISTRY' },

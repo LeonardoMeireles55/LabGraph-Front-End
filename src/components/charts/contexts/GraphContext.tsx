@@ -11,7 +11,7 @@ interface GraphContextType {
 const GraphContext = createContext<GraphContextType | undefined>(undefined);
 
 export const GraphProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [viewMode, setViewMode] = useState<ViewMode>('single');
+  const [viewMode, setViewMode] = useState<ViewMode>('dual');
 
   const toggleView = () => {
     setViewMode((current) => (current === 'single' ? 'dual' : 'single'));

@@ -47,7 +47,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
                     <select
                         id='level'
                         value={level}
-                        disabled={level === '0'}
+                        // disabled={level === '0'}
                         onChange={(e) => {
                             setLevel(e.target.value);
                             setFiltered(e.target.value !== '0');

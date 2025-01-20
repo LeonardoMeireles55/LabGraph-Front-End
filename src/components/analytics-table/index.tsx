@@ -24,7 +24,6 @@ const AnalyticsTableIndex = () => {
 
     const {
         data: dataFetched,
-        links: _links,
         isLoading,
         error,
         fetchData,
@@ -115,7 +114,6 @@ const AnalyticsTableIndex = () => {
                     ) : (
                         <ListingTable
                             items={dataFetched}
-                            pageInfos={_links}
                             onPageChange={handlePageChange}
                         />
                     )}

@@ -5,13 +5,15 @@ import {
 } from '@/components/shared/date-selector/constants/formatDateWithTime';
 import { useState } from 'react';
 
-interface Links {
-  last?: { href: string };
-  next?: { href: string };
-  prev?: { href: string };
-  'current-page'?: { href: string };
-  currentPage?: { href: string };
-  totalPages?: { href: string };
+interface PaginatedResponse {
+  content: ListingItem[];
+  totalPages: number;
+  totalElements: number;
+  size: number;
+  number: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
 }
 
 interface UseAnalyticsDataProps {
@@ -21,7 +23,6 @@ interface UseAnalyticsDataProps {
   endDate: { day: number; month: number; year: number };
   itemsPerPage: number;
   currentPage: number;
-  totalPages?: number;
 }
 
 export const useAnalyticsData = ({
@@ -33,10 +34,10 @@ export const useAnalyticsData = ({
   currentPage,
 }: UseAnalyticsDataProps) => {
   const [data, setData] = useState<ListingItem[]>([]);
-  const [links, setLinks] = useState<Links>({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
 
   const fetchData = async (url: string) => {
     setIsLoading(true);
@@ -56,10 +57,10 @@ export const useAnalyticsData = ({
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = await response.json();
-      setData(result._embedded?.analyticsRecordList || result);
-      setTotalPages(result._links.totalPages.href);
-      setLinks(result._links);
+      const result: PaginatedResponse = await response.json();
+      setData(result.content);
+      setTotalPages(result.totalPages);
+      setTotalElements(result.totalElements);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to fetch data');
     } finally {
@@ -73,7 +74,7 @@ export const useAnalyticsData = ({
     const endDateFormatted = formatEndDateWithTime(endDate.year, endDate.month, endDate.day);
 
     if (isFiltered) {
-      return `${baseUrl}/level-date-range?level=${level}&startDate=${startDateFormatted}&endDate=${endDateFormatted}&page=${currentPage}&sort=date,desc`;
+      return `${baseUrl}/level-date-range?level=${level}&startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`;
     }
 
     return `${baseUrl}/date-range?startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`;
@@ -81,11 +82,11 @@ export const useAnalyticsData = ({
 
   return {
     data,
-    links,
     isLoading,
     error,
     fetchData,
     buildUrl,
     totalPages,
+    totalElements,
   };
 };

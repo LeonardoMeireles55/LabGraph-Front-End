@@ -12,8 +12,5 @@ export interface PageLinks {
 
 export interface ListingTableProps {
   items: ListingItem[];
-
-  pageInfos: any;
-
   onPageChange: (url: string) => Promise<void>;
 }

@@ -1,4 +1,5 @@
 services:
+  restart: on-failure
   quality-lab-pro-front-end:
     image: leonardomeireles55/quality-lab-pro-front-end:latest
     ports:

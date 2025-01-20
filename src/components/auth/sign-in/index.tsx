@@ -16,7 +16,7 @@ const LoginForm = () => {
       </div>
       <div className='mb-8 text-center'>
         <div className='mb-6 flex justify-center text-textSecondary opacity-95 transition-transform duration-300 ease-in-out hover:scale-105'>
-          <Logo className='h-20 w-auto' />
+          <Logo className='h-24 md:h-48 w-auto' />
         </div>
         <h1 className='bg-clip-text text-4xl font-bold text-textPrimary sm:text-5xl'>
           LabGraph

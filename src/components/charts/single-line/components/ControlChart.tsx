@@ -38,6 +38,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
   const { width: windowWidth } = useWindowDimensions();
 
+
   const data = listing;
   const { mean, sd, name, level, unit_value, ownMeanValue, ownSdValue } = data[0];
 

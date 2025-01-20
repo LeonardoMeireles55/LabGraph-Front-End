@@ -5,8 +5,8 @@ export default function useDateSelector() {
   const startDate = new Date();
   startDate.setDate(endDate.getDate() - 30);
 
-  const [startDay, setStartDay] = useState<number>(startDate.getDate() + 9);
-  const [startMonth, setStartMonth] = useState<number>(startDate.getMonth() + 1);
+  const [startDay, setStartDay] = useState<number>(startDate.getDate() - 1);
+  const [startMonth, setStartMonth] = useState<number>(startDate.getMonth());
   const [startYear, setStartYear] = useState<number>(startDate.getFullYear());
 
   const [endDay, setEndDay] = useState<number>(endDate.getDate());

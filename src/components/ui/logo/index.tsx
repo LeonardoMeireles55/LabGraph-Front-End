@@ -16,10 +16,11 @@ const Logo = ({ className = 'h-16 w-auto' }: LogoProps) => {
       <path
         d='M40 100L160 100M100 40L100 160'
         stroke='currentColor'
-        strokeWidth='1'
-        strokeDasharray='4 4'
+        strokeWidth='0.5'
+        strokeDasharray='3 3'
         className=''
       />
+
 
       <path
         d='M100 70L130 85L130 115L100 130L70 115L70 85Z'
@@ -44,6 +45,8 @@ const Logo = ({ className = 'h-16 w-auto' }: LogoProps) => {
         <line x1='70' y1='85' x2='130' y2='115' />
         <line x1='70' y1='115' x2='130' y2='85' />
       </g>
+
+
     </svg>
   );
 };

@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build  && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
-    "start": "node .next/standalone/server.js",
-    "start-old": "next start",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@types/cookie": "^0.6.0",
     "cookie": "^1.0.2",
+    "date-fns": "^4.1.0",
     "json2csv": "^6.0.0-alpha.2",
     "lucide-react": "^0.468.0",
     "next": "15.1.0",
@@ -25,6 +25,7 @@
     "@types/node": "^20",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
+    "@types/react-plotly.js": "^2.6.3",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "15.1.0",

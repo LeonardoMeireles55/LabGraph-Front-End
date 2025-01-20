@@ -1,5 +1,4 @@
 import { AuthFormData } from '@/components/auth/types/Auth';
-import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 import { authService } from '@/services/auth';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -55,6 +54,38 @@ export const useAuth = (isLogin: boolean) => {
     }));
   };
 
+  const handleAuth = async (isLoginRequest: boolean) => {
+    try {
+      if (isLoginRequest) {
+        const response = await authService.signIn({
+          email: formData.email.trim(),
+          password: formData.password,
+        });
+        
+        if (response.tokenJWT) {
+          await authService.setSession(response.tokenJWT);
+          router.push('/hematology');
+          return;
+        }
+      } else {
+        const response = await authService.signUp({
+          email: formData.email.trim(),
+          password: formData.password,
+          username: formData.username?.trim() ?? '',
+        });
+        
+        if (response.ok) {
+          router.push('/login');
+          return;
+        }
+      }
+      throw new Error('Authentication failed');
+    } catch (err) {
+      console.error('Auth error:', err);
+      throw err;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -67,27 +98,8 @@ export const useAuth = (isLogin: boolean) => {
         return;
       }
 
-      const response = isLogin
-        ? await authService.signIn({
-            email: formData.email.trim(),
-            password: formData.password,
-          })
-        : await authService.signUp({
-            email: formData.email.trim(),
-            password: formData.password,
-            username: formData.username?.trim() ?? '',
-          });
-
-      if (response.tokenJWT) {
-        await authService.setSession(response.tokenJWT);
-        router.push('/hematology');
-      } else {
-        throw new Error(
-          getStatusMessage(response.status) ?? 'An error occurred. Please try again later.'
-        );
-      }
+      await handleAuth(isLogin);
     } catch (err) {
-      console.error('Auth error:', err);
       if (err instanceof Error) {
         setError(err.message);
       } else {

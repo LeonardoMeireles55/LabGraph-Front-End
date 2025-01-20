@@ -1,9 +1,9 @@
-import { AuthFormData } from '@/components/auth/types/Auth';
+import { AuthFormData, LoginFormData } from '@/components/auth/types/Auth';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const authService = {
-  async signIn(credentials: Pick<AuthFormData, 'email' | 'password'>) {
+  async signIn(credentials: Pick<LoginFormData, 'email' | 'password'>) {
     const response = await fetch(`${API_BASE_URL}/users/sign-in`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -18,7 +18,7 @@ export const authService = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
     });
-    return await response.json();
+    return { ok: response.status === 204 };
   },
 
   async setSession(token: string) {

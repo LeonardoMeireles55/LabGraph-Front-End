@@ -5,6 +5,11 @@ export interface AuthFormData {
   confirmPassword?: string;
 }
 
+export interface LoginFormData {
+  email: string;
+  password: string;
+}
+
 export interface InputFieldProps {
   id: string;
   type: string;

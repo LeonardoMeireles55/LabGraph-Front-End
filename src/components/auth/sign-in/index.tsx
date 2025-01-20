@@ -29,7 +29,7 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit} className='space-y-6'>
         <InputField
           id='email'
-          type='email'
+          type='text'
           label='Email'
           value={formData.email}
           onChange={handleChange}

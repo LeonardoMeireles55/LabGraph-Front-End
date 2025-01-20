@@ -4,6 +4,13 @@ import TableRow from './table-row';
 import MobileItemCard from './mobile-item-card';
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
+  if (!items || !Array.isArray(items) || items.length === 0) {
+    return (
+      <div className='flex items-center justify-center w-full h-full'>
+        <p className='text-textPrimary bg-danger p-2 rounded-md'>Error: No data available or invalid data format.</p>
+      </div>
+    )
+  }
   return (
     <div className='flex flex-col justify-between w-full h-min rounded-lg shadow-xl'>
       <table className='hidden bg-background md:table'>

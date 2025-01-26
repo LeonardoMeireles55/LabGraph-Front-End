@@ -24,14 +24,14 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
   const levels = useMemo(() => {
     if (!listings || listings.length === 0) return [];
-    return listings.map((level) => level.groupedValuesByLevel.level);
+    return listings.map((level) => level.groupedValuesByLevelDTO.level);
   }, [listings]);
 
   const chartData = useMemo(() => {
     if (!listings || listings.length === 0) return [];
 
     const maxLength = Math.max(
-      ...listings.map((level) => level.groupedValuesByLevel.values.length)
+      ...listings.map((level) => level.groupedValuesByLevelDTO.values.length)
     );
 
     return Array.from({ length: maxLength }).map((_, index) => {
@@ -39,13 +39,13 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
       for (let levelIndex = 0; levelIndex < listings.length; levelIndex++) {
         const data = listings[levelIndex];
-        const values = data.groupedValuesByLevel.values[index];
-        const ouwnMean = data.groupedMeanAndStdRecordByLevel.values[0].mean;
-        const ouwnSd = data.groupedMeanAndStdRecordByLevel.values[0].standardDeviation;
+        const values = data.groupedValuesByLevelDTO.values[index];
+        const ownMean = data.groupedMeanAndStdByLevelDTO.values[0].mean;
+        const ownSd = data.groupedMeanAndStdByLevelDTO.values[0].standardDeviation;
 
         if (values) {
           const { mean, standardDeviation }: MeanStdDevValue = useOwnValues
-            ? { mean: ouwnMean, standardDeviation: ouwnSd }
+            ? { mean: ownMean, standardDeviation: ownSd }
             : { mean: values.mean, standardDeviation: values.sd };
 
           entry.date = customFormatDate(values.date);
@@ -104,7 +104,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
           <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl'>
-            {listings[0].groupedValuesByLevel.values[0].name}
+            {listings[0].groupedValuesByLevelDTO.values[0].name}
           </h2>
           <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
             <button

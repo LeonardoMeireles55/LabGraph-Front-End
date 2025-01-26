@@ -1,4 +1,4 @@
-import useFetchListinig from '@/components/charts/single-line/hooks/useFetchListinig';
+import useFetchListing from '@/components/charts/single-line/hooks/useFetchListinig';
 import { ListingItem } from '@/components/charts/types/Chart';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -42,7 +42,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
     date: { startDay, startMonth, startYear, endDay, endMonth, endYear },
   });
 
-  const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListinig({
+  const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing({
     url: props.url,
     urlMeanAndDeviation: props.urlMeanAndDeviation,
   });

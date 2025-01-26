@@ -1,4 +1,4 @@
-import useFetchListiningGrouped from '@/components/charts/multiple-line/hooks/useFetchListiningGrouped';
+import useFetchListeningGrouped from '@/components/charts/multiple-line/hooks/useFetchListiningGrouped';
 import urlByNameAndDateNew from '@/components/utils/helpers/urlByNameAndDateNew';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -36,7 +36,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
     analyticsType,
   });
 
-  const { listing } = useFetchListiningGrouped(url);
+  const { listing } = useFetchListeningGrouped(url);
 
   useEffect(() => {
     setListinig(listing);

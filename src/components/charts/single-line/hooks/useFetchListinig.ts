@@ -3,7 +3,7 @@ import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 import { useEffect, useState } from 'react';
 import { ListingCollection, UseFetchListingProps } from '../../types/Chart';
 
-const useFetchListinig = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => {
+const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => {
   const [listing, setListing] = useState<ListingCollection>([]);
   const [unitValues, setUnitValues] = useState<string | null>(null);
   const [ownMeanValue, setOwnMean] = useState<number | null>(null);
@@ -60,4 +60,4 @@ const useFetchListinig = ({ url, urlMeanAndDeviation }: UseFetchListingProps) =>
   };
 };
 
-export default useFetchListinig;
+export default useFetchListing;

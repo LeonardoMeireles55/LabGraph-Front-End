@@ -49,6 +49,7 @@ const config: Config = {
       sun: 'var(--color-sun)',
       moon: 'var(--color-moon)',
       buttonMuted: 'var(--color-button-muted)',
+      logo: 'var(--color-logo-l)',
 
       dark: {
         primary: 'var(--color-primary)',
@@ -76,6 +77,7 @@ const config: Config = {
         sun: 'var(--color-sun)',
         moon: 'var(--color-moon)',
         buttonMuted: 'var(--color-button-muted)',
+        logo: 'var(--color-logo-l)',
       },
     },
   },

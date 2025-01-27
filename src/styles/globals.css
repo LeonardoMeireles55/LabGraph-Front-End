@@ -54,7 +54,7 @@ input[type='checkbox']:focus {
   --color-background: rgba(248, 250, 252, 1);
   --color-surface: rgba(255, 255, 255, 1);
   --color-muted: rgba(226, 232, 240, 1);
-  --color-text-primary: rgba(15, 23, 42, 1);
+  --color-logo-l: rgba(255, 255, 255, 1);
   --color-text-secondary: rgba(71, 85, 105, 1);
   --color-grid-lines: rgba(203, 213, 225, 0.5);
   --color-border: rgba(203, 213, 225, 1);
@@ -88,6 +88,7 @@ input[type='checkbox']:focus {
   --color-grid-lines: rgba(248, 250, 252, 0.1);
   --color-navbar: rgba(30, 41, 59, 1);
   --color-white: rgba(248, 250, 252, 1);
+  --color-logo-l: rgba(15, 23, 42, 1);
   --color-green: rgba(52, 211, 153, 1);
   --color-shadow: rgba(0255, 255, 255, 0.2);
   --color-overlay: rgba(255, 255, 255, 0.2);

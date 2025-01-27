@@ -10,8 +10,8 @@ const InputField: React.FC<InputFieldProps> = ({
   autoCompleteProps,
 }) => {
   return (
-    <div className=''>
-      <label htmlFor={id} className='block text-xs sm:text-sm font-medium text-bgText transition-colors'>
+    <div className='space-y-2'>
+      <label htmlFor={id} className='block text-xs sm:text-sm font-medium text-textSecondary transition-colors'>
         {label}
       </label>
       <input

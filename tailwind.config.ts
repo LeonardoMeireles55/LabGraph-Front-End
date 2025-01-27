@@ -48,6 +48,7 @@ const config: Config = {
       borderColor: 'var(--border-color);',
       sun: 'var(--color-sun)',
       moon: 'var(--color-moon)',
+      buttonMuted: 'var(--color-button-muted)',
 
       dark: {
         primary: 'var(--color-primary)',
@@ -74,6 +75,7 @@ const config: Config = {
         borderColor: 'var(--border-color);',
         sun: 'var(--color-sun)',
         moon: 'var(--color-moon)',
+        buttonMuted: 'var(--color-button-muted)',
       },
     },
   },

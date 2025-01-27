@@ -5,25 +5,21 @@ import ThemeToggle from '../../ui/theme';
 import ErrorMessage from '../../utils/components/error-message';
 import InputField from '../common/InputField';
 import SubmitButton from '../common/SubmitButton';
-import useTheme from '@/components/ui/theme/hooks/useTheme';
 
 const LoginForm = () => {
   const { formData, error, handleChange, handleSubmit } = useAuth(true);
 
   return (
-    <div className='w-full max-w-md transform rounded-xl border border-borderColor px-4 py-4 shadow-xl backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-2xl sm:px-16 sm:py-4'>
+    <div className='w-full max-w-md transform rounded-xl border border-borderColor px-8 py-8 shadow-xl backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-2xl sm:px-16 sm:py-16'>
       <div className='absolute right-4 top-4 z-50'>
         <ThemeToggle />
       </div>
       <div className='text-center'>
         <div className='flex justify-center text-textSecondary opacity-95 transition-transform duration-300 ease-in-out'>
-          <Logo className='ml-10' />
+          <Logo />
         </div>
-        <p className='text-textSecondary'>Sign in to continue</p>
       </div>
-
       {error && <ErrorMessage message={error} />}
-
       <form onSubmit={handleSubmit} className='space-y-4'>
         <InputField
           id='email'
@@ -44,15 +40,15 @@ const LoginForm = () => {
           <label className='flex items-center space-x-1'>
             <input
               type='checkbox'
-              className='rounded border-borderColor text-primary transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-primary focus:ring-offset-0'
+              className='rounded border-borderColor text-textPrimary transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-primary focus:ring-offset-0'
             />
-            <span className='text-textSecondary transition-colors duration-200 hover:text-textPrimary'>
+            <span className='text-textSecondary transition-colors duration-200'>
               Remember me
             </span>
           </label>
           <Link
             href='#'
-            className='text-primary transition-colors duration-200'
+            className='text-textPrimary transition-colors duration-200'
           >
             Forgot password?
           </Link>
@@ -64,7 +60,7 @@ const LoginForm = () => {
           Don&apos;t have an account?{' '}
           <Link
             href='/signup'
-            className='font-medium text-primary transition-colors duration-200'
+            className='font-medium text-textPrimary transition-colors duration-200'
           >
             Sign up
           </Link>

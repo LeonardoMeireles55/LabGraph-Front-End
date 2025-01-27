@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+# package-lock.json should NOT be ignored - it ensures consistent installs across environments
 
 # testing
 /coverage

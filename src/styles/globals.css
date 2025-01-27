@@ -18,59 +18,83 @@ select {
   cursor: pointer;
 }
 
-:root {
-  --color-mean-line: rgba(46, 125, 50, 1.0);    
-  --color-sd1: rgba(30, 136, 229, 0.8);         
-  --color-sd2: rgba(236, 64, 122, 0.8);        
-  --color-sd3: rgba(220, 38, 38, 1.0);         
-  --color-primary: rgba(25, 88, 143, 1);
-  --color-secondary: rgba(14, 165, 233, 1.0);
-  --color-accent: rgba(245, 158, 11, 1.0);
-    --color-danger: rgba(239, 68, 68, 1.0);
+input[type='checkbox'] {
+  appearance: none !important;
+  background-color: transparent !important;
+  border: 1px solid var(--color-text-secondary) !important;
+  cursor: pointer !important;
+  border-radius: 6px !important;
+  width: 12px !important;
+  height: 12px !important;
+  transition: all 0.2s ease-in-out !important;
+}
 
-  --color-background: rgba(248, 250, 252, 1.0);
-  --color-surface: rgba(255, 255, 255, 1.0);
-  --color-muted: rgba(226, 232, 240, 1.0);
-  --color-text-primary: rgba(15, 23, 42, 1.0);
-  --color-text-secondary: rgba(71, 85, 105, 1.0);
+input[type='checkbox']:checked {
+  background-color: var(--color-text-secondary) !important;
+  border-color: none !important;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+input[type='checkbox']:focus {
+  box-shadow: 0 0 0 2px rgba(var(--color-primary), 0.2) !important;
+}
+
+:root {
+  --color-mean-line: rgba(46, 125, 50, 1);
+  --color-sd1: rgba(30, 136, 229, 0.8);
+  --color-sd2: rgba(236, 64, 122, 0.8);
+  --color-sd3: rgba(220, 38, 38, 1);
+  --color-primary: rgba(25, 88, 143, 1);
+  --color-secondary: rgba(14, 165, 233, 1);
+  --color-accent: rgba(245, 158, 11, 1);
+  --color-danger: rgba(239, 68, 68, 1);
+
+  --color-background: rgba(248, 250, 252, 1);
+  --color-surface: rgba(255, 255, 255, 1);
+  --color-muted: rgba(226, 232, 240, 1);
+  --color-text-primary: rgba(15, 23, 42, 1);
+  --color-text-secondary: rgba(71, 85, 105, 1);
   --color-grid-lines: rgba(203, 213, 225, 0.5);
-  --color-border: rgba(203, 213, 225, 1.0);
-  --color-navbar: rgba(255, 255, 255, 1.0);
-  --color-white: rgba(255, 255, 255, 1.0);
-  --color-bg-text: rgba(30, 41, 59, 1.0);
-  --color-green: rgba(16, 185, 129, 1.0);
+  --color-border: rgba(203, 213, 225, 1);
+  --color-navbar: rgba(255, 255, 255, 1);
+  --color-white: rgba(255, 255, 255, 1);
+  --color-bg-text: rgba(30, 41, 59, 1);
+  --color-green: rgba(16, 185, 129, 1);
   --color-shadow: rgba(0, 0, 0, 0.2);
   --color-overlay: rgba(0, 0, 0, 0.05);
   --border-color: rgba(71, 85, 105, 0.3);
-  --color-sun: rgba(251, 191, 36, 1.0);
-  --color-moon: rgba(148, 163, 184, 1.0);
+  --color-sun: rgba(251, 191, 36, 1);
+  --color-moon: rgba(148, 163, 184, 1);
+  --color-button-muted: rgba(71, 85, 105, 0.5);
 }
 
 .dark {
-
-  --color-mean-line: rgba(165, 214, 167, 1.0); 
-  --color-sd1: rgba(100, 181, 246, 0.8);       
-  --color-sd2: rgba(244, 143, 177, 0.8);        
-  --color-sd3: rgba(239, 68, 68, 1.0);    
-  --color-primary: rgba(129, 140, 248, 1.0);
-  --color-secondary: rgba(56, 189, 248, 1.0);
-  --color-accent: rgba(251, 191, 36, 1.0);
-  --color-background: rgba(15, 23, 42, 1.0);
-  --color-surface: rgba(30, 41, 59, 1.0);
-  --color-muted: rgba(51, 65, 85, 1.0);
-    --color-danger: rgba(220, 38, 38, 1.0);
-  --color-text-primary: rgba(248, 250, 252, 1.0);
-  --color-text-secondary: rgba(248, 250, 252, 1.0);
-  --color-bg-text: rgba(248, 250, 252, 1.0);
+  --color-mean-line: rgba(165, 214, 167, 1);
+  --color-sd1: rgba(100, 181, 246, 0.8);
+  --color-sd2: rgba(244, 143, 177, 0.8);
+  --color-sd3: rgba(239, 68, 68, 1);
+  --color-primary: rgba(248, 250, 252, 1);
+  --color-secondary: rgba(56, 189, 248, 1);
+  --color-accent: rgba(251, 191, 36, 1);
+  --color-background: rgba(15, 23, 42, 1);
+  --color-surface: rgba(30, 41, 59, 1);
+  --color-muted: rgba(51, 65, 85, 1);
+  --color-danger: rgba(220, 38, 38, 1);
+  --color-text-primary: rgba(248, 250, 252, 1);
+  --color-text-secondary: rgba(248, 250, 252, 1);
+  --color-bg-text: rgba(248, 250, 252, 1);
   --color-grid-lines: rgba(248, 250, 252, 0.1);
-  --color-navbar: rgba(30, 41, 59, 1.0);
-  --color-white: rgba(248, 250, 252, 1.0);
-  --color-green: rgba(52, 211, 153, 1.0);
+  --color-navbar: rgba(30, 41, 59, 1);
+  --color-white: rgba(248, 250, 252, 1);
+  --color-green: rgba(52, 211, 153, 1);
   --color-shadow: rgba(0255, 255, 255, 0.2);
   --color-overlay: rgba(255, 255, 255, 0.2);
   --border-color: rgba(248, 250, 252, 0.5);
-  --color-sun: rgba(251, 191, 36, 1.0);
-  --color-moon: rgba(226, 232, 240, 1.0);
+  --color-sun: rgba(251, 191, 36, 1);
+  --color-moon: rgba(226, 232, 240, 1);
+  --color-button-muted: rgb(35, 49, 71);
 }
 
 @keyframes spin {
@@ -82,4 +106,3 @@ select {
 .animate-spin {
   animation: spin 1s linear infinite;
 }
-

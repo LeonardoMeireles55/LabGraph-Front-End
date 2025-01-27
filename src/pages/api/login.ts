@@ -10,22 +10,19 @@ interface SuccessResponse {
   success: boolean;
 }
 
-const TOKEN_SECONDS = 3600;
-
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<SuccessResponse | ErrorResponse>
 ) {
   if (req.method !== 'POST') {
-    console.error(`Invalid method: ${req.method}`);
     return res.status(405).json({
-      message: 'Method not allowed. Only POST requests are accepted.',
+      message: 'Method not allowed',
       status: 405,
     });
   }
 
   try {
-    const { token } = req.body;
+    const { token, remember, dateExp } = req.body;
 
     if (!token || typeof token !== 'string') {
       console.error('Token missing or not a string');
@@ -35,35 +32,22 @@ export default function handler(
       });
     }
 
-    if (token.split('.').length !== 3) {
-      console.error('Malformed token provided');
-      return res.status(401).json({
-        message: 'Malformed token',
-        status: 401,
-      });
-    }
+    const maxAgeInSeconds = remember
+      ? Math.floor((new Date(dateExp).getTime() - Date.now()) / 1000)
+      : undefined;
 
     const cookieOptions = {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict' as const,
       path: '/',
-      maxAge: TOKEN_SECONDS,
+      maxAge: maxAgeInSeconds,
     };
 
-    try {
-      res.setHeader('Set-Cookie', serialize('tokenJWT', token, cookieOptions));
-    } catch (cookieError) {
-      console.error('Error setting cookie:', cookieError);
-      return res.status(500).json({
-        message: 'Failed to set authentication cookie',
-        status: 500,
-      });
-    }
-
+    res.setHeader('Set-Cookie', serialize('tokenJWT', token, cookieOptions));
     return res.status(200).json({ success: true });
   } catch (error) {
-    console.error('Unexpected error during login:', error);
+    console.error('Login error:', error);
     return res.status(500).json({
       message: 'Internal server error',
       status: 500,

@@ -24,6 +24,10 @@ const config: Config = {
       },
     },
     colors: {
+      signin: 'var(--color-signin)',
+      signinHover: 'var(--color-signin-hover)',
+      signout: 'var(--color-signout)',
+      signoutHover: 'var(--color-signout-hover)',
       primary: 'var(--color-primary)',
       secondary: 'var(--color-secondary)',
       accent: 'var(--color-accent)',
@@ -50,8 +54,13 @@ const config: Config = {
       moon: 'var(--color-moon)',
       buttonMuted: 'var(--color-button-muted)',
       logo: 'var(--color-logo-l)',
+      checkbox: 'var(--color-checkbox)',
 
       dark: {
+        signin: 'var(--color-signin)',
+        signinHover: 'var(--color-signin-hover)',
+        signout: 'var(--color-signout)',
+        signoutHover: 'var(--color-signout-hover)',
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
         accent: 'var(--color-accent)',
@@ -78,6 +87,7 @@ const config: Config = {
         moon: 'var(--color-moon)',
         buttonMuted: 'var(--color-button-muted)',
         logo: 'var(--color-logo-l)',
+        checkbox: 'var(--color-checkbox)',
       },
     },
   },

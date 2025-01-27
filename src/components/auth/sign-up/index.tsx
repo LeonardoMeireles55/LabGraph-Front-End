@@ -11,21 +11,17 @@ const SignUpForm = () => {
   const { formData, error, handleChange, handleSubmit } = useAuth(false);
 
   return (
-    <div className='relative w-full rounded-xl border border-borderColor p-8 shadow-xl'>
+    <div className='w-full max-w-md transform rounded-xl border border-borderColor px-8 py-8 shadow-xl backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-2xl sm:px-16 sm:py-16'>
       <div className='absolute right-4 top-4 z-50'>
         <ThemeToggle />
       </div>
-      <div className='mb-8 text-center'>
-        <div className='mb-4 flex justify-center text-textSecondary opacity-95'>
-          <Logo className='h-20 w-auto' />
+      <div className='text-center mb-0'>
+        <div className='flex justify-center text-secondary opacity-95 transition-transform duration-300 ease-in-out'>
+          <Logo className='w-32 sm:w-40 md:w-48 lg:w-56 opacity-85' />
         </div>
-        <h1 className='text-4xl font-bold text-textPrimary'>Create Account</h1>
-        <p className='mt-2 text-textSecondary'>Fill in the details to register</p>
       </div>
-
       {error && <ErrorMessage message={error} />}
-
-      <form onSubmit={handleSubmit} className='space-y-4'>
+      <form onSubmit={handleSubmit} className='space-y-3'>
         <InputField
           id='username'
           type='text'
@@ -57,9 +53,10 @@ const SignUpForm = () => {
 
         <SubmitButton text='Create Account' />
 
-        <p className='mt-4 text-center text-sm text-textSecondary'>
+        <p className='mt-6 text-center text-xs sm:text-sm text-textSecondary'>
           Already have an account?{' '}
-          <Link href='/login' className='text-primary'>
+          <Link href='/login'
+            className='font-medium text-textPrimary transition-colors duration-200'>
             Sign in
           </Link>
         </p>

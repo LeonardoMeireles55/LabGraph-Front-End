@@ -10,8 +10,8 @@ const InputField: React.FC<InputFieldProps> = ({
   autoCompleteProps,
 }) => {
   return (
-    <div className='space-y-2'>
-      <label htmlFor={id} className='block text-xs sm:text-sm font-medium text-textSecondary transition-colors'>
+    <div className='space-y-0'>
+      <label htmlFor={id} className='block text-xs sm:text-sm  text-textSecondary transition-colors'>
         {label}
       </label>
       <input
@@ -20,7 +20,7 @@ const InputField: React.FC<InputFieldProps> = ({
         autoComplete={autoCompleteProps ? 'off' : 'on'}
         value={value}
         onChange={onChange}
-        className='placeholder:text-textPrimary hover:border-textPrimary focus:ring-textPrimary w-full rounded-lg border border-borderColor bg-surface p-3 text-bgText transition-all duration-200 ease-in-out focus:border-textPrimary focus:outline-none focus:ring-1'
+        className='placeholder:text-textSecondary hover:border-textPrimary focus:ring-textSecondary w-full rounded-lg border border-borderColor bg-surface p-1.5 text-bgText transition-all duration-200 ease-in-out focus:border-textPrimary focus:outline-none focus:ring-1'
         required
       />
     </div>

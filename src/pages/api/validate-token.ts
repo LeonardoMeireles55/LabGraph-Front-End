@@ -12,7 +12,7 @@ export default async function handler(
   if (req.method !== 'GET') {
     return res.status(405).json({
       valid: false,
-      message: 'Method not allowed'
+      message: 'Method not allowed',
     });
   }
 
@@ -22,7 +22,7 @@ export default async function handler(
     if (!token) {
       return res.status(401).json({
         valid: false,
-        message: 'No token found'
+        message: 'No token found',
       });
     }
 
@@ -30,7 +30,7 @@ export default async function handler(
     if (token.split('.').length !== 3) {
       return res.status(401).json({
         valid: false,
-        message: 'Invalid token format'
+        message: 'Invalid token format',
       });
     }
 
@@ -40,13 +40,13 @@ export default async function handler(
       if (Date.now() >= payload.exp * 1000) {
         return res.status(401).json({
           valid: false,
-          message: 'Token expired'
+          message: 'Token expired',
         });
       }
     } catch {
       return res.status(401).json({
         valid: false,
-        message: 'Invalid token payload'
+        message: 'Invalid token payload',
       });
     }
 
@@ -55,7 +55,7 @@ export default async function handler(
     console.error('Token validation error:', error);
     return res.status(500).json({
       valid: false,
-      message: 'Internal server error'
+      message: 'Internal server error',
     });
   }
 }

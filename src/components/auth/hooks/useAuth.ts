@@ -15,6 +15,7 @@ export const useAuth = (isLogin: boolean) => {
     username: '',
     confirmPassword: '',
   });
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -60,10 +61,10 @@ export const useAuth = (isLogin: boolean) => {
         const response = await authService.signIn({
           email: formData.email.trim(),
           password: formData.password,
+          remember: rememberMe,
         });
-        
-        if (response.tokenJWT) {
-          await authService.setSession(response.tokenJWT);
+
+        if (response.success) {
           router.push('/hematology');
           return;
         }
@@ -73,7 +74,7 @@ export const useAuth = (isLogin: boolean) => {
           password: formData.password,
           username: formData.username?.trim() ?? '',
         });
-        
+
         if (response.ok) {
           router.push('/login');
           return;
@@ -110,5 +111,13 @@ export const useAuth = (isLogin: boolean) => {
     }
   };
 
-  return { formData, error, loading, handleChange, handleSubmit };
+  return {
+    formData,
+    error,
+    loading,
+    rememberMe,
+    setRememberMe,
+    handleChange,
+    handleSubmit,
+  };
 };

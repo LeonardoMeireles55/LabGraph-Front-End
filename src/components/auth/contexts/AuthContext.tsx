@@ -13,19 +13,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const router = useRouter();
 
     const validateToken = useCallback(async () => {
-        if (router.pathname === '/signup') return;
-        if (router.pathname === '/login') return;
+        if (router.pathname === '/signup' || router.pathname === '/login') return;
+
         try {
             const response = await fetch('/api/validate-token');
             const data = await response.json();
 
             setIsValid(data.valid);
             if (!data.valid) {
+                localStorage.removeItem('remembered');
                 router.push('/login');
             }
         } catch (error) {
             console.error('Token validation error:', error);
             setIsValid(false);
+            localStorage.removeItem('remembered');
             router.push('/login');
         }
     }, [router]);

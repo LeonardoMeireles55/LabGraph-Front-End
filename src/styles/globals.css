@@ -10,6 +10,15 @@
   transition: background-color 0.1s ease-in-out;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 html {
   background-color: var(--color-background);
 }
@@ -18,7 +27,7 @@ select {
   cursor: pointer;
 }
 
-input[type='checkbox'] {
+/* input[type='checkbox'] {
   appearance: none !important;
   background-color: transparent !important;
   border: 1px solid var(--color-text-secondary) !important;
@@ -27,15 +36,14 @@ input[type='checkbox'] {
   width: 12px !important;
   height: 12px !important;
   transition: all 0.2s ease-in-out !important;
-}
+} */
 
-input[type='checkbox']:checked {
-  background-color: var(--color-text-secondary) !important;
+/* input[type='checkbox']:checked {
   border-color: none !important;
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='var(--color-accent)' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
   background-position: center !important;
   background-repeat: no-repeat !important;
-}
+} */
 
 input[type='checkbox']:focus {
   box-shadow: 0 0 0 2px rgba(var(--color-primary), 0.2) !important;
@@ -50,11 +58,11 @@ input[type='checkbox']:focus {
   --color-secondary: rgba(14, 165, 233, 1);
   --color-accent: rgba(245, 158, 11, 1);
   --color-danger: rgba(239, 68, 68, 1);
-
   --color-background: rgba(248, 250, 252, 1);
   --color-surface: rgba(255, 255, 255, 1);
   --color-muted: rgba(226, 232, 240, 1);
   --color-logo-l: rgba(255, 255, 255, 1);
+  --color-text-primary: rgb(30, 36, 45, 1);
   --color-text-secondary: rgba(71, 85, 105, 1);
   --color-grid-lines: rgba(203, 213, 225, 0.5);
   --color-border: rgba(203, 213, 225, 1);
@@ -67,7 +75,12 @@ input[type='checkbox']:focus {
   --border-color: rgba(71, 85, 105, 0.3);
   --color-sun: rgba(251, 191, 36, 1);
   --color-moon: rgba(148, 163, 184, 1);
-  --color-button-muted: rgba(71, 85, 105, 0.5);
+  --color-button-muted: rgba(71, 85, 105, 0.8);
+  --checkbox-color: rgb(30, 36, 45, 1); /* or your desired default color */
+  --color-signin: rgba(16, 185, 129, 1); /* Same as --color-green for consistency */
+  --color-signin-hover: rgba(14, 165, 115, 1);
+  --color-signout: rgba(220, 38, 38, 0.9); /* Similar to danger but slightly transparent */
+  --color-signout-hover: rgba(220, 38, 38, 1);
 }
 
 .dark {
@@ -95,7 +108,12 @@ input[type='checkbox']:focus {
   --border-color: rgba(248, 250, 252, 0.5);
   --color-sun: rgba(251, 191, 36, 1);
   --color-moon: rgba(226, 232, 240, 1);
-  --color-button-muted: rgb(35, 49, 71);
+  --color-button-muted: rgb(66, 83, 107);
+  --checkbox-color: #ffffff; /* or your desired default color */
+  --color-signin: rgba(52, 211, 153, 1); /* Same as dark theme --color-green */
+  --color-signin-hover: rgba(45, 185, 132, 1);
+  --color-signout: rgba(239, 68, 68, 0.9); /* Dark theme danger variant */
+  --color-signout-hover: rgba(239, 68, 68, 1);
 }
 
 @keyframes spin {

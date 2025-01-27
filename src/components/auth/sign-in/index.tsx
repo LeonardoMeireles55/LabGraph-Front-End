@@ -5,22 +5,23 @@ import ThemeToggle from '../../ui/theme';
 import ErrorMessage from '../../utils/components/error-message';
 import InputField from '../common/InputField';
 import SubmitButton from '../common/SubmitButton';
+import CheckIcon from '@/components/ui/icons/CheckBox';
 
 const LoginForm = () => {
-  const { formData, error, handleChange, handleSubmit } = useAuth(true);
+  const { formData, error, handleChange, rememberMe, setRememberMe, handleSubmit } = useAuth(true);
 
   return (
     <div className='w-full max-w-md transform rounded-xl border border-borderColor px-8 py-8 shadow-xl backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-2xl sm:px-16 sm:py-16'>
       <div className='absolute right-4 top-4 z-50'>
         <ThemeToggle />
       </div>
-      <div className='text-center'>
-        <div className='flex justify-center text-textSecondary opacity-95 transition-transform duration-300 ease-in-out'>
-          <Logo />
+      <div className='text-center mb-0'>
+        <div className='flex justify-center text-secondary opacity-95 transition-transform duration-300 ease-in-out'>
+          <Logo className='w-32 sm:w-40 md:w-48 lg:w-56 opacity-85' />
         </div>
       </div>
       {error && <ErrorMessage message={error} />}
-      <form onSubmit={handleSubmit} className='space-y-4'>
+      <form onSubmit={handleSubmit} className='space-y-3'>
         <InputField
           id='email'
           type='text'
@@ -37,15 +38,11 @@ const LoginForm = () => {
         />
 
         <div className='flex items-center justify-between text-xs sm:text-sm'>
-          <label className='flex items-center space-x-1'>
-            <input
-              type='checkbox'
-              className='rounded border-borderColor text-textPrimary transition-colors duration-200 ease-in-out focus:ring-2 focus:ring-primary focus:ring-offset-0'
-            />
-            <span className='text-textSecondary transition-colors duration-200'>
-              Remember me
-            </span>
-          </label>
+          <CheckIcon
+            text="Keep me logged in"
+            checked={rememberMe}
+            onChange={setRememberMe}
+          />
           <Link
             href='#'
             className='text-textPrimary transition-colors duration-200'

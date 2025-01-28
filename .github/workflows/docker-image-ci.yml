@@ -42,3 +42,5 @@ jobs:
           docker-compose up -d
       - name: Notify deployment
         run: echo "Deployment completed successfully"
+      - name: Notify environment
+        run: echo "Application ready in production"

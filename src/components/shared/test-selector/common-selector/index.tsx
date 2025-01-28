@@ -59,6 +59,9 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
     }
   }, [listing, ownMeanValue, ownSdValue, unitValues, SetListingItem]);
 
+  const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK;
+
+
   return (
     <div className='mt-12 grid content-start items-start gap-1 text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
       <DateSelector
@@ -103,7 +106,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
             <Link
               className='flex items-center justify-center rounded-md border border-borderColor bg-background px-2 py-0.5 md:px-2 md:py-1 text-sm font-medium text-textSecondary shadow-sm transition-all duration-200 hover:scale-110 hover:bg-background/90 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
               target='_blank'
-              href='https://docs.google.com/spreadsheets/d/1afb6XMe-CAg1yKednEugp3W8v6AMy5QJMzHzeoHRRRg/edit'
+              href={GOOGLE_SHEET_URL || ''}
             >
               <span className='hidden md:inline px-0.5 py-0.5'>
                 <CheckCircle size={17} />

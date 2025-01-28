@@ -18,7 +18,6 @@ export const authService = {
       });
 
       const data = await backendResponse.json();
-      console.log('data:', data.dateExp);
 
       if (!backendResponse.ok) {
         throw new Error(data.message || 'Authentication failed');

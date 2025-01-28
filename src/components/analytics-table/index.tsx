@@ -3,7 +3,7 @@ import useDateSelector from '@/components/shared/date-selector/hooks/useDateSele
 import Footer from '@/components/ui/footer';
 import NavBar from '@/components/ui/navigation-bar';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useAnalyticsData } from '@/components/analytics-table/hooks/useAnalyticsData';
 import useWindowDimensions from '@/components/ui/hooks/useWindowDimensions';
 import AnalyticsFilters from './util/analytics-filters';
@@ -12,7 +12,7 @@ import AnalyticsPagination from './util/analytics-pagination';
 const AnalyticsTableIndex = () => {
     const dateSelector = useDateSelector();
     const [currentPage, setCurrentPage] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(7);
+    const [itemsPerPage, setItemsPerPage] = useState(8);
     const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics');
     const [level, setLevel] = useState('0');
     const [isFiltered, setFiltered] = useState(false);
@@ -78,12 +78,26 @@ const AnalyticsTableIndex = () => {
         { value: 'coagulation-analytics', label: 'COAGULATION' },
     ];
 
-    const levelOptions = [
-        { value: '0', label: '-' },
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-        { value: '3', label: '3' },
-    ]
+    const levelOptions = useMemo(() => {
+        switch (analyticsType) {
+            case 'hematology-analytics':
+                return [
+                    { value: '0', label: '-' },
+                    { value: '1', label: '1' },
+                    { value: '2', label: '2' },
+                    { value: '3', label: '3' },
+                ];
+            case 'biochemistry-analytics':
+            case 'coagulation-analytics':
+                return [
+                    { value: '0', label: '-' },
+                    { value: '1', label: '1' },
+                    { value: '2', label: '2' },
+                ];
+            default:
+                return [{ value: '0', label: '-' }];
+        }
+    }, [analyticsType]);
 
     return (
         <div className='min-h bg-background'>

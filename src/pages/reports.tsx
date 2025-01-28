@@ -91,7 +91,7 @@ const ReportsPage = () => {
             <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
           </span>
         </div>
-        <span className='w-5/6 p-4 border shadow-md rounded-xl border-textPrimary md:mt-4 xl:w-1/3 xl:p-8'>
+        <span className='w-4/6 p-4 border border-borderColor shadow-md rounded-xl md:mt-4 xl:w-1/3 xl:p-8'>
           <Image
             className='object-cover rounded-xl'
             fetchPriority='high'

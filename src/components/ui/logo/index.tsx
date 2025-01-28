@@ -5,9 +5,9 @@ interface LogoProps {
 
 const Logo = ({ className, tittle = 'LabGraph' }: LogoProps) => {
   return (
-    <div className="flex flex-col items-center gap-2 sm:gap-3 md:gap-4">
+    <div className="flex flex-col items-center">
       <svg
-        className={`w-32 h-32 md:w-72 md:h-72 lg:w-72 lg:h-72 ${className}`}
+        className={`w-32 h-32 md:w-64 md:h-64 lg:w-64 lg:h-64 ${className}`}
         viewBox="0 0 300 300"
         xmlns="http://www.w3.org/2000/svg"
       >

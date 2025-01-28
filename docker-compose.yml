@@ -12,7 +12,7 @@ services:
     stdin_open: true
     tty: true
     # command: ['npm', 'start']
-    command: ["node", "server.js"]
+    command: ['node', 'server.js']
     networks:
       - qualitylab-net
 
@@ -22,4 +22,5 @@ volumes:
 
 networks:
   qualitylab-net:
-    external: true
+    driver: bridge
+    name: qualitylab-net

@@ -3,18 +3,18 @@ import { AuthFormData } from '@/components/auth/types/Auth';
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 interface SignInParams {
-  email: string;
+  identifier: string;
   password: string;
   remember?: boolean;
 }
 
 export const authService = {
-  signIn: async ({ email, password, remember }: SignInParams) => {
+  signIn: async ({ identifier: identifier, password, remember }: SignInParams) => {
     try {
       const backendResponse = await fetch(`${API_BASE_URL}/users/sign-in`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ identifier: identifier, password }),
       });
 
       const data = await backendResponse.json();

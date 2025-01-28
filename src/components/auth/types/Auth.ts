@@ -1,12 +1,12 @@
 export interface AuthFormData {
-  email: string;
+  identifier: string;
   password: string;
   username: string;
   confirmPassword?: string;
 }
 
 export interface LoginFormData {
-  email: string;
+  identifier: string;
   password: string;
 }
 

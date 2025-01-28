@@ -24,10 +24,10 @@ const LoginForm = () => {
       {error && <ErrorMessage message={error} />}
       <form onSubmit={handleSubmit} className='space-y-1.5'>
         <InputField
-          id='email'
+          id='identifier'
           type='text'
-          label='Email'
-          value={formData.email}
+          label='Email or Username'
+          value={formData.identifier}
           onChange={handleChange}
         />
         <InputField

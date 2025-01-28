@@ -10,7 +10,7 @@ interface ValidationError {
 
 export const useAuth = (isLogin: boolean) => {
   const [formData, setFormData] = useState<AuthFormData>({
-    email: '',
+    identifier: '',
     password: '',
     username: '',
     confirmPassword: '',
@@ -22,26 +22,33 @@ export const useAuth = (isLogin: boolean) => {
 
   const validateForm = (): ValidationError[] => {
     const errors: ValidationError[] = [];
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!formData.email) {
-      errors.push({ field: 'email', message: 'Email is required' });
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.push({ field: 'email', message: 'Invalid email' });
-    }
+    if (isLogin) {
+      if (!formData.identifier) {
+        errors.push({ field: 'identifier', message: 'Email or username is required' });
+      }
+      // For login, we don't validate email format since identifier can be username
+    } else {
+      // For signup, validate email and username separately
+      if (!formData.identifier) {
+        errors.push({ field: 'identifier', message: 'Email is required' });
+      } else if (!emailRegex.test(formData.identifier)) {
+        errors.push({ field: 'identifier', message: 'Invalid email format' });
+      }
 
-    if (!formData.password) {
-      errors.push({ field: 'password', message: 'Password is required' });
-    } else if (formData.password.length < 6) {
-      errors.push({ field: 'password', message: 'Password must be at least 6 characters' });
-    }
-
-    if (!isLogin) {
       if (!formData.username) {
         errors.push({ field: 'username', message: 'Username is required' });
       }
       if (formData.password !== formData.confirmPassword) {
         errors.push({ field: 'confirmPassword', message: 'Passwords do not match' });
       }
+    }
+
+    if (!formData.password) {
+      errors.push({ field: 'password', message: 'Password is required' });
+    } else if (formData.password.length < 6) {
+      errors.push({ field: 'password', message: 'Password must be at least 6 characters' });
     }
 
     return errors;
@@ -59,7 +66,7 @@ export const useAuth = (isLogin: boolean) => {
     try {
       if (isLoginRequest) {
         const response = await authService.signIn({
-          email: formData.email.trim(),
+          identifier: formData.identifier.trim(),
           password: formData.password,
           remember: rememberMe,
         });
@@ -70,7 +77,7 @@ export const useAuth = (isLogin: boolean) => {
         }
       } else {
         const response = await authService.signUp({
-          email: formData.email.trim(),
+          identifier: formData.identifier.trim(),
           password: formData.password,
           username: formData.username?.trim() ?? '',
         });

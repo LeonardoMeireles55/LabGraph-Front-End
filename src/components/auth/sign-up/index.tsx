@@ -24,17 +24,17 @@ const SignUpForm = () => {
       {error && <ErrorMessage message={error} />}
       <form onSubmit={handleSubmit} className='space-y-1.5'>
         <InputField
-          id='username'
+          id='identifier'
           type='text'
           label='Username'
-          value={formData.username}
+          value={formData.identifier}
           onChange={handleChange}
         />
         <InputField
           id='email'
           type='email'
           label='Email'
-          value={formData.email || formData.identifier}
+          value={formData.email ? formData.email : ''}
           onChange={handleChange}
         />
         <InputField

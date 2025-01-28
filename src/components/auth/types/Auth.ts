@@ -2,7 +2,6 @@ export interface AuthFormData {
   identifier: string;
   email?: string;
   password: string;
-  username: string;
   confirmPassword?: string;
 }
 

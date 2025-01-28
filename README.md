@@ -69,6 +69,7 @@ A specialized web application for laboratory quality control management, impleme
   - Comprehensive QC data analysis with filtering capabilities
   - Statistical metrics and performance indicators
   - Quality control violation tracking
+  - Sending email warnings 
 
 - **Dark/Light Mode**: Full theme support for comfortable viewing in any environment
 
@@ -106,12 +107,6 @@ Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 The application will be available at [http://localhost:3000](http://localhost:3000).
@@ -122,12 +117,6 @@ Create an optimized production build:
 
 ```bash
 npm run build
-# or
-yarn build
-# or
-pnpm build
-# or
-bun build
 ```
 
 The build output will be generated in the `build` directory.

@@ -34,7 +34,7 @@ const SignUpForm = () => {
           id='email'
           type='email'
           label='Email'
-          value={formData.email}
+          value={formData.email || formData.identifier}
           onChange={handleChange}
         />
         <InputField

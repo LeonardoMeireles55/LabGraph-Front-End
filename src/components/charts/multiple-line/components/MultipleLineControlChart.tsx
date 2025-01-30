@@ -142,7 +142,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
           >
             <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
-              <XAxis
+              {/* <XAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 dataKey='date'
                 angle={-55}
@@ -154,7 +154,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                 axisLine={false}
                 tickLine={false}
                 stroke='var(--color-text-primary)'
-              />
+              /> */}
               <YAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}

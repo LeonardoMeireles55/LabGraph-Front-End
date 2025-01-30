@@ -1,6 +1,6 @@
 services:
   quality-lab-pro-front-end:
-    restart: on-failure
+    restart: always
     image: leonardomeireles55/quality-lab-pro-front-end:latest
     ports:
       - '3000'

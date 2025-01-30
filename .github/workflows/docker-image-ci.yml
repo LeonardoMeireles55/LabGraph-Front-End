@@ -1,46 +1,64 @@
-name: Docker Image CI/CD
+name: Frontend Deploy Pipeline
 
 on:
   push:
     branches: ['main']
-  # pull_request:
-  #   branches: ['main']
 
 jobs:
   build:
     runs-on: [self-hosted, linux, x64, frontend]
-
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Cache Docker layers
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-      - name: Log in to Docker Hub
+
+      - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-      - name: Build and push Docker image
+
+      - name: Build and push
         run: |
           docker compose -f docker-compose.build.yml build
           docker compose -f docker-compose.build.yml push
 
   deploy:
-    runs-on: [self-hosted, linux, x64, frontend]
     needs: build
+    runs-on: [self-hosted, linux, x64, frontend]
     environment: Production
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Deploy
+      - uses: actions/checkout@v4
+
+      - name: Deploy application
         run: |
           docker compose pull
           docker compose up -d
-      - name: Notify deployment
-        run: echo "Deployment completed successfully"
-      - name: Notify environment
-        run: echo "Application ready in production"
+
+      - name: Deployment notification
+        run: echo "✅ Deployment completed"
+
+  health-check:
+    needs: deploy
+    runs-on: [self-hosted, linux, x64, frontend]
+    steps:
+      - name: Verify application health
+        run: |
+          # Initial wait for application startup
+          sleep 15
+
+          HEALTH_CHECK_URL="http://localhost:3000/api/health"
+          MAX_RETRIES=5
+          COUNT=0
+
+          while [ $COUNT -lt $MAX_RETRIES ]; do
+            if curl -s -f $HEALTH_CHECK_URL; then
+              echo "🟢 Application is healthy!"
+              exit 0
+            fi
+            COUNT=$((COUNT + 1))
+            echo "Health check attempt $COUNT failed. Retrying..."
+            sleep 10
+          done
+
+          echo "❌ Application failed health check"
+          exit 1
+
+      - name: Final status
+        if: success()
+        run: echo "🚀 Application is running successfully in production"

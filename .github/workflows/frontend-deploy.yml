@@ -33,34 +33,25 @@ jobs:
       - name: Deployment notification
         run: echo "✅ Deployment completed"
 
-  health-check:
+ health-check:
+    runs-on: [ self-hosted, linux, x64, backend ]
     needs: deploy
-    runs-on: [self-hosted, linux, x64, frontend]
+    timeout-minutes: 5
     steps:
-      - name: Verify application health
+      - name: Health check with timeout and retry
         run: |
-          # Initial wait for application startup
-          sleep 15
-
-          CONTAINER_NAME="labgraph-front-end-quality-lab-pro-front-end-1"
-
-          HEALTH_CHECK_URL="https://lab-spec.systems/api/health-check"
-          MAX_RETRIES=5
-          COUNT=0
-
-          while [ $COUNT -lt $MAX_RETRIES ]; do
-            if docker exec $CONTAINER_NAME curl -s -f https://lab-spec.systems/api/health-check; then
-              echo "🟢 Application is healthy!"
+          max_attempts=12
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            if curl -sSf https://lab-spec.systems/api/health-check; then
+              echo "✅ Service is healthy!"
               exit 0
             fi
-            COUNT=$((COUNT + 1))
-            echo "Health check attempt $COUNT failed. Retrying..."
-            sleep 10
+            echo "Attempt $attempt/$max_attempts - Service not healthy yet..."
+            sleep 15
+            attempt=$((attempt + 1))
           done
-
-          # If we get here, health check failed
-          echo "❌ Application failed health check"
-          docker logs $CONTAINER_NAME --tail 50
+          echo "Health check failed after $max_attempts attempts"
           exit 1
 
       - name: Final status

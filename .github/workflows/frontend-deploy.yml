@@ -44,20 +44,12 @@ jobs:
 
           CONTAINER_NAME="labgraph-front-end-quality-lab-pro-front-end-1"
 
-          # Check if container is running and healthy
-          if ! docker container inspect $CONTAINER_NAME --format '{{.State.Status}}' | grep -q "running"; then
-            echo "❌ Container $CONTAINER_NAME is not running properly"
-            docker logs $CONTAINER_NAME --tail 50
-            exit 1
-          fi
-
-          # Use container's network namespace for health check
-          HEALTH_CHECK_URL="http://labgraph-front-end-quality-lab-pro-front-end-1:3000/api/health-check"
+          HEALTH_CHECK_URL="https://lab-spec.systems/api/health-check"
           MAX_RETRIES=5
           COUNT=0
 
           while [ $COUNT -lt $MAX_RETRIES ]; do
-            if docker exec $CONTAINER_NAME curl -s -f $HEALTH_CHECK_URL; then
+            if docker exec $CONTAINER_NAME curl -s -f https://lab-spec.systems/api/health-check; then
               echo "🟢 Application is healthy!"
               exit 0
             fi

@@ -54,10 +54,10 @@ input[type='checkbox']:focus {
   --color-sd1: rgba(30, 136, 229, 0.8);
   --color-sd2: rgba(236, 64, 122, 0.8);
   --color-sd3: rgba(220, 38, 38, 1);
-  --color-primary: rgba(25, 88, 143, 1);
-  --color-secondary: rgba(14, 165, 233, 1);
-  --color-accent: rgba(245, 158, 11, 1);
-  --color-danger: rgba(239, 68, 68, 1);
+  --color-primary: rgba(59, 130, 246, 1);
+  --color-secondary: rgba(20, 184, 166, 1);
+  --color-accent: rgba(249, 115, 22, 1);
+  --color-danger: rgba(220, 38, 38, 1);
   --color-background: rgba(248, 250, 252, 1);
   --color-surface: rgba(255, 255, 255, 1);
   --color-muted: rgba(226, 232, 240, 1);
@@ -88,9 +88,10 @@ input[type='checkbox']:focus {
   --color-sd1: rgba(100, 181, 246, 0.8);
   --color-sd2: rgba(244, 143, 177, 0.8);
   --color-sd3: rgba(239, 68, 68, 1);
-  --color-primary: rgba(248, 250, 252, 1);
-  --color-secondary: rgba(56, 189, 248, 1);
-  --color-accent: rgba(251, 191, 36, 1);
+  --color-primary: rgba(241, 245, 249, 1);
+  --color-secondary: rgba(45, 212, 191, 1);
+  --color-accent: rgba(252, 211, 77, 1);
+  --color-danger: rgba(220, 38, 38, 1);
   --color-background: rgba(15, 23, 42, 1);
   --color-surface: rgba(30, 41, 59, 1);
   --color-muted: rgba(51, 65, 85, 1);

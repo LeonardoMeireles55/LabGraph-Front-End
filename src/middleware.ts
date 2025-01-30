@@ -4,8 +4,9 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get('tokenJWT')?.value;
   const isLoginPage = request.nextUrl.pathname === '/login';
   const isSignupPage = request.nextUrl.pathname === '/signup';
+  const isHealthCheck = request.nextUrl.pathname === '/health-check';
 
-  if (!token && !isLoginPage && !isSignupPage) {
+  if (!token && !isLoginPage && !isSignupPage && !isHealthCheck) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
   if (token && isLoginPage) {

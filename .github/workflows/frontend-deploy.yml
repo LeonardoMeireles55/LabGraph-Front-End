@@ -42,7 +42,7 @@ jobs:
           # Initial wait for application startup
           sleep 15
 
-          HEALTH_CHECK_URL="http://localhost:3000/api/health"
+          HEALTH_CHECK_URL="http://localhost:3000/api/health-check"
           MAX_RETRIES=5
           COUNT=0
 

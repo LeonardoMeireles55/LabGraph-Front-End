@@ -49,8 +49,8 @@ jobs:
       - name: Deployment notification
         run: echo "✅ Deployment completed"
 
- health-check:
-    runs-on: [ self-hosted, linux, x64, backend ]
+  health-check:
+    runs-on: [self-hosted, linux, x64, backend]
     needs: deploy
     timeout-minutes: 5
     steps:

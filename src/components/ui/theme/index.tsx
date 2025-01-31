@@ -1,18 +1,8 @@
 import useTheme from '@/components/ui/theme/hooks/useTheme';
-import { Moon, Sun } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { CloudSun, Moon } from 'lucide-react';
 
 const ThemeToggle = () => {
-  const { theme, toggleTheme, isLoaded } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted || !isLoaded) {
-    return <button className='h-10 w-10 rounded-full p-2' aria-label='Toggle theme' />;
-  }
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <button
@@ -20,10 +10,10 @@ const ThemeToggle = () => {
       className='rounded-full p-2 hover:bg-surface focus:outline-none'
       aria-label='Toggle theme'
     >
-      {theme === 'light' ? (
-        <Sun className='hover:scale-115 h-7 w-7 text-textPrimary' />
+      {theme == 'light' ? (
+        <CloudSun strokeWidth="1.5" className='hover:scale-115 h-7 w-7 text-textPrimary opacity-80' />
       ) : (
-        <Moon className='hover:scale-115 h-7 w-7 text-textPrimary' />
+        <Moon strokeWidth="1.5" className='hover:scale-115 h-7 w-7  text-textPrimary opacity-90' />
       )}
     </button>
   );

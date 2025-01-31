@@ -18,7 +18,7 @@ const LoginForm = () => {
       </div>
       <div className='text-center'>
         <div className='flex justify-center text-secondary opacity-95 transition-transform duration-300 ease-in-out'>
-          <Logo className='w-32 sm:w-40 md:w-48 lg:w-56 opacity-85' />
+          <Logo className='w-32 sm:w-40 md:w-48 lg:w-56 opacity-90' />
         </div>
       </div>
       {error && <ErrorMessage message={error} />}

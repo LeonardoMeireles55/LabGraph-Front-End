@@ -8,7 +8,6 @@ import {
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
-  XAxis,
   YAxis,
 } from 'recharts';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';

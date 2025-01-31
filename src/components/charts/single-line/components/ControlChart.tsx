@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
 import {
   CartesianGrid,
@@ -14,25 +14,26 @@ import {
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import { ControlChartProps } from '../../types/Chart';
 import useWindowDimensions from '@/components/ui/hooks/useWindowDimensions';
-import filter from '../../constants/filter';
 import getColorByLevel from '../../constants/getColorByLevel';
+import normalizeValue from '../../constants/normalizeValue';
 
-const CustomDot: React.FC<any> = ({ cx, cy, payload, colors }) => {
-  return (
-    <g>
-      <circle cx={cx} cy={cy} r={3} fill={colors} />
-      <text
-        x={cx}
-        y={cy - 10}
-        fill='var(--color-text-primary)'
-        className='text-[0.5rem] text-textPrimary md:text-xs'
-        textAnchor='end'
-      >
-        {payload.rawValue.toFixed(2)}
-      </text>
-    </g>
-  );
-};
+// const CustomDot: React.FC<any> = ({ cx, cy, payload, colors }) => {
+//   return (
+//     <g>
+//       <circle cx={cx} cy={cy} r={3} fill={colors} />
+//       <text
+//         x={cx}
+//         y={cy - 10}
+//         fill='var(--color-text-primary)'
+//         className='text-[0.5rem] text-textPrimary md:text-xs'
+//         textAnchor='end'
+//       >
+//         {payload.rawValue.toFixed(2)}
+//       </text>
+//     </g>
+//   );
+// };
+
 
 const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
@@ -40,10 +41,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
 
 
   const data = listing;
-  const { mean, sd, name, level, unit_value, ownMeanValue, ownSdValue } = data[0];
 
-  const activeMean = useOwnValues ? ownMeanValue : mean;
-  const activeSd = useOwnValues ? ownSdValue : sd;
 
   const renderLegend = (props: any) => {
     const { payload } = props;
@@ -51,42 +49,53 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     return (
       <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
         {payload.map((entry: any, index: number) => (
-          <div key={`legend-${index}`} className='flex items-center gap-2'>
-            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: getColorByLevel(level.toString()) }} />
-            <span className='text-textPrimary'>{`${level.toUpperCase()}`}</span>
+          <div key={`legend-${entry}`} className='flex items-center gap-2'>
+            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: getColorByLevel(data[index].level.toString()) }} />
+            <span className='text-textPrimary'>{`${data[index].level.toString()}`}</span>
           </div>
         ))}
       </div>
     );
   };
 
-  const chartData = data.map((entry) => ({
+  const chartData = data.map((entry, index) => ({
+    key: index,
     date: customFormatDate(entry.date),
     levelLot: entry.level_lot,
-    name: name,
-    value: filter(entry.value, activeMean, activeSd),
-    unitValue: unit_value,
+    level: entry.level,
+    name: entry.name,
+    value: normalizeValue(entry.value, entry.mean, entry.sd),
+
+    unitValue: entry.unit_value,
     rawValue: entry.value,
+    sd: entry.sd,
+    mean: entry.mean,
+    OwnSd: entry.ownSdValue,
+    OwnMean: entry.ownMeanValue,
     description: entry.description,
     rules: entry.rules,
   }));
 
-  const yAxisValues = [
-    { value: activeMean - 3 * activeSd, label: '-3s', color: 'var(--color-sd3)' },
-    { value: activeMean - 2 * activeSd, label: '-2s', color: 'var(--color-sd2)' },
-    { value: activeMean - activeSd, label: '-1s', color: 'var(--color-sd1)' },
-    { value: activeMean, label: 'Mean', color: 'var(--color-mean-line)' },
-    { value: activeMean + activeSd, label: '+1s', color: 'var(--color-sd1)' },
-    { value: activeMean + 2 * activeSd, label: '+2s', color: 'var(--color-sd2)' },
-    { value: activeMean + 3 * activeSd, label: '+3s', color: 'var(--color-sd3)' },
-  ];
+
+  const yAxisValues = useMemo(
+    () => [
+      { value: -3, label: '-3s', color: 'var(--color-sd3)' },
+      { value: -2, label: '-2s', color: 'var(--color-sd2)' },
+      { value: -1, label: '-1s', color: 'var(--color-sd1)' },
+      { value: 0, label: 'Mean', color: 'var(--color-mean-line)' },
+      { value: 1, label: '+1s', color: 'var(--color-sd1)' },
+      { value: 2, label: '+2s', color: 'var(--color-sd2)' },
+      { value: 3, label: '+3s', color: 'var(--color-sd3)' },
+    ],
+    []
+  );
 
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='border shadow-md rounded-2xl border-borderColor bg-surface shadow-shadow'>
         <div className='relative flex flex-col items-center'>
           <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl'>
-            {name} - Level {level.toString().toUpperCase()}
+            {chartData[0].name} - Level {chartData[0].level.toString().toUpperCase()}
           </h2>
           <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
             <button
@@ -136,7 +145,9 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               />
               <YAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
-                domain={[activeMean - 3.5 * activeSd, activeMean + 3.5 * activeSd]}
+                domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
+
+                // domain={[data[0].mean - 3.5 * data[0].sd, data[0].mean + 3.5 * data[0].sd]}
                 textAnchor='end'
                 ticks={yAxisValues.map((v) => v.value)}
                 width={windowWidth < 768 ? 30 : 40}
@@ -165,10 +176,10 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                               <div className='flex items-center gap-2 mb-1'>
                                 <div
                                   className='w-3 h-3 rounded-full'
-                                  style={{ backgroundColor: getColorByLevel(level.toString()) }}
+                                  style={{ backgroundColor: getColorByLevel(data.level) }}
                                 />
                                 <span className='font-medium'>
-                                  Level {level.toString().toUpperCase()}
+                                  Level: {data.level.toUpperCase()}
                                 </span>
                               </div>
                               <p>Test: {data.name}</p>
@@ -187,14 +198,21 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               />
               <Line
                 type='linear'
-                dataKey='value'
-                stroke={getColorByLevel(level.toString())}
+                dataKey={`value`}
+                name={`level`}
+                stroke={getColorByLevel(data[0].level.toString())}
                 strokeWidth={1.0}
-                activeDot={{ r: 3 }}
-                dot={<CustomDot colors={getColorByLevel(level.toString())} />}
+                connectNulls={true}
+                activeDot={{ color: getColorByLevel(data[0].level.toString()), r: 3 }}
+                dot={{
+                  fill: getColorByLevel(data[0].level.toString()),
+                  stroke: getColorByLevel(data[0].level.toString()),
+                  r: 2,
+                  strokeWidth: 1,
+                  className: 'text-textPrimary',
+                }}
                 animationDuration={250}
               />
-
               {yAxisValues.map((line, index) => (
                 <ReferenceLine
                   key={index}

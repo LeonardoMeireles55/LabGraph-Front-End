@@ -29,6 +29,8 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+RUN rm -rf /app/.next/cache && rm -rf /app/.next/diagnostics
+
 FROM base AS runner
 WORKDIR /app
 

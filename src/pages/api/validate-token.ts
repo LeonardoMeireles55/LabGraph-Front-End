@@ -1,15 +1,9 @@
-import { LRUCache } from 'lru-cache';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 interface ValidationResponse {
   valid: boolean;
   message?: string;
 }
-
-const tokenCache = new LRUCache<string, boolean>({
-  max: 500,
-  ttl: 1000 * 60 * 5,
-});
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,11 +26,7 @@ export default async function handler(
       });
     }
 
-    const cachedResult = tokenCache.get(token);
-    if (cachedResult !== undefined) {
-      return res.status(200).json({ valid: cachedResult });
-    }
-
+    // Verify token structure
     if (token.split('.').length !== 3) {
       return res.status(401).json({
         valid: false,
@@ -44,24 +34,22 @@ export default async function handler(
       });
     }
 
+    // Verify token expiration
     try {
       const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
       if (Date.now() >= payload.exp * 1000) {
-        tokenCache.set(token, false, { ttl: 1000 * 60 * 5 });
         return res.status(401).json({
           valid: false,
           message: 'Token expired',
         });
       }
     } catch {
-      tokenCache.set(token, false, { ttl: 1000 * 60 * 5 });
       return res.status(401).json({
         valid: false,
         message: 'Invalid token payload',
       });
     }
 
-    tokenCache.set(token, true, { ttl: 1000 * 60 * 5 });
     return res.status(200).json({ valid: true });
   } catch (error) {
     console.error('Token validation error:', error);

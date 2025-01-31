@@ -2,22 +2,50 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get('tokenJWT')?.value;
-  const isLoginPage = request.nextUrl.pathname === '/login';
-  const isSignupPage = request.nextUrl.pathname === '/signup';
-  const isHealthCheck = request.nextUrl.pathname === '/health-check';
+  const { pathname } = request.nextUrl;
 
-  if (!token && !isLoginPage && !isSignupPage && !isHealthCheck) {
+  const publicPages = ['/login', '/signup', '/health-check'];
+
+  if (!token && !publicPages.includes(pathname)) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
-  if (token && isLoginPage) {
+
+  if (token && (pathname === '/login' || pathname === '/signup')) {
     return NextResponse.redirect(new URL('/', request.url));
   }
-  const response = await NextResponse.next();
-  if (response.status === 403 || response.status === 401) {
-    const response = NextResponse.redirect(new URL('/login', request.url));
-    response.cookies.delete('tokenJWT');
-    return response;
+
+  if (token && !publicPages.includes(pathname)) {
+    try {
+      const validationResponse = await fetch(
+        new URL('/api/validate-token', request.url).toString(),
+        {
+          method: 'GET',
+          headers: {
+            Cookie: `tokenJWT=${token}`,
+          },
+        }
+      );
+
+      const validationResult = await validationResponse.json();
+
+      if (!validationResult.valid) {
+        const response = NextResponse.redirect(new URL('/login', request.url));
+        response.cookies.delete('tokenJWT');
+        return response;
+      }
+    } catch (error) {
+      console.error('Token validation failed:', error);
+      const response = NextResponse.redirect(new URL('/login', request.url));
+      response.cookies.delete('tokenJWT');
+      return response;
+    }
   }
+
+  const response = NextResponse.next();
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-XSS-Protection', '1; mode=block');
+
   return response;
 }
 

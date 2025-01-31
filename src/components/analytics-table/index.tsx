@@ -69,7 +69,6 @@ const AnalyticsTableIndex = () => {
 
     useEffect(() => {
         setItemsPerPage(width >= 1800 ? 12 : 8);
-        console.log(width);
     }, [fetchData, width]);
 
     const analyticsOptions = [

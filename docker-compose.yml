@@ -11,8 +11,8 @@ services:
       - qualitylab_public:/app/public
     stdin_open: true
     tty: true
-    # command: ['npm', 'start']
-    command: ['node', 'server.js']
+    command: ['npm', 'start']
+    # command: ['node', 'server.js']
     networks:
       - qualitylab-net
 

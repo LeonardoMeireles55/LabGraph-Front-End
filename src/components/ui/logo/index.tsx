@@ -17,9 +17,9 @@ const Logo = ({ className, title = 'LabGraph' }: LogoProps) => {
     <div className={`flex flex-col items-center ${className}`}>
       <Image src={isLight ? lightmode : darkmode} alt="Logo" width={300} height={100} />
       <div className="flex items-center gap-1">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-textPrimary opacity-80">
+{/*         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-textPrimary opacity-80">
           {title}
-        </h1>
+        </h1> */}
         <p className="text-sm text-textPrimary md:text-lg opacity-80">®</p>
       </div>
     </div>

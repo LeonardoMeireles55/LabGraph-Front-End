@@ -59,8 +59,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
           entry[`name${levelNum}`] = values.name;
           entry[`description${levelNum}`] = values.description;
           entry[`rules${levelNum}`] = values.rules;
-          entry[`mean${levelNum}`] = mean;
-          entry[`sd${levelNum}`] = standardDeviation;
+          entry[`mean${levelNum}`] = useOwnValues ? ownMean : mean;
+          entry[`sd${levelNum}`] = useOwnValues ? ownSd : standardDeviation;
         }
       }
 
@@ -193,8 +193,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                           const rawValueKey = `rawValue${dataKeyIndex}`;
                           const levelLotKey = `levelLot${dataKeyIndex}`;
                           const nameKey = `name${dataKeyIndex}`;
-                          const descriptionKey = `description${dataKeyIndex}`;
-                          const rulesKey = `rules${dataKeyIndex}`;
+                          // const descriptionKey = `description${dataKeyIndex}`;
+                          // const rulesKey = `rules${dataKeyIndex}`;
+                          const meanKey = `mean${dataKeyIndex}`;
+                          const sdKey = `sd${dataKeyIndex}`;
 
                           if (data[valueKey]) {
                             return (
@@ -210,8 +212,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                 <p>Test: {data[nameKey]}</p>
                                 <p>Value: {data[rawValueKey]}</p>
                                 <p>Lot: {data[levelLotKey]}</p>
-                                <p>Description: {data[descriptionKey]}</p>
-                                {data[rulesKey] && <p>Rules: {data[rulesKey]}</p>}
+                                <p>Mean: {data[meanKey].toFixed(2)}</p>
+                                <p>Sd: {data[sdKey].toFixed(2)}</p>
                               </div>
                             );
                           }

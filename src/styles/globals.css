@@ -89,7 +89,7 @@ input[type='checkbox']:focus {
   --color-sd2: rgba(244, 143, 177, 0.8);
   --color-sd3: rgba(239, 68, 68, 1);
   --color-primary: rgba(241, 245, 249, 1);
-  --color-secondary: rgba(45, 212, 191, 1);
+  --color-secondary: rgb(150, 205, 197);
   --color-accent: rgba(252, 211, 77, 1);
   --color-danger: rgba(220, 38, 38, 1);
   --color-background: rgba(15, 23, 42, 1);

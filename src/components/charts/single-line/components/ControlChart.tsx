@@ -51,7 +51,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
         {payload.map((entry: any, index: number) => (
           <div key={`legend-${entry}`} className='flex items-center gap-2'>
             <div className='h-3 w-3 rounded-full' style={{ backgroundColor: getColorByLevel(data[index].level.toString()) }} />
-            <span className='text-textPrimary'>{`${data[index].level.toString()}`}</span>
+            <span className='text-textPrimary'>{`${data[index].level.toString().toUpperCase()}`}</span>
           </div>
         ))}
       </div>
@@ -64,12 +64,12 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     levelLot: entry.level_lot,
     level: entry.level,
     name: entry.name,
-    value: normalizeValue(entry.value, entry.mean, entry.sd),
+    value: normalizeValue(entry.value, (useOwnValues ? entry.ownMeanValue : entry.mean), (useOwnValues ? entry.ownSdValue : entry.sd)),
 
     unitValue: entry.unit_value,
     rawValue: entry.value,
-    sd: entry.sd,
-    mean: entry.mean,
+    sd: useOwnValues ? entry.ownSdValue : entry.sd,
+    mean: useOwnValues ? entry.ownSdValue : entry.mean,
     OwnSd: entry.ownSdValue,
     OwnMean: entry.ownMeanValue,
     description: entry.description,
@@ -185,8 +185,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                               <p>Test: {data.name}</p>
                               <p>Value: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
                               <p>Lot: {data.levelLot}</p>
-                              <p>Description: {data.description}</p>
-                              <p>Rules: {data.rules}</p>
+                              <p>Mean: {data.mean.toFixed(2)}</p>
+                              <p>Sd: {data.sd.toFixed(2)}</p>
                             </div>
                           );
                         })}

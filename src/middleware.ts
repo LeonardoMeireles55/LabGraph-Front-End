@@ -15,37 +15,19 @@ export async function middleware(request: NextRequest) {
   }
 
   if (token && !publicPages.includes(pathname)) {
-    try {
-      const validationResponse = await fetch(
-        new URL('/api/validate-token', request.url).toString(),
-        {
-          method: 'GET',
-          headers: {
-            Cookie: `tokenJWT=${token}`,
-          },
-        }
-      );
-
-      const validationResult = await validationResponse.json();
-
-      if (!validationResult.valid) {
-        const response = NextResponse.redirect(new URL('/login', request.url));
-        response.cookies.delete('tokenJWT');
-        return response;
-      }
-    } catch (error) {
-      console.error('Token validation failed:', error);
+    const response = NextResponse.next();
+    if (response.status === 403 || response.status === 401) {
       const response = NextResponse.redirect(new URL('/login', request.url));
       response.cookies.delete('tokenJWT');
       return response;
     }
+    return response;
   }
-
   const response = NextResponse.next();
-
-  return response;
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-XSS-Protection', '1; mode=block');
 }
-
 export const config = {
   matcher: [
     '/((?!api|_next/static|_next/data|_next/image|favicon.ico|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico|.*\\.png).*)',

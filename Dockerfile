@@ -19,7 +19,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/package.json app/package-lock.json ./
 
-COPY src./
+COPY src ./
 COPY public ./public
 COPY next.config.js ./
 

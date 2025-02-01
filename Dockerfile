@@ -16,12 +16,11 @@ RUN \
 
 FROM node:23-alpine AS builder
 WORKDIR /app
+
+COPY . .
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/package.json app/package-lock.json ./
-
-COPY src ./
-COPY public ./public
-COPY next.config.js ./
 
 ENV NEXT_TELEMETRY_DISABLED=1
 

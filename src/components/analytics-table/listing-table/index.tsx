@@ -15,18 +15,11 @@ const tableHeaders = [
   'Rules'
 ];
 
-const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
-  if (!items || !Array.isArray(items) || items.length === 0) {
-    return (
-      <div className='flex items-center justify-center w-full h-full'>
-        <p className='text-textPrimary bg-danger p-2 rounded-md'>Error: No data available or invalid data format.</p>
-      </div>
-    )
-  }
+const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
 
   return (
     <div className='flex flex-col justify-between w-full h-min rounded-lg shadow-xl'>
-      <table className='hidden bg-background md:table'>
+      <table className='hidden bg-surface md:table'>
         <thead className='bg-muted rounded-lg'>
           <tr>
             {tableHeaders.map((header, index) => (
@@ -37,6 +30,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
                 {header}
               </th>
             ))}
+
           </tr>
         </thead>
         <tbody>
@@ -45,17 +39,15 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
           ))}
         </tbody>
       </table>
-
       <div className='grid content-center justify-center grid-cols-4 px-2 text-center md:hidden'>
         {items.map((item, index) => (
           <MobileItemCard key={index} item={item} />
         ))}
       </div>
-
-      {items.length === 0 && (
-        <div className='py-2 text-center bg-background text-muted'>No items to display</div>
-      )}
+      {items.length === 0 ? <div className='py-2 text-center bg-surface text-textSecondary'>please select another date range and level.</div>
+        : null}
     </div>
+
   );
 };
 

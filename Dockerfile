@@ -3,7 +3,7 @@
 FROM node:23-alpine AS base
 
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
+# RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
@@ -15,10 +15,12 @@ RUN \
   fi
 
 
-FROM base AS builder
+FROM node:23-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+# COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+COPY package.json ./
+
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -29,7 +31,7 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-RUN rm -rf /app/.next/cache && rm -rf /app/.next/diagnostics
+RUN rm -rf /app/.next/cache /app/.next/diagnostics
 
 FROM node:23-alpine AS runner
 WORKDIR /app
@@ -42,7 +44,7 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/package.json ./
 
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules 
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/public ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 

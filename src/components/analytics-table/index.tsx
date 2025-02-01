@@ -17,15 +17,11 @@ const AnalyticsTableIndex = () => {
     const [level, setLevel] = useState('0');
     const [isFiltered, setFiltered] = useState(false);
 
-
     const { width } = useWindowDimensions();
-
-
 
     const {
         data: dataFetched,
         isLoading,
-        error,
         fetchData,
         buildUrl,
         totalPages,
@@ -116,20 +112,11 @@ const AnalyticsTableIndex = () => {
                         setLevel={setLevel}
                         setFiltered={setFiltered}
                     />
-                    {isLoading ? (
-                        <div className='flex content-center items-center justify-center fixed left-0 top-13 w-full'>
-                            <div className='h-10 w-10 animate-spin rounded-full border-t-2 border-primary'></div>
-                        </div>
-                    ) : error ? (
-                        <div className='mtrelative rounded bg-danger px-4 py-3 text-textPrimary' role='alert'>
-                            {error}
-                        </div>
-                    ) : (
-                        <ListingTable
-                            items={dataFetched}
-                            onPageChange={handlePageChange}
-                        />
-                    )}
+                    <ListingTable
+                        items={dataFetched}
+                        isLoading={isLoading}
+                        onPageChange={handlePageChange}
+                    />
                 </div>
                 <AnalyticsPagination
                     currentPage={currentPage}

@@ -32,12 +32,12 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
                   <span
                     key={i}
                     className={`block h-0.5 w-6 bg-textPrimary transition-all duration-300 ${isMenuOpen && i === 0
-                        ? 'translate-y-2.5 rotate-45'
-                        : isMenuOpen && i === 1
-                          ? 'opacity-0'
-                          : isMenuOpen && i === 2
-                            ? '-translate-y-2.5 -rotate-45'
-                            : ''
+                      ? 'translate-y-2.5 rotate-45'
+                      : isMenuOpen && i === 1
+                        ? 'opacity-0'
+                        : isMenuOpen && i === 2
+                          ? '-translate-y-2.5 -rotate-45'
+                          : ''
                       }`}
                   />
                 ))}

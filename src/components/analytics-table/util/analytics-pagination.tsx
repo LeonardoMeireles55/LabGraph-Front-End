@@ -24,11 +24,11 @@ const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
                 &larr;
             </button>
             <span className='text-xs text-textSecondary'>
-                Page {currentPage + 1} of {totalPages ? totalPages : dataFetched.length}
+                Page {currentPage + 1} of {totalPages}
             </span>
             <button
                 onClick={() => setCurrentPage((prev) => prev + 1)}
-                disabled={currentPage === totalPages}
+                disabled={currentPage === totalPages || dataFetched.length === 0}
                 className='px-4 py-2 text-xs text-white transition-colors bg-opacity-100 rounded-md hover:bg-primaryDark bg-border disabled:cursor-not-allowed disabled:opacity-25 md:text-base'
             >
                 &rarr;

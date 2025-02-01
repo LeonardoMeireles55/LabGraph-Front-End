@@ -8,13 +8,12 @@ import { useState } from 'react';
 
 interface PaginatedResponse {
   content: ListingItem[];
-  totalPages: number;
-  totalElements: number;
-  size: number;
-  number: number;
-  first: boolean;
-  last: boolean;
-  empty: boolean;
+  page: {
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number: number;
+  };
 }
 
 interface UseAnalyticsDataProps {
@@ -43,6 +42,7 @@ export const useAnalyticsData = ({
 
   const fetchData = async (url: string) => {
     if (loading) {
+      setIsLoading(true);
       return;
     }
 
@@ -51,7 +51,6 @@ export const useAnalyticsData = ({
       return;
     }
 
-    setIsLoading(true);
     setError(null);
     try {
       const response = await fetch(url, {
@@ -67,8 +66,8 @@ export const useAnalyticsData = ({
 
       const result: PaginatedResponse = await response.json();
       setData(result.content);
-      setTotalPages(result.totalPages);
-      setTotalElements(result.totalElements);
+      setTotalPages(result.page.totalPages);
+      setTotalElements(result.page.totalElements);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to fetch data');
     } finally {

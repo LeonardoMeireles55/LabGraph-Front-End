@@ -20,6 +20,10 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/package.json app/package-lock.json ./
 
+COPY pages ./pages
+COPY public ./public
+COPY next.config.js ./
+
 # COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 # COPY package.json ./
 
@@ -46,7 +50,7 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/package.json ./
 
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
-COPY --from=builder --chown=nextjs:nodejs /app/public ./
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
 

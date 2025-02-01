@@ -31,7 +31,7 @@ RUN \
 
 RUN rm -rf /app/.next/cache && rm -rf /app/.next/diagnostics
 
-FROM base AS runner
+FROM node:23-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production

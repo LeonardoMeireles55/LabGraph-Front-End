@@ -1,62 +1,62 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-interface ErrorResponse {
-  message: string;
-  status: number;
+interface ValidationResponse {
+  valid: boolean;
+  message?: string;
+  token?: string;
 }
 
-interface SuccessResponse {
-  token: string;
-}
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<SuccessResponse | ErrorResponse>
+  res: NextApiResponse<ValidationResponse>
 ) {
-  // Method validation
   if (req.method !== 'GET') {
-    console.error(`Invalid method: ${req.method}`);
     return res.status(405).json({
-      message: 'Method not allowed. Only GET requests are accepted.',
-      status: 405,
+      valid: false,
+      message: 'Method not allowed',
     });
   }
 
   try {
     const token = req.cookies.tokenJWT;
 
-    // Token validation
     if (!token) {
-      console.error('Token not found in cookies');
       return res.status(401).json({
-        message: 'Authentication required. Please login again.',
-        status: 401,
+        valid: false,
+        message: 'No token found',
       });
     }
 
-    if (typeof token !== 'string') {
-      console.error('Invalid token format');
-      return res.status(400).json({
+    // Verify token structure
+    if (token.split('.').length !== 3) {
+      return res.status(401).json({
+        valid: false,
         message: 'Invalid token format',
-        status: 400,
       });
     }
 
-    return res.status(200).json({ token });
+    // Verify token expiration
+    try {
+      const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+      if (Date.now() >= payload.exp * 1000) {
+        return res.status(401).json({
+          valid: false,
+          message: 'Token expired',
+        });
+      }
+    } catch {
+      return res.status(401).json({
+        valid: false,
+        message: 'Invalid token payload',
+      });
+    }
+
+    return res.status(200).json({ token: token, valid: true });
   } catch (error) {
-    // Error handling
-    console.error('Error retrieving token:', error);
-
-    if (error instanceof Error) {
-      return res.status(500).json({
-        message: `Internal server error: ${error.message}`,
-        status: 500,
-      });
-    }
-
+    console.error('Token validation error:', error);
     return res.status(500).json({
-      message: 'Unknown error occurred',
-      status: 500,
+      valid: false,
+      message: 'Internal server error',
     });
   }
 }

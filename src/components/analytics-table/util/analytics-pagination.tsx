@@ -15,7 +15,7 @@ const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
     setCurrentPage,
 }) => {
     return (
-        <div className='flex items-center justify-center py-4 space-x-2'>
+        <div className='flex items-center justify-center py-4 space-x-2 fixed bottom-12 w-full bg-background'>
             <button
                 onClick={() => setCurrentPage((prev) => prev - 1)}
                 disabled={currentPage === 0}

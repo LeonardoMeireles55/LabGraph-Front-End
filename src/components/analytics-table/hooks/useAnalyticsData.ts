@@ -1,3 +1,4 @@
+import { useValidatedToken } from '@/components/auth/hooks/useValidatedToken';
 import { ListingItem } from '@/components/charts/types/Chart';
 import {
   formatDateWithTime,
@@ -38,14 +39,21 @@ export const useAnalyticsData = ({
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
+  const { token, loading } = useValidatedToken();
 
   const fetchData = async (url: string) => {
+    if (loading) {
+      return;
+    }
+
+    if (!token) {
+      setError('No authentication token available');
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
     try {
-      const tokenResponse = await fetch('/api/get-token');
-      const { token } = await tokenResponse.json();
-
       const response = await fetch(url, {
         headers: {
           'Content-Type': 'application/json',

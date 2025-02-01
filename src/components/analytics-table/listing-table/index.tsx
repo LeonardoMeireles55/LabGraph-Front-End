@@ -3,6 +3,18 @@ import { ListingTableProps } from '../../features/types/ListiningTable';
 import TableRow from './table-row';
 import MobileItemCard from './mobile-item-card';
 
+const tableHeaders = [
+  'Date',
+  'Test',
+  'Level',
+  'Lot',
+  'Standard Deviation',
+  'Mean',
+  'Values',
+  'Unit',
+  'Rules'
+];
+
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
   if (!items || !Array.isArray(items) || items.length === 0) {
     return (
@@ -11,38 +23,20 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
       </div>
     )
   }
+
   return (
     <div className='flex flex-col justify-between w-full h-min rounded-lg shadow-xl'>
       <table className='hidden bg-background md:table'>
         <thead className='bg-muted rounded-lg'>
           <tr>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Date
-            </th>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Test
-            </th>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Level
-            </th>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Lot
-            </th>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Standard Deviation
-            </th>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Mean
-            </th>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Values
-            </th>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Unit
-            </th>
-            <th className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'>
-              Rules
-            </th>
+            {tableHeaders.map((header, index) => (
+              <th
+                key={index}
+                className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'
+              >
+                {header}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>

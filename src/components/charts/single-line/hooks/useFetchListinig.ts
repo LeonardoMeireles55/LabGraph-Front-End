@@ -1,3 +1,4 @@
+import { useValidatedToken } from '@/components/auth/hooks/useValidatedToken';
 import checkResponse from '@/components/utils/helpers/checkResponse';
 import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
 import { useEffect, useState } from 'react';
@@ -8,13 +9,25 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
   const [unitValues, setUnitValues] = useState<string | null>(null);
   const [ownMeanValue, setOwnMean] = useState<number | null>(null);
   const [ownSdValue, setOwnSd] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { token, loading } = useValidatedToken();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const tokenResponse = await fetch('/api/get-token');
-        const { token } = await tokenResponse.json();
+      if (loading) {
+        return;
+      }
 
+      if (!token) {
+        setError('No authentication token available');
+        return;
+      }
+
+      setIsLoading(true);
+      setError(null);
+
+      try {
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -43,12 +56,16 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
           setUnitValues(null);
         }
       } catch (error: Error | any) {
-        console.error('Error fetching data:', getStatusMessage(error.status));
+        const errorMessage = getStatusMessage(error.status);
+        setError(errorMessage);
+        console.error('Error fetching data:', errorMessage);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [url, urlMeanAndDeviation]);
+  }, [url, urlMeanAndDeviation, token, loading]);
 
   return {
     listing,
@@ -57,6 +74,8 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
     ownSdValue,
     url,
     urlMeanAndDeviation,
+    isLoading,
+    error,
   };
 };
 

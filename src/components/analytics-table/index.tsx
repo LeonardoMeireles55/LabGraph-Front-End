@@ -117,11 +117,11 @@ const AnalyticsTableIndex = () => {
                         setFiltered={setFiltered}
                     />
                     {isLoading ? (
-                        <div className='flex content-center items-center justify-center'>
+                        <div className='flex content-center items-center justify-center fixed left-0 top-13 w-full'>
                             <div className='h-10 w-10 animate-spin rounded-full border-t-2 border-primary'></div>
                         </div>
                     ) : error ? (
-                        <div className='mtrelative rounded bg-danger px-4 py-3 text-white' role='alert'>
+                        <div className='mtrelative rounded bg-danger px-4 py-3 text-textPrimary' role='alert'>
                             {error}
                         </div>
                     ) : (

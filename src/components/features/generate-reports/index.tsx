@@ -13,7 +13,7 @@ const GenerateReports: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'da
     setIsGenerating(true);
 
     try {
-      const csv = parse(jsonData);
+      const csv = parse(jsonData.content);
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = URL.createObjectURL(blob);
 

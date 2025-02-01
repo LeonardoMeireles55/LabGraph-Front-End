@@ -1,9 +1,9 @@
 interface LogoProps {
   className?: string;
-  tittle?: string;
+  title?: string;
 }
 
-const Logo = ({ className, tittle: title = 'LabGraph' }: LogoProps) => {
+const Logo = ({ className, title: title = 'LabGraph' }: LogoProps) => {
   return (
     <div className="flex flex-col items-center">
       <svg
@@ -12,7 +12,7 @@ const Logo = ({ className, tittle: title = 'LabGraph' }: LogoProps) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <g fill="var(--color-text-primary)">
-          <g fill="var(--color-text-primary)" id="svg_33" transform="translate(0 -5) translate(0.871867 10.5649) matrix(0.014087 0 0 -0.0135062 -1.7931 191.985)">
+          <g id="svg_33" transform="translate(0 -5) translate(0.871867 10.5649) matrix(0.014087 0 0 -0.0135062 -1.7931 191.985)">
             <path d="m16727,14163c-10,-9 -9,-6921 1,-6927c13,-8 54,39 322,359c134,160 249,304 257,322c11,27 13,554 11,3140l-3,3108l-291,3c-160,1 -293,-1 -297,-5z" id="svg_34" />
             <path d="m18016,14148c-3,-13 -6,-1381 -6,-3040c0,-2581 2,-3018 14,-3018c13,0 483,550 554,649c38,53 39,65 8,189c-77,305 -74,562 9,860l35,126l0,1650c0,1453 -10,2515 -25,2584l-5,22l-289,0l-289,0l-6,-22z" id="svg_35" />
             <path d="m4906,13974c-15,-14 -16,-342 -16,-3465c0,-2875 2,-3450 13,-3455c8,-3 63,15 123,40c116,47 256,88 368,107c41,7 76,19 87,30c19,19 19,106 19,3367c0,2089 -4,3353 -10,3362c-11,18 -134,27 -392,29c-148,1 -179,-2 -192,-15z" id="svg_36" />
@@ -33,14 +33,14 @@ const Logo = ({ className, tittle: title = 'LabGraph' }: LogoProps) => {
       </svg>
       <div className="flex items-center flex-col">
         <h1 className="text-3xl sm:text-4xl md:text-4xl font-bold text-textPrimary opacity-90">
-          <em>{title}</em>
-          <p className="text-sm text-textPrimary md:text-lg opacity-90 inline-flex">®</p>
+          <em>{'<'}{title}{'>'}</em>
+          <p className="text-sm text-textPrimary md:text-lg opacity-90 inline-flex align-top">®</p>
         </h1>
         <h2 className="text-lg md:text-sm text-textPrimary opacity-70 mb-4">
           Making quality management easy
         </h2>
       </div>
-    </div>
+    </div >
   )
 };
 

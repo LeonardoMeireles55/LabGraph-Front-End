@@ -18,7 +18,7 @@ RUN \
 FROM node:23-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/package.json ./
+COPY --from=deps /app/package.json package-lock.json ./
 
 # COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 # COPY package.json ./

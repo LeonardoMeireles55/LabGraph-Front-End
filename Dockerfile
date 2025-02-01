@@ -14,18 +14,14 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-
 FROM node:23-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/package.json app/package-lock.json ./
 
-COPY src/pages ./pages
+COPY src./
 COPY public ./public
 COPY next.config.js ./
-
-# COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
-# COPY package.json ./
 
 ENV NEXT_TELEMETRY_DISABLED=1
 

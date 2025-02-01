@@ -14,19 +14,22 @@ export async function middleware(request: NextRequest) {
   const publicPages = ['/login', '/signup', '/health-check'];
 
   if (!token && !publicPages.includes(pathname)) {
+    request.cookies.delete('tokenJWT');
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
   if (token && (pathname === '/login' || pathname === '/signup')) {
-    return NextResponse.redirect(new URL('/', request.url));
+    return NextResponse.redirect(new URL('/hematology', request.url));
   }
 
   if (token && !publicPages.includes(pathname)) {
     if (!token) {
+      request.cookies.delete('tokenJWT');
       return NextResponse.redirect(new URL('/login', request.url));
     }
 
     if (isTokenExpired(token)) {
+      request.cookies.delete('tokenJWT');
       return NextResponse.redirect(new URL('/login', request.url));
     }
     return NextResponse.next();

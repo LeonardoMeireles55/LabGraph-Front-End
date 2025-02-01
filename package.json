@@ -13,9 +13,9 @@
     "cookie": "^1.0.2",
     "json2csv": "^6.0.0-alpha.2",
     "lucide-react": "^0.468.0",
-    "next": "15.1.0",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
     "recharts": "^2.15.0"
   },

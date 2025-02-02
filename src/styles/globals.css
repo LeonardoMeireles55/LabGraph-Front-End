@@ -27,6 +27,16 @@ select {
   cursor: pointer;
 }
 
+select option:hover {
+  background-color: var(--color-muted) !important;
+  color: var(--color-text-primary) !important;
+}
+select option:focus,
+select option:checked {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text-primary) !important;
+}
+
 /* input[type='checkbox'] {
   appearance: none !important;
   background-color: transparent !important;
@@ -50,71 +60,72 @@ input[type='checkbox']:focus {
 }
 
 :root {
-  --color-mean-line: rgba(46, 125, 50, 1);
-  --color-sd1: rgba(30, 136, 229, 0.8);
-  --color-sd2: rgba(236, 64, 122, 0.8);
-  --color-sd3: rgba(220, 38, 38, 1);
-  --color-primary: rgba(59, 130, 246, 1);
-  --color-secondary: rgba(20, 184, 166, 1);
-  --color-accent: rgba(249, 115, 22, 1);
-  --color-danger: rgba(220, 38, 38, 1);
-  --color-background: rgba(248, 250, 252, 1);
-  --color-surface: rgba(255, 255, 255, 1);
-  --color-muted: rgba(226, 232, 240, 1);
-  --color-logo-l: rgba(255, 255, 255, 1);
-  --color-text-primary: rgb(30, 36, 45, 1);
-  --color-text-secondary: rgba(71, 85, 105, 1);
-  --color-grid-lines: rgba(203, 213, 225, 0.5);
-  --color-border: rgba(203, 213, 225, 1);
-  --color-navbar: rgba(255, 255, 255, 1);
-  --color-white: rgba(255, 255, 255, 1);
-  --color-bg-text: rgba(30, 41, 59, 1);
-  --color-green: rgba(16, 185, 129, 1);
+  /* Modern light theme colors */
+  --color-mean-line: #2d6a4f;
+  --color-sd1: #2a9d8f;
+  --color-sd2: #e9c46a;
+  --color-sd3: #e76f51;
+  --color-primary: #555555;
+  --color-secondary: rgb(40, 126, 202);
+  --color-accent: #ffc20b;
+  --color-danger: #ff4136;
+  --color-background: #f7f7f7;
+  --color-surface: #ffffff;
+  --color-muted: #f1f1f1;
+  --color-logo-l: #ffffff;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-grid-lines: #cccccc;
+  --color-border: #dddddd;
+  --color-navbar: #ffffff;
+  --color-white: #ffffff;
+  --color-bg-text: #222222;
+  --color-green: #28a745;
   --color-shadow: rgba(0, 0, 0, 0.2);
   --color-overlay: rgba(0, 0, 0, 0.05);
-  --border-color: rgba(71, 85, 105, 0.3);
-  --color-sun: rgba(251, 191, 36, 1);
-  --color-moon: rgba(148, 163, 184, 1);
-  --color-button-muted: rgba(71, 85, 105, 0.8);
-  --checkbox-color: rgb(30, 36, 45, 1); /* or your desired default color */
-  --color-signin: rgba(16, 185, 129, 1); /* Same as --color-green for consistency */
-  --color-signin-hover: rgba(14, 165, 115, 1);
-  --color-signout: rgba(220, 38, 38, 0.9); /* Similar to danger but slightly transparent */
-  --color-signout-hover: rgba(220, 38, 38, 1);
+  --border-color: #cccccc;
+  --color-sun: #fdb813;
+  --color-moon: #778899;
+  --color-button-muted: #888888;
+  --checkbox-color: #111111;
+  --color-signin: #28a745;
+  --color-signin-hover: #218838;
+  --color-signout: #ff4136;
+  --color-signout-hover: #ff0000;
 }
 
 .dark {
-  --color-mean-line: rgba(165, 214, 167, 1);
-  --color-sd1: rgba(100, 181, 246, 0.8);
-  --color-sd2: rgba(244, 143, 177, 0.8);
-  --color-sd3: rgba(239, 68, 68, 1);
-  --color-primary: rgba(241, 245, 249, 1);
-  --color-secondary: rgb(150, 205, 197);
-  --color-accent: rgba(252, 211, 77, 1);
-  --color-danger: rgba(220, 38, 38, 1);
-  --color-background: rgba(15, 23, 42, 1);
-  --color-surface: rgba(30, 41, 59, 1);
-  --color-muted: rgba(51, 65, 85, 1);
-  --color-danger: rgba(220, 38, 38, 1);
-  --color-text-primary: rgba(248, 250, 252, 1);
-  --color-text-secondary: rgba(248, 250, 252, 1);
-  --color-bg-text: rgba(248, 250, 252, 1);
-  --color-grid-lines: rgba(248, 250, 252, 0.1);
-  --color-navbar: rgba(30, 41, 59, 1);
-  --color-white: rgba(248, 250, 252, 1);
-  --color-logo-l: rgba(15, 23, 42, 1);
-  --color-green: rgba(52, 211, 153, 1);
-  --color-shadow: rgba(0255, 255, 255, 0.2);
-  --color-overlay: rgba(255, 255, 255, 0.2);
-  --border-color: rgba(248, 250, 252, 0.5);
-  --color-sun: rgba(251, 191, 36, 1);
-  --color-moon: rgba(226, 232, 240, 1);
-  --color-button-muted: rgb(66, 83, 107);
-  --checkbox-color: #ffffff; /* or your desired default color */
-  --color-signin: rgba(52, 211, 153, 1); /* Same as dark theme --color-green */
-  --color-signin-hover: rgba(45, 185, 132, 1);
-  --color-signout: rgba(239, 68, 68, 0.9); /* Dark theme danger variant */
-  --color-signout-hover: rgba(239, 68, 68, 1);
+  /* Modern dark theme colors */
+  --color-mean-line: #a8d5ba;
+  --color-sd1: #71c7ec;
+  --color-sd2: #f4a261;
+  --color-sd3: #e63946;
+  --color-primary: #bdbdbd;
+  --color-secondary: #a66cff;
+  --color-accent: #ffff00;
+  --color-danger: #ff4136;
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-muted: #888888;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #aaaaaa;
+  --color-bg-text: #eeeeee;
+  --color-grid-lines: rgba(255, 255, 255, 0.1);
+  --color-navbar: #1e1e1e;
+  --color-white: #ffffff;
+  --color-logo-l: #000000;
+  --color-green: #2ecc71;
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-overlay: rgba(255, 255, 255, 0.1);
+  --border-color: #444444;
+  --color-sun: #fdb813;
+  --color-moon: #778899;
+  --color-button-muted: #999999;
+  --checkbox-color: #ffffff;
+  --color-signin: #28a745;
+  --color-signin-hover: #218838;
+  --color-signout: #ff4136;
+  --color-signout-hover: #ff0000;
 }
 
 @keyframes spin {

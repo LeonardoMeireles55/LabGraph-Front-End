@@ -11,7 +11,7 @@ const MobileMenu = ({ isMenuOpen, onLogout, jsonData, fileName }: MobileMenuProp
     }`}
   >
     <div className='flex flex-col space-y-4'>
-      {[...navLinks, { text: 'EXIT', url: '/login', onClick: onLogout }].map((link, index) => (
+      {[...navLinks, { text: 'EXIT', url: '/auth/login', onClick: onLogout }].map((link, index) => (
         <Link
           key={index}
           href={link.url}

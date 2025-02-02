@@ -1,5 +1,5 @@
 import { AuthFormData } from '@/components/authentication/types/Auth';
-import { authService } from '@/services/auth';
+import { authService } from '@/services/auth-service';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -70,7 +70,7 @@ export const useAuth = (isLogin: boolean) => {
         });
 
         if (response.success) {
-          router.push('/hematology');
+          router.push('/charts/hematology');
           return;
         }
       } else {
@@ -81,7 +81,7 @@ export const useAuth = (isLogin: boolean) => {
         });
 
         if (response.ok) {
-          router.push('/login');
+          router.push('/auth/login');
           return;
         }
       }

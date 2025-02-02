@@ -3,18 +3,18 @@ import { NextResponse, type NextRequest } from 'next/server';
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get('tokenJWT')?.value;
   const { pathname } = request.nextUrl;
-  const publicPages = ['/login', '/signup', '/health-check'];
+  const publicPages = ['/auth/login', '/auth/signup', '/health-check'];
 
   if (publicPages.includes(pathname)) {
     if (token && !isTokenExpired(token)) {
-      return NextResponse.redirect(new URL('/hematology', request.url));
+      return NextResponse.redirect(new URL('/charts/hematology', request.url));
     }
     return NextResponse.next();
   }
 
   if (!token || (token && isTokenExpired(token))) {
     request.cookies.delete('tokenJWT');
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/auth/login', request.url));
   }
 
   const response = NextResponse.next();

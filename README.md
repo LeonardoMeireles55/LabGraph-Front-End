@@ -5,45 +5,141 @@ A specialized web application for laboratory quality control management, impleme
 ## Project Structure
 
 ```
-├──public
+├── public
 │   ├── favicon.ico
 │   ├── lab.jpg
+│   ├── n_logo.svg
 │   ├── next.svg
 │   └── vercel.svg
 ├── src
 │   ├── components
-│   │   ├── auth
+│   │   ├── analytics-table
+│   │   │   ├── hooks
+│   │   │   │   └── useAnalyticsData.ts
+│   │   │   ├── index.tsx
+│   │   │   ├── listing-table
+│   │   │   │   ├── index.tsx
+│   │   │   │   ├── mobile-item-card.tsx
+│   │   │   │   └── table-row.tsx
+│   │   │   └── util
+│   │   │       ├── analytics-filters.tsx
+│   │   │       └── analytics-pagination.tsx
+│   │   ├── authentication
+│   │   │   ├── common
+│   │   │   │   ├── InputField.tsx
+│   │   │   │   └── SubmitButton.tsx
+│   │   │   ├── constants
+│   │   │   │   └── validateToken.ts
+│   │   │   ├── custom-errors
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── types
+│   │   │   ├── hooks
+│   │   │   │   ├── useAuthentication.ts
+│   │   │   │   └── useValidatedToken.ts
+│   │   │   ├── sign-in
+│   │   │   │   └── index.tsx
+│   │   │   ├── sign-up
+│   │   │   │   └── index.tsx
+│   │   │   └── types
+│   │   │       ├── Auth.ts
+│   │   │       └── User.ts
 │   │   ├── charts
+│   │   │   ├── constants
+│   │   │   │   ├── filter.ts
+│   │   │   │   ├── getColorByLevel.ts
+│   │   │   │   └── normalizeValue.ts
+│   │   │   ├── contexts
+│   │   │   │   └── GraphContext.tsx
+│   │   │   ├── index.tsx
+│   │   │   ├── mean-deviation
+│   │   │   │   └── index.tsx
+│   │   │   ├── multiple-line
+│   │   │   │   ├── components
+│   │   │   │   ├── hooks
+│   │   │   │   └── index.tsx
+│   │   │   ├── single-line
+│   │   │   │   ├── components
+│   │   │   │   ├── hooks
+│   │   │   │   └── index.tsx
+│   │   │   └── types
+│   │   │       └── Chart.ts
 │   │   ├── features
+│   │   │   ├── csv-generator
+│   │   │   │   ├── constants
+│   │   │   │   └── index.tsx
+│   │   │   ├── generate-reports
+│   │   │   │   └── index.tsx
+│   │   │   ├── types
+│   │   │   │   ├── CsvGenerator.ts
+│   │   │   │   ├── FileProcessing.ts
+│   │   │   │   └── ListiningTable.ts
+│   │   │   └── update-results
+│   │   │       └── index.tsx
 │   │   ├── reports
-│   │   ├── shared
-│   │   ├── ui
-│   │   └── utils
-│   ├── constants
-│   │   └── fileProcessing.ts
-│   ├── contexts
-│   │   └── GraphContext.tsx
+│   │   │   ├── hooks
+│   │   │   │   └── useFetchReports.ts
+│   │   │   └── reports-page
+│   │   │       └── index.tsx
+│   │   └── shared
+│   │       ├── date-selector
+│   │       │   ├── components
+│   │       │   ├── constants
+│   │       │   ├── hooks
+│   │       │   ├── index.tsx
+│   │       │   └── types
+│   │       ├── navigation-bar
+│   │       │   ├── components
+│   │       │   ├── constants
+│   │       │   ├── hooks
+│   │       │   ├── index.tsx
+│   │       │   └── types
+│   │       ├── test-selector
+│   │       │   ├── common-selector
+│   │       │   ├── custom-selector
+│   │       │   └── types
+│   │       ├── ui
+│   │       │   ├── footer
+│   │       │   ├── hooks
+│   │       │   ├── icons
+│   │       │   ├── logo
+│   │       │   └── theme
+│   │       └── utils
+│   │           ├── components
+│   │           ├── helpers
+│   │           ├── types
+│   │           └── validation.ts
 │   ├── middleware.ts
 │   ├── pages
+│   │   ├── 400.tsx
+│   │   ├── 401.tsx
+│   │   ├── 403.tsx
+│   │   ├── 404.tsx
+│   │   ├── 500.tsx
+│   │   ├── 503.tsx
 │   │   ├── _app.tsx
 │   │   ├── _document.tsx
-│   │   ├── analytics-table.tsx
 │   │   ├── api
-│   │   ├── biochemistry.tsx
-│   │   ├── coagulation.tsx
-│   │   ├── hematology.tsx
+│   │   │   ├── get-token.ts
+│   │   │   ├── health-check.ts
+│   │   │   ├── login.ts
+│   │   │   └── logout.ts
+│   │   ├── auth
+│   │   │   ├── login.tsx
+│   │   │   └── signup.tsx
+│   │   ├── charts
+│   │   │   ├── biochemistry.tsx
+│   │   │   ├── coagulation.tsx
+│   │   │   └── hematology.tsx
 │   │   ├── index.tsx
-│   │   ├── login.tsx
-│   │   ├── reports.tsx
-│   │   └── signup.tsx
+│   │   └── misc
+│   │       ├── analytics-table.tsx
+│   │       └── reports.tsx
 │   ├── services
-│   │   └── auth.ts
-│   ├── styles
-│   │   └── globals.css
-│   └── utils
-│       ├── fileProcessors.ts
-│       └── validation.ts
-
+│   │   └── auth-service.ts
+│   └── styles
+│       └── globals.css
+├── tailwind.config.ts
+└── tsconfig.json
 ```
 
 ## Features

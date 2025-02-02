@@ -14,12 +14,12 @@ export const useValidatedToken = () => {
 
         if (!tokenResponse.ok) {
           if (
-            router.pathname !== '/login' &&
-            router.pathname !== '/signup' &&
+            router.pathname !== '/auth/login' &&
+            router.pathname !== '/auth/signup' &&
             router.pathname !== '/health-check'
           ) {
             setToken(null);
-            router.push('/login');
+            router.push('/auth/login');
           }
           return;
         }

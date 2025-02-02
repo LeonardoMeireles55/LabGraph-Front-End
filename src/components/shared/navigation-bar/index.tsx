@@ -27,19 +27,21 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
           <span className='hidden lg:flex'>
             <ThemeToggle />
           </span>
-          <div className='flex items-center gap-4 lg:hidden'>
+          <div className='flex items-center gap-2 lg:hidden'>
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className='flex flex-col gap-1'
+              className='p-2'
               aria-label='Toggle menu'
             >
-              {[0, 1, 2].map((i) => (
-                <span
-                  key={i}
-                  className={`block h-0.5 w-6 bg-textPrimary transition-all duration-300 ${getMenuBarClass(isMenuOpen, i)}`}
-                />
-              ))}
+              <div className='space-y-2'>
+                {[0, 1, 2].map((i) => (
+                  <span
+                    key={i}
+                    className={`block h-0.5 w-6 bg-textSecondary transition-all duration-300 ${getMenuBarClass(isMenuOpen, i)}`}
+                  />
+                ))}
+              </div>
             </button>
           </div>
         </div>

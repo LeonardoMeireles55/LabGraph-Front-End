@@ -271,7 +271,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               <Legend
                 content={renderLegend}
                 verticalAlign='bottom'
-                wrapperStyle={{ paddingBottom: '0px' }}
+                wrapperStyle={{ paddingTop: '5px', paddingBottom: '5px' }}
               />
             </LineChart>
           </ResponsiveContainer>

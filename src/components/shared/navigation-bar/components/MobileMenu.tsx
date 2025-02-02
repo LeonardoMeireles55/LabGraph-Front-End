@@ -6,23 +6,26 @@ import ViewToggleButton from './ViewToggleButton';
 
 const MobileMenu = ({ isMenuOpen, onLogout, jsonData, fileName }: MobileMenuProps) => (
   <div
-    className={`fixed left-0 right-0 top-[4rem] bg-surface p-4 shadow-lg shadow-shadow sm:top-20 lg:hidden ${
+    className={`fixed left-0 right-0 top-[4rem] bg-surface p-2 shadow-xl shadow-shadow sm:top-20 lg:hidden ${
       isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
     }`}
   >
-    <div className='flex flex-col space-y-4'>
+    <div className='flex flex-col space-y-2'>
       {[...navLinks, { text: 'EXIT', url: '/auth/login', onClick: onLogout }].map((link, index) => (
         <Link
           key={index}
           href={link.url}
           onClick={link.onClick}
-          className='text-base font-normal text-textPrimary hover:text-primary'
+          className='text-sm font-normal text-textSecondary hover:text-primary'
         >
           {link.text}
         </Link>
       ))}
-      <ViewToggleButton />
-      <CsvGenerator jsonData={jsonData} fileName={fileName} />
+      <hr className='border-t-[0.5px] border-textSecondary' />
+      <span className='flex flex-col w-full'>
+        <ViewToggleButton />
+        <CsvGenerator jsonData={jsonData} fileName={fileName} />
+      </span>
     </div>
   </div>
 );

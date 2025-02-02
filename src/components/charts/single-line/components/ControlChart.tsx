@@ -217,9 +217,10 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 />
               ))}
               <Legend
+                className='text-[0.5px] md:text-sm'
                 content={renderLegend}
                 verticalAlign='bottom'
-                wrapperStyle={{ padding: '0px' }}
+                wrapperStyle={{ paddingTop: '5px', paddingBottom: '5px' }}
               />
             </LineChart>
           </ResponsiveContainer>

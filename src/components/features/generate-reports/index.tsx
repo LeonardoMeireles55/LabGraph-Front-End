@@ -1,7 +1,7 @@
 import { parse } from 'json2csv';
 import { Download, Loader2 } from 'lucide-react';
 import React, { useState } from 'react';
-import getStatusMessage from '../../utils/helpers/getStatusMessage';
+import getStatusMessage from '../../shared/utils/helpers/getStatusMessage';
 import { CsvGeneratorProps } from '../types/CsvGenerator';
 
 const GenerateReports: React.FC<CsvGeneratorProps> = ({ jsonData, fileName = 'data.csv' }) => {

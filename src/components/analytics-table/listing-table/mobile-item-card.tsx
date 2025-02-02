@@ -1,6 +1,5 @@
-
-import React from 'react';
 import { ListingItem } from '@/components/charts/types/Chart';
+import React from 'react';
 
 interface MobileItemCardProps {
   item: ListingItem;

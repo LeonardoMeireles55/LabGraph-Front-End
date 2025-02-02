@@ -1,3 +1,4 @@
+import useWindowDimensions from '@/components/shared/ui/hooks/useWindowDimensions';
 import React, { useMemo, useState } from 'react';
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
 import {
@@ -11,9 +12,8 @@ import {
   YAxis,
 } from 'recharts';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
-import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart';
-import useWindowDimensions from '../../../ui/hooks/useWindowDimensions';
 import normalizeValue from '../../constants/normalizeValue';
+import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart';
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
@@ -45,7 +45,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
         if (values) {
           const { mean, standardDeviation }: MeanStdDevValue = useOwnValues
             ? { mean: ownMean, standardDeviation: ownSd }
-            : { mean: values.mean, standardDeviation: values.sd };
+            : {
+                mean: values.mean,
+                standardDeviation: values.sd,
+              };
 
           entry.date = customFormatDate(values.date);
 
@@ -111,17 +114,16 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               className='group flex flex-col items-center transition-all duration-300'
             >
               <div
-                className={`rounded-full p-2 transition-all duration-300 ${useOwnValues
-                  ? 'hover:bg-textPrimary/20 text-textPrimary'
-                  : 'hover:bg-textSecondary/20 text-textSecondary'
-                  }`}
+                className={`rounded-full p-2 transition-all duration-300 ${
+                  useOwnValues
+                    ? 'hover:bg-textPrimary/20 text-textPrimary'
+                    : 'hover:bg-textSecondary/20 text-textSecondary'
+                }`}
               >
                 {useOwnValues ? (
                   <TbMathFunction className='h-4 w-4 md:h-6 md:w-6' />
-
                 ) : (
                   <TbFileDescription className='h-4 w-4 md:h-6 md:w-6' />
-
                 )}
               </div>
               <span
@@ -174,12 +176,18 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               <Tooltip
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
-                    const uniqueEntries = payload.filter((entry, index, self) =>
-                      index === self.findIndex((e) => (
-                        e.dataKey && entry.dataKey && (
-                          e.payload[`date${e.dataKey.toString().slice(-1)}`] === entry.payload[`date${entry.dataKey.toString().slice(-1)}`] &&
-                          e.payload[`level${e.dataKey.toString().slice(-1)}`] === entry.payload[`level${entry.dataKey.toString().slice(-1)}`])
-                      ))
+                    const uniqueEntries = payload.filter(
+                      (entry, index, self) =>
+                        index ===
+                        self.findIndex(
+                          (e) =>
+                            e.dataKey &&
+                            entry.dataKey &&
+                            e.payload[`date${e.dataKey.toString().slice(-1)}`] ===
+                              entry.payload[`date${entry.dataKey.toString().slice(-1)}`] &&
+                            e.payload[`level${e.dataKey.toString().slice(-1)}`] ===
+                              entry.payload[`level${entry.dataKey.toString().slice(-1)}`]
+                        )
                     );
 
                     return (
@@ -204,7 +212,9 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                 <div className='mb-1 flex items-center gap-2'>
                                   <div
                                     className='h-3 w-3 rounded-full'
-                                    style={{ backgroundColor: entry.stroke }}
+                                    style={{
+                                      backgroundColor: entry.stroke,
+                                    }}
                                   />
                                   <span className='font-medium'>{data[level].toUpperCase()}</span>
                                 </div>
@@ -234,7 +244,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                   stroke={lineColors[index]}
                   strokeWidth={1.0}
                   connectNulls={true}
-                  activeDot={{ color: lineColors[index], r: 3 }}
+                  activeDot={{
+                    color: lineColors[index],
+                    r: 3,
+                  }}
                   dot={{
                     fill: lineColors[index],
                     stroke: lineColors[index],

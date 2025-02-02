@@ -1,14 +1,14 @@
 import useFetchListing from '@/components/charts/single-line/hooks/useFetchListinig';
 import { ListingItem } from '@/components/charts/types/Chart';
+import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import MeanAndDeviationDisplay from '../../../charts/mean-deviation';
 import UpdateResults from '../../../features/update-results';
-import urlAnalyticsByNameAndDateAndLevel from '../../../utils/helpers/urlAnalyticsByNameAndDateAndLevel';
 import DateSelector from '../../date-selector';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
+import urlAnalyticsByNameAndDateAndLevel from '../../utils/helpers/urlAnalyticsByNameAndDateAndLevel';
 import { CommonTestSelectorProps } from '../types/Selector';
-import { CheckCircle } from 'lucide-react';
 
 const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   list,
@@ -59,7 +59,6 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   }, [listing, ownMeanValue, ownSdValue, unitValues, SetListingItem]);
 
   const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK;
-
 
   return (
     <div className='mt-12 grid content-start items-start gap-1 text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>

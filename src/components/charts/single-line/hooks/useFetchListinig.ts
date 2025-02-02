@@ -1,6 +1,6 @@
-import { useValidatedToken } from '@/components/auth/hooks/useValidatedToken';
-import checkResponse from '@/components/utils/helpers/checkResponse';
-import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
+import { useValidatedToken } from '@/components/authentication/hooks/useValidatedToken';
+import checkResponse from '@/components/shared/utils/helpers/checkResponse';
+import getStatusMessage from '@/components/shared/utils/helpers/getStatusMessage';
 import { useEffect, useState } from 'react';
 import { ListingCollection, UseFetchListingProps } from '../../types/Chart';
 

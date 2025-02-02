@@ -1,5 +1,5 @@
-import checkResponse from '@/components/utils/helpers/checkResponse';
-import getStatusMessage from '@/components/utils/helpers/getStatusMessage';
+import checkResponse from '@/components/shared/utils/helpers/checkResponse';
+import getStatusMessage from '@/components/shared/utils/helpers/getStatusMessage';
 import { useEffect, useState } from 'react';
 
 interface ListingCollection extends Array<any> {}

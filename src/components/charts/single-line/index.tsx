@@ -1,10 +1,10 @@
 import ControlChart from '@/components/charts/single-line/components/ControlChart';
+import NavBar from '@/components/shared/navigation-bar';
 import TestSelectorWithLevel from '@/components/shared/test-selector/common-selector';
-import Loading from '@/components/utils/components/loading';
+import Footer from '@/components/shared/ui/footer';
+import Loading from '@/components/shared/utils/components/loading';
 import Head from 'next/head';
 import { useState } from 'react';
-import Footer from '../../ui/footer';
-import NavBar from '../../ui/navigation-bar';
 import { LabGraphProps, ListingItem } from '../types/Chart';
 
 const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {

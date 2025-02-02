@@ -1,4 +1,4 @@
-import { useValidatedToken } from '@/components/auth/hooks/useValidatedToken';
+import { useValidatedToken } from '@/components/authentication/hooks/useValidatedToken';
 import { ListingItem } from '@/components/charts/types/Chart';
 import {
   formatDateWithTime,

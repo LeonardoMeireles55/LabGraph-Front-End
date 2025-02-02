@@ -1,13 +1,13 @@
-import CustomError from '@/components/ui/custom-errors';
+import CustomError from '@/components/authentication/custom-errors';
 
 export default function Custom401() {
-    return (
-        <CustomError
-            code='401'
-            title='Unauthorized'
-            message="You need to be authenticated to access this page"
-            buttonText='Home'
-            buttonHref='/'
-        />
-    );
+  return (
+    <CustomError
+      code='401'
+      title='Unauthorized'
+      message='You need to be authenticated to access this page'
+      buttonText='Home'
+      buttonHref='/'
+    />
+  );
 }

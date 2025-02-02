@@ -1,3 +1,4 @@
+import useWindowDimensions from '@/components/shared/ui/hooks/useWindowDimensions';
 import React, { useMemo, useState } from 'react';
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
 import {
@@ -12,36 +13,15 @@ import {
   YAxis,
 } from 'recharts';
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
-import { ControlChartProps } from '../../types/Chart';
-import useWindowDimensions from '@/components/ui/hooks/useWindowDimensions';
 import getColorByLevel from '../../constants/getColorByLevel';
 import normalizeValue from '../../constants/normalizeValue';
-
-// const CustomDot: React.FC<any> = ({ cx, cy, payload, colors }) => {
-//   return (
-//     <g>
-//       <circle cx={cx} cy={cy} r={3} fill={colors} />
-//       <text
-//         x={cx}
-//         y={cy - 10}
-//         fill='var(--color-text-primary)'
-//         className='text-[0.5rem] text-textPrimary md:text-xs'
-//         textAnchor='end'
-//       >
-//         {payload.rawValue.toFixed(2)}
-//       </text>
-//     </g>
-//   );
-// };
-
+import { ControlChartProps } from '../../types/Chart';
 
 const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
   const { width: windowWidth } = useWindowDimensions();
 
-
   const data = listing;
-
 
   const renderLegend = (props: any) => {
     const { payload } = props;
@@ -50,7 +30,12 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
       <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
         {payload.map((entry: any, index: number) => (
           <div key={`legend-${entry}`} className='flex items-center gap-2'>
-            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: getColorByLevel(data[index].level.toString()) }} />
+            <div
+              className='h-3 w-3 rounded-full'
+              style={{
+                backgroundColor: getColorByLevel(data[index].level.toString()),
+              }}
+            />
             <span className='text-textPrimary'>{`${data[index].level.toString().toUpperCase()}`}</span>
           </div>
         ))}
@@ -64,7 +49,11 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     levelLot: entry.level_lot,
     level: entry.level,
     name: entry.name,
-    value: normalizeValue(entry.value, (useOwnValues ? entry.ownMeanValue : entry.mean), (useOwnValues ? entry.ownSdValue : entry.sd)),
+    value: normalizeValue(
+      entry.value,
+      useOwnValues ? entry.ownMeanValue : entry.mean,
+      useOwnValues ? entry.ownSdValue : entry.sd
+    ),
 
     unitValue: entry.unit_value,
     rawValue: entry.value,
@@ -75,7 +64,6 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     description: entry.description,
     rules: entry.rules,
   }));
-
 
   const yAxisValues = useMemo(
     () => [
@@ -103,10 +91,11 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               className='flex flex-col items-center transition-all duration-300 group'
             >
               <div
-                className={`rounded-full p-2 transition-all duration-300 ${useOwnValues
-                  ? 'hover:bg-textPrimary/20 text-textPrimary'
-                  : 'hover:bg-textSecondary/20 text-textSecondary'
-                  }`}
+                className={`rounded-full p-2 transition-all duration-300 ${
+                  useOwnValues
+                    ? 'hover:bg-textPrimary/20 text-textPrimary'
+                    : 'hover:bg-textSecondary/20 text-textSecondary'
+                }`}
               >
                 {useOwnValues ? (
                   <TbMathFunction className='w-4 h-4 md:h-6 md:w-6' />
@@ -146,7 +135,6 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               <YAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
-
                 // domain={[data[0].mean - 3.5 * data[0].sd, data[0].mean + 3.5 * data[0].sd]}
                 textAnchor='end'
                 ticks={yAxisValues.map((v) => v.value)}
@@ -176,7 +164,9 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                               <div className='flex items-center gap-2 mb-1'>
                                 <div
                                   className='w-3 h-3 rounded-full'
-                                  style={{ backgroundColor: getColorByLevel(data.level) }}
+                                  style={{
+                                    backgroundColor: getColorByLevel(data.level),
+                                  }}
                                 />
                                 <span className='font-medium'>
                                   Level: {data.level.toUpperCase()}
@@ -203,7 +193,10 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 stroke={getColorByLevel(data[0].level.toString())}
                 strokeWidth={1.0}
                 connectNulls={true}
-                activeDot={{ color: getColorByLevel(data[0].level.toString()), r: 3 }}
+                activeDot={{
+                  color: getColorByLevel(data[0].level.toString()),
+                  r: 3,
+                }}
                 dot={{
                   fill: getColorByLevel(data[0].level.toString()),
                   stroke: getColorByLevel(data[0].level.toString()),
@@ -233,7 +226,6 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
         </div>
       </div>
     </div>
-
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListingTableProps } from '../../features/types/ListiningTable';
-import TableRow from './table-row';
 import MobileItemCard from './mobile-item-card';
+import TableRow from './table-row';
 
 const tableHeaders = [
   'Date',
@@ -12,11 +12,10 @@ const tableHeaders = [
   'Mean',
   'Values',
   'Unit',
-  'Rules'
+  'Rules',
 ];
 
-const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
-
+const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
   return (
     <div className='flex flex-col justify-between w-full h-min rounded-lg shadow-xl'>
       <table className='hidden bg-surface md:table'>
@@ -30,7 +29,6 @@ const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
                 {header}
               </th>
             ))}
-
           </tr>
         </thead>
         <tbody>
@@ -44,10 +42,12 @@ const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
           <MobileItemCard key={index} item={item} />
         ))}
       </div>
-      {items.length === 0 ? <div className='py-2 text-center bg-surface text-textSecondary'>please select another date range and level.</div>
-        : null}
+      {items.length === 0 ? (
+        <div className='py-2 text-center bg-surface text-textSecondary'>
+          please select another date range and level.
+        </div>
+      ) : null}
     </div>
-
   );
 };
 

@@ -4,5 +4,4 @@ const filter = (value: number, mean: number, sd: number) => {
   return value;
 };
 
-
 export default filter;

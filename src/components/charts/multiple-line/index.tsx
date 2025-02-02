@@ -1,9 +1,9 @@
+import NavBar from '@/components/shared/navigation-bar';
 import TestSelectorWithoutLevel from '@/components/shared/test-selector/custom-selector';
-import Loading from '@/components/utils/components/loading';
+import Footer from '@/components/shared/ui/footer';
+import Loading from '@/components/shared/utils/components/loading';
 import Head from 'next/head';
 import React, { useState } from 'react';
-import Footer from '../../ui/footer';
-import NavBar from '../../ui/navigation-bar';
 import { LevelGroupResponse, MultipleLineGraphProps } from '../types/Chart';
 import MultipleLineControlChart from './components/MultipleLineControlChart';
 

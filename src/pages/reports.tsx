@@ -6,8 +6,8 @@ import {
   formatEndDateWithTime,
 } from '@/components/shared/date-selector/constants/formatDateWithTime';
 import useDateSelector from '@/components/shared/date-selector/hooks/useDateSelector';
-import Footer from '@/components/ui/footer';
-import NavBar from '@/components/ui/navigation-bar';
+import NavBar from '@/components/shared/navigation-bar';
+import Footer from '@/components/shared/ui/footer';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';

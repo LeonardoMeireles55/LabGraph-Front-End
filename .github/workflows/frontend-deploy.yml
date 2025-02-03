@@ -62,11 +62,8 @@ jobs:
       - name: Build and push with buildx
         run: |
           [ -f buildx-cache/index.json ] || echo "{}" > buildx-cache/index.json
-          if ! docker buildx inspect builder >/dev/null 2>&1; then
-            docker buildx create --name builder --use
-          else
-            docker buildx use builder
-          fi
+          docker buildx rm builder || true
+          docker buildx create --name builder --use
           docker buildx build \
             --file Dockerfile \
             --cache-from=type=local,src=buildx-cache \

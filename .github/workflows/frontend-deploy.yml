@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Ensure buildx cache
         run: mkdir -p /tmp/.buildx-cache
 
@@ -23,7 +26,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ hashFiles('Dockerfile', 'docker-compose.build.yml') }}
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
 
@@ -33,20 +36,18 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Build and push with buildx
+      - name: Build and push Docker image
+        id: docker_build
         run: |
-          docker system prune -f
-          if docker buildx inspect builder >/dev/null 2>&1; then
-            docker buildx rm builder || true
-          fi
-          docker buildx create --use --name builder
-          docker buildx build \
-            --file Dockerfile \
-            --cache-from=type=local,src=/tmp/.buildx-cache \
-            --cache-to=type=local,dest=/tmp/.buildx-cache,mode=max \
-            --pull \
-            --push \
-            -t leonardomeireles55/quality-lab-pro-front-end:latest .
+          for i in 1 2 3; do
+            if docker compose -f docker-compose.build.yml build && \
+               docker compose -f docker-compose.build.yml push; then
+              exit 0
+            fi
+            echo "Retry $i/3..."
+            sleep 10
+          done
+          exit 1
 
   deploy:
     needs: build

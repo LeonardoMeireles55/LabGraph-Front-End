@@ -55,7 +55,7 @@ const SignUpForm = () => {
         <p className='text-center text-xs sm:text-sm text-textSecondary'>
           Already have an account?{' '}
           <Link
-            href='/login'
+            href='/auth/login'
             className='font-medium text-textPrimary transition-colors duration-200'
           >
             Sign in

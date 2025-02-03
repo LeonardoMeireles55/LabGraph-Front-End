@@ -33,11 +33,9 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: clean up
-        run: docker system prune -f
-
       - name: Build and push with buildx
         run: |
+          docker system prune -f
           if docker buildx inspect builder >/dev/null 2>&1; then
             docker buildx rm builder || true
           fi

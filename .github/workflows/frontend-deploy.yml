@@ -49,6 +49,18 @@ jobs:
       - name: Deployment notification
         run: echo "✅ Deployment completed"
 
+  cleanup:
+    runs-on: [self-hosted, linux, x64, frontend]
+    needs: deploy
+    if: always()
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Running cleanup script
+        run: |
+          chmod +x ./.github/scripts/cleanup_system.sh
+          ./.github/scripts/cleanup_system.sh
+
   health-check:
     runs-on: [self-hosted, linux, x64, backend]
     needs: deploy

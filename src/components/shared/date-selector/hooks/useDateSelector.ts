@@ -3,7 +3,7 @@ import { useState } from 'react';
 export default function useDateSelector() {
   const endDate = new Date();
   const startDate = new Date();
-  startDate.setDate(endDate.getDate() - 15); // Inicializa a data inicial com 15 dias antes da data final
+  startDate.setDate(endDate.getDate() - 5);
 
   const [startDay, setStartDay] = useState<number>(startDate.getDate());
   const [startMonth, setStartMonth] = useState<number>(startDate.getMonth() + 1);

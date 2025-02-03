@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Ensure node_modules directory
+        run: mkdir -p node_modules
+
       - name: Cache node modules
         uses: actions/cache@v3
         with:
@@ -36,7 +39,11 @@ jobs:
             ${{ runner.os }}-nextjs-
 
       - name: Ensure buildx cache
-        run: mkdir -p /tmp/.buildx-cache
+        run: |
+          mkdir -p /tmp/.buildx-cache
+          if [ ! -f /tmp/.buildx-cache/index.json ]; then
+            echo "{}" > /tmp/.buildx-cache/index.json
+          fi
 
       - name: Cache Docker layers
         uses: actions/cache@v3
@@ -78,18 +85,6 @@ jobs:
       - name: Deployment notification
         run: echo "✅ Deployment completed"
 
-  cleanup:
-    runs-on: [self-hosted, linux, x64, frontend]
-    needs: deploy
-    if: always()
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Running cleanup script
-        run: |
-          chmod +x ./.github/scripts/cleanup_system.sh
-          ./.github/scripts/cleanup_system.sh
-
   health-check:
     runs-on: [self-hosted, linux, x64, backend]
     needs: deploy
@@ -114,3 +109,17 @@ jobs:
       - name: Final status
         if: success()
         run: echo "🚀 Application is running successfully in production"
+
+    cleanup:
+      runs-on: [self-hosted, linux, x64, frontend]
+      needs: deploy
+      if: always()
+          steps:
+            - uses: actions/checkout@v4
+            - name: Running cleanup script
+              run: |
+                chmod +x ./.github/scripts/cleanup_system.sh
+                ./.github/scripts/cleanup_system.sh
+
+
+

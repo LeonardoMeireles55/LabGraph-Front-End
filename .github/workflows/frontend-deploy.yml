@@ -110,16 +110,13 @@ jobs:
         if: success()
         run: echo "🚀 Application is running successfully in production"
 
-    cleanup:
-      runs-on: [self-hosted, linux, x64, frontend]
-      needs: deploy
-      if: always()
-          steps:
-            - uses: actions/checkout@v4
-            - name: Running cleanup script
-              run: |
-                chmod +x ./.github/scripts/cleanup_system.sh
-                ./.github/scripts/cleanup_system.sh
-
-
-
+  cleanup:
+    runs-on: [self-hosted, linux, x64, frontend]
+    needs: deploy
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+      - name: Running cleanup script
+        run: |
+          chmod +x ./.github/scripts/cleanup_system.sh
+          ./.github/scripts/cleanup_system.sh

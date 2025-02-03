@@ -96,7 +96,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Running cleanup script
+      - name: Running cleanup script...
         run: |
           chmod +x ./.github/scripts/cleanup_system.sh
           ./.github/scripts/cleanup_system.sh

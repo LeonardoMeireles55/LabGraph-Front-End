@@ -16,31 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Remove existing node_modules directory
-        run: rm -rf node_modules
-
-      - name: Ensure Next.js cache
-        run: mkdir -p /tmp/.next
-
-      - name: Cache Next.js build
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.next
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-
-
       - name: Ensure buildx cache
-        run: |
-          mkdir -p buildx-cache
-          if [ ! -f buildx-cache/index.json ]; then
-            echo "{}" > buildx-cache/index.json
-          fi
+        run: mkdir -p /tmp/.buildx-cache
 
       - name: Cache Docker layers
         uses: actions/cache@v3
         with:
-          path: buildx-cache
+          path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ hashFiles('Dockerfile', 'docker-compose.build.yml') }}
           restore-keys: |
             ${{ runner.os }}-buildx-
@@ -53,13 +35,11 @@ jobs:
 
       - name: Build and push with buildx
         run: |
-          [ -f buildx-cache/index.json ] || echo "{}" > buildx-cache/index.json
-          docker buildx rm builder || true
-          docker buildx create --name builder --use
+          docker buildx create --use --name builder || true
           docker buildx build \
             --file Dockerfile \
-            --cache-from=type=local,src=buildx-cache \
-            --cache-to=type=local,dest=buildx-cache,mode=max \
+            --cache-from=type=local,src=/tmp/.buildx-cache \
+            --cache-to=type=local,dest=/tmp/.buildx-cache,mode=max \
             --pull \
             --push \
             -t leonardomeireles55/quality-lab-pro-front-end:latest .
@@ -106,8 +86,9 @@ jobs:
 
   cleanup:
     runs-on: [self-hosted, linux, x64, frontend]
-    needs: deploy
+    needs: health-check
     if: always()
+
     steps:
       - uses: actions/checkout@v4
       - name: Running cleanup script

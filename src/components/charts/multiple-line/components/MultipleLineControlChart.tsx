@@ -93,8 +93,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
       <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
         {payload.map((entry: any, index: number) => (
           <div key={`legend-${index}`} className='flex items-center gap-2'>
-            <div className='h-3 w-3 rounded-full' style={{ backgroundColor: entry.color }} />
-            <span className='text-textPrimary'>{`${levels[index].toUpperCase()}`}</span>
+            <div className='h-2.5 w-2.5 rounded-full' style={{ backgroundColor: entry.color }} />
+            <span className='text-textPrimary text-xs md:text-sm'>{`${levels[index].toUpperCase()}`}</span>
           </div>
         ))}
       </div>
@@ -105,7 +105,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl'>
+          <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl italic'>
             {listings[0].groupedValuesByLevelDTO.values[0].name}
           </h2>
           <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
@@ -135,11 +135,11 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
           </div>
         </div>
 
-        <div className='flex h-[250px]  content-center items-center justify-center md:min-h-[250px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
+        <div className='flex h-[300px] content-center items-center justify-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
           <ResponsiveContainer
             className='flex items-center content-center justify-center bg-surface'
-            width='98%'
-            height='98%'
+            width='97%'
+            height='96%'
           >
             <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
@@ -208,10 +208,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
                           if (data[valueKey]) {
                             return (
-                              <div key={index} className={'border-border pt-2'}>
-                                <div className='mb-1 flex items-center gap-2'>
+                              <div key={index} className={'border-border'}>
+                                <div className='flex items-center gap-2'>
                                   <div
-                                    className='h-3 w-3 rounded-full'
+                                    className='h-2.5 w-2.5 rounded-full'
                                     style={{
                                       backgroundColor: entry.stroke,
                                     }}
@@ -271,7 +271,12 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               <Legend
                 content={renderLegend}
                 verticalAlign='bottom'
-                wrapperStyle={{ paddingTop: '5px', paddingBottom: '5px' }}
+                wrapperStyle={{
+                  paddingTop: '5px',
+                  paddingBottom: '5px',
+                  fontStyle: 'italic',
+                  fontSize: 'x-small',
+                }}
               />
             </LineChart>
           </ResponsiveContainer>

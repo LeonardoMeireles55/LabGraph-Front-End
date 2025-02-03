@@ -31,12 +31,12 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
         {payload.map((entry: any, index: number) => (
           <div key={`legend-${entry}`} className='flex items-center gap-2'>
             <div
-              className='h-3 w-3 rounded-full'
+              className='h-2.5 w-2.5 rounded-full'
               style={{
                 backgroundColor: getColorByLevel(data[index].level.toString()),
               }}
             />
-            <span className='text-textPrimary'>{`${data[index].level.toString().toUpperCase()}`}</span>
+            <span className='text-textPrimary text-xs md:text-sm'>{`${data[index].level.toString().toUpperCase()}`}</span>
           </div>
         ))}
       </div>
@@ -82,7 +82,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='border shadow-md rounded-2xl border-borderColor bg-surface shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl'>
+          <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl italic'>
             {chartData[0].name} - Level {chartData[0].level.toString().toUpperCase()}
           </h2>
           <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
@@ -111,18 +111,18 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
             </button>
           </div>
         </div>
-        <div className='flex h-[250px]  content-center items-center justify-center md:min-h-[250px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
+        <div className='flex h-[275px] content-center items-center justify-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
           <ResponsiveContainer
             className='flex items-center content-center justify-center bg-surface'
-            width='98%'
-            height='98%'
+            width='97%'
+            height='96%'
           >
             <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
               <XAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 dataKey='date'
-                angle={-55}
+                angle={-60}
                 textAnchor='end'
                 tickFormatter={(date) => date}
                 height={windowWidth < 768 ? 40 : 60}
@@ -135,7 +135,6 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               <YAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
-                // domain={[data[0].mean - 3.5 * data[0].sd, data[0].mean + 3.5 * data[0].sd]}
                 textAnchor='end'
                 ticks={yAxisValues.map((v) => v.value)}
                 width={windowWidth < 768 ? 30 : 40}
@@ -158,12 +157,12 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                           const data = item.payload;
                           return (
                             <div
-                              key={index}
-                              className='pb-2 mb-2 border-b border-border last:border-0 last:pb-0'
+                              key={`${data.date}-${data.level}-${data.levelLot}`}
+                              className='mb-2 border-b border-border last:border-0 last:pb-0'
                             >
                               <div className='flex items-center gap-2 mb-1'>
                                 <div
-                                  className='w-3 h-3 rounded-full'
+                                  className='w-2.5 h-2.5 rounded-full'
                                   style={{
                                     backgroundColor: getColorByLevel(data.level),
                                   }}
@@ -173,6 +172,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                 </span>
                               </div>
                               <p>Test: {data.name}</p>
+                              <p>Date: {data.date}</p>
                               <p>Value: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
                               <p>Lot: {data.levelLot}</p>
                               <p>Mean: {data.mean.toFixed(2)}</p>
@@ -211,16 +211,20 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                   key={index}
                   y={line.value}
                   stroke={line.color}
-                  strokeDasharray='5 5'
+                  strokeDasharray='4 4'
                   strokeWidth={1.0}
                   strokeOpacity={1.0}
                 />
               ))}
               <Legend
-                className='text-[0.5px] md:text-sm'
                 content={renderLegend}
                 verticalAlign='bottom'
-                wrapperStyle={{ paddingTop: '5px', paddingBottom: '5px' }}
+                wrapperStyle={{
+                  paddingTop: '5px',
+                  paddingBottom: '5px',
+                  fontStyle: 'italic',
+                  fontSize: 'x-small',
+                }}
               />
             </LineChart>
           </ResponsiveContainer>

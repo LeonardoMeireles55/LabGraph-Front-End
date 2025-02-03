@@ -65,16 +65,16 @@ input[type='checkbox']:focus {
   --color-sd1: #2a9d8f;
   --color-sd2: #e9c46a;
   --color-sd3: #e76f51;
-  --color-primary: #555555;
-  --color-secondary: rgb(40, 126, 202);
-  --color-accent: #ffc20b;
-  --color-danger: #ff4136;
-  --color-background: #f7f7f7;
+  --color-primary: #333333; /* Updated for better contrast */
+  --color-secondary: #0070f3; /* Modern blue tone */
+  --color-accent: #ff5722; /* updated accent, now distinct from secondary */
+  --color-danger: #d32f2f; /* Slightly deeper red */
+  --color-background: #fafafa; /* Lighter background */
   --color-surface: #ffffff;
   --color-muted: #f1f1f1;
   --color-logo-l: #ffffff;
-  --color-text-primary: #111111;
-  --color-text-secondary: #555555;
+  --color-text-primary: #222222; /* Improved readability */
+  --color-text-secondary: #444444; /* Enhanced legibility */
   --color-grid-lines: #cccccc;
   --color-border: #dddddd;
   --color-navbar: #ffffff;
@@ -100,18 +100,18 @@ input[type='checkbox']:focus {
   --color-sd1: #71c7ec;
   --color-sd2: #f4a261;
   --color-sd3: #e63946;
-  --color-primary: #bdbdbd;
-  --color-secondary: #a66cff;
-  --color-accent: #ffff00;
-  --color-danger: #ff4136;
-  --color-background: #121212;
-  --color-surface: #1e1e1e;
-  --color-muted: #888888;
+  --color-primary: #cccccc; /* Lighter text for dark mode */
+  --color-secondary: #8ab4f8; /* Softer blue */
+  --color-accent: #ff7043; /* updated dark accent to contrast secondary */
+  --color-danger: #d32f2f;
+  --color-background: #242529; /* Darker background */
+  --color-surface: #2f3136; /* Elevated surface contrast */
+  --color-muted: #40444b;
   --color-text-primary: #e0e0e0;
-  --color-text-secondary: #aaaaaa;
+  --color-text-secondary: #c7c7c7; /* More distinct secondary text */
   --color-bg-text: #eeeeee;
   --color-grid-lines: rgba(255, 255, 255, 0.1);
-  --color-navbar: #1e1e1e;
+  --color-navbar: #202225;
   --color-white: #ffffff;
   --color-logo-l: #000000;
   --color-green: #2ecc71;

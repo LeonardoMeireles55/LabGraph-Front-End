@@ -35,7 +35,10 @@ jobs:
 
       - name: Build and push with buildx
         run: |
-          docker buildx inspect builder || docker buildx create --use --name builder
+          if docker buildx inspect builder >/dev/null 2>&1; then
+            docker buildx rm builder || true
+          fi
+          docker buildx create --use --name builder
           docker buildx build \
             --file Dockerfile \
             --cache-from=type=local,src=/tmp/.buildx-cache \

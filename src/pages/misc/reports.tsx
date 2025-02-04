@@ -95,7 +95,7 @@ const ReportsPage = () => {
           <Image
             className='object-cover rounded-xl'
             fetchPriority='high'
-            src='/lab_photo.png'
+            src='/labvidraria.png'
             style={{
               width: '100%',
               height: 'auto',

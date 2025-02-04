@@ -18,7 +18,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build
 
-RUN rm -rf /app/.next/cache /app/.next/diagnostics
+RUN rm -rf /app/.next/diagnostics
 
 FROM node:23-alpine AS runner
 WORKDIR /app

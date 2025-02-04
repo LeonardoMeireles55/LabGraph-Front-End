@@ -7,19 +7,19 @@ import Contacts from './components/Contacts';
 const AboutUs = () => {
   const carouselImages = [
     {
-      src: '/labs.png',
+      src: '/labbancada.png',
       alt: 'view result by table',
     },
     {
-      src: '/lab-2.png',
+      src: '/lab2.png',
       alt: 'view result by chart',
     },
     {
-      src: '/lab-3.png',
+      src: '/lab3.png',
       alt: 'generate reports',
     },
     {
-      src: '/lab-4.png',
+      src: '/lab4.png',
       alt: 'alerts by email',
     },
   ];

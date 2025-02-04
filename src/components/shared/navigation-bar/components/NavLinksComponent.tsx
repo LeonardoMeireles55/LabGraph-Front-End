@@ -8,7 +8,7 @@ import ViewToggleButton from './ViewToggleButton';
 
 const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ jsonData, fileName }) => {
   const router = useRouter();
-  const onLogout = () => handleLogout(router);
+  const onLogout = () => handleLogout();
 
   return (
     <div className='hidden items-center gap-6 lg:flex xl:gap-8 px-6 py-3'>

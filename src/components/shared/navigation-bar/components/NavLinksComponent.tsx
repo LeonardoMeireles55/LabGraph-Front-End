@@ -1,13 +1,11 @@
 import CsvGenerator from '@/components/features/csv-generator';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import handleLogout from '../constants/handleLogout';
 import navLinks from '../constants/navLinks';
 import { NavLinksComponentProps } from '../types/NavigationBar';
 import ViewToggleButton from './ViewToggleButton';
 
 const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ jsonData, fileName }) => {
-  const router = useRouter();
   const onLogout = () => handleLogout();
 
   return (

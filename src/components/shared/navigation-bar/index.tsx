@@ -1,4 +1,3 @@
-import router from 'next/router';
 import { useState } from 'react';
 import ThemeToggle from '../ui/theme';
 import MobileMenu from './components/MobileMenu';
@@ -16,7 +15,7 @@ const getMenuBarClass = (isOpen: boolean, index: number): string => {
 
 const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const onLogout = () => handleLogout(router);
+  const onLogout = () => handleLogout();
 
   return (
     <nav className='fixed left-0 top-0 z-50 w-full bg-navbar shadow-xl shadow-overlay'>

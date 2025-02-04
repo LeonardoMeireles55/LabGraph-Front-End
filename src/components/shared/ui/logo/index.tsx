@@ -3,7 +3,7 @@ interface LogoProps {
   title?: string;
 }
 
-const Logo = ({ className, title: title = 'LabGraph' }: LogoProps) => {
+const Logo = ({ className, title = 'LabGraph' }: LogoProps) => {
   return (
     <div className='flex flex-col items-center'>
       <svg

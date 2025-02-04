@@ -1,7 +1,7 @@
 import { useValidatedToken } from '@/components/authentication/hooks/useValidatedToken';
 import checkResponse from '@/components/shared/utils/helpers/checkResponse';
 import getStatusMessage from '@/components/shared/utils/helpers/getStatusMessage';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ListingCollection, UseFetchListingProps } from '../../types/Chart';
 
 const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => {
@@ -13,59 +13,69 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
   const [error, setError] = useState<string | null>(null);
   const { token, loading } = useValidatedToken();
 
+  const fetchConfig = useMemo(
+    () => ({
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }),
+    [token]
+  );
+
+  const fetchData = useCallback(
+    async (abortController: AbortController) => {
+      if (!token) throw new Error('No authentication token available');
+
+      const [listingResponse, meanDeviationResponse] = await Promise.all([
+        fetch(url, { ...fetchConfig, signal: abortController.signal }),
+        fetch(urlMeanAndDeviation, { ...fetchConfig, signal: abortController.signal }),
+      ]);
+
+      const [json, jsonMeanAndDeviation] = await Promise.all([
+        checkResponse(listingResponse),
+        checkResponse(meanDeviationResponse),
+      ]);
+
+      return { json, jsonMeanAndDeviation };
+    },
+    [url, urlMeanAndDeviation, fetchConfig, token]
+  );
+
   useEffect(() => {
-    const fetchData = async () => {
-      if (loading) {
-        return;
-      }
+    if (loading) return;
 
-      if (!token) {
-        setError('No authentication token available');
-        return;
-      }
+    const abortController = new AbortController();
+    setIsLoading(true);
+    setError(null);
 
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const json = await checkResponse(response);
-
-        const responseMeanAndDeviation = await fetch(urlMeanAndDeviation, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const jsonMeanAndDeviation = await checkResponse(responseMeanAndDeviation);
-
+    fetchData(abortController)
+      .then(({ json, jsonMeanAndDeviation }) => {
         setOwnMean(jsonMeanAndDeviation.mean);
         setOwnSd(jsonMeanAndDeviation.standardDeviation);
 
         if (json.length > 0) {
-          setUnitValues(json[0]?.unit_value || null);
+          setUnitValues(json[0]?.unit_value ?? null);
           setListing(json);
         } else {
           setUnitValues(null);
         }
-      } catch (error: Error | any) {
+      })
+      .catch((error: Error | any) => {
+        if (error.name === 'AbortError') return;
         const errorMessage = getStatusMessage(error.status);
         setError(errorMessage);
         console.error('Error fetching data:', errorMessage);
-      } finally {
+      })
+      .finally(() => {
         setIsLoading(false);
-      }
-    };
+      });
 
-    fetchData();
-  }, [url, urlMeanAndDeviation, token, loading]);
+    return () => {
+      abortController.abort();
+    };
+  }, [loading, fetchData]);
 
   return {
     listing,

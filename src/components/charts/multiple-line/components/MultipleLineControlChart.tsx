@@ -201,8 +201,6 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                           const rawValueKey = `rawValue${dataKeyIndex}`;
                           const levelLotKey = `levelLot${dataKeyIndex}`;
                           const nameKey = `name${dataKeyIndex}`;
-                          // const descriptionKey = `description${dataKeyIndex}`;
-                          // const rulesKey = `rules${dataKeyIndex}`;
                           const meanKey = `mean${dataKeyIndex}`;
                           const sdKey = `sd${dataKeyIndex}`;
 

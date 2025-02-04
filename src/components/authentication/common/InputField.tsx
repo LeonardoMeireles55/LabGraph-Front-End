@@ -23,7 +23,7 @@ const InputField: React.FC<InputFieldProps> = ({
         autoComplete={autoCompleteProps ? 'off' : 'on'}
         value={value}
         onChange={onChange}
-        className='placeholder:text-textSecondary hover:border-textPrimary focus:ring-textSecondary w-full rounded-lg border border-borderColor bg-surface p-1.5 text-bgText transition-all duration-200 ease-in-out focus:border-textPrimary focus:outline-none focus:ring-1'
+        className='input-modern placeholder:text-textSecondary hover:border-textPrimary focus:ring-textSecondary w-full rounded-lg border border-borderColor bg-surface p-1.5 text-bgText transition-all duration-200 ease-in-out focus:border-textPrimary focus:outline-none focus:ring-1'
         required
       />
     </div>

@@ -3,7 +3,12 @@ import { NextResponse, type NextRequest } from 'next/server';
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get('tokenJWT')?.value;
   const { pathname } = request.nextUrl;
-  const publicPages = ['/auth/login', '/auth/signup', '/health-check'];
+  const publicPages = ['/auth/login', '/auth/signup', '/health-check', '/about-us'];
+  const isNotNecessaryToRedirect = pathname === '/about-us';
+
+  if (isNotNecessaryToRedirect) {
+    return NextResponse.next();
+  }
 
   if (publicPages.includes(pathname)) {
     if (token && !isTokenExpired(token)) {
@@ -33,6 +38,6 @@ function isTokenExpired(token: string): boolean {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/data|_next/image|favicon.ico|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico|.*\\.png).*)',
+    '/((?!api|_next/static|_next/data|_next/image|favicon.ico|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico|.*\\.png|.*\\.jpg).*)',
   ],
 };

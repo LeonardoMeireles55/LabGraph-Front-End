@@ -153,7 +153,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                   if (active && payload && payload.length) {
                     return (
                       <div className='p-2 text-xs border rounded shadow-md border-border bg-background text-textPrimary shadow-shadow'>
-                        {payload.map((item, index) => {
+                        {payload.map((item) => {
                           const data = item.payload;
                           return (
                             <div

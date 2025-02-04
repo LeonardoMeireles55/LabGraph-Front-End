@@ -91,14 +91,15 @@ const ReportsPage = () => {
             <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
           </span>
         </div>
-        <span className='w-4/6 p-4 border border-borderColor shadow-md rounded-xl md:mt-4 xl:w-1/3 xl:p-8'>
+        <span className='w-4/6 p-4 border border-borderColor shadow-md rounded-xl md:mt-4 xl:w-1/3 xl:p-6'>
           <Image
             className='object-cover rounded-xl'
             fetchPriority='high'
-            src='/lab.jpg'
+            src='/lab_photo.png'
             style={{
               width: '100%',
               height: 'auto',
+              opacity: 1.0,
             }}
             width={350}
             height={150}

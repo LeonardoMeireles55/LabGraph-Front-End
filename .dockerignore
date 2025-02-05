@@ -9,11 +9,6 @@ yarn-error.log*
 /coverage
 /test-results
 
-# Next.js
-/.next/
-/out/
-/build
-
 # Environment files
 .env.local
 .env.development.local
@@ -40,11 +35,6 @@ docker-compose.yml
 # OS generated files
 .DS_Store
 Thumbs.db
-
-# Documentation and config
-*.md
-*.yml
-*.yaml
 
 # Misc
 .log

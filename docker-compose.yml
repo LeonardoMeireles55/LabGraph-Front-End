@@ -14,7 +14,7 @@ services:
     stdin_open: true
     tty: true
     # command: ['npm', 'start']
-    command: ['node', '.next/standalone/server.js']
+    command: ['node', './server.js']
     networks:
       - qualitylab-net
 

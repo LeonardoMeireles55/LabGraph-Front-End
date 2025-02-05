@@ -52,7 +52,7 @@ const FeatureCard: React.FC<Feature> = ({ title, description, icon }) => (
 );
 
 const AvailableFeatures: React.FC = () => (
-  <div id='features' className='py-12'>
+  <div className='py-12'>
     <h2 className='text-3xl font-semibold text-textPrimary text-center mb-12'>
       Available Features
     </h2>

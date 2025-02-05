@@ -8,6 +8,8 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
   { id: 'overview', label: 'OVERVIEW' },
   { id: 'features', label: 'FEATURES' },
   { id: 'contact', label: 'CONTACT' },
+  { id: 'faq', label: 'FAQ' },
+  { id: 'team', label: 'TEAM' },
 ];
 
 const AboutNavbar: React.FC = () => {
@@ -24,10 +26,11 @@ const AboutNavbar: React.FC = () => {
         <div className='flex justify-between items-center py-4'>
           <div className='flex flex-col'>
             <h1 className='text-2xl sm:text-4xl font-semibold text-primary italic tracking-tight'>
-              &lt;LabGraph&gt; <span className='text-xs sm:text-sm opacity-90 align-top'>®</span>
+              &lt;LabGraph&gt;{' '}
+              <span className='text-[8px] sm:text-xs opacity-90 align-top'>®</span>
             </h1>
-            <p className='text-xs sm:text-sm text-textPrimary opacity-70 italic'>
-              Quality Management Made Simple
+            <p className='text-[8px] text-center sm:text-sm text-textPrimary opacity-70 italic'>
+              Quality Management System
             </p>
           </div>
 
@@ -47,7 +50,7 @@ const AboutNavbar: React.FC = () => {
               <li>
                 <Link
                   href='/auth/signup'
-                  className='px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondaryHover transition-colors duration-300 italic font-medium'
+                  className='px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondaryHover transition-colors duration-300 italic font-light'
                 >
                   TRY DEMO
                 </Link>
@@ -62,7 +65,7 @@ const AboutNavbar: React.FC = () => {
           <div className='lg:hidden flex items-center gap-4'>
             <Link
               href='/auth/signup'
-              className='px-3 py-1.5 bg-primary text-white text-sm rounded-lg hover:bg-accent transition-colors duration-300 italic font-medium'
+              className='px-3 py-1.5 bg-secondary text-white text-sm rounded-lg hover:bg-secondaryHover transition-colors duration-300 italic font-light'
             >
               DEMO
             </Link>

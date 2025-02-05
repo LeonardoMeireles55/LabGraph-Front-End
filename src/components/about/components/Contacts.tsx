@@ -21,7 +21,7 @@ const CONTACT_ITEMS = [
 
 const Contacts: React.FC = () => {
   return (
-    <div id='contact' className='w-full max-w-5xl mx-auto py-12'>
+    <div className='w-full max-w-5xl mx-auto py-12'>
       <h2 className='text-3xl font-semibold text-textPrimary text-center mb-12'>Contacts</h2>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
         {CONTACT_ITEMS.map((item, index) => (

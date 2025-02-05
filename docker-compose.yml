@@ -9,15 +9,18 @@ services:
     volumes:
       # - qualitylab_node_modules:/app/node_modules
       - qualitylab_public:/app/public
+      - quality_lab_images:/app/.next/static
+
     stdin_open: true
     tty: true
-    command: ['npm', 'start']
-    # command: ['node', 'server.js']
+    # command: ['npm', 'start']
+    command: ['node', 'server.js']
     networks:
       - qualitylab-net
 
 volumes:
   qualitylab_node_modules:
+  quality_lab_images:
   qualitylab_public:
 
 networks:

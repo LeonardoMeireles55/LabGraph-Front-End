@@ -45,7 +45,7 @@ const FAQCard: FC<FAQItem> = ({ question, answer }) => (
       <div className='text-primary group-hover:text-accent transition-colors duration-300'>
         <BiHelpCircle size={24} />
       </div>
-      <h3 className='text-lg font-semibold text-textPrimary'>{question}</h3>
+      <h3 className='text-lg font-semibold text-textSecondary'>{question}</h3>
     </div>
     <p className='text-textSecondary text-sm leading-relaxed'>{answer}</p>
   </div>
@@ -53,7 +53,7 @@ const FAQCard: FC<FAQItem> = ({ question, answer }) => (
 
 const FrequentlyAskedQuestions: FC = () => (
   <div id='faq' className='py-12'>
-    <h2 className='text-3xl font-semibold text-textPrimary text-center mb-12'>
+    <h2 className='text-3xl font-semibold text-textSecondary text-center mb-12'>
       Frequently Asked Questions
     </h2>
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>

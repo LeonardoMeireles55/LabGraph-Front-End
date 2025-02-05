@@ -11,13 +11,19 @@ export interface CarouselImage {
   alt: string;
 }
 
-export interface Feature {
+export interface FeatureProps {
   title: string;
   description: string;
   icon: JSX.Element;
 }
 
-export interface NavigationItem {
+export interface OverviewProps {
+  title: string;
+  description: string;
+  icon: JSX.Element;
+}
+
+export interface NavigationProps {
   id: string;
   label: string;
 }

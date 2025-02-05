@@ -7,7 +7,7 @@ const ContactItem: React.FC<ContactItemProps> = ({ icon: Icon, title, content })
       <Icon />
     </div>
     <div className='space-y-1'>
-      <h3 className='font-semibold text-textPrimary text-lg'>{title}</h3>
+      <h3 className='font-semibold text-textSecondary text-lg'>{title}</h3>
       <p className='text-textSecondary'>{content}</p>
     </div>
   </div>
@@ -22,7 +22,7 @@ const CONTACT_ITEMS = [
 const Contacts: React.FC = () => {
   return (
     <div className='w-full max-w-5xl mx-auto py-12'>
-      <h2 className='text-3xl font-semibold text-textPrimary text-center mb-12'>Contacts</h2>
+      <h2 className='text-3xl font-semibold text-textSecondary text-center mb-12'>Contacts</h2>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
         {CONTACT_ITEMS.map((item, index) => (
           <ContactItem key={index} {...item} />

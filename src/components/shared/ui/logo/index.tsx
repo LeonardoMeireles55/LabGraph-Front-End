@@ -6,15 +6,11 @@ interface LogoProps {
 const Logo = ({ className, title = 'LabGraph' }: LogoProps) => {
   return (
     <div className='flex flex-col items-center'>
-      <svg
-        className={`w-44 h-44 md:w-72 md:h-72 lg:w-72 lg:h-72 ${className}`}
-        viewBox='0 0 300 150'
-        xmlns='http://www.w3.org/2000/svg'
-      >
+      <svg className={`${className}`} viewBox='0 0 300 200' xmlns='http://www.w3.org/2000/svg'>
         <g fill='var(--color-text-primary)'>
           <g
             id='svg_33'
-            transform='translate(0 -5) translate(0.871867 10.5649) matrix(0.014087 0 0 -0.0135062 -1.7931 191.985)'
+            transform='translate(0 0) translate(0.871867 10.5649) matrix(0.014087 0 0 -0.0135062 -1.7931 191.985)'
           >
             <path
               d='m16727,14163c-10,-9 -9,-6921 1,-6927c13,-8 54,39 322,359c134,160 249,304 257,322c11,27 13,554 11,3140l-3,3108l-291,3c-160,1 -293,-1 -297,-5z'
@@ -79,16 +75,14 @@ const Logo = ({ className, title = 'LabGraph' }: LogoProps) => {
           </g>
         </g>
       </svg>
-      <div className='flex items-center flex-col'>
-        <h1 className='text-3xl sm:text-4xl md:text-4xl font-bold text-textPrimary opacity-90'>
-          <em>
-            {'<'}
-            {title}
-            {'>'}
-          </em>
-          <p className='text-sm text-textPrimary md:text-lg opacity-90 inline-flex align-top'>®</p>
+      <div className='flex items-center flex-col mb-2'>
+        <h1 className='italic text-2xl sm:text-3xl md:text-3xl font-bold text-textPrimary opacity-90'>
+          {title}
+          <p className='text-xs text-textPrimary md:text-[12px] opacity-90 inline-flex align-top'>
+            ®
+          </p>
         </h1>
-        <h2 className='text-lg md:text-sm text-textPrimary opacity-70 mb-4'>
+        <h2 className='text-xs md:text-xs text-textPrimary opacity-70'>
           Making quality management easy
         </h2>
       </div>

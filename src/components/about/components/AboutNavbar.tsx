@@ -1,11 +1,11 @@
-import { NavigationItem } from '@/components/about/types/about';
+import { NavigationProps } from '@/components/about/types/about';
 import NavLogo from '@/components/shared/navigation-bar/components/NavLogo';
 import ThemeToggle from '@/components/shared/ui/theme';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
 
-const NAVIGATION_ITEMS: NavigationItem[] = [
+const NAVIGATION_ITEMS: NavigationProps[] = [
   { id: 'overview', label: 'OVERVIEW' },
   { id: 'features', label: 'FEATURES' },
   { id: 'contact', label: 'CONTACT' },

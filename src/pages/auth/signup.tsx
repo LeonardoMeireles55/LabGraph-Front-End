@@ -2,12 +2,8 @@ import SignUpForm from '@/components/authentication/sign-up';
 
 const SignUp = () => {
   return (
-    <div className=' h-screen from-primary/20 bg-gradient-to-br to-background'>
-      <div className='flex items-center justify-center p-1.5 h-screen'>
-        <div className='w-full max-w-lg flex justify-center items-center content-center'>
-          <SignUpForm />
-        </div>
-      </div>
+    <div className='px-2 h-screen from-primary/20 bg-gradient-to-br to-background flex items-center justify-center'>
+      <SignUpForm />
     </div>
   );
 };

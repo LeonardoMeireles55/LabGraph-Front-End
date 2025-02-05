@@ -1,7 +1,7 @@
-import Footer from '@/components/shared/ui/footer';
 import CheckIcon from '@/components/shared/ui/icons/CheckBox';
 import Logo from '@/components/shared/ui/logo';
 import ThemeToggle from '@/components/shared/ui/theme';
+import { AtSign, Lock } from 'lucide-react';
 import Link from 'next/link';
 import ErrorMessage from '../../shared/utils/components/error-message';
 import InputField from '../common/InputField';
@@ -12,30 +12,34 @@ const LoginForm = () => {
   const { formData, error, handleChange, rememberMe, setRememberMe, handleSubmit } = useAuth(true);
 
   return (
-    <div className='w-full max-w-md transform rounded-xl border border-borderColor px-8 py-6 shadow-xl backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-2xl sm:px-12 sm:py-12'>
+    <div className='w-full max-w-md transform rounded-xl border border-borderColor px-8 py-6 shadow-xl backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-2xl sm:px-12 sm:py-8 mx-auto'>
       <div className='absolute right-4 top-4 z-50'>
         <ThemeToggle />
       </div>
-      <div className='text-center'>
+      <div className='mb-6 text-center'>
         <div className='flex justify-center text-secondary opacity-95 transition-transform duration-300 ease-in-out'>
           <Logo className='w-32 sm:w-40 md:w-48 lg:w-56 opacity-90' />
         </div>
       </div>
       {error && <ErrorMessage message={error} />}
-      <form onSubmit={handleSubmit} className='space-y-1.5'>
+      <form onSubmit={handleSubmit} className='mb-4 space-y-4'>
         <InputField
           id='identifier'
           type='text'
           label='Email or Username'
+          placeholder='Enter your email or username'
           value={formData.identifier}
           onChange={handleChange}
+          icon={<AtSign className='h-4 w-4 text-textSecondary' />}
         />
         <InputField
           id='password'
           type='password'
           label='Password'
+          placeholder='Enter your password'
           value={formData.password}
           onChange={handleChange}
+          icon={<Lock className='h-4 w-4 text-textSecondary' />}
         />
 
         <div className='flex items-center justify-between text-xs sm:text-sm'>
@@ -57,9 +61,6 @@ const LoginForm = () => {
           </Link>
         </p>
       </form>
-      <div className='flex flex-rol w-full justify-center h-12 md:h-6'>
-        <Footer />
-      </div>
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import { Feature } from '@/components/about/types/about';
+import { FeatureProps } from '@/components/about/types/about';
 import { BiLineChart, BiMailSend, BiTable, BiTestTube } from 'react-icons/bi';
 import { MdDarkMode, MdOutlineRule } from 'react-icons/md';
 
-const FEATURES: Feature[] = [
+const FEATURES: FeatureProps[] = [
   {
     title: 'Westgard Rules',
     description:
@@ -39,13 +39,13 @@ const FEATURES: Feature[] = [
   },
 ];
 
-const FeatureCard: React.FC<Feature> = ({ title, description, icon }) => (
+const FeatureCard: React.FC<FeatureProps> = ({ title, description, icon }) => (
   <div className='card-hover p-6 bg-surface rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-borderColor group'>
     <div className='flex items-center mb-4 space-x-3'>
       <div className='text-primary group-hover:text-accent transition-colors duration-300'>
         {icon}
       </div>
-      <h3 className='text-lg font-semibold text-textPrimary'>{title}</h3>
+      <h3 className='text-lg font-semibold text-textSecondary'>{title}</h3>
     </div>
     <p className='text-textSecondary text-sm leading-relaxed'>{description}</p>
   </div>
@@ -53,7 +53,7 @@ const FeatureCard: React.FC<Feature> = ({ title, description, icon }) => (
 
 const AvailableFeatures: React.FC = () => (
   <div className='py-12'>
-    <h2 className='text-3xl font-semibold text-textPrimary text-center mb-12'>
+    <h2 className='text-3xl font-semibold text-textSecondary text-center mb-12'>
       Available Features
     </h2>
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>

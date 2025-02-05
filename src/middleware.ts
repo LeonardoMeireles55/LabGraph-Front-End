@@ -38,6 +38,6 @@ function isTokenExpired(token: string): boolean {
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/data|_next/image|favicon.ico|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico|.*\\.png|.*\\.jpg|.*\\.webp).*)',
+    '/((?!api|_next/static|_next/image|next/public|_next/data|_next/image|favicon.ico|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico|.*\\.png|.*\\.jpg|.*\\.webp).*)',
   ],
 };

@@ -93,6 +93,7 @@ const ReportsPage = () => {
         </div>
         <span className='w-4/6 p-4 border border-borderColor shadow-md rounded-xl md:mt-4 xl:w-1/3 xl:p-6'>
           <Image
+            unoptimized={true}
             className='object-cover rounded-xl'
             fetchPriority='high'
             src='/labvidraria.png'

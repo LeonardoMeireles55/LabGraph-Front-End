@@ -95,6 +95,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
               <div className='absolute inset-0 bg-neutral-200 animate-pulse' />
             )}
             <Image
+              unoptimized={true}
               src={image.src}
               alt={image.alt}
               fill

@@ -5,6 +5,7 @@ FROM node:21-alpine AS base
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 RUN apk add --update npm
+RUN npm install -g npm@11.1.0
 
 WORKDIR /app
 
@@ -29,9 +30,19 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # RUN addgroup --system --gid 1001 nodejs
 # RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./_next
+# COPY --from=builder /app/public ./public
+# COPY --from=builder /app/.next ./_next
+# COPY --from=builder /app/.next/standalone ./
+# COPY --from=builder /app/.next/static ./.next/static
+
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/.next/static ./.next/standalone/.next/static
+COPY --from=builder /app/public ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/server ./.next/standalone/server
+COPY --from=builder /app/.next/cache ./.next/standalone/cache
+COPY --from=builder /app/.next/static ./_next/static
+COPY --from=builder /app/.next ./_next
 
 # USER nextjs

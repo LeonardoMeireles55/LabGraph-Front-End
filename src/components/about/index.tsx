@@ -8,19 +8,19 @@ import FrequentlyAskedQuestions from './components/FrequentlyAskedQuestions';
 const AboutUs = () => {
   const carouselImages = [
     {
-      src: '/labbancada.png',
+      src: '/reports.jpg',
       alt: 'view result by table',
     },
     {
-      src: '/lab2.png',
+      src: '/lab.jpg',
       alt: 'view result by chart',
     },
     {
-      src: '/lab3.png',
+      src: '/labbancada.jpg',
       alt: 'generate reports',
     },
     {
-      src: '/lab4.png',
+      src: '/lab4.jpg',
       alt: 'alerts by email',
     },
   ];
@@ -35,11 +35,8 @@ const AboutUs = () => {
           </section>
 
           <section className='flex flex-col items-center'>
-            <p className='text-base sm:text-lg text-textSecondary leading-relaxed max-w-3xl justify-center text-center font-light'>
+            <p className='text-xs sm:text-sm text-textSecondary leading-relaxed max-w-3xl justify-center text-center font-light'>
               Welcome to our free and open source solution for laboratory quality control.
-              We&apos;re here to simplify your daily lab operations and help you maintain
-              high-quality standards. Together with our growing community, we&apos;re making quality
-              control accessible to labs everywhere.
             </p>
           </section>
         </main>

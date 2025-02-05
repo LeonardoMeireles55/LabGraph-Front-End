@@ -1,4 +1,5 @@
 import { NavigationItem } from '@/components/about/types/about';
+import NavLogo from '@/components/shared/navigation-bar/components/NavLogo';
 import ThemeToggle from '@/components/shared/ui/theme';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
@@ -23,15 +24,16 @@ const AboutNavbar: React.FC = () => {
   return (
     <nav className='sticky top-0 bg-navbar backdrop-blur-sm z-50 border-b border-borderColor italic'>
       <div className='max-w-7xl mx-auto px-4'>
-        <div className='flex justify-between items-center py-4'>
+        <div className='flex justify-between items-center py-8'>
           <div className='flex flex-col'>
-            <h1 className='text-2xl sm:text-4xl font-semibold text-primary italic tracking-tight'>
-              &lt;LabGraph&gt;{' '}
-              <span className='text-[8px] sm:text-xs opacity-90 align-top'>®</span>
+            <NavLogo />
+            {/* <h1 className='text-2xl sm:text-4xl font-bold text-primary italic tracking-tight'>
+              &lt;LabGraph&gt;{}
+              <span className='text-[10px] sm:text-xs opacity-90 align-top'>®</span>
             </h1>
-            <p className='text-[8px] text-center sm:text-sm text-textPrimary opacity-70 italic'>
+            <p className='text-[8px] text-center sm:text-sm text-primary opacity-70 italic'>
               Quality Management System
-            </p>
+            </p> */}
           </div>
 
           {/* Desktop Navigation */}
@@ -41,7 +43,7 @@ const AboutNavbar: React.FC = () => {
                 <li key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
-                    className='text-textSecondary hover:text-primary italic transition-colors whitespace-nowrap'
+                    className='text-textSecondary hover:text-primary italic transition-colors whitespace-nowrap hover:underline hover:decoration-primary hover:decoration-1'
                   >
                     {item.label}
                   </button>
@@ -82,7 +84,7 @@ const AboutNavbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed left-0 right-0 top-[4rem] bg-surface p-4 shadow-xl shadow-shadow lg:hidden ${
+        className={`fixed left-0 right-0 top-[7rem] bg-surface p-4 shadow-xl shadow-shadow lg:hidden ${
           isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
         } transition-all duration-300`}
       >

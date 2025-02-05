@@ -6,6 +6,7 @@ const navLinks: NavLinkProps[] = [
   { text: 'HEMATOLOGY', url: '/charts/hematology' },
   { text: 'REPORTS', url: '/misc/reports' },
   { text: 'TABLES', url: '/misc/analytics-table' },
+  { text: 'ABOUT', url: '/about-us' },
 ];
 
 export default navLinks;

@@ -9,7 +9,7 @@ const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ jsonData, fileNam
   const onLogout = () => handleLogout();
 
   return (
-    <div className='hidden items-center gap-6 lg:flex xl:gap-8 px-6 py-3'>
+    <div className='hidden items-center gap-4 lg:flex xl:gap-4 px-4 py-3'>
       {[...navLinks, { text: 'EXIT', url: '/auth/login', onClick: onLogout }].map((link) => (
         <Link
           key={link.url}

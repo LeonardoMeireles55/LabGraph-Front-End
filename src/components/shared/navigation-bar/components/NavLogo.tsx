@@ -6,10 +6,10 @@ const NavLogo = () => (
     <div className='flex flex-col'>
       <span className='text-lg font-bold text-textPrimary sm:text-xl'>
         <em>LabGraph</em>
-        <span className='text-[8px] md:text-[10px] align-top'>®</span>
+        <span className='text-[6px] md:text-[8px] align-top'>®</span>
       </span>
-      <span className='-mt-1 text-[10px] text-textSecondary sm:text-xs'>version 0.9.0</span>
-    </div>
+      <span className='-mt-1 text-[8px] text-textSecondary sm:text-[8px]'>Quality System</span>
+    </div>{' '}
   </div>
 );
 

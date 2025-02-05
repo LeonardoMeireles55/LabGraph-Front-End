@@ -7,21 +7,22 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      # - qualitylab_node_modules:/app/node_modules
-      - qualitylab_public:/app/public
-      - static:/app/.next/static
+      - qualitylab_public:/app/.next/standalone/public
+      - qualitylab_static:/app/.next/standalone/.next/static
+      - qualitylab_standalone:/app/.next/standalone
 
     stdin_open: true
     tty: true
     # command: ['npm', 'start']
-    command: ['node', './server.js']
+    command: ['node', '.next/standalone/server.js']
     networks:
       - qualitylab-net
 
 volumes:
   qualitylab_node_modules:
-  static:
+  qualitylab_static:
   qualitylab_public:
+  qualitylab_standalone:
 
 networks:
   qualitylab-net:

@@ -50,10 +50,9 @@ export const authService = {
 
     let data = {};
     try {
-      // In case there is a JSON response (for error messages etc.)
       data = await response.json();
     } catch (e) {
-      // In case of no content (204), ignore JSON parsing errors.
+      console.error('Error parsing response:', e);
     }
 
     return {

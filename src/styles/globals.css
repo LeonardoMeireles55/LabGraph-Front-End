@@ -1,8 +1,15 @@
+/********************
+ * Tailwind Imports
+ ********************/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/********************
+ * Theme Variables
+ ********************/
 @layer base {
+  /* Light Theme */
   :root {
     /* Modern light theme colors */
     --color-mean-line: #2d6a4f;
@@ -54,6 +61,7 @@
     --color-neutral-300: #cbd5e1;
   }
 
+  /* Dark Theme */
   .dark {
     /* Modern dark theme colors */
     --color-mean-line: #a8d5ba;
@@ -104,21 +112,54 @@
     --color-neutral-300: #525252;
   }
 
+  /********************
+   * Base Elements
+   ********************/
   * {
     @apply m-0 p-0 no-underline outline-none;
-    font-family: 'Inter', sans-serif;
-  }
-
-  body {
-    @apply antialiased;
+    caret-color: var(--color-primary);
   }
 
   html {
     @apply scroll-smooth bg-background;
   }
+
+  body {
+    @apply antialiased;
+  }
 }
 
+/********************
+ * Component Styles
+ ********************/
 @layer components {
+  /* Modern Input */
+  .input-modern {
+    @apply w-full rounded-lg border border-borderColor bg-surface p-1.5 text-bgText hover:border-textPrimary;
+    @apply shadow-shadow hover:shadow-xl focus:border-textPrimary focus:outline-none focus:ring-1 focus:ring-textSecondary;
+    @apply transition-all duration-300 ease-in-out;
+    @apply placeholder:text-textSecondary placeholder:opacity-25;
+  }
+
+  /* Modern Button */
+  .button-modern {
+    @apply flex w-full transform items-center justify-center gap-1;
+    @apply rounded-lg bg-buttonMuted px-3 py-1.5;
+    @apply text-base font-semibold text-white;
+    @apply shadow-shadow hover:scale-105 hover:shadow-sm;
+    @apply transition-all duration-200 ease-in-out;
+    @apply focus:ring-1 focus:ring-textPrimary focus:ring-opacity-50;
+    @apply active:scale-95 disabled:opacity-70;
+  }
+
+  /* Glass Effect */
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md;
+    @apply border-white/20 border;
+    @apply shadow-lg;
+  }
+
+  /* Image Loading States */
   .image-loading-blur {
     @apply scale-105 blur-2xl transition-all duration-700;
   }
@@ -126,36 +167,13 @@
   .image-loaded {
     @apply scale-100 blur-0 transition-all duration-700;
   }
-
-  .input-modern {
-    @apply transition-all duration-300 ease-in-out;
-    @apply focus:ring-2 focus:ring-opacity-50;
-    @apply hover:shadow-md;
-  }
-
-  /* Modern button effects */
-  .button-modern {
-    @apply relative overflow-hidden transition-all duration-300;
-    @apply hover:shadow-lg active:scale-95;
-    @apply before:bg-white/10 before:absolute before:inset-0 before:opacity-0 before:transition-opacity;
-    @apply hover:before:opacity-100;
-  }
-
-  /* Smooth transitions */
-  .transition-modern {
-    @apply transition-all duration-300 ease-in-out;
-  }
-
-  /* Glass effect */
-  .glass-effect {
-    @apply bg-white/10 backdrop-blur-md;
-    @apply border-white/20 border;
-    @apply shadow-lg;
-  }
 }
 
+/********************
+ * Utilities & Animations
+ ********************/
 @layer utilities {
-  /* Custom animations */
+  /* Animation Keyframes */
   @keyframes float {
     0%,
     100% {
@@ -166,33 +184,47 @@
     }
   }
 
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Animation Classes */
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
 
-  /* Modern scroll behavior */
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  /* Scrollbar Styling */
   .scrollbar-modern {
     @apply scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-gray-600;
     @apply scrollbar-track-transparent;
   }
 
-  /* Modern card effects */
+  /* Card Hover Effects */
   .card-hover {
     @apply transition-transform duration-300 ease-out;
     @apply hover:-translate-y-1 hover:shadow-xl;
   }
 }
 
-/* Input autofill styles */
+/********************
+ * Form Elements
+ ********************/
+/* Autofill Styles */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px var(--color-surface) inset !important;
+  -webkit-box-shadow: 0 0 0 25px var(--color-surface) inset !important;
   -webkit-text-fill-color: var(--color-text-primary) !important;
 }
 
-/* Select element modernization */
+/* Select Element Styles */
 select {
   @apply cursor-pointer transition-colors duration-200;
 }
@@ -209,18 +241,7 @@ select option:checked {
   @apply bg-surface text-textPrimary;
 }
 
-/* Modern focus styles */
+/* Focus Styles
 :focus-visible {
   @apply outline-none ring-2 ring-secondary ring-opacity-50;
-}
-
-/* Spin animation */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
+} */

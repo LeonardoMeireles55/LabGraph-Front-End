@@ -8,7 +8,6 @@ const InputField: React.FC<InputFieldProps> = ({
   label,
   value,
   onChange,
-  autoCompleteProps,
   placeholder,
   icon,
 }) => {
@@ -28,12 +27,9 @@ const InputField: React.FC<InputFieldProps> = ({
         <input
           type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
           id={id}
-          autoComplete={autoCompleteProps ? 'off' : 'on'}
           value={value}
           onChange={onChange}
-          className={`input-modern placeholder:text-textSecondary placeholder:opacity-25 hover:border-textPrimary focus:ring-textSecondary w-full rounded-lg border border-borderColor bg-surface p-1.5 text-bgText transition-all duration-200 ease-in-out focus:border-textPrimary focus:outline-none focus:ring-1 ${
-            icon ? 'pl-10' : 'pl-3'
-          }`}
+          className={`input-modern   ${icon ? 'pl-10' : 'pl-3'}`}
           required
           placeholder={placeholder}
         />

@@ -18,7 +18,6 @@ export interface InputFieldProps {
   placeholder?: string;
   icon?: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  autoCompleteProps?: string;
 }
 
 export interface SubmitButtonProps {

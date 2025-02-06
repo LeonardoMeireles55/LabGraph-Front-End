@@ -17,8 +17,8 @@ const tableHeaders = [
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
   return (
-    <div className='flex flex-col justify-between w-full h-min rounded-lg shadow-xl'>
-      <table className='hidden bg-surface md:table'>
+    <div className='flex flex-col justify-between w-full h-min'>
+      <table className='hidden bg-surface md:table shadow-md shadow-shadow'>
         <thead className='bg-muted rounded-lg'>
           <tr>
             {tableHeaders.map((header, index) => (
@@ -37,7 +37,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
           ))}
         </tbody>
       </table>
-      <div className='grid content-center justify-center grid-cols-4 px-2 text-center md:hidden'>
+      <div className='grid content-center justify-center gap-4 grid-cols-4 px-2 text-center md:hidden'>
         {items.map((item, index) => (
           <MobileItemCard key={index} item={item} />
         ))}

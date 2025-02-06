@@ -28,9 +28,20 @@ export const useAuth = (isLogin: boolean) => {
       if (!formData.identifier) {
         errors.push({ field: 'identifier', message: 'Identifier is required.' });
       }
+      if (!formData.password) {
+        errors.push({ field: 'password', message: 'Password is required.' });
+      }
     } else {
       if (!formData.email || !emailRegex.test(formData.email)) {
         errors.push({ field: 'email', message: 'A valid email address is required.' });
+      }
+      if (!formData.password) {
+        errors.push({ field: 'password', message: 'Password is required.' });
+      } else if (formData.password.length < 4 || !/[!@#$%^&*]/.test(formData.password)) {
+        errors.push({
+          field: 'password',
+          message: 'Password must be at least 4 characters long and include one special character.',
+        });
       }
       if (!formData.confirmPassword) {
         errors.push({ field: 'confirmPassword', message: 'Confirm Password is required.' });
@@ -40,15 +51,6 @@ export const useAuth = (isLogin: boolean) => {
           message: 'Passwords do not match.',
         });
       }
-    }
-
-    if (!formData.password) {
-      errors.push({ field: 'password', message: 'Password is required.' });
-    } else if (formData.password.length < 4 || !/[!@#$%^&*]/.test(formData.password)) {
-      errors.push({
-        field: 'password',
-        message: 'Password must be at least 4 characters long and include one special character.',
-      });
     }
 
     return errors;

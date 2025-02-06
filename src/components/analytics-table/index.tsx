@@ -1,10 +1,10 @@
 import { useAnalyticsData } from '@/components/analytics-table/hooks/useAnalyticsData';
-import ListingTable from '@/components/analytics-table/listing-table';
 import useDateSelector from '@/components/shared/date-selector/hooks/useDateSelector';
-import { useEffect, useMemo, useState } from 'react';
-import NavBar from '../shared/navigation-bar';
-import Footer from '../shared/ui/footer';
+import { useEffect, useState } from 'react';
 import useWindowDimensions from '../shared/ui/hooks/useWindowDimensions';
+import { useAnalyticsOptions } from './hooks/useAnalyticsOptions';
+import MainLayout from './layouts/MainLayout';
+import ListingTable from './listing-table';
 import AnalyticsFilters from './util/analytics-filters';
 import AnalyticsPagination from './util/analytics-pagination';
 
@@ -17,6 +17,7 @@ const AnalyticsTableIndex = () => {
   const [isFiltered, setFiltered] = useState(false);
 
   const { width } = useWindowDimensions();
+  const { analyticsOptions, levelOptions } = useAnalyticsOptions(analyticsType);
 
   const {
     data: dataFetched,
@@ -58,70 +59,38 @@ const AnalyticsTableIndex = () => {
     dateSelector.endYear,
   ]);
 
+  useEffect(() => {
+    setItemsPerPage(width >= 1800 ? 14 : 8);
+  }, [width]);
+
   const handlePageChange = async (url: string): Promise<void> => {
     await fetchData(url);
   };
 
-  useEffect(() => {
-    setItemsPerPage(width >= 1800 ? 12 : 8);
-  }, [fetchData, width]);
-
-  const analyticsOptions = [
-    { value: 'biochemistry-analytics', label: 'BIOCHEMISTRY' },
-    { value: 'hematology-analytics', label: 'HEMATOLOGY' },
-    { value: 'coagulation-analytics', label: 'COAGULATION' },
-  ];
-
-  const levelOptions = useMemo(() => {
-    switch (analyticsType) {
-      case 'hematology-analytics':
-        return [
-          { value: '0', label: '-' },
-          { value: '1', label: '1' },
-          { value: '2', label: '2' },
-          { value: '3', label: '3' },
-        ];
-      case 'biochemistry-analytics':
-      case 'coagulation-analytics':
-        return [
-          { value: '0', label: '-' },
-          { value: '1', label: '1' },
-          { value: '2', label: '2' },
-        ];
-      default:
-        return [{ value: '0', label: '-' }];
-    }
-  }, [analyticsType]);
-
   return (
-    <div className='min-h bg-background'>
-      <div className='min-h flex flex-col content-center items-center justify-center'>
-        <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
-        <NavBar jsonData={dataFetched} fileName={analyticsType} />
-        <div className='w-full max-w-7xl'>
-          <AnalyticsFilters
-            dateSelector={dateSelector}
-            analyticsOptions={analyticsOptions}
-            analyticsType={analyticsType}
-            setAnalyticsType={setAnalyticsType}
-            levelOptions={levelOptions}
-            level={level}
-            setLevel={setLevel}
-            setFiltered={setFiltered}
-          />
-          <ListingTable items={dataFetched} isLoading={isLoading} onPageChange={handlePageChange} />
-        </div>
-        <AnalyticsPagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          dataFetched={dataFetched}
-          setCurrentPage={setCurrentPage}
-        />
-        <div className='flex flex-col items-center justify-end'>
-          <Footer />
-        </div>
-      </div>
-    </div>
+    <MainLayout
+      title={`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}
+      jsonData={dataFetched}
+      fileName={analyticsType}
+    >
+      <AnalyticsFilters
+        dateSelector={dateSelector}
+        analyticsOptions={analyticsOptions}
+        analyticsType={analyticsType}
+        setAnalyticsType={setAnalyticsType}
+        levelOptions={levelOptions}
+        level={level}
+        setLevel={setLevel}
+        setFiltered={setFiltered}
+      />
+      <ListingTable items={dataFetched} isLoading={isLoading} onPageChange={handlePageChange} />
+      <AnalyticsPagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        dataFetched={dataFetched}
+        setCurrentPage={setCurrentPage}
+      />
+    </MainLayout>
   );
 };
 

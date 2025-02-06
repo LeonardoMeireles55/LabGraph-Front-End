@@ -6,24 +6,7 @@ services:
     ports:
       - '3000:3000'
     environment:
-      - NODE_ENV=production
-    volumes:
-      - qualitylab_node_modules:/app/node_modules
-      - qualitylab_public:/app/public
+      - NODE_ENV=development
     stdin_open: true
     tty: true
-    command: ['npm', 'start']
-    networks:
-      - qualitylab-net
-
-volumes:
-  qualitylab_node_modules:
-  qualitylab_public:
-
-networks:
-  qualitylab-net:
-    name: qualitylab-net
-    driver: bridge
-    attachable: true
-    driver_opts:
-      com.docker.network.bridge.name: qualitylab-net
+    command: ['node', './server.js']

@@ -14,7 +14,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Health
   const healthCheck: HealthResponse = {
     status: 'healthy',
     timestamp: new Date().toISOString(),
-    version: process.env.NEXT_PUBLIC_APP_VERSION || '1.0.0',
+    version: process.env.NEXT_PUBLIC_APP_VERSION ?? '1.0.0',
   };
 
   res.status(200).json(healthCheck);

@@ -15,7 +15,6 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  // Minimum swipe distance (in px)
   const minSwipeDistance = 50;
 
   const nextSlide = useCallback(() => {
@@ -30,7 +29,6 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
     setCurrentIndex(index);
   }, []);
 
-  // Touch handlers
   const onTouchStart = (e: TouchEvent) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
@@ -67,24 +65,21 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
       role='region'
       aria-label='Image carousel'
       tabIndex={0}
-      className='relative w-full h-[400px] overflow-hidden rounded-lg group'
+      className='relative w-full h-[400px] overflow-hidden rounded-2xl group shadow-lg'
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      {/* Progress bar */}
       <div className='absolute top-0 left-0 w-full h-1 bg-transparent z-10'>
         <div
-          className='h-full bg-transparent transition-all duration-300'
+          className='h-full bg-accent/50 transition-all duration-300'
           style={{
             width: `${(currentIndex + 1) * (100 / images.length)}%`,
           }}
         />
       </div>
-
-      {/* Images */}
       <div
         className='flex h-full transition-transform duration-500 ease-out'
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -99,25 +94,20 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
               alt={image.alt}
               fill
               className={`object-cover transition-all duration-700 ${
-                !imagesLoaded[index] ? 'blur-xl scale-105' : 'blur-0 scale-100'
+                !imagesLoaded[index] ? 'blur-xl scale-100' : 'blur-0 scale-100'
               }`}
               priority={index === 0}
               onLoad={() => {
                 setImagesLoaded((prev) => ({ ...prev, [index]: true }));
               }}
             />
-            {/* Caption */}
-            {/* <div className='absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent'>
-              <p className='text-white text-sm md:text-base'>{image.alt}</p>
-            </div> */}
           </div>
         ))}
       </div>
 
-      {/* Navigation Buttons */}
       <button
         onClick={previousSlide}
-        className='absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300'
+        className='absolute left-2 top-1/2 transform -translate-y-1/2 bg-textSecondary text-white p-2 rounded-full opacity-0 group-hover:opacity-85 transition-all duration-300 hover:scale-110'
         aria-label='Previous slide'
       >
         <ChevronLeft className='h-6 w-6' />
@@ -130,7 +120,6 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
         <ChevronRight className='h-6 w-6' />
       </button>
 
-      {/* Dots Indicator */}
       <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2'>
         {images.map((_, index) => (
           <button

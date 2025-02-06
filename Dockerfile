@@ -5,7 +5,7 @@ FROM node:20.17.0-alpine AS base
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 RUN apk add --update npm
-RUN npm install -g npm@11.1.0
+RUN npm install -g npm@latest
 
 WORKDIR /app
 

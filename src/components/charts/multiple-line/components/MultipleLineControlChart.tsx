@@ -1,4 +1,5 @@
 import useWindowDimensions from '@/components/shared/ui/hooks/useWindowDimensions';
+import returnFullNameByTest from '@/components/shared/utils/helpers/returnFullNameByTest';
 import React, { useMemo, useState } from 'react';
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
 import {
@@ -105,10 +106,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl italic'>
-            {listings[0].groupedValuesByLevelDTO.values[0].name}
+          <h2 className='mt-4 flex content-center items-center justify-center text-xs text-textSecondary md:text-2xl italic'>
+            {returnFullNameByTest(listings[0].groupedValuesByLevelDTO.values[0].name)}
           </h2>
-          <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
+          <div className='absolute right-1 top-1/2 -translate-y-1/2 transform'>
             <button
               onClick={() => setUseOwnValues(!useOwnValues)}
               className='group flex flex-col items-center transition-all duration-300'
@@ -121,13 +122,13 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                 }`}
               >
                 {useOwnValues ? (
-                  <TbMathFunction className='h-4 w-4 md:h-6 md:w-6' />
+                  <TbMathFunction className='h-3 w-3 md:h-5 md:w-5' />
                 ) : (
-                  <TbFileDescription className='h-4 w-4 md:h-6 md:w-6' />
+                  <TbFileDescription className='h-3 w-3 md:h-5 md:w-5' />
                 )}
               </div>
               <span
-                className={`text-[8px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
+                className={`text-[6px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
               >
                 {useOwnValues ? 'Calculated' : 'Reference Value'}
               </span>
@@ -135,7 +136,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
           </div>
         </div>
 
-        <div className='flex h-[300px] content-center items-center justify-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
+        <div className='flex h-[250px] content-center items-center justify-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
           <ResponsiveContainer
             className='flex items-center content-center justify-center bg-surface'
             width='97%'
@@ -162,8 +163,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                 textAnchor='end'
                 ticks={yAxisValues.map((v) => v.value)}
                 dataKey='sd'
-                width={windowWidth < 768 ? 30 : 50}
-                height={0}
+                height={windowWidth < 768 ? 35 : 60}
+                width={windowWidth < 768 ? 35 : 40}
                 tickMargin={0}
                 axisLine={false}
                 tickLine={false}
@@ -214,7 +215,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                       backgroundColor: entry.stroke,
                                     }}
                                   />
-                                  <span className='font-medium'>{data[level].toUpperCase()}</span>
+                                  <span className='font-light'>{data[level].toUpperCase()}</span>
                                 </div>
                                 <p>Date: {data[date]}</p>
                                 <p>Test: {data[nameKey]}</p>

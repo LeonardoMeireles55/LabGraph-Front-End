@@ -13,7 +13,7 @@ const NavLogo = () => (
         </span>
       </span>
       <span className='-mt-1 text-[8px] text-textSecondary sm:text-[8px] transition-all duration-300 hover:translate-x-1 hover:text-textPrimary'>
-        Quality System
+        Quality management easy
       </span>
     </div>
   </div>

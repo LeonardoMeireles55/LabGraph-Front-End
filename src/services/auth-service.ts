@@ -47,6 +47,19 @@ export const authService = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
     });
-    return { ok: response.status === 204 };
+
+    let data = {};
+    try {
+      // In case there is a JSON response (for error messages etc.)
+      data = await response.json();
+    } catch (e) {
+      // In case of no content (204), ignore JSON parsing errors.
+    }
+
+    return {
+      ok: response.status === 204,
+      status: response.status,
+      data,
+    };
   },
 };

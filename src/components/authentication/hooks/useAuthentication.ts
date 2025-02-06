@@ -16,7 +16,7 @@ export const useAuth = (isLogin: boolean) => {
     confirmPassword: '',
   });
   const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState<ValidationError[]>([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -26,28 +26,28 @@ export const useAuth = (isLogin: boolean) => {
 
     if (isLogin) {
       if (!formData.identifier) {
-        errors.push({ field: 'username', message: 'Username is required' });
+        errors.push({ field: 'identifier', message: 'Identifier is required.' });
       }
     } else {
       if (!formData.email || !emailRegex.test(formData.email)) {
-        errors.push({ field: 'email', message: 'Invalid email address' });
+        errors.push({ field: 'email', message: 'A valid email address is required.' });
       }
       if (!formData.confirmPassword) {
-        errors.push({ field: 'confirmPassword', message: 'Confirm Password is required' });
+        errors.push({ field: 'confirmPassword', message: 'Confirm Password is required.' });
       } else if (formData.password !== formData.confirmPassword) {
         errors.push({
           field: 'confirmPassword',
-          message: 'Passwords do not match',
+          message: 'Passwords do not match.',
         });
       }
     }
 
     if (!formData.password) {
-      errors.push({ field: 'password', message: 'Password is required' });
+      errors.push({ field: 'password', message: 'Password is required.' });
     } else if (formData.password.length < 4 || !/[!@#$%^&*]/.test(formData.password)) {
       errors.push({
         field: 'password',
-        message: 'Password must be at least 4 characters and one special character',
+        message: 'Password must be at least 4 characters long and include one special character.',
       });
     }
 
@@ -55,7 +55,7 @@ export const useAuth = (isLogin: boolean) => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError('');
+    setErrors([]);
     setFormData((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
@@ -86,33 +86,39 @@ export const useAuth = (isLogin: boolean) => {
           router.push('/auth/login');
           return;
         }
+
+        if (response.status === 409) {
+          throw new Error('Signup was unsuccessful. Please verify your details and try again.');
+        }
       }
-      throw new Error('Authentication failed');
+      throw new Error('Please verify your details and try again.');
     } catch (err) {
       console.error('Auth error:', err);
-      throw err;
+      let errorMessage = 'An unknown error occurred.';
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      throw new Error(errorMessage);
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setErrors([]);
+
+    const validationErrors = validateForm();
+    if (validationErrors.length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     setLoading(true);
-
     try {
-      const validationErrors = validateForm();
-      if (validationErrors.length > 0) {
-        setError(validationErrors.map((err) => err.message).join(', '));
-        return;
-      }
-
       await handleAuth(isLogin);
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Error connecting to the server. Please try again later.');
-      }
+      setErrors([
+        { field: 'general', message: err instanceof Error ? err.message : 'Server error.' },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -120,7 +126,7 @@ export const useAuth = (isLogin: boolean) => {
 
   return {
     formData,
-    error,
+    errors,
     loading,
     rememberMe,
     setRememberMe,

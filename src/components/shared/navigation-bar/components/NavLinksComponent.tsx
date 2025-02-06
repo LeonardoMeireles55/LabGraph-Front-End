@@ -15,7 +15,7 @@ const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ jsonData, fileNam
           key={link.url}
           href={link.url}
           onClick={link.onClick}
-          className='group relative px-3 py-2 text-sm font-medium text-textPrimary transition-all duration-300 ease-in-out xl:text-base'
+          className='group relative text-xs xl:text-sm px-3 py-2 font-medium text-textPrimary transition-all duration-300 ease-in-out '
         >
           {link.text}
           <span className='absolute bottom-0 left-1/2 h-0.5 w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full group-hover:left-0' />

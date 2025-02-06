@@ -32,7 +32,9 @@ export const useAuth = (isLogin: boolean) => {
       if (!formData.email || !emailRegex.test(formData.email)) {
         errors.push({ field: 'email', message: 'Invalid email address' });
       }
-      if (formData.password !== formData.confirmPassword) {
+      if (!formData.confirmPassword) {
+        errors.push({ field: 'confirmPassword', message: 'Confirm Password is required' });
+      } else if (formData.password !== formData.confirmPassword) {
         errors.push({
           field: 'confirmPassword',
           message: 'Passwords do not match',
@@ -42,10 +44,10 @@ export const useAuth = (isLogin: boolean) => {
 
     if (!formData.password) {
       errors.push({ field: 'password', message: 'Password is required' });
-    } else if (formData.password.length < 6) {
+    } else if (formData.password.length < 4 || !/[!@#$%^&*]/.test(formData.password)) {
       errors.push({
         field: 'password',
-        message: 'Password must be at least 6 characters and one special character',
+        message: 'Password must be at least 4 characters and one special character',
       });
     }
 

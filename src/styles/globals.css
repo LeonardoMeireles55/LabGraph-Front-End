@@ -14,6 +14,7 @@
     --color-secondary-hover: #0366d6; /* Darker hover state */
     --color-accent: #ff5722; /* updated accent, now distinct from secondary */
     --color-danger: #d32f2f; /* Slightly deeper red */
+    --color-error-text: #fafafa;
     --color-background: #fafafa; /* Lighter background */
     --color-surface: #ffffff;
     --color-muted: #f1f1f1;
@@ -64,6 +65,7 @@
     --color-secondary-hover: #6e9cf5; /* Darker hover state */
     --color-accent: #ff7043; /* updated dark accent to contrast secondary */
     --color-danger: #d32f2f;
+    --color-error-text: #fafafa;
     --color-background: #242529; /* Darker background */
     --color-surface: #2f3136; /* Elevated surface contrast */
     --color-muted: #40444b;

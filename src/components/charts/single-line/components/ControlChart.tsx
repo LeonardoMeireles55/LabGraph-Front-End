@@ -168,7 +168,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                     backgroundColor: getColorByLevel(data.level),
                                   }}
                                 />
-                                <span className='font-light'>
+                                <span className='font-medium'>
                                   Level: {data.level.toUpperCase()}
                                 </span>
                               </div>

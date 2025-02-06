@@ -215,7 +215,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                                       backgroundColor: entry.stroke,
                                     }}
                                   />
-                                  <span className='font-light'>{data[level].toUpperCase()}</span>
+                                  <span className='font-medium'>{data[level].toUpperCase()}</span>
                                 </div>
                                 <p>Date: {data[date]}</p>
                                 <p>Test: {data[nameKey]}</p>

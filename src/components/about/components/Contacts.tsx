@@ -28,7 +28,7 @@ const Contacts: React.FC = () => {
     <div className='w-full max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8'>
       <h2 className='text-3xl font-semibold text-textPrimary text-center mb-4'>Get in Touch</h2>
       <p className='text-textSecondary text-center mb-12 max-w-2xl mx-auto'>
-        We're here to help and answer any questions you might have
+        We&apos;re here to help and answer any questions you might have
       </p>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
         {CONTACT_ITEMS.map((item, index) => (

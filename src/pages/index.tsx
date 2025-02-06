@@ -1,5 +1,5 @@
-import Hematology from './charts/hematology';
+import AboutUsPage from './about-us';
 
 export default function Home() {
-  return Hematology();
+  return AboutUsPage();
 }

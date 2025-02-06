@@ -9,7 +9,7 @@ import SubmitButton from '../common/SubmitButton';
 import { useAuth } from '../hooks/useAuthentication';
 
 const LoginForm = () => {
-  const { formData, error, handleChange, rememberMe, setRememberMe, handleSubmit } = useAuth(true);
+  const { formData, errors, handleChange, rememberMe, setRememberMe, handleSubmit } = useAuth(true);
 
   return (
     <div className='px-2 h-screen from-primary/20 bg-gradient-to-br to-background flex items-center justify-center'>
@@ -22,7 +22,7 @@ const LoginForm = () => {
             <Logo className='w-32 sm:w-40 md:w-48 lg:w-56 opacity-90' />
           </div>
         </div>
-        {error && <ErrorMessage message={error} />}
+        {errors && <ErrorMessage message={errors.map((error) => error.message).join(', ')} />}
         <form onSubmit={handleSubmit} className='mb-4 space-y-4'>
           <InputField
             id='identifier'

@@ -1,43 +1,47 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
+interface TokenPayload {
+  exp: number;
+  [key: string]: unknown;
+}
+
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get('tokenJWT')?.value;
   const { pathname } = request.nextUrl;
-  const publicPages = ['/auth/login', '/auth/signup', '/health-check', '/about-us'];
-  const isNotNecessaryToRedirect = pathname === '/about-us';
 
-  if (isNotNecessaryToRedirect) {
-    return NextResponse.next();
-  }
+  const PUBLIC_ROUTES = ['/auth/login', '/auth/signup', '/health-check', '/about-us'];
+  const LOGIN_ROUTE = '/auth/login';
 
-  if (publicPages.includes(pathname)) {
+  if (PUBLIC_ROUTES.includes(pathname)) {
     if (token && !isTokenExpired(token)) {
       return NextResponse.redirect(new URL('/charts/hematology', request.url));
     }
-    return NextResponse.next();
+    request.cookies.delete('tokenJWT');
   }
 
   if (!token || (token && isTokenExpired(token))) {
     request.cookies.delete('tokenJWT');
-    return NextResponse.redirect(new URL('/auth/login', request.url));
+    return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url));
   }
 
-  const response = NextResponse.next();
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-XSS-Protection', '1; mode=block');
-  return response;
+  return NextResponse.next();
 }
 
 function isTokenExpired(token: string): boolean {
-  const [, payloadBase64] = token.split('.');
-  const payload = JSON.parse(Buffer.from(payloadBase64, 'base64').toString());
-  const expirationDate = new Date(payload.exp * 1000);
-  return new Date() > expirationDate;
+  try {
+    const [, payloadBase64] = token.split('.');
+    if (!payloadBase64) return true;
+
+    const payload = JSON.parse(Buffer.from(payloadBase64, 'base64').toString()) as TokenPayload;
+    const expirationDate = new Date(payload.exp * 1000);
+    return new Date() > expirationDate;
+  } catch {
+    return true;
+  }
 }
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|next/public|_next/data|_next/image|favicon.ico|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico|.*\\.png|.*\\.jpg|.*\\.webp).*)',
+    '/((?!api|_next/static|_next/image|next/public|_next/data|_next/image|favicon.ico|auth/login|auth/signup|health-check|about-us|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico|.*\\.png|.*\\.jpg|.*\\.webp).*)',
   ],
 };

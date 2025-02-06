@@ -40,22 +40,29 @@ const FAQS: FAQItem[] = [
 ];
 
 const FAQCard: FC<FAQItem> = ({ question, answer }) => (
-  <div className='card-hover p-6 bg-surface rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-borderColor group'>
+  <div className='card-hover p-6 bg-surface rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-borderColor group hover:bg-primaryLight/5'>
     <div className='flex items-center mb-4 space-x-3'>
-      <div className='text-primary group-hover:text-accent transition-colors duration-300'>
+      <div className='p-2 rounded-lg bg-primary/5 text-primary group-hover:bg-accent/10 group-hover:text-accent transition-all duration-300'>
         <BiHelpCircle size={24} />
       </div>
-      <h3 className='text-lg font-semibold text-textSecondary'>{question}</h3>
+      <h3 className='text-lg font-semibold text-textPrimary group-hover:text-accent transition-colors duration-300'>
+        {question}
+      </h3>
     </div>
-    <p className='text-textSecondary text-sm leading-relaxed'>{answer}</p>
+    <p className='text-textSecondary text-sm leading-relaxed group-hover:text-textPrimary transition-colors duration-300'>
+      {answer}
+    </p>
   </div>
 );
 
 const FrequentlyAskedQuestions: FC = () => (
-  <div id='faq' className='py-12'>
-    <h2 className='text-3xl font-semibold text-textSecondary text-center mb-12'>
+  <div id='faq' className='py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
+    <h2 className='text-3xl font-semibold text-textPrimary text-center mb-4'>
       Frequently Asked Questions
     </h2>
+    <p className='text-textSecondary text-center mb-12 max-w-2xl mx-auto'>
+      Find answers to common questions about our quality control system
+    </p>
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
       {FAQS.map((faq, index) => (
         <FAQCard key={index} {...faq} />

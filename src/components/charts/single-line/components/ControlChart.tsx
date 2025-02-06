@@ -1,4 +1,5 @@
 import useWindowDimensions from '@/components/shared/ui/hooks/useWindowDimensions';
+import returnFullNameByTest from '@/components/shared/utils/helpers/returnFullNameByTest';
 import React, { useMemo, useState } from 'react';
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
 import {
@@ -82,10 +83,10 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='border shadow-md rounded-2xl border-borderColor bg-surface shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex content-center items-center justify-center text-base text-textSecondary md:text-2xl italic'>
-            {chartData[0].name} - Level {chartData[0].level.toString().toUpperCase()}
+          <h2 className='mt-4 flex content-center items-center justify-center text-xs text-textSecondary md:text-2xl italic'>
+            {returnFullNameByTest(data[0].name) + ' (Level - ' + data[0].level.toUpperCase() + ')'}
           </h2>
-          <div className='absolute right-2 top-1/2 -translate-y-1/2 transform'>
+          <div className='absolute right-1 top-1/2 -translate-y-1/2 transform'>
             <button
               onClick={() => setUseOwnValues(!useOwnValues)}
               className='flex flex-col items-center transition-all duration-300 group'
@@ -98,20 +99,20 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 }`}
               >
                 {useOwnValues ? (
-                  <TbMathFunction className='w-4 h-4 md:h-6 md:w-6' />
+                  <TbMathFunction className='h-3 w-3 md:h-5 md:w-5' />
                 ) : (
-                  <TbFileDescription className='w-4 h-4 md:h-6 md:w-6' />
+                  <TbFileDescription className='h-3 w-3 md:h-5 md:w-5' />
                 )}
               </div>
               <span
-                className={`text-[8px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
+                className={`text-[6px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
               >
                 {useOwnValues ? 'Calculated' : 'Reference Value'}
               </span>
             </button>
           </div>
         </div>
-        <div className='flex h-[275px] content-center items-center justify-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
+        <div className='flex h-[250px] content-center items-center justify-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
           <ResponsiveContainer
             className='flex items-center content-center justify-center bg-surface'
             width='97%'
@@ -120,13 +121,13 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
             <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
               <XAxis
-                className='text-[0.5rem] text-textPrimary md:text-xs'
+                className='text-[0.4rem] text-textPrimary md:text-[0.7rem]'
                 dataKey='date'
-                angle={-60}
+                angle={-50}
                 textAnchor='end'
                 tickFormatter={(date) => date}
-                height={windowWidth < 768 ? 40 : 60}
-                width={windowWidth < 768 ? 30 : 40}
+                height={windowWidth < 768 ? 35 : 60}
+                width={windowWidth < 768 ? 35 : 40}
                 tickMargin={0}
                 axisLine={false}
                 tickLine={false}
@@ -167,7 +168,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                                     backgroundColor: getColorByLevel(data.level),
                                   }}
                                 />
-                                <span className='font-medium'>
+                                <span className='font-light'>
                                   Level: {data.level.toUpperCase()}
                                 </span>
                               </div>

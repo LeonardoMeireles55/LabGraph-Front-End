@@ -19,7 +19,7 @@ const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <div className='space-y-0'>
-      <label htmlFor={id} className='block text-xs sm:text-sm text-textSecondary transition-colors'>
+      <label htmlFor={id} className='block text-xs text-textSecondary transition-colors sm:text-sm'>
         {label}
       </label>
       <div className='relative'>
@@ -39,7 +39,7 @@ const InputField: React.FC<InputFieldProps> = ({
             onClick={togglePasswordVisibility}
             className='absolute right-3 top-1/2 -translate-y-1/2 text-textSecondary hover:text-textPrimary'
           >
-            {showPassword ? <EyeOff className='h-4 w-4' /> : <Eye className='h-4 w-4' />}
+            {showPassword ? <EyeOff className='size-4' /> : <Eye className='size-4' />}
           </button>
         )}
       </div>

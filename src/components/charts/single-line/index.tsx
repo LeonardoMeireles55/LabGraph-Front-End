@@ -13,12 +13,12 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
   return (
     <div className='min-h-min gap-4'>
       <NavBar />
-      <div className='flex flex-col items-center content-center min-h-min justify-center bg-background'>
+      <div className='flex min-h-min flex-col place-content-center items-center bg-background'>
         <Head>
           <title>{`LabGraph - ${testList[0] || ''}`}</title>
         </Head>
         <div className='flex flex-col'>
-          <div className='flex mb-4 mt-12 ml-4 justify-start md:mt-24 xl:mb-8 xl:mt-32'>
+          <div className='mb-4 ml-4 mt-12 flex justify-start md:mt-24 xl:mb-8 xl:mt-32'>
             <TestSelectorWithLevel
               name={testList[0]}
               level={1}
@@ -27,12 +27,12 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
               list={testList}
             />
           </div>
-          <div className='flex flex-col items-center w-screen min-h-full justify-center'>
+          <div className='flex min-h-full w-screen flex-col items-center justify-center'>
             {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
           </div>
         </div>
       </div>
-      <div className='flex flex-col items-center content-center justify-end mt-6 min-h-min xl:mt-8'>
+      <div className='mt-6 flex min-h-min flex-col content-center items-center justify-end xl:mt-8'>
         <Footer />
       </div>
     </div>

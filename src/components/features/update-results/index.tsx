@@ -1,4 +1,4 @@
-import { useValidatedToken } from '@/components/authentication/hooks/useValidatedToken';
+import { useToken } from '@/components/authentication/contexts/TokenContext';
 import { processCsvFile, processTextFile } from '@/components/shared/utils/helpers/fileProcessors';
 import { Upload } from 'lucide-react';
 import React, { useCallback, useState } from 'react';
@@ -11,7 +11,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
     isProcessing: false,
     message: '',
   });
-  const { token, loading } = useValidatedToken();
+  const { token, loading } = useToken();
 
   const postResults = useCallback(
     async (data: any) => {
@@ -87,19 +87,19 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
       <label
         htmlFor='fileInput'
         title='Send analytics results TXT or CSV file'
-        className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 md:px-2 md:py-1 text-base text-textSecondary hover:scale-110 ${
+        className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 text-base text-textSecondary hover:scale-110 md:px-2 md:py-1 ${
           status.isProcessing ? 'cursor-not-allowed opacity-50' : ''
         }`}
       >
-        <span className='hidden md:inline py-0.5'>
+        <span className='hidden py-0.5 md:inline'>
           {status.isProcessing ? status.message : <Upload size={21} />}
         </span>
-        <span className='inline md:hidden py-0.5'>
+        <span className='inline py-0.5 md:hidden'>
           {status.isProcessing ? status.message : <Upload size={17} />}
         </span>
       </label>
       {status.error && (
-        <p className='ml-2 text-textPrimary md:text-white md:py-2 md:px-1 md:bg-danger rounded-3xl text-xs'>
+        <p className='ml-2 rounded-3xl text-xs text-textPrimary md:bg-danger md:px-1 md:py-2 md:text-white'>
           {status.error}
         </p>
       )}

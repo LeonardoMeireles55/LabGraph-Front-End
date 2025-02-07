@@ -1,15 +1,10 @@
 import { AuthFormData } from '@/components/authentication/types/Auth';
+import { AuthParams } from './types/AuthParams';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-interface SignInParams {
-  identifier: string;
-  password: string;
-  remember?: boolean;
-}
-
 export const authService = {
-  signIn: async ({ identifier: identifier, password, remember }: SignInParams) => {
+  signIn: async ({ identifier: identifier, password, remember }: AuthParams) => {
     try {
       const backendResponse = await fetch(`${API_BASE_URL}/users/sign-in`, {
         method: 'POST',

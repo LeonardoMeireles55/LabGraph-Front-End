@@ -9,7 +9,7 @@ const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
   unitValue,
 }) => {
   return (
-    <div className='mt:mt-4 md:ml-8 flex w-full flex-col md:gap-2 text-xs font-light text-textPrimary md:mt-0 md:flex-row'>
+    <div className='mt:mt-4 flex w-full flex-col text-xs font-light text-textPrimary md:ml-8 md:mt-0 md:flex-row md:gap-2'>
       <div className='flex flex-row justify-start md:flex-col'>
         <span>Mean (Reference):</span>
         <span className='text-textPrimary'>

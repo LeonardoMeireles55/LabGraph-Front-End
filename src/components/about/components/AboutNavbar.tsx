@@ -22,9 +22,9 @@ const AboutNavbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className='sticky top-0 bg-navbar backdrop-blur-sm z-50 border-b border-borderColor italic'>
-      <div className='max-w-7xl mx-auto px-4'>
-        <div className='flex justify-between items-center py-8'>
+    <nav className='sticky top-0 z-50 border-b border-borderColor bg-navbar italic backdrop-blur-sm'>
+      <div className='mx-auto max-w-7xl px-4'>
+        <div className='flex items-center justify-between py-8'>
           <div className='flex flex-col'>
             <NavLogo />
             {/* <h1 className='text-2xl sm:text-4xl font-bold text-primary italic tracking-tight'>
@@ -37,13 +37,13 @@ const AboutNavbar: React.FC = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className='hidden lg:flex items-center gap-6'>
-            <ul className='flex space-x-6 text-sm sm:text-base items-center'>
+          <div className='hidden items-center gap-6 lg:flex'>
+            <ul className='flex items-center space-x-6 text-sm sm:text-base'>
               {NAVIGATION_ITEMS.map((item) => (
                 <li key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
-                    className='text-textSecondary hover:text-primary italic transition-colors whitespace-nowrap hover:underline hover:decoration-primary hover:decoration-1'
+                    className='whitespace-nowrap italic text-textSecondary transition-colors hover:text-primary hover:underline hover:decoration-primary hover:decoration-1'
                   >
                     {item.label}
                   </button>
@@ -52,7 +52,7 @@ const AboutNavbar: React.FC = () => {
               <li>
                 <Link
                   href='/auth/signup'
-                  className='px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondaryHover transition-colors duration-300 italic font-light'
+                  className='rounded-lg bg-secondary px-4 py-2 font-light italic text-white transition-colors duration-300 hover:bg-secondaryHover'
                 >
                   TRY DEMO
                 </Link>
@@ -64,17 +64,17 @@ const AboutNavbar: React.FC = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className='lg:hidden flex items-center gap-4'>
+          <div className='flex items-center gap-4 lg:hidden'>
             <Link
               href='/auth/signup'
-              className='px-3 py-1.5 bg-secondary text-white text-sm rounded-lg hover:bg-secondaryHover transition-colors duration-300 italic font-light'
+              className='rounded-lg bg-secondary px-3 py-1.5 text-sm font-light italic text-white transition-colors duration-300 hover:bg-secondaryHover'
             >
               DEMO
             </Link>
             <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className='text-textSecondary hover:text-primary p-2'
+              className='p-2 text-textSecondary hover:text-primary'
             >
               <Menu size={24} />
             </button>
@@ -84,7 +84,7 @@ const AboutNavbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed left-0 right-0 top-[7rem] bg-surface p-4 shadow-xl shadow-shadow lg:hidden ${
+        className={`fixed inset-x-0 top-28 bg-surface p-4 shadow-xl shadow-shadow lg:hidden ${
           isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
         } transition-all duration-300`}
       >
@@ -93,7 +93,7 @@ const AboutNavbar: React.FC = () => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className='text-sm font-normal text-textSecondary hover:text-primary text-left'
+              className='text-left text-sm font-normal text-textSecondary hover:text-primary'
             >
               {item.label}
             </button>

@@ -76,11 +76,11 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
         handleEndMonthChange={handleEndMonthChange}
         handleEndYearChange={handleEndYearChange}
       />
-      <div className='mt-2 md:mt-0 grid grid-cols-1 content-start items-start justify-start gap-2 md:flex-row'>
+      <div className='mt-2 grid grid-cols-1 place-content-start items-start gap-2 md:mt-0 md:flex-row'>
         <div className='flex flex-row items-center gap-2'>
-          <span className='font-medium text-sm'>Test:</span>
+          <span className='text-sm font-medium'>Test:</span>
           <select
-            className='rounded-md border border-borderColor bg-background md:px-2 md:py-1 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+            className='hover:border-borderColor/80 focus:ring-borderColor/30 rounded-md border border-borderColor bg-background text-sm text-textSecondary shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 md:px-2 md:py-1'
             value={testName}
             onChange={(e) => setTestName(e.target.value)}
           >
@@ -90,9 +90,9 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
               </option>
             ))}
           </select>
-          <span className='font-medium text-sm'>Level:</span>
+          <span className='text-sm font-medium'>Level:</span>
           <select
-            className='rounded-md border border-borderColor bg-background py-0.5 md:px-1 md:py-1 text-sm text-textSecondary shadow-sm transition-all duration-200 hover:border-borderColor/80 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+            className='hover:border-borderColor/80 focus:ring-borderColor/30 rounded-md border border-borderColor bg-background py-0.5 text-sm text-textSecondary shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 md:p-1'
             value={testLevel}
             onChange={(e) => setTestLevel(Number(e.target.value))}
           >
@@ -100,16 +100,16 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
             <option value={2}>2</option>
             <option value={3}>3</option>
           </select>
-          <span className='flex flex-row content-center items-center justify-center'>
+          <span className='flex flex-row place-content-center items-center'>
             <Link
-              className='flex items-center justify-center rounded-md border border-borderColor bg-background px-2 py-0.5 md:px-2 md:py-1 text-sm font-medium text-textSecondary shadow-sm transition-all duration-200 hover:scale-110 hover:bg-background/90 focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+              className='hover:bg-background/90 focus:ring-borderColor/30 flex items-center justify-center rounded-md border border-borderColor bg-background px-2 py-0.5 text-sm font-medium text-textSecondary shadow-sm transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 md:px-2 md:py-1'
               target='_blank'
               href={GOOGLE_SHEET_URL || ''}
             >
-              <span className='hidden md:inline px-0.5 py-0.5'>
+              <span className='hidden p-0.5 md:inline'>
                 <CheckCircle size={17} />
               </span>
-              <span className='inline md:hidden px-0.5 py-0.5'>
+              <span className='inline p-0.5 md:hidden'>
                 <CheckCircle size={17} />
               </span>
             </Link>

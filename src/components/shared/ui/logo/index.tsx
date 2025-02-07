@@ -75,14 +75,14 @@ const Logo = ({ className, title = 'LabGraph' }: LogoProps) => {
           </g>
         </g>
       </svg>
-      <div className='flex items-center flex-col mb-2'>
-        <h1 className='italic text-2xl sm:text-3xl md:text-3xl font-bold text-textPrimary opacity-90'>
+      <div className='mb-2 flex flex-col items-center'>
+        <h1 className='text-2xl font-bold italic text-textPrimary opacity-90 sm:text-3xl md:text-3xl'>
           {title}
-          <p className='text-xs text-textPrimary md:text-[12px] opacity-90 inline-flex align-top'>
+          <p className='inline-flex align-top text-xs text-textPrimary opacity-90 md:text-[12px]'>
             ®
           </p>
         </h1>
-        <h2 className='text-xs md:text-xs text-textPrimary opacity-70'>
+        <h2 className='text-xs text-textPrimary opacity-70 md:text-xs'>
           Making quality management easy
         </h2>
       </div>

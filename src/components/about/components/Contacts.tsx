@@ -2,15 +2,15 @@ import { ContactItemProps } from '@/components/about/types/about';
 import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
 
 const ContactItem: React.FC<ContactItemProps> = ({ icon: Icon, title, content }) => (
-  <div className='flex card-hover items-center gap-6 p-6 bg-surface rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-borderColor group hover:bg-primaryLight/5'>
-    <div className='p-3 rounded-lg bg-primary/5 text-primary group-hover:bg-accent/10 group-hover:text-accent transition-all duration-300'>
+  <div className='card-hover hover:bg-primaryLight/5 group flex items-center gap-6 rounded-2xl border border-borderColor bg-surface p-6 shadow-lg transition-all duration-300 hover:shadow-xl'>
+    <div className='bg-primary/5 group-hover:bg-accent/10 rounded-lg p-3 text-primary transition-all duration-300 group-hover:text-accent'>
       <Icon />
     </div>
     <div className='space-y-1'>
-      <h3 className='font-semibold text-textPrimary group-hover:text-accent transition-colors duration-300 text-lg'>
+      <h3 className='text-lg font-semibold text-textPrimary transition-colors duration-300 group-hover:text-accent'>
         {title}
       </h3>
-      <p className='text-textSecondary group-hover:text-textPrimary transition-colors duration-300'>
+      <p className='text-textSecondary transition-colors duration-300 group-hover:text-textPrimary'>
         {content}
       </p>
     </div>
@@ -25,12 +25,12 @@ const CONTACT_ITEMS = [
 
 const Contacts: React.FC = () => {
   return (
-    <div className='w-full max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8'>
-      <h2 className='text-3xl font-semibold text-textPrimary text-center mb-4'>Get in Touch</h2>
-      <p className='text-textSecondary text-center mb-12 max-w-2xl mx-auto'>
+    <div className='mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
+      <h2 className='mb-4 text-center text-3xl font-semibold text-textPrimary'>Get in Touch</h2>
+      <p className='mx-auto mb-12 max-w-2xl text-center text-textSecondary'>
         We&apos;re here to help and answer any questions you might have
       </p>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+      <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
         {CONTACT_ITEMS.map((item, index) => (
           <ContactItem key={index} {...item} />
         ))}

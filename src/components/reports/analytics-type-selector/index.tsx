@@ -6,7 +6,7 @@ interface AnalyticsTypeSelectorProps {
 const AnalyticsTypeSelector = ({ analyticsType, onChange }: AnalyticsTypeSelectorProps) => {
   return (
     <select
-      className='text-xs border rounded-md border-borderColor bg-background text-textSecondary md:text-sm'
+      className='rounded-md border border-borderColor bg-background text-xs text-textSecondary md:text-sm'
       value={analyticsType}
       onChange={(e) => onChange(e.target.value)}
     >

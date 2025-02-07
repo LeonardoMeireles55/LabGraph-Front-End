@@ -32,12 +32,12 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
         {payload.map((entry: any, index: number) => (
           <div key={`legend-${entry}`} className='flex items-center gap-2'>
             <div
-              className='h-2.5 w-2.5 rounded-full'
+              className='size-2.5 rounded-full'
               style={{
                 backgroundColor: getColorByLevel(data[index].level.toString()),
               }}
             />
-            <span className='text-textPrimary text-xs md:text-sm'>{`${data[index].level.toString().toUpperCase()}`}</span>
+            <span className='text-xs text-textPrimary md:text-sm'>{`${data[index].level.toString().toUpperCase()}`}</span>
           </div>
         ))}
       </div>
@@ -81,15 +81,15 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
 
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
-      <div className='border shadow-md rounded-2xl border-borderColor bg-surface shadow-shadow'>
+      <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex content-center items-center justify-center text-[9px] text-textSecondary md:text-2xl italic'>
+          <h2 className='mt-4 flex place-content-center items-center text-[9px] italic text-textSecondary md:text-2xl'>
             {returnFullNameByTest(data[0].name) + ' (Level - ' + data[0].level.toUpperCase() + ')'}
           </h2>
-          <div className='absolute right-1 top-1/2 -translate-y-1/2 transform'>
+          <div className='absolute right-1 top-1/2 -translate-y-1/2'>
             <button
               onClick={() => setUseOwnValues(!useOwnValues)}
-              className='flex flex-col items-center transition-all duration-300 group'
+              className='group flex flex-col items-center transition-all duration-300'
             >
               <div
                 className={`rounded-full p-2 transition-all duration-300 ${
@@ -99,9 +99,9 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 }`}
               >
                 {useOwnValues ? (
-                  <TbMathFunction className='h-3 w-3 md:h-5 md:w-5' />
+                  <TbMathFunction className='size-3 md:size-5' />
                 ) : (
-                  <TbFileDescription className='h-3 w-3 md:h-5 md:w-5' />
+                  <TbFileDescription className='size-3 md:size-5' />
                 )}
               </div>
               <span
@@ -112,9 +112,9 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
             </button>
           </div>
         </div>
-        <div className='flex h-[250px] content-center items-center justify-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
+        <div className='flex h-[250px] place-content-center items-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
           <ResponsiveContainer
-            className='flex items-center content-center justify-center bg-surface'
+            className='flex place-content-center items-center bg-surface'
             width='97%'
             height='96%'
           >
@@ -154,7 +154,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     return (
-                      <div className='p-2 text-xs border rounded shadow-md border-border bg-background text-textPrimary shadow-shadow'>
+                      <div className='rounded border border-border bg-background p-2 text-xs text-textPrimary shadow-md shadow-shadow'>
                         {payload.map((item) => {
                           const data = item.payload;
                           return (
@@ -162,9 +162,9 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                               key={`${data.date}-${data.level}-${data.levelLot}`}
                               className='mb-2 border-b border-border last:border-0 last:pb-0'
                             >
-                              <div className='flex items-center gap-2 mb-1'>
+                              <div className='mb-1 flex items-center gap-2'>
                                 <div
-                                  className='w-2.5 h-2.5 rounded-full'
+                                  className='size-2.5 rounded-full'
                                   style={{
                                     backgroundColor: getColorByLevel(data.level),
                                   }}

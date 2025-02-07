@@ -13,7 +13,7 @@ const Loading: React.FC = () => {
 
   return (
     <div className='flex flex-col items-center justify-center gap-4'>
-      <div className='spinner h-12 w-12 animate-spin rounded-full border-t-4 text-primary justify-end' />
+      <div className='size-12 animate-spin justify-end rounded-full border-t-4 text-primary' />
       {showMessage && <p className='text-sm text-textPrimary'>Try select other date range.</p>}
     </div>
   );

@@ -12,12 +12,9 @@ const ThemeToggle = () => {
       title='Toggle theme'
     >
       {theme === 'light' ? (
-        <CloudSun
-          strokeWidth='1.5'
-          className='hover:scale-115 h-7 w-7 text-textPrimary opacity-80'
-        />
+        <CloudSun strokeWidth='1.5' className='size-7 text-textPrimary opacity-80' />
       ) : (
-        <Moon strokeWidth='1.5' className='hover:scale-115 h-7 w-7  text-textPrimary opacity-90' />
+        <Moon strokeWidth='1.5' className='size-7 text-textPrimary opacity-90' />
       )}
     </button>
   );

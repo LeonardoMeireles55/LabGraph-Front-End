@@ -22,7 +22,7 @@ const SignUpForm = () => {
           placeholder='Enter your username'
           value={formData.identifier}
           onChange={handleChange}
-          icon={<User className='h-4 w-4 text-textSecondary' />}
+          icon={<User className='size-4 text-textSecondary' />}
         />
         <InputField
           id='email'
@@ -31,7 +31,7 @@ const SignUpForm = () => {
           placeholder='Enter your email'
           value={formData.email ? formData.email : ''}
           onChange={handleChange}
-          icon={<AtSign className='h-4 w-4 text-textSecondary' />}
+          icon={<AtSign className='size-4 text-textSecondary' />}
         />
         <InputField
           id='password'
@@ -40,7 +40,7 @@ const SignUpForm = () => {
           placeholder='Enter your password'
           value={formData.password}
           onChange={handleChange}
-          icon={<Lock className='h-4 w-4 text-textSecondary' />}
+          icon={<Lock className='size-4 text-textSecondary' />}
         />
         <InputField
           id='confirmPassword'
@@ -49,7 +49,7 @@ const SignUpForm = () => {
           placeholder='Confirm your password'
           value={formData.confirmPassword ?? ''}
           onChange={handleChange}
-          icon={<Lock className='h-4 w-4 text-textSecondary' />}
+          icon={<Lock className='size-4 text-textSecondary' />}
         />
         <SubmitButton text='Create Account' />
         <AuthLink text='Already have an account?' linkText='Sign in' href='/auth/login' />

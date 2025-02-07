@@ -23,7 +23,7 @@ const LoginForm = () => {
           placeholder='Enter your email or username'
           value={formData.identifier}
           onChange={handleChange}
-          icon={<AtSign className='h-4 w-4 text-textSecondary' />}
+          icon={<AtSign className='size-4 text-textSecondary' />}
         />
         <InputField
           id='password'
@@ -32,7 +32,7 @@ const LoginForm = () => {
           placeholder='Enter your password'
           value={formData.password}
           onChange={handleChange}
-          icon={<Lock className='h-4 w-4 text-textSecondary' />}
+          icon={<Lock className='size-4 text-textSecondary' />}
         />
 
         <div className='flex items-center justify-between text-xs sm:text-sm'>

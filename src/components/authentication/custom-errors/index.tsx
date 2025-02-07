@@ -3,15 +3,13 @@ import { CustomErrorProps } from './types/CustomErrorProps';
 export default function CustomError({ code, title, message }: CustomErrorProps) {
   return (
     <main className='flex min-h-screen items-center justify-center bg-background'>
-      <div className='flex flex-col items-center rounded-2xl bg-surface p-8 sm:p-10 backdrop-blur-sm gap-4'>
-        <div className='transform text-[100px] sm:text-[140px] font-bold text-textSecondary'>
-          {code}
-        </div>
-        <h1 className='text-2xl sm:text-4xl font-bold text-textSecondary underline'>{title}</h1>
-        <p className='mt-4 sm:mt-6 text-sm sm:text-xl text-textSecondary'>{message}</p>
+      <div className='flex flex-col items-center gap-4 rounded-2xl bg-surface p-8 backdrop-blur-sm sm:p-10'>
+        <div className='text-[100px] font-bold text-textSecondary sm:text-[140px]'>{code}</div>
+        <h1 className='text-2xl font-bold text-textSecondary underline sm:text-4xl'>{title}</h1>
+        <p className='mt-4 text-sm text-textSecondary sm:mt-6 sm:text-xl'>{message}</p>
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          className='w-12 h-12 mt-8 sm:w-18 sm:h-18 text-textSecondary'
+          className='mt-8 size-12 text-textSecondary'
           fill='none'
           viewBox='0 0 24 24'
           stroke='currentColor'

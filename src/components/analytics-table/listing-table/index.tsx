@@ -17,9 +17,9 @@ const tableHeaders = [
 
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
   return (
-    <div className='flex flex-col justify-between w-full h-min'>
-      <table className='hidden bg-surface md:table shadow-md shadow-shadow'>
-        <thead className='bg-muted rounded-lg'>
+    <div className='flex h-min w-full flex-col justify-between'>
+      <table className='hidden bg-surface shadow-md shadow-shadow md:table'>
+        <thead className='rounded-lg bg-muted'>
           <tr>
             {tableHeaders.map((header, index) => (
               <th
@@ -37,13 +37,13 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
           ))}
         </tbody>
       </table>
-      <div className='grid content-center justify-center gap-4 grid-cols-4 px-2 text-center md:hidden'>
+      <div className='grid grid-cols-4 place-content-center gap-4 px-2 text-center md:hidden'>
         {items.map((item, index) => (
           <MobileItemCard key={index} item={item} />
         ))}
       </div>
       {items.length === 0 ? (
-        <div className='py-2 text-center bg-surface text-textSecondary'>
+        <div className='bg-surface py-2 text-center text-textSecondary'>
           please select another date range and level.
         </div>
       ) : null}

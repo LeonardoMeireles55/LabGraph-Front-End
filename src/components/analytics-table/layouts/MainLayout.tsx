@@ -9,8 +9,8 @@ interface MainLayoutProps {
 
 const MainLayout = ({ children, title }: MainLayoutProps) => {
   return (
-    <div className='min-h bg-background'>
-      <div className='min-h flex flex-col content-center items-center justify-center'>
+    <div className='bg-background'>
+      <div className='flex flex-col place-content-center items-center'>
         <title>{title}</title>
         <NavBar />
         <div className='w-full max-w-7xl'>{children}</div>

@@ -7,7 +7,7 @@ interface MobileItemCardProps {
 
 const MobileItemCard: React.FC<MobileItemCardProps> = ({ item }) => {
   return (
-    <div className='p-2 border rounded-md shadow-md border-border bg-surface'>
+    <div className='rounded-md border border-border bg-surface p-2 shadow-md'>
       <p className='text-[6px] font-semibold text-textSecondary'>
         Test: <span className='text-textPrimary'>{item.name}</span>
       </p>

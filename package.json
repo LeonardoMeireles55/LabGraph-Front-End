@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "eslint ./src --fix"
   },
   "dependencies": {
     "@types/cookie": "^0.6.0",
@@ -24,10 +25,10 @@
     "@types/node": "^20",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
-    "@types/react-plotly.js": "^2.6.3",
     "autoprefixer": "^10.0.1",
-    "eslint": "^8",
+    "eslint": "^8.57.1",
     "eslint-config-next": "15.1.0",
+    "eslint-plugin-tailwindcss": "^3.18.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "postcss": "^8",
     "prettier": "^3.4.2",

@@ -9,6 +9,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       className='rounded-full p-2 hover:bg-surface focus:outline-none'
       aria-label='Toggle theme'
+      title='Toggle theme'
     >
       {theme === 'light' ? (
         <CloudSun

@@ -1,29 +1,28 @@
-import CsvGenerator from '@/components/features/csv-generator';
 import Link from 'next/link';
-import handleLogout from '../constants/handleLogout';
+import ThemeToggle from '../../ui/theme';
 import navLinks from '../constants/navLinks';
 import { NavLinksComponentProps } from '../types/NavigationBar';
 import ViewToggleButton from './ViewToggleButton';
 
-const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ jsonData, fileName }) => {
-  const onLogout = () => handleLogout();
-
+const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ onLogout }) => {
   return (
     <div className='hidden items-center gap-4 lg:flex xl:gap-4 px-4 py-3'>
-      {[...navLinks, { text: 'EXIT', url: '/auth/login', onClick: onLogout }].map((link) => (
-        <Link
-          key={link.url}
-          href={link.url}
-          onClick={link.onClick}
-          className='group relative text-xs xl:text-sm px-3 py-2 font-medium text-textPrimary transition-all duration-300 ease-in-out '
-        >
-          {link.text}
-          <span className='absolute bottom-0 left-1/2 h-0.5 w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full group-hover:left-0' />
-        </Link>
-      ))}
-      <div className='rounded-lg p-2 hover:bg-overlay transition-colors duration-300'>
-        <CsvGenerator jsonData={jsonData} fileName={fileName} />
-      </div>
+      {[...navLinks, { id: 'exit', text: 'EXIT', url: '/auth/login', onClick: onLogout }].map(
+        (link) => (
+          <Link
+            key={link.id}
+            href={link.url}
+            onClick={link.onClick}
+            className='group relative text-xs xl:text-sm px-3 py-2 font-medium text-textPrimary transition-all duration-300 ease-in-out '
+          >
+            {link.text}
+            <span className='absolute bottom-0 left-1/2 h-0.5 w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full group-hover:left-0' />
+          </Link>
+        )
+      )}
+      <span className='hidden lg:flex'>
+        <ThemeToggle />
+      </span>
       <div className='pl-2 border-l border-border'>
         <ViewToggleButton />
       </div>

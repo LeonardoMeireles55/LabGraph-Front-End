@@ -93,7 +93,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
     return (
       <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
         {payload.map((entry: any, index: number) => (
-          <div key={`legend-${index}`} className='flex items-center gap-2'>
+          <div key={`legend-${entry.id}`} className='flex items-center gap-2'>
             <div className='h-2.5 w-2.5 rounded-full' style={{ backgroundColor: entry.color }} />
             <span className='text-textPrimary text-xs md:text-sm'>{`${levels[index].toUpperCase()}`}</span>
           </div>
@@ -106,7 +106,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex content-center items-center justify-center text-xs text-textSecondary md:text-2xl italic'>
+          <h2 className='mt-4 flex content-center items-center justify-center text-[9px] text-textSecondary md:text-2xl italic'>
             {returnFullNameByTest(listings[0].groupedValuesByLevelDTO.values[0].name)}
           </h2>
           <div className='absolute right-1 top-1/2 -translate-y-1/2 transform'>
@@ -144,19 +144,6 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
           >
             <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
-              {/* <XAxis
-                className='text-[0.5rem] text-textPrimary md:text-xs'
-                dataKey='date'
-                angle={-55}
-                textAnchor='end'
-                tickFormatter={(date) => date}
-                height={windowWidth < 768 ? 40 : 60}
-                width={windowWidth < 768 ? 30 : 40}
-                tickMargin={0}
-                axisLine={false}
-                tickLine={false}
-                stroke='var(--color-text-primary)'
-              /> */}
               <YAxis
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
@@ -193,7 +180,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
                     return (
                       <div className='rounded border border-border bg-background p-1 text-[0.5rem] text-textPrimary shadow-md shadow-shadow md:text-[0.65rem]'>
-                        {uniqueEntries.map((entry, index) => {
+                        {uniqueEntries.map((entry) => {
                           const dataKeyIndex = entry.dataKey?.toString().slice(-1) ?? '';
                           const data = entry.payload;
                           const date = `date${dataKeyIndex}`;
@@ -207,7 +194,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
                           if (data[valueKey]) {
                             return (
-                              <div key={index} className={'border-border'}>
+                              <div key={entry.payload.id} className={'border-border'}>
                                 <div className='flex items-center gap-2'>
                                   <div
                                     className='h-2.5 w-2.5 rounded-full'
@@ -236,7 +223,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
               />
               {listings.map((_, index) => (
                 <Line
-                  key={index}
+                  key={listings[index].groupedValuesByLevelDTO.level}
                   type='linear'
                   dataKey={`value${index + 1}`}
                   name={`Nível ${index}`}
@@ -257,9 +244,9 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                   animationDuration={250}
                 />
               ))}
-              {yAxisValues.map((line, index) => (
+              {yAxisValues.map((line) => (
                 <ReferenceLine
-                  key={index}
+                  key={line.value}
                   y={line.value}
                   stroke={line.color}
                   strokeDasharray='5 5'

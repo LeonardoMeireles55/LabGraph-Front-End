@@ -1,4 +1,5 @@
 export interface ListingItem {
+  id: number;
   name: string;
   level_lot: string;
   test_lot: string;

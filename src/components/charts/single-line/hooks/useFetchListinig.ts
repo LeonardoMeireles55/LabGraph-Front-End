@@ -75,7 +75,7 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
     return () => {
       abortController.abort();
     };
-  }, [loading, fetchData]);
+  }, [loading, fetchData, token]);
 
   return {
     listing,

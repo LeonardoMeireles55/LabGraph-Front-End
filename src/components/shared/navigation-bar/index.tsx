@@ -13,7 +13,7 @@ const getMenuBarClass = (isOpen: boolean, index: number): string => {
   return '';
 };
 
-const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
+const NavBar: React.FC<NavBarProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const onLogout = () => handleLogout();
 
@@ -22,10 +22,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='flex h-16 items-center justify-between sm:h-20'>
           <NavLogo />
-          <NavLinksComponent fileName={fileName} jsonData={jsonData} />
-          <span className='hidden lg:flex'>
-            <ThemeToggle />
-          </span>
+          <NavLinksComponent onLogout={onLogout} />
           <div className='flex items-center gap-2 lg:hidden'>
             <ThemeToggle />
             <button
@@ -45,12 +42,7 @@ const NavBar: React.FC<NavBarProps> = ({ jsonData, fileName }) => {
           </div>
         </div>
       </div>
-      <MobileMenu
-        isMenuOpen={isMenuOpen}
-        onLogout={onLogout}
-        jsonData={jsonData}
-        fileName={fileName}
-      />
+      <MobileMenu isMenuOpen={isMenuOpen} onLogout={onLogout} />
     </nav>
   );
 };

@@ -17,7 +17,7 @@ export default function Document() {
   `;
 
   return (
-    <Html lang='eng-US'>
+    <Html lang='en-US'>
       <Head />
       <body className=''>
         <Main />

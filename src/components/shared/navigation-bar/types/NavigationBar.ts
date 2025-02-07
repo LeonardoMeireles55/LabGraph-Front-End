@@ -1,22 +1,18 @@
 export interface NavLinksComponentProps {
-  jsonData?: Array<Record<string, any>>;
-  fileName?: string;
+  onLogout: () => void;
 }
 
 export interface MobileMenuProps {
   isMenuOpen: boolean;
   onLogout: () => void;
-  jsonData?: Array<Record<string, any>>;
-  fileName?: string;
 }
 
-export interface NavBarProps {
-  jsonData?: Array<Record<string, any>>;
-  fileName?: string;
-}
+export interface NavBarProps {}
 
 export interface NavLinkProps {
+  id: string;
   text: string;
   url: string;
+  title?: string;
   onClick?: () => Promise<void>;
 }

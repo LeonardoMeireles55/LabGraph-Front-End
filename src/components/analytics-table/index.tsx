@@ -68,11 +68,7 @@ const AnalyticsTableIndex = () => {
   };
 
   return (
-    <MainLayout
-      title={`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}
-      jsonData={dataFetched}
-      fileName={analyticsType}
-    >
+    <MainLayout title={`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}>
       <AnalyticsFilters
         dateSelector={dateSelector}
         analyticsOptions={analyticsOptions}

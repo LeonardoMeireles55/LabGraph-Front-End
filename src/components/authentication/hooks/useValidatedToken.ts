@@ -35,7 +35,7 @@ export const useValidatedToken = () => {
     };
 
     fetchToken();
-  }, [router, setToken, setLoading]);
+  }, [router]);
 
   return {
     token,

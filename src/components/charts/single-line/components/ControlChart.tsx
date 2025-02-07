@@ -44,8 +44,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     );
   };
 
-  const chartData = data.map((entry, index) => ({
-    key: index,
+  const chartData = data.map((entry) => ({
+    key: entry.id,
     date: customFormatDate(entry.date),
     levelLot: entry.level_lot,
     level: entry.level,
@@ -83,7 +83,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='border shadow-md rounded-2xl border-borderColor bg-surface shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex content-center items-center justify-center text-xs text-textSecondary md:text-2xl italic'>
+          <h2 className='mt-4 flex content-center items-center justify-center text-[9px] text-textSecondary md:text-2xl italic'>
             {returnFullNameByTest(data[0].name) + ' (Level - ' + data[0].level.toUpperCase() + ')'}
           </h2>
           <div className='absolute right-1 top-1/2 -translate-y-1/2 transform'>
@@ -122,6 +122,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
               <CartesianGrid stroke='false' />
               <XAxis
                 className='text-[0.4rem] text-textPrimary md:text-[0.7rem]'
+                id='key'
                 dataKey='date'
                 angle={-50}
                 textAnchor='end'
@@ -188,6 +189,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 }}
               />
               <Line
+                id={'id'}
                 type='linear'
                 dataKey={`value`}
                 name={`level`}
@@ -207,9 +209,9 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 }}
                 animationDuration={250}
               />
-              {yAxisValues.map((line, index) => (
+              {yAxisValues.map((line) => (
                 <ReferenceLine
-                  key={index}
+                  key={line.value}
                   y={line.value}
                   stroke={line.color}
                   strokeDasharray='4 4'

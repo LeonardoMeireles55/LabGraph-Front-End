@@ -12,7 +12,7 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
 
   return (
     <div className='min-h-min gap-4'>
-      <NavBar jsonData={dataFetched} fileName={testList[0]} />
+      <NavBar />
       <div className='flex flex-col items-center content-center min-h-min justify-center bg-background'>
         <Head>
           <title>{`LabGraph - ${testList[0] || ''}`}</title>

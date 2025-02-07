@@ -12,7 +12,7 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
 
   return (
     <div className='min-h-min'>
-      <NavBar jsonData={groupResponse} fileName={testList[0]} />
+      <NavBar />
       <div className='flex min-h-min flex-col content-center items-center justify-evenly bg-background'>
         <Head>
           <title>{`LabGraph - ${testList[0] || ''}`}</title>

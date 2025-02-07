@@ -8,7 +8,7 @@ interface SubmitButtonProps {
 const SubmitButton = ({ text, icon = true }: SubmitButtonProps) => {
   return (
     <button type='submit' className='button-modern'>
-      {icon ? <LogIn className='w-5 h-5' /> : text}
+      {icon ? <LogIn className='size-5' /> : text}
     </button>
   );
 };

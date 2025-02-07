@@ -32,7 +32,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             id='tests'
             value={analyticsType}
             onChange={(e) => setAnalyticsType(e.target.value)}
-            className='mt-1 rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+            className='focus:ring-borderColor/30 mt-1 rounded border border-borderColor bg-background text-textSecondary focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'
           >
             {analyticsOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -50,7 +50,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
               setLevel(e.target.value);
               setFiltered(e.target.value !== '0');
             }}
-            className='mt-1 rounded border border-borderColor bg-background text-textSecondary md:px-2 md:py-1 md:text-sm focus:outline-none focus:ring-2 focus:ring-borderColor/30'
+            className='focus:ring-borderColor/30 mt-1 rounded border border-borderColor bg-background text-textSecondary focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'
           >
             {levelOptions.map((option) => (
               <option key={option.value} value={option.value}>

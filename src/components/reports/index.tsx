@@ -29,9 +29,9 @@ const Reports = () => {
   const { dataFetched } = useReportsData({ url });
 
   return (
-    <div className='flex flex-col min-h-screen justify-evenly'>
+    <div className='flex min-h-screen flex-col justify-evenly'>
       <ReportsHeader analyticsType={analyticsType} dataFetched={dataFetched} />
-      <main className='flex flex-col items-center flex-grow mt-16 justify-evenly bg-background xl:mt-16'>
+      <main className='mt-16 flex grow flex-col items-center justify-evenly bg-background xl:mt-16'>
         <ReportsControls
           analyticsType={analyticsType}
           onAnalyticsTypeChange={setAnalyticsType}
@@ -40,7 +40,7 @@ const Reports = () => {
           {...dateSelector}
         />
         <ReportImage />
-        <div className='flex flex-col items-center content-end justify-end mt-16'>
+        <div className='mt-16 flex flex-col place-content-end items-center'>
           <Footer />
         </div>
       </main>

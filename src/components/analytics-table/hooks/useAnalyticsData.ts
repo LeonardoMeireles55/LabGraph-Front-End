@@ -1,4 +1,4 @@
-import { useValidatedToken } from '@/components/authentication/hooks/useValidatedToken';
+import { useToken } from '@/components/authentication/contexts/TokenContext';
 import { ListingItem } from '@/components/charts/types/Chart';
 import {
   formatDateWithTime,
@@ -38,7 +38,7 @@ export const useAnalyticsData = ({
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
-  const { token, loading } = useValidatedToken();
+  const { token, loading } = useToken();
 
   const fetchData = async (url: string) => {
     if (loading) {

@@ -5,7 +5,7 @@ import ViewToggleButton from './ViewToggleButton';
 
 const MobileMenu = ({ isMenuOpen, onLogout }: MobileMenuProps) => (
   <div
-    className={`fixed left-0 right-0 top-[4rem] bg-surface p-2 shadow-xl shadow-shadow sm:top-20 lg:hidden ${
+    className={`fixed inset-x-0 top-16 bg-surface p-2 shadow-xl shadow-shadow sm:top-20 lg:hidden ${
       isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
     }`}
   >
@@ -23,7 +23,7 @@ const MobileMenu = ({ isMenuOpen, onLogout }: MobileMenuProps) => (
         )
       )}
       <hr className='border-t-[0.5px] border-textSecondary' />
-      <span className='flex flex-col w-full'>
+      <span className='flex w-full flex-col'>
         <ViewToggleButton />
       </span>
     </div>

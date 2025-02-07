@@ -5,7 +5,7 @@ import { ReportsHeaderProps } from '../types/Reports';
 const ReportsHeader = ({ analyticsType }: ReportsHeaderProps) => (
   <>
     <Head>
-      <title>{`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}</title>
+      <title>{`LabGraph - ${analyticsType.toUpperCase() || 'Quality-Lab-Pro'}`}</title>
     </Head>
     <NavBar />
   </>

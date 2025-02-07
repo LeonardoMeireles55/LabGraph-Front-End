@@ -45,19 +45,19 @@ const CsvGenerator: React.FC<CsvGeneratorProps> = ({
       <button
         onClick={generateCsv}
         disabled={isGenerating}
-        className={`flex items-center justify-center rounded-lg px-1 py-1 text-textPrimary transition-all duration-300 ease-in-out focus:outline-none focus:ring-0 ${isGenerating ? 'cursor-not-allowed opacity-50' : 'hover:scale-105'} `}
+        className={`flex items-center justify-center rounded-lg p-1 text-textPrimary transition-all duration-300 ease-in-out focus:outline-none focus:ring-0 ${isGenerating ? 'cursor-not-allowed opacity-50' : 'hover:scale-105'} `}
         aria-label='Export CSV'
       >
         {isGenerating ? (
-          <Loader2 className='w-5 h-5 mr-2 animate-spin' />
+          <Loader2 className='mr-2 size-5 animate-spin' />
         ) : (
-          <Download className='w-5 h-5 mr-2' />
+          <Download className='mr-2 size-5' />
         )}
         <span>{buttonText}</span>
       </button>
 
       {error && (
-        <div className='max-w-full px-1 py-1 text-sm text-center break-words border border-red-200 rounded-lg bg-red-50 text-danger'>
+        <div className='max-w-full break-words rounded-lg border bg-danger p-1 text-center text-sm text-danger'>
           {error}
         </div>
       )}

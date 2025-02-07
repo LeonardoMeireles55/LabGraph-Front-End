@@ -1,4 +1,4 @@
-import { useValidatedToken } from '@/components/authentication/hooks/useValidatedToken';
+import { useToken } from '@/components/authentication/contexts/TokenContext';
 import checkResponse from '@/components/shared/utils/helpers/checkResponse';
 import getStatusMessage from '@/components/shared/utils/helpers/getStatusMessage';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -11,7 +11,7 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
   const [ownSdValue, setOwnSd] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { token, loading } = useValidatedToken();
+  const { token, loading } = useToken();
 
   const fetchConfig = useMemo(
     () => ({

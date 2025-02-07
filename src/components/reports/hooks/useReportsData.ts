@@ -1,3 +1,4 @@
+import { useToken } from '@/components/authentication/contexts/TokenContext';
 import { ListingItem } from '@/components/charts/types/Chart';
 import { useEffect, useState } from 'react';
 
@@ -6,14 +7,16 @@ interface UseReportsDataProps {
 }
 
 const useReportsData = ({ url }: UseReportsDataProps) => {
+  const { token, loading } = useToken();
+
   const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (loading) {
+        return;
+      }
       try {
-        const tokenResponse = await fetch('/api/get-token');
-        const { token } = await tokenResponse.json();
-
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -21,6 +24,10 @@ const useReportsData = ({ url }: UseReportsDataProps) => {
             Authorization: `Bearer ${token}`,
           },
         });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         const result = await response.json();
         setDataFetched(result);
@@ -30,7 +37,7 @@ const useReportsData = ({ url }: UseReportsDataProps) => {
     };
 
     fetchData();
-  }, [url]);
+  }, [url, loading, token]);
 
   return { dataFetched };
 };

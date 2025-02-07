@@ -94,8 +94,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
       <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
         {payload.map((entry: any, index: number) => (
           <div key={`legend-${entry.id}`} className='flex items-center gap-2'>
-            <div className='h-2.5 w-2.5 rounded-full' style={{ backgroundColor: entry.color }} />
-            <span className='text-textPrimary text-xs md:text-sm'>{`${levels[index].toUpperCase()}`}</span>
+            <div className='size-2.5 rounded-full' style={{ backgroundColor: entry.color }} />
+            <span className='text-xs text-textPrimary md:text-sm'>{`${levels[index].toUpperCase()}`}</span>
           </div>
         ))}
       </div>
@@ -106,10 +106,10 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex content-center items-center justify-center text-[9px] text-textSecondary md:text-2xl italic'>
+          <h2 className='mt-4 flex place-content-center items-center text-[9px] italic text-textSecondary md:text-2xl'>
             {returnFullNameByTest(listings[0].groupedValuesByLevelDTO.values[0].name)}
           </h2>
-          <div className='absolute right-1 top-1/2 -translate-y-1/2 transform'>
+          <div className='absolute right-1 top-1/2 -translate-y-1/2'>
             <button
               onClick={() => setUseOwnValues(!useOwnValues)}
               className='group flex flex-col items-center transition-all duration-300'
@@ -122,9 +122,9 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                 }`}
               >
                 {useOwnValues ? (
-                  <TbMathFunction className='h-3 w-3 md:h-5 md:w-5' />
+                  <TbMathFunction className='size-3 md:size-5' />
                 ) : (
-                  <TbFileDescription className='h-3 w-3 md:h-5 md:w-5' />
+                  <TbFileDescription className='size-3 md:size-5' />
                 )}
               </div>
               <span
@@ -136,9 +136,9 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
           </div>
         </div>
 
-        <div className='flex h-[250px] content-center items-center justify-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
+        <div className='flex h-[250px] place-content-center items-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[550px]'>
           <ResponsiveContainer
-            className='flex items-center content-center justify-center bg-surface'
+            className='flex place-content-center items-center bg-surface'
             width='97%'
             height='96%'
           >
@@ -197,7 +197,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                               <div key={entry.payload.id} className={'border-border'}>
                                 <div className='flex items-center gap-2'>
                                   <div
-                                    className='h-2.5 w-2.5 rounded-full'
+                                    className='size-2.5 rounded-full'
                                     style={{
                                       backgroundColor: entry.stroke,
                                     }}

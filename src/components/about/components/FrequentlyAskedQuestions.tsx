@@ -40,30 +40,30 @@ const FAQS: FAQItem[] = [
 ];
 
 const FAQCard: FC<FAQItem> = ({ question, answer }) => (
-  <div className='card-hover p-6 bg-surface rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-borderColor group hover:bg-primaryLight/5'>
-    <div className='flex items-center mb-4 space-x-3'>
-      <div className='p-2 rounded-lg bg-primary/5 text-primary group-hover:bg-accent/10 group-hover:text-accent transition-all duration-300'>
+  <div className='card-hover hover:bg-primaryLight/5 group rounded-2xl border border-borderColor bg-surface p-6 shadow-lg transition-all duration-300 hover:shadow-xl'>
+    <div className='mb-4 flex items-center space-x-3'>
+      <div className='bg-primary/5 group-hover:bg-accent/10 rounded-lg p-2 text-primary transition-all duration-300 group-hover:text-accent'>
         <BiHelpCircle size={24} />
       </div>
-      <h3 className='text-lg font-semibold text-textPrimary group-hover:text-accent transition-colors duration-300'>
+      <h3 className='text-lg font-semibold text-textPrimary transition-colors duration-300 group-hover:text-accent'>
         {question}
       </h3>
     </div>
-    <p className='text-textSecondary text-sm leading-relaxed group-hover:text-textPrimary transition-colors duration-300'>
+    <p className='text-sm leading-relaxed text-textSecondary transition-colors duration-300 group-hover:text-textPrimary'>
       {answer}
     </p>
   </div>
 );
 
 const FrequentlyAskedQuestions: FC = () => (
-  <div id='faq' className='py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
-    <h2 className='text-3xl font-semibold text-textPrimary text-center mb-4'>
+  <div id='faq' className='mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
+    <h2 className='mb-4 text-center text-3xl font-semibold text-textPrimary'>
       Frequently Asked Questions
     </h2>
-    <p className='text-textSecondary text-center mb-12 max-w-2xl mx-auto'>
+    <p className='mx-auto mb-12 max-w-2xl text-center text-textSecondary'>
       Find answers to common questions about our quality control system
     </p>
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+    <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
       {FAQS.map((faq, index) => (
         <FAQCard key={index} {...faq} />
       ))}

@@ -19,7 +19,7 @@ const Footer: FC = () => {
             <Github
               size={24}
               strokeWidth={1.5}
-              className='inline-block ml-4 fill-background rounded-full p-0'
+              className='ml-4 inline-block rounded-full fill-background p-0'
             />
           </Link>
           <Link
@@ -31,7 +31,7 @@ const Footer: FC = () => {
             <Linkedin
               size={24}
               strokeWidth={1.5}
-              className='inline-block ml-4 fill-background rounded-full p-0'
+              className='ml-4 inline-block rounded-full fill-background p-0'
             />
           </Link>
         </span>

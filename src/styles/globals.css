@@ -240,8 +240,3 @@ select option:hover {
 select option:checked {
   @apply bg-surface text-textPrimary;
 }
-
-/* Focus Styles
-:focus-visible {
-  @apply outline-none ring-2 ring-secondary ring-opacity-50;
-} */

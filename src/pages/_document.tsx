@@ -17,7 +17,7 @@ export default function Document() {
   `;
 
   return (
-    <Html className='light' lang='eng-US'>
+    <Html lang='eng-US'>
       <Head />
       <body className=''>
         <Main />

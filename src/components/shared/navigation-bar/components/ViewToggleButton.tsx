@@ -11,9 +11,9 @@ const ViewToggleButton = () => {
       title={`${viewMode === 'single' ? 'Switch to' : 'Back to'} ${viewMode === 'single' ? 'multi line' : 'line'}`}
     >
       {viewMode === 'single' ? (
-        <TbChartAreaLine strokeWidth='1.5' className='h-7 w-7 opacity-80' />
+        <TbChartAreaLine strokeWidth='1.5' className='size-7 opacity-80' />
       ) : (
-        <TbChartLine strokeWidth='1.5' className='h-7 w-7 opacity-80' />
+        <TbChartLine strokeWidth='1.5' className='size-7 opacity-80' />
       )}
     </button>
   );

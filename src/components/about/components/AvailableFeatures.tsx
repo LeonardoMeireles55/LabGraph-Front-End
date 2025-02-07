@@ -40,23 +40,23 @@ const FEATURES: FeatureProps[] = [
 ];
 
 const FeatureCard: React.FC<FeatureProps> = ({ title, description, icon }) => (
-  <div className='card-hover p-6 bg-surface rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-borderColor group'>
-    <div className='flex items-center mb-4 space-x-3'>
-      <div className='text-primary group-hover:text-accent transition-colors duration-300'>
+  <div className='card-hover group rounded-2xl border border-borderColor bg-surface p-6 shadow-lg transition-all duration-300 hover:shadow-xl'>
+    <div className='mb-4 flex items-center space-x-3'>
+      <div className='text-primary transition-colors duration-300 group-hover:text-accent'>
         {icon}
       </div>
       <h3 className='text-lg font-semibold text-textSecondary'>{title}</h3>
     </div>
-    <p className='text-textSecondary text-sm leading-relaxed'>{description}</p>
+    <p className='text-sm leading-relaxed text-textSecondary'>{description}</p>
   </div>
 );
 
 const AvailableFeatures: React.FC = () => (
   <div className='py-12'>
-    <h2 className='text-3xl font-semibold text-textSecondary text-center mb-12'>
+    <h2 className='mb-12 text-center text-3xl font-semibold text-textSecondary'>
       Available Features
     </h2>
-    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+    <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
       {FEATURES.map((feature, index) => (
         <FeatureCard key={index} {...feature} />
       ))}

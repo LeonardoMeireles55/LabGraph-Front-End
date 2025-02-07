@@ -8,28 +8,16 @@ import Overview from './components/Overview';
 
 const AboutUs = () => {
   const carouselImages = [
-    {
-      src: '/reports.jpg',
-      alt: 'view result by table',
-    },
-    {
-      src: '/lab.jpg',
-      alt: 'view result by chart',
-    },
-    {
-      src: '/labbancada.jpg',
-      alt: 'generate reports',
-    },
-    {
-      src: '/lab4.jpg',
-      alt: 'alerts by email',
-    },
+    { id: 1, src: '/reports.jpg', alt: 'view result by table' },
+    { id: 2, src: '/lab.jpg', alt: 'view result by chart' },
+    { id: 3, src: '/labbancada.jpg', alt: 'generate reports' },
+    { id: 4, src: '/lab4.jpg', alt: 'alerts by email' },
   ];
 
   return (
-    <div id='overview' className='flex flex-col bg-background min-h-screen'>
+    <div id='overview' className='flex min-h-screen flex-col bg-background'>
       <AboutNavbar />
-      <div className='flex flex-col items-center max-w-7xl mx-auto w-full px-4 py-8 space-y-2'>
+      <div className='mx-auto flex w-full max-w-7xl flex-col items-center space-y-2 px-4 py-8'>
         <section id='carousel' className='w-full'>
           <Carousel images={carouselImages} />
         </section>

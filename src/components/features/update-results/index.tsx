@@ -75,7 +75,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
   };
 
   return (
-    <div className='mr-4 flex items-center gap-0 text-textSecondary'>
+    <div className='mr-4 flex items-center gap-0 text-textSecondary shadow-sm shadow-shadow'>
       <input
         type='file'
         id='fileInput'

@@ -1,3 +1,4 @@
+import Loading from '@/components/shared/utils/components/loading';
 import React from 'react';
 import { ListingTableProps } from '../../features/types/ListiningTable';
 import MobileItemCard from './mobile-item-card';
@@ -6,10 +7,10 @@ import TableRow from './table-row';
 const tableHeaders = [
   'Date',
   'Test',
-  'Level',
-  'Lot',
+  'Level Test',
+  'Lot Number',
   'Standard Deviation',
-  'Mean',
+  'Mean Test',
   'Values',
   'Unit',
   'Rules',
@@ -18,7 +19,7 @@ const tableHeaders = [
 const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
   return (
     <div className='flex h-min w-full flex-col justify-between'>
-      <table className='hidden bg-surface shadow-md shadow-shadow md:table'>
+      <table className='hidden rounded-md bg-surface shadow-md shadow-shadow md:table'>
         <thead className='rounded-lg bg-muted'>
           <tr>
             {tableHeaders.map((header, index) => (
@@ -43,8 +44,8 @@ const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
         ))}
       </div>
       {items.length === 0 ? (
-        <div className='bg-surface py-2 text-center text-textSecondary'>
-          please select another date range and level.
+        <div className=' rounded-md py-2 text-center text-textSecondary md:shadow-md md:shadow-shadow'>
+          <Loading />
         </div>
       ) : null}
     </div>

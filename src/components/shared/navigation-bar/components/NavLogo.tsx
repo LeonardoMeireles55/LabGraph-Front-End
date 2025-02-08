@@ -1,6 +1,6 @@
 const NavLogo = () => (
   <div className='flex items-center gap-2 sm:gap-3'>
-    <div className='flex size-10 items-center justify-center rounded-xl bg-textSecondary shadow-lg transition-all duration-300 hover:rotate-3 hover:scale-110 hover:bg-primary sm:size-12'>
+    <div className='flex size-8 items-center justify-center rounded-xl bg-textSecondary shadow-lg transition-all duration-300 hover:rotate-3 hover:scale-110 hover:bg-primary sm:size-10'>
       <span className='text-lg font-bold text-surface transition-all duration-300 hover:scale-110 sm:text-xl'>
         L
       </span>

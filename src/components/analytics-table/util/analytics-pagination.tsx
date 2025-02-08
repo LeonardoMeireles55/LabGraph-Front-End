@@ -18,7 +18,7 @@ const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
       <button
         onClick={() => setCurrentPage((prev) => prev - 1)}
         disabled={currentPage === 0}
-        className='bg-muted rounded-md px-4 py-2 text-xs text-white transition-colors hover:bg-primaryLight disabled:cursor-not-allowed disabled:opacity-50 md:text-sm'
+        className='rounded-md bg-muted px-4 py-2 text-xs text-white transition-colors hover:bg-primaryLight disabled:cursor-not-allowed disabled:opacity-50 md:text-sm'
       >
         &larr;
       </button>
@@ -28,7 +28,7 @@ const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
       <button
         onClick={() => setCurrentPage((prev) => prev + 1)}
         disabled={currentPage === totalPages || dataFetched.length === 0}
-        className='bg-border rounded-md px-4 py-2 text-xs text-white transition-colors hover:bg-primaryLight disabled:cursor-not-allowed disabled:opacity-50 md:text-sm'
+        className='rounded-md bg-border px-4 py-2 text-xs text-white transition-colors hover:bg-primaryLight disabled:cursor-not-allowed disabled:opacity-50 md:text-sm'
       >
         &rarr;
       </button>

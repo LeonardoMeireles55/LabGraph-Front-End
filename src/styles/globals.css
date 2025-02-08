@@ -11,105 +11,138 @@
 @layer base {
   /* Light Theme */
   :root {
-    /* Modern light theme colors */
-    --color-mean-line: #2d6a4f;
-    --color-sd1: #2a9d8f;
-    --color-sd2: #e9c46a;
-    --color-sd3: #e76f51;
-    --color-primary: #333333; /* Updated for better contrast */
-    --color-secondary: #0070f3; /* Modern blue tone */
-    --color-secondary-hover: #0366d6; /* Darker hover state */
-    --color-accent: #ff5722; /* updated accent, now distinct from secondary */
-    --color-danger: #d32f2f; /* Slightly deeper red */
-    --color-error-text: #fafafa;
-    --color-background: #fafafa; /* Lighter background */
-    --color-surface: #ffffff;
-    --color-muted: #f1f1f1;
-    --color-logo-l: #ffffff;
-    --color-text-primary: #222222; /* Improved readability */
-    --color-text-secondary: #444444; /* Enhanced legibility */
-    --color-grid-lines: #cccccc;
-    --color-border: #dddddd;
-    --color-navbar: #ffffff;
-    --color-white: #ffffff;
-    --color-bg-text: #222222;
-    --color-green: #28a745;
-    --color-shadow: rgba(0, 0, 0, 0.2);
-    --color-overlay: rgba(0, 0, 0, 0.05);
-    --border-color: #cccccc;
-    --color-sun: #fdb813;
-    --color-moon: #778899;
-    --color-button-muted: #888888;
-    --checkbox-color: #111111;
-    --color-signin: #28a745;
-    --color-signin-hover: #218838;
-    --color-signout: #ff4136;
-    --color-signout-hover: #ff0000;
-    --color-primary-light: #4a4a4a;
-    --color-primary-dark: #222222;
-    --color-tertiary: #6b46c1;
-    --color-tertiary-hover: #553c9a;
-    --color-success: #34d399;
-    --color-success-hover: #059669;
-    --color-warning: #fbbf24;
-    --color-warning-hover: #d97706;
-    --color-info: #60a5fa;
-    --color-info-hover: #3b82f6;
-    --color-neutral-50: #f8fafc;
-    --color-neutral-100: #f1f5f9;
-    --color-neutral-200: #e2e8f0;
-    --color-neutral-300: #cbd5e1;
+    /* Data Visualization Colors - For charts and graphs */
+    --color-mean-line: #2d6a4f; /* Central tendency line */
+    --color-sd1: #2a9d8f; /* First standard deviation range */
+    --color-sd2: #e9c46a; /* Second standard deviation range */
+    --color-sd3: #e76f51; /* Third standard deviation range */
+
+    /* Core Brand Colors */
+    --color-primary: #333333; /* Main brand color */
+    --color-primary-light: #4a4a4a; /* Lighter shade for highlights */
+    --color-primary-dark: #222222; /* Darker shade for emphasis */
+    --color-secondary: #0070f3; /* Secondary brand color */
+    --color-secondary-hover: #0366d6; /* Interactive state */
+    --color-tertiary: #6b46c1; /* Additional brand accent */
+    --color-tertiary-hover: #553c9a; /* Interactive state */
+
+    /* Interface Status Colors */
+    --color-success: #34d399; /* Positive actions/states */
+    --color-success-hover: #059669; /* Interactive state */
+    --color-warning: #fbbf24; /* Cautionary indicators */
+    --color-warning-hover: #d97706; /* Interactive state */
+    --color-danger: #d32f2f; /* Error/Danger indicators */
+    --color-info: #60a5fa; /* Informational elements */
+    --color-info-hover: #3b82f6; /* Interactive state */
+    --color-accent: #ff5722; /* Attention-drawing elements */
+
+    /* Text Colors */
+    --color-text-primary: #222222; /* Main body text */
+    --color-text-secondary: #444444; /* Supporting text */
+    --color-bg-text: #222222; /* Text on colored backgrounds */
+    --color-error-text: #fafafa; /* Error message text */
+
+    /* Background Hierarchy */
+    --color-background: #fafafa; /* Main background */
+    --color-surface: #ffffff; /* Elevated elements */
+    --color-muted: #f1f1f1; /* De-emphasized areas */
+    --color-navbar: #ffffff; /* Navigation background */
+
+    /* Neutral Scale */
+    --color-neutral-50: #f8fafc; /* Lightest neutral */
+    --color-neutral-100: #f1f5f9; /* Light neutral */
+    --color-neutral-200: #e2e8f0; /* Medium-light neutral */
+    --color-neutral-300: #cbd5e1; /* Medium neutral */
+
+    /* UI Functional Colors */
+    --color-border: #dddddd; /* Borders and dividers */
+    --color-grid-lines: #cccccc; /* Grid and chart lines */
+    --color-shadow: rgba(0, 0, 0, 0.2); /* Shadows */
+    --color-overlay: rgba(0, 0, 0, 0.05); /* Overlays */
+
+    /* Interactive Elements */
+    --color-button-muted: #888888; /* Secondary buttons */
+    --color-signin: #28a745; /* Sign-in action */
+    --color-signin-hover: #218838; /* Interactive state */
+    --color-signout: #ff4136; /* Sign-out action */
+    --color-signout-hover: #ff0000; /* Interactive state */
+
+    /* System Colors */
+    --color-white: #ffffff; /* Pure white */
+    --color-logo-l: #ffffff; /* Logo light variant */
+    --checkbox-color: #111111; /* Form controls */
+    --border-color: #cccccc; /* Standard borders */
+    --color-sun: #fdb813; /* Light theme indicator */
+    --color-moon: #778899; /* Dark theme indicator */
+    --color-green: #28a745; /* Success indicators */
   }
 
   /* Dark Theme */
   .dark {
-    /* Modern dark theme colors */
+    /* Data Visualization Colors */
     --color-mean-line: #a8d5ba;
     --color-sd1: #71c7ec;
     --color-sd2: #f4a261;
     --color-sd3: #e63946;
-    --color-primary: #cccccc; /* Lighter text for dark mode */
-    --color-secondary: #8ab4f8; /* Softer blue */
-    --color-secondary-hover: #6e9cf5; /* Darker hover state */
-    --color-accent: #ff7043; /* updated dark accent to contrast secondary */
-    --color-danger: #d32f2f;
-    --color-error-text: #fafafa;
-    --color-background: #242529; /* Darker background */
-    --color-surface: #2f3136; /* Elevated surface contrast */
-    --color-muted: #40444b;
-    --color-text-primary: #e0e0e0;
-    --color-text-secondary: #c7c7c7; /* More distinct secondary text */
-    --color-bg-text: #eeeeee;
-    --color-grid-lines: rgba(255, 255, 255, 0.1);
-    --color-navbar: #202225;
-    --color-white: #ffffff;
-    --color-logo-l: #000000;
-    --color-green: #2ecc71;
-    --color-shadow: rgba(255, 255, 255, 0.12);
-    --color-overlay: rgba(255, 255, 255, 0.1);
-    --border-color: #444444;
-    --color-sun: #fdb813;
-    --color-moon: #778899;
-    --color-button-muted: #999999;
-    --checkbox-color: #ffffff;
-    --color-signin: #28a745;
-    --color-signin-hover: #218838;
-    --color-signout: #ff4136;
-    --color-signout-hover: #ff0000;
+
+    /* Core Brand Colors */
+    --color-primary: #cccccc;
     --color-primary-light: #e5e5e5;
     --color-primary-dark: #1a1a1a;
+    --color-secondary: #8ab4f8;
+    --color-secondary-hover: #6e9cf5;
     --color-tertiary: #9f7aea;
     --color-tertiary-hover: #805ad5;
+
+    /* Interface Status Colors */
     --color-success: #10b981;
     --color-success-hover: #059669;
     --color-warning: #f59e0b;
     --color-warning-hover: #d97706;
+    --color-danger: #d32f2f;
     --color-info: #3b82f6;
     --color-info-hover: #2563eb;
+    --color-accent: #ff7043;
+
+    /* Text Colors */
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #c7c7c7;
+    --color-bg-text: #eeeeee;
+    --color-error-text: #fafafa;
+
+    /* Background Hierarchy */
+    --color-background: #242529;
+    --color-surface: #2f3136;
+    --color-muted: #40444b;
+    --color-navbar: #202225;
+
+    /* Neutral Scale */
     --color-neutral-50: #1a1a1a;
     --color-neutral-100: #262626;
     --color-neutral-200: #404040;
     --color-neutral-300: #525252;
+
+    /* UI Functional Colors */
+    --color-border: #444444;
+    --color-grid-lines: rgba(255, 255, 255, 0.1);
+    --color-shadow: rgba(255, 255, 255, 0.25);
+    --color-overlay: rgba(255, 255, 255, 0.1);
+
+    /* Interactive Elements */
+    --color-button-muted: #999999;
+    --color-signin: #28a745;
+    --color-signin-hover: #218838;
+    --color-signout: #ff4136;
+    --color-signout-hover: #ff0000;
+
+    /* System Colors */
+    --color-white: #ffffff;
+    --color-logo-l: #000000;
+    --checkbox-color: #ffffff;
+    --color-sun: #fdb813;
+    --color-moon: #778899;
+    --color-green: #2ecc71;
+    --border-color: #cccccc85; /* Standard borders */
   }
 
   /********************

@@ -38,7 +38,7 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
 
         const tokenResponse = await fetch('/api/get-token');
 
-        if (!tokenResponse.ok) {
+        if (!tokenResponse.ok || tokenResponse.status === 401) {
           setLoading(false);
           setToken(null);
           router.push('/auth/login');

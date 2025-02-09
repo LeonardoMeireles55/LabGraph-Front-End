@@ -7,7 +7,7 @@ A web application for laboratory quality control management implementing Westgar
 ```
 ├── public/           # Static files
 ├── src/
-│   ├── components/   # Reusable components
+│   ├── features/   # Reusable features components
 │   │   ├── analytics-table/
 │   │   ├── authentication/
 │   │   ├── charts/

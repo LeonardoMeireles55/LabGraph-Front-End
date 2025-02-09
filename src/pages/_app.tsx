@@ -1,5 +1,5 @@
-import { TokenProvider } from '@/components/authentication/contexts/TokenContext';
-import { GraphProvider } from '@/components/charts/contexts/GraphContext';
+import { TokenProvider } from '@/features/authentication/contexts/TokenContext';
+import { GraphProvider } from '@/features/charts/contexts/GraphContext';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { IBM_Plex_Sans } from 'next/font/google';

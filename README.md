@@ -87,4 +87,4 @@ node ./.next/standalone/server.js
 
 Licensed under GNU General Public License v3.0 (GPL-3.0)
 
-![image](https://github.com/user-attachments/assets/861b601c-53cd-4bd6-a12a-96ccc5ed0dce)
+![image](https://github.com/user-attachments/assets/89193291-fe53-488e-b652-4094d319f281)

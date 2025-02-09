@@ -65,12 +65,22 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ```bash
 npm run build
+npm run start
+
+```
+
+or
+
+```bash
+npm run build
+node ./.next/standalone/server.js
+
 ```
 
 ## Contributing
 
 1. Fork the repository
-2. Create feature branch
+2. Create feature/[...] or fix/[...] branch
 3. Submit pull request
 
 ## License

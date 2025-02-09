@@ -28,9 +28,9 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
         if (
           router.pathname === '/auth/login' ||
           router.pathname === '/auth/signup' ||
-          router.pathname === '/health-check' ||
           router.pathname === '/auth/forgot-password' ||
-          router.pathname === '/about-us'
+          router.pathname === '/about-us' ||
+          router.pathname === '/'
         ) {
           setLoading(false);
           return;

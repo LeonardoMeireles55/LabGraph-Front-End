@@ -20,7 +20,7 @@ const ReportsControls = ({
   <div className='grid gap-2 text-textSecondary md:flex xl:mt-14'>
     <DateSelector {...dateSelectorProps} />
     <AnalyticsTypeSelector analyticsType={analyticsType} onChange={onAnalyticsTypeChange} />
-    <span className='flex justify-evenly rounded-md border border-borderColor text-textSecondary'>
+    <span className='flex justify-evenly rounded-md shadow-sm shadow-shadow border border-borderColor text-textSecondary'>
       <GenerateReports jsonData={dataFetched} fileName={analyticsType} />
     </span>
   </div>

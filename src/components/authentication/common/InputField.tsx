@@ -9,6 +9,7 @@ const InputField: React.FC<InputFieldProps> = ({
   value,
   onChange,
   placeholder,
+  autoComplete,
   icon,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,6 +33,7 @@ const InputField: React.FC<InputFieldProps> = ({
           className={`input-modern   ${icon ? 'pl-10' : 'pl-3'}`}
           required
           placeholder={placeholder}
+          autoComplete={autoComplete}
         />
         {type === 'password' && (
           <button

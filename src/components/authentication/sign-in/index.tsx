@@ -24,6 +24,7 @@ const LoginForm = () => {
           value={formData.identifier}
           onChange={handleChange}
           icon={<AtSign className='size-4 text-textSecondary' />}
+          autoComplete='username'
         />
         <InputField
           id='password'
@@ -33,6 +34,7 @@ const LoginForm = () => {
           value={formData.password}
           onChange={handleChange}
           icon={<Lock className='size-4 text-textSecondary' />}
+          autoComplete='current-password'
         />
 
         <div className='flex items-center justify-between text-xs sm:text-sm'>

@@ -17,6 +17,7 @@ export interface InputFieldProps {
   value: string;
   placeholder?: string;
   icon?: React.ReactNode;
+  autoComplete?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

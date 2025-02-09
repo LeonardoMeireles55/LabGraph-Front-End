@@ -23,6 +23,7 @@ const SignUpForm = () => {
           value={formData.identifier}
           onChange={handleChange}
           icon={<User className='size-4 text-textSecondary' />}
+          autoComplete='username'
         />
         <InputField
           id='email'
@@ -32,6 +33,7 @@ const SignUpForm = () => {
           value={formData.email ? formData.email : ''}
           onChange={handleChange}
           icon={<AtSign className='size-4 text-textSecondary' />}
+          autoComplete='email'
         />
         <InputField
           id='password'
@@ -41,6 +43,7 @@ const SignUpForm = () => {
           value={formData.password}
           onChange={handleChange}
           icon={<Lock className='size-4 text-textSecondary' />}
+          autoComplete='new-password'
         />
         <InputField
           id='confirmPassword'
@@ -50,6 +53,7 @@ const SignUpForm = () => {
           value={formData.confirmPassword ?? ''}
           onChange={handleChange}
           icon={<Lock className='size-4 text-textSecondary' />}
+          autoComplete='new-password'
         />
         <SubmitButton text='Create Account' />
         <AuthLink text='Already have an account?' linkText='Sign in' href='/auth/login' />

@@ -1,4 +1,4 @@
-import GraphWrapper from '@/components/charts';
+import GraphWrapper from '@/features/charts';
 
 const list = [
   'ALB2',

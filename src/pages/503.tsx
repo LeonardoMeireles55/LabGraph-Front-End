@@ -1,4 +1,4 @@
-import CustomError from '@/components/authentication/custom-errors';
+import CustomError from '@/features/authentication/custom-errors';
 
 export default function Custom503() {
   return (

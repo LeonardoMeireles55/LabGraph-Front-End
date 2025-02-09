@@ -1,4 +1,4 @@
-import AboutUs from '../components/about';
+import AboutUs from '@/features/about';
 
 const AboutUsPage = () => {
   return <AboutUs />;

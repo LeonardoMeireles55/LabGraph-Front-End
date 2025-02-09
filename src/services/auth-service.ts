@@ -1,4 +1,4 @@
-import { AuthFormData } from '@/components/authentication/types/Auth';
+import { AuthFormData } from '@/features/authentication/types/Auth';
 import { AuthParams } from './types/AuthParams';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;

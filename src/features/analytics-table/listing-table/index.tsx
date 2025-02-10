@@ -5,45 +5,45 @@ import MobileItemCard from './mobile-item-card';
 import TableRow from './table-row';
 
 const tableHeaders = [
-  'Date',
-  'Test',
-  'Level Test',
-  'Lot Number',
-  'Standard Deviation',
-  'Mean Test',
-  'Values',
-  'Unit',
-  'Rules',
+  { id: 'date', name: 'Date' },
+  { id: 'test', name: 'Test' },
+  { id: 'level_test', name: 'Level Test' },
+  { id: 'lot_number', name: 'Lot Number' },
+  { id: 'standard_deviation', name: 'Standard Deviation' },
+  { id: 'mean_test', name: 'Mean Test' },
+  { id: 'values', name: 'Values' },
+  { id: 'unit', name: 'Unit' },
+  { id: 'rules', name: 'Rules' },
 ];
 
-const ListingTable: React.FC<ListingTableProps> = ({ items }) => {
+const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
   return (
-    <div className='flex h-min w-full flex-col justify-between'>
+    <div className='flex h-min w-full flex-col justify-evenly '>
       <table className='hidden rounded-md bg-surface shadow-md shadow-shadow md:table'>
         <thead className='rounded-lg bg-muted'>
           <tr>
-            {tableHeaders.map((header, index) => (
+            {tableHeaders.map((header) => (
               <th
-                key={index}
+                key={header.id}
                 className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'
               >
-                {header}
+                {header.name}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => (
-            <TableRow key={index} item={item} />
+          {items.map((item) => (
+            <TableRow key={item.id} item={item} />
           ))}
         </tbody>
       </table>
-      <div className='grid grid-cols-4 place-content-center gap-4 px-2 text-center md:hidden'>
-        {items.map((item, index) => (
-          <MobileItemCard key={index} item={item} />
+      <div className='grid grid-cols-4 place-content-center gap-2 px-2 text-center md:hidden'>
+        {items.map((item) => (
+          <MobileItemCard key={item.id} item={item} />
         ))}
       </div>
-      {items.length === 0 ? (
+      {isLoading ? (
         <div className=' rounded-md py-2 text-center text-textSecondary md:shadow-md md:shadow-shadow'>
           <Loading />
         </div>

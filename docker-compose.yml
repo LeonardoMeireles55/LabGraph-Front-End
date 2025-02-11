@@ -1,14 +1,35 @@
 services:
-  quality-lab-pro-front-end:
-    restart: always
+  app-prod:
+    container_name: quality-lab-pro-front-end-prod
+    restart: unless-stopped
     image: leonardomeireles55/quality-lab-pro-front-end:latest
+    build:
+      context: .
+      dockerfile: ./docker/node-js/Dockerfile.prod
     ports:
-      - '3000'
-    environment:
-      - NODE_ENV=production
-    command: ['node', './server.js']
+      - '80:80'
     networks:
       - qualitylab-net
+    profiles:
+      - prod
+
+  app-dev:
+    container_name: quality-lab-pro-front-end-dev
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/node-js/Dockerfile.dev
+    ports:
+      - '3000:3000'
+    # volumes:
+      # - ./node_modules:/app/.next/standalone/node_modules:ro
+    stdin_open: true
+    tty: true
+    networks:
+      - qualitylab-net
+    profiles:
+      - dev
+
 networks:
   qualitylab-net:
     driver: bridge

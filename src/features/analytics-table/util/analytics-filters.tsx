@@ -9,7 +9,7 @@ interface AnalyticsFiltersProps {
   levelOptions: { value: string; label: string }[];
   level: string;
   setLevel: (value: string) => void;
-  setFiltered: (setter: (prev: boolean) => boolean) => void;
+  setFiltered: (value: boolean) => void;
 }
 
 const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
@@ -27,7 +27,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
       <div className='mt-4 w-full md:mt-14 md:w-auto'>
         <DateSelector {...dateSelector} />
         <label htmlFor='tests' className='flex items-center gap-1 text-textSecondary'>
-          Test:{' '}
+          Test:
           <select
             id='tests'
             value={analyticsType}
@@ -42,13 +42,13 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
           </select>
         </label>
         <label htmlFor='level' className='flex items-center gap-2 text-textSecondary'>
-          Level:{' '}
+          Level:
           <select
             id='level'
             value={level}
             onChange={(e) => {
               setLevel(e.target.value);
-              setFiltered(() => e.target.value !== '0');
+              setFiltered(e.target.value !== '0');
             }}
             className='focus:ring-borderColor/30 mt-1 rounded border border-borderColor bg-background text-textSecondary focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'
           >

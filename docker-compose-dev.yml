@@ -1,0 +1,12 @@
+services:
+  quality-lab-pro-front-end:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
+    command: ['node', './server.js']

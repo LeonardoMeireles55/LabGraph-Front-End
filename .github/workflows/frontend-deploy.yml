@@ -8,6 +8,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  DOCKER_IMAGE: leonardomeireles55/quality-lab-pro-front-end
+  DOCKER_TAG: latest
+  HEALTH_CHECK_URL: https://lab-spec.systems/api/health-check
+
 jobs:
   build:
     runs-on: [self-hosted, linux, x64, frontend]
@@ -40,10 +45,10 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: Dockerfile
+          file: ./.docker/node-js/Dockerfile.prod
           push: true
-          tags: leonardomeireles55/quality-lab-pro-front-end:latest
-          cache-from: type=registry,ref=leonardomeireles55/quality-lab-pro-front-end:latest
+          tags: ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+          cache-from: type=registry,ref=${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
           cache-to: type=inline,mode=min
 
   deploy:
@@ -56,7 +61,7 @@ jobs:
       - name: Deploy application
         run: |
           docker compose pull
-          docker compose up -d
+          docker compose --profile dev up -d
 
       - name: Deployment notification
         run: echo "✅ Deployment completed"
@@ -71,7 +76,7 @@ jobs:
           max_attempts=12
           attempt=1
           while [ $attempt -le $max_attempts ]; do
-            if curl -sSf https://lab-spec.systems/api/health-check; then
+            if curl -sSf ${{ env.HEALTH_CHECK_URL }}; then
               echo "✅ Service is healthy!"
               exit 0
             fi

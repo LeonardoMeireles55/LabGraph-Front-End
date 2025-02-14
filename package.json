@@ -6,8 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "eslint ./src --fix"
+    "lint": "next lint --fix",
+    "lint:fix": "eslint ./src --fix",
+    "exec:container": "docker exec -it quality-lab-pro-front-end-dev /bin/sh"
   },
   "dependencies": {
     "@types/cookie": "^0.6.0",

@@ -1,0 +1,17 @@
+FROM node:20.17.0-alpine AS base
+
+WORKDIR /app
+
+ENV NODE_ENV=development
+
+RUN apk add --no-cache libc6-compat && apk add --update npm && npm install -g npm@latest
+
+COPY package.json package-lock.json* ./
+
+RUN chmod -R 777 /app
+
+COPY . .
+
+RUN npm ci
+
+CMD ["sh", "-c", "npm run dev"]

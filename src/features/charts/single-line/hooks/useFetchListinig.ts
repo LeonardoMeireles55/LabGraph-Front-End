@@ -2,13 +2,13 @@ import { useToken } from '@/features/authentication/contexts/TokenContext';
 import checkResponse from '@/features/shared/utils/helpers/checkResponse';
 import getStatusMessage from '@/features/shared/utils/helpers/getStatusMessage';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ListingCollection, UseFetchListingProps } from '../../types/Chart';
+import { FetchListingData, ListingCollection } from '../../types/Chart';
 
-const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => {
+const useFetchListing = (url: string) => {
   const [listing, setListing] = useState<ListingCollection>([]);
-  const [unitValues, setUnitValues] = useState<string | null>(null);
-  const [ownMeanValue, setOwnMean] = useState<number | null>(null);
-  const [ownSdValue, setOwnSd] = useState<number | null>(null);
+  const [unitValues, setUnitValues] = useState<string>('-');
+  const [ownMeanValue, setOwnMean] = useState<number>(0);
+  const [ownSdValue, setOwnSd] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { token, loading } = useToken();
@@ -24,57 +24,40 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
     [token]
   );
 
-  const fetchData = useCallback(
-    async (abortController: AbortController) => {
-      if (!token) throw new Error('No authentication token available');
-
-      const [listingResponse, meanDeviationResponse] = await Promise.all([
-        fetch(url, { ...fetchConfig, signal: abortController.signal }),
-        fetch(urlMeanAndDeviation, { ...fetchConfig, signal: abortController.signal }),
-      ]);
-
-      const [json, jsonMeanAndDeviation] = await Promise.all([
-        checkResponse(listingResponse),
-        checkResponse(meanDeviationResponse),
-      ]);
-
-      return { json, jsonMeanAndDeviation };
-    },
-    [url, urlMeanAndDeviation, fetchConfig, token]
-  );
+  const fetchData = useCallback(async (): Promise<FetchListingData> => {
+    if (!token) throw new Error('No authentication token available');
+    const response = await fetch(url, fetchConfig);
+    const data: FetchListingData = await checkResponse(response);
+    return data;
+  }, [url, fetchConfig, token]);
 
   useEffect(() => {
     if (loading) return;
 
-    const abortController = new AbortController();
     setIsLoading(true);
     setError(null);
 
-    fetchData(abortController)
-      .then(({ json, jsonMeanAndDeviation }) => {
-        setOwnMean(jsonMeanAndDeviation.mean);
-        setOwnSd(jsonMeanAndDeviation.standardDeviation);
+    (async () => {
+      try {
+        const data = await fetchData();
+        setOwnMean(data.calcMeanAndStdDTO.mean);
+        setOwnSd(data.calcMeanAndStdDTO.standardDeviation);
 
-        if (json.length > 0) {
-          setUnitValues(json[0]?.unit_value ?? null);
-          setListing(json);
+        if (data.analyticsDTO.length > 0) {
+          setUnitValues(data.analyticsDTO[0]?.unit_value ?? '-');
+          setListing(data.analyticsDTO);
         } else {
-          setUnitValues(null);
+          setUnitValues('-');
         }
-      })
-      .catch((error: Error | any) => {
-        if (error.name === 'AbortError') return;
-        const errorMessage = getStatusMessage(error.status);
+      } catch (error: unknown) {
+        if (error instanceof Error && error.name === 'AbortError') return;
+        const errorMessage = getStatusMessage((error as any).status);
         setError(errorMessage);
         console.error('Error fetching data:', errorMessage);
-      })
-      .finally(() => {
+      } finally {
         setIsLoading(false);
-      });
-
-    return () => {
-      abortController.abort();
-    };
+      }
+    })();
   }, [loading, fetchData, token]);
 
   return {
@@ -83,7 +66,6 @@ const useFetchListing = ({ url, urlMeanAndDeviation }: UseFetchListingProps) => 
     ownMeanValue,
     ownSdValue,
     url,
-    urlMeanAndDeviation,
     isLoading,
     error,
   };

@@ -104,3 +104,13 @@ export interface ListingData {
   ownMean: number | null;
   ownSd: number | null;
 }
+
+export interface FetchListingData {
+  calcMeanAndStdDTO: {
+    mean: number;
+    standardDeviation: number;
+  };
+  analyticsDTO: {
+    unit_value?: string;
+  }[];
+}

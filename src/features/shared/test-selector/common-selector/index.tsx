@@ -42,10 +42,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
     date: { startDay, startMonth, startYear, endDay, endMonth, endYear },
   });
 
-  const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing({
-    url: props.url,
-    urlMeanAndDeviation: props.urlMeanAndDeviation,
-  });
+  const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing(props.url);
 
   useEffect(() => {
     if (listing) {

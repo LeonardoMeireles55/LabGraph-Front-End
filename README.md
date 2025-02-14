@@ -4,10 +4,10 @@ A web application for laboratory quality control management implementing Westgar
 
 ## Project Structure
 
-```
-├── public/           # Static files
+```bash
+├── public/          # Static files
 ├── src/
-│   ├── features/   # Reusable features components
+│   ├── features/    # Reusable features components
 │   │   ├── analytics-table/
 │   │   ├── authentication/
 │   │   ├── charts/
@@ -61,15 +61,13 @@ npm run dev
 
 Visit [http://localhost:3000](http://localhost:3000)
 
+### Docker
+
+Development: Execute `docker compose --profile dev up -d --remove-orphans;`
+
+Prod: Execute `docker compose --profile prod up -d`
+
 ### Production Build
-
-```bash
-npm run build
-npm run start
-
-```
-
-or
 
 ```bash
 npm run build

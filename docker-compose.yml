@@ -8,6 +8,8 @@ services:
       dockerfile: ./.docker/node-js/Dockerfile.prod
     env_file:
       - ./.env
+    environment:
+      - NODE_ENV=production
     ports:
       - '3000'
     networks:
@@ -44,7 +46,9 @@ services:
 
 networks:
   quality-net:
+    name: quality-net
     driver: bridge
 
   quality-net-dev:
+    name: quality-net-dev
     driver: bridge

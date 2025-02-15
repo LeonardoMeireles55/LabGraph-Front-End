@@ -5,8 +5,8 @@ import useWindowDimensions from '../shared/ui/hooks/useWindowDimensions';
 import { useAnalyticsOptions } from './hooks/useAnalyticsOptions';
 import MainLayout from './layouts/MainLayout';
 import ListingTable from './listing-table';
-import AnalyticsFilters from './util/analytics-filters';
-import AnalyticsPagination from './util/analytics-pagination';
+import AnalyticsFilters from './util/AnalyticsFilters';
+import AnalyticsPagination from './util/AnalyticsPagination';
 
 const AnalyticsTableIndex = () => {
   const dateSelector = useDateSelector();
@@ -14,7 +14,7 @@ const AnalyticsTableIndex = () => {
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics');
   const [level, setLevel] = useState('0');
-  const [isFiltered, setFiltered] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
 
   const { width } = useWindowDimensions();
   const { analyticsOptions, levelOptions } = useAnalyticsOptions(analyticsType);
@@ -77,7 +77,7 @@ const AnalyticsTableIndex = () => {
         levelOptions={levelOptions}
         level={level}
         setLevel={setLevel}
-        setFiltered={setFiltered}
+        setFiltered={setIsFiltered}
       />
       <ListingTable items={dataFetched} isLoading={isLoading} onPageChange={handlePageChange} />
       <AnalyticsPagination

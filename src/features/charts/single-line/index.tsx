@@ -9,6 +9,7 @@ import { LabGraphProps, ListingItem } from '../types/Chart';
 
 const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
   const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div className='min-h-min gap-4'>
@@ -22,13 +23,14 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
             <TestSelectorWithLevel
               name={testList[0]}
               level={1}
+              isLoading={setIsLoading}
               setListingItem={setDataFetched}
               analyticsType={analyticsType}
               list={testList}
             />
           </div>
           <div className='flex min-h-full w-screen flex-col items-center justify-center'>
-            {!dataFetched[0] ? <Loading /> : <ControlChart listing={dataFetched} />}
+            {isLoading ? <Loading /> : <ControlChart listing={dataFetched} />}
           </div>
         </div>
       </div>

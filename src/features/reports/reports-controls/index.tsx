@@ -1,6 +1,6 @@
 import { ListingItem } from '@/features/charts/types/Chart';
-import GenerateReports from '@/features/features/generate-reports';
 import AnalyticsTypeSelector from '@/features/reports/analytics-type-selector';
+import GenerateReports from '@/features/reports/generate-csv';
 import DateSelector from '@/features/shared/date-selector';
 import { DateSelectorProps } from '@/features/shared/date-selector/types/dateSelectorProps';
 

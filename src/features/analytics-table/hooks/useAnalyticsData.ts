@@ -5,25 +5,8 @@ import {
   formatEndDateWithTime,
 } from '@/features/shared/date-selector/constants/formatDateWithTime';
 import { useState } from 'react';
+import { PaginatedResponse, UseAnalyticsDataProps } from '../types/AnalyticsTable';
 
-interface PaginatedResponse {
-  content: ListingItem[];
-  page: {
-    size: number;
-    totalElements: number;
-    totalPages: number;
-    number: number;
-  };
-}
-
-interface UseAnalyticsDataProps {
-  analyticsType: string;
-  level: string;
-  startDate: { day: number; month: number; year: number };
-  endDate: { day: number; month: number; year: number };
-  itemsPerPage: number;
-  currentPage: number;
-}
 
 export const useAnalyticsData = ({
   analyticsType,

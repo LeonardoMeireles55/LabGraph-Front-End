@@ -6,6 +6,7 @@ export interface CommonTestSelectorProps {
   name: string;
   level: number;
   setListingItem: (data: ListingItem[]) => void;
+  isLoading: (data: boolean) => void;
 }
 
 export interface TestSelectorProps {

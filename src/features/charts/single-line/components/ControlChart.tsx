@@ -17,34 +17,14 @@ import customFormatDate from '../../../shared/date-selector/constants/customForm
 import getColorByLevel from '../../constants/getColorByLevel';
 import normalizeValue from '../../constants/normalizeValue';
 import { ControlChartProps } from '../../types/Chart';
+import LegendCustom from './LegendCustom';
+import TooltipCustom from './TooltipCustom';
 
-const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
+const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
   const { width: windowWidth } = useWindowDimensions();
 
-  const data = listing;
-
-  const renderLegend = (props: any) => {
-    const { payload } = props;
-
-    return (
-      <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
-        {payload.map((entry: any, index: number) => (
-          <div key={`legend-${entry}`} className='flex items-center gap-2'>
-            <div
-              className='size-2.5 rounded-full'
-              style={{
-                backgroundColor: getColorByLevel(data[index].level.toString()),
-              }}
-            />
-            <span className='text-xs text-textPrimary md:text-sm'>{`${data[index].level.toString().toUpperCase()}`}</span>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const chartData = data.map((entry) => ({
+  const chartData = listingData.map((entry) => ({
     key: entry.id,
     date: customFormatDate(entry.date),
     levelLot: entry.level_lot,
@@ -84,7 +64,10 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
           <h2 className='mt-4 flex place-content-center items-center text-[9px] italic text-textSecondary md:text-2xl'>
-            {returnFullNameByTest(data[0].name) + ' (Level - ' + data[0].level.toUpperCase() + ')'}
+            {returnFullNameByTest(listingData[0].name) +
+              ' (Level - ' +
+              listingData[0].level.toUpperCase() +
+              ')'}
           </h2>
           <div className='absolute right-1 top-1/2 -translate-y-1/2'>
             <button
@@ -150,59 +133,22 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                   return matchingValue ? matchingValue.label : '';
                 }}
               />
-              <Tooltip
-                content={({ active, payload }) => {
-                  if (active && payload && payload.length) {
-                    return (
-                      <div className='rounded border border-border bg-background p-2 text-xs text-textPrimary shadow-md shadow-shadow'>
-                        {payload.map((item) => {
-                          const data = item.payload;
-                          return (
-                            <div
-                              key={`${data.date}-${data.level}-${data.levelLot}`}
-                              className='mb-2 border-b border-border last:border-0 last:pb-0'
-                            >
-                              <div className='mb-1 flex items-center gap-2'>
-                                <div
-                                  className='size-2.5 rounded-full'
-                                  style={{
-                                    backgroundColor: getColorByLevel(data.level),
-                                  }}
-                                />
-                                <span className='font-medium'>
-                                  Level: {data.level.toUpperCase()}
-                                </span>
-                              </div>
-                              <p>Test: {data.name}</p>
-                              <p>Date: {data.date}</p>
-                              <p>Value: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
-                              <p>Lot: {data.levelLot}</p>
-                              <p>Mean: {data.mean.toFixed(2)}</p>
-                              <p>Sd: {data.sd.toFixed(2)}</p>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
+              <Tooltip content={TooltipCustom} />
               <Line
                 id={'id'}
                 type='linear'
                 dataKey={`value`}
                 name={`level`}
-                stroke={getColorByLevel(data[0].level.toString())}
+                stroke={getColorByLevel(listingData[0].level.toString())}
                 strokeWidth={1.0}
                 connectNulls={true}
                 activeDot={{
-                  color: getColorByLevel(data[0].level.toString()),
+                  color: getColorByLevel(listingData[0].level.toString()),
                   r: 3,
                 }}
                 dot={{
-                  fill: getColorByLevel(data[0].level.toString()),
-                  stroke: getColorByLevel(data[0].level.toString()),
+                  fill: getColorByLevel(listingData[0].level.toString()),
+                  stroke: getColorByLevel(listingData[0].level.toString()),
                   r: 2,
                   strokeWidth: 1,
                   className: 'text-textPrimary',
@@ -220,7 +166,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing }) => {
                 />
               ))}
               <Legend
-                content={renderLegend}
+                content={<LegendCustom />}
                 verticalAlign='bottom'
                 wrapperStyle={{
                   paddingTop: '5px',

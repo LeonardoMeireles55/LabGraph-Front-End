@@ -1,8 +1,7 @@
-import getStatusMessage from './getStatusMessage';
-
 const checkResponse = async (response: Response) => {
   if (!response.ok) {
-    throw new Error(`Network response was not ok: ${getStatusMessage(response.status)}`);
+    const resp = await response.json()
+    throw new Error(`${resp.details}`);
   }
   return await response.json();
 };

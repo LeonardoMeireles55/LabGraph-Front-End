@@ -1,9 +1,5 @@
-import { ListingItem } from '@/features/charts/types/Chart';
 import React from 'react';
-
-interface MobileItemCardProps {
-  item: ListingItem;
-}
+import { MobileItemCardProps } from '../types/AnalyticsTable';
 
 const MobileItemCard: React.FC<MobileItemCardProps> = ({ item }) => {
   return (

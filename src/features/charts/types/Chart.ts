@@ -1,3 +1,5 @@
+import { LegendProps } from "recharts";
+
 export interface ListingItem {
   id: number;
   name: string;
@@ -15,7 +17,7 @@ export interface ListingItem {
   rules?: string;
 }
 
-export interface ListingCollection extends Array<any> {}
+export interface ListingCollection extends Array<any> { }
 
 export interface UseFetchListingProps {
   url: string;
@@ -113,4 +115,29 @@ export interface FetchListingData {
   analyticsDTO: {
     unit_value?: string;
   }[];
+}
+
+
+export interface PayloadData {
+  date: string;
+  level: string;
+  levelLot: string;
+  name: string;
+  rawValue: number;
+  unitValue: string;
+  mean: number;
+  sd: number;
+}
+
+export interface LegendCustomProps extends LegendProps {
+  payload?: Array<{
+    value: string;
+    payload: {
+      level: string;
+      strokeDasharray: string | number;
+    };
+  }>;
+  data?: Array<{
+    level: string;
+  }>;
 }

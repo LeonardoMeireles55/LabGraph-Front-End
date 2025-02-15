@@ -1,9 +1,5 @@
-import { ListingItem } from '@/features/charts/types/Chart';
 import React from 'react';
-
-interface TableRowProps {
-  item: ListingItem;
-}
+import { TableRowProps } from '../types/AnalyticsTable';
 
 const TableRow: React.FC<TableRowProps> = ({ item }) => {
   return (

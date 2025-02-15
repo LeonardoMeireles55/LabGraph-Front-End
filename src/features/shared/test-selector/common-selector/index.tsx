@@ -16,6 +16,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   name,
   level,
   setListingItem: SetListingItem,
+  isLoading: SetIsLoading,
 }) => {
   const [testName, setTestName] = useState<string>(name);
   const [testLevel, setTestLevel] = useState<number>(level || 1);
@@ -45,6 +46,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   const { listing, ownMeanValue, ownSdValue, unitValues } = useFetchListing(props.url);
 
   useEffect(() => {
+    SetIsLoading(true);
     if (listing) {
       const updatedListing: ListingItem[] = listing.map((item) => ({
         ...item,
@@ -52,8 +54,26 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
         ownSdValue,
       }));
       SetListingItem(updatedListing);
+      if (updatedListing.length > 0) {
+        SetIsLoading(false);
+      }
     }
-  }, [listing, ownMeanValue, ownSdValue, unitValues, SetListingItem]);
+  }, [
+    listing,
+    ownMeanValue,
+    ownSdValue,
+    unitValues,
+    testName,
+    testLevel,
+    startDay,
+    startMonth,
+    startYear,
+    endDay,
+    endMonth,
+    endYear,
+    SetListingItem,
+    SetIsLoading,
+  ]);
 
   const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK;
 

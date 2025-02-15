@@ -1,11 +1,6 @@
 import NavBar from '@/features/shared/navigation-bar';
 import Footer from '@/features/shared/ui/footer';
-import { ReactNode } from 'react';
-
-interface MainLayoutProps {
-  children: ReactNode;
-  title: string;
-}
+import { MainLayoutProps } from '../types/AnalyticsTable';
 
 const MainLayout = ({ children, title }: MainLayoutProps) => {
   return (

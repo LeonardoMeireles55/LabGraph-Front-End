@@ -3,7 +3,7 @@ import urlByNameAndDateNew from '@/features/shared/utils/helpers/urlByNameAndDat
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import UpdateResults from '../../../features/update-results';
+import UpdateResults from '../../../miscs/update-results';
 import DateSelector from '../../date-selector';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
 import { TestSelectorProps } from '../types/Selector';

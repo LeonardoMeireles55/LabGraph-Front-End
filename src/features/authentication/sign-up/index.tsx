@@ -1,9 +1,9 @@
 import AuthFormContainer from '@/features/authentication/layout/AuthFormContainer';
 import ErrorMessage from '@/features/shared/utils/components/error-message';
 import { AtSign, Lock, User } from 'lucide-react';
-import AuthLink from '../common/AuthLink';
-import InputField from '../common/InputField';
-import SubmitButton from '../common/SubmitButton';
+import AuthLink from '../components/AuthLink';
+import InputField from '../components/InputField';
+import SubmitButton from '../components/SubmitButton';
 import { useAuth } from '../hooks/useAuthentication';
 
 const SignUpForm = () => {

@@ -1,8 +1,8 @@
 import Loading from '@/features/shared/utils/components/loading';
 import React from 'react';
-import { ListingTableProps } from '../../features/types/ListiningTable';
-import MobileItemCard from './mobile-item-card';
-import TableRow from './table-row';
+import { ListingTableProps } from '../../miscs/types/ListiningTable';
+import MobileItemCard from '../components/MobileItemCard';
+import TableRow from '../components/TableRow';
 
 const tableHeaders = [
   { id: 'date', name: 'Date' },

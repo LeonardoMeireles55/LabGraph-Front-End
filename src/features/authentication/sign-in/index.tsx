@@ -2,9 +2,9 @@ import AuthFormContainer from '@/features/authentication/layout/AuthFormContaine
 import CheckIcon from '@/features/shared/ui/icons/CheckBox';
 import ErrorMessage from '@/features/shared/utils/components/error-message';
 import { AtSign, Lock } from 'lucide-react';
-import AuthLink from '../common/AuthLink';
-import InputField from '../common/InputField';
-import SubmitButton from '../common/SubmitButton';
+import AuthLink from '../components/AuthLink';
+import InputField from '../components/InputField';
+import SubmitButton from '../components/SubmitButton';
 import { useAuth } from '../hooks/useAuthentication';
 
 const LoginForm = () => {

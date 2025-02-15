@@ -2,8 +2,8 @@ import { ProcessedData } from '@/features/charts/types/Chart';
 import {
   CSV_MINIMUM_COLUMNS,
   MAX_VALUE,
-} from '@/features/features/csv-generator/constants/fileProcessing';
-import { FileProcessingResult } from '@/features/features/types/FileProcessing';
+} from '@/features/miscs/csv-generator/constants/fileProcessing';
+import { FileProcessingResult } from '@/features/miscs/types/FileProcessing';
 
 export const cleanValue = (value: string) => value.replace(/"/g, '').trim();
 

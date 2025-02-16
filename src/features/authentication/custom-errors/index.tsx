@@ -1,6 +1,6 @@
 import { CustomErrorProps } from './types/CustomErrorProps';
 
-export default function CustomError({ code, title, message }: CustomErrorProps) {
+export default function CustomError({ code, title, message }: Readonly<CustomErrorProps>) {
   return (
     <main className='flex min-h-screen items-center justify-center bg-background'>
       <div className='flex flex-col items-center gap-4 rounded-2xl bg-surface p-8 backdrop-blur-sm sm:p-10'>

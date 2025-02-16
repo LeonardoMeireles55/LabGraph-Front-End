@@ -1,7 +1,8 @@
 import { JSX } from 'react';
 
 export interface ContactItemProps {
-  icon: React.ComponentType;
+  id: number;
+  icon: JSX.Element;
   title: string;
   content: string;
 }
@@ -13,12 +14,14 @@ export interface CarouselImage {
 }
 
 export interface FeatureProps {
+  id: number;
   title: string;
   description: string;
   icon: JSX.Element;
 }
 
 export interface OverviewProps {
+  id: number;
   title: string;
   description: string;
   icon: JSX.Element;
@@ -27,4 +30,10 @@ export interface OverviewProps {
 export interface NavigationProps {
   id: string;
   label: string;
+}
+
+export interface FAQItem {
+  id: number;
+  question: string;
+  answer: string;
 }

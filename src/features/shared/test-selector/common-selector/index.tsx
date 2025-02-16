@@ -97,6 +97,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
         <div className='flex flex-row items-center gap-2'>
           <span className='text-sm font-medium'>Test:</span>
           <select
+            name='testName'
             className='hover:border-borderColor/80 focus:ring-borderColor/30 rounded-md border border-borderColor bg-background text-sm text-textSecondary shadow-sm shadow-shadow transition-all duration-200 focus:outline-none focus:ring-2 md:px-2 md:py-1'
             value={testName}
             onChange={(e) => setTestName(e.target.value)}
@@ -109,6 +110,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
           </select>
           <span className='text-sm font-medium'>Level:</span>
           <select
+            name='common-selector'
             className='hover:border-borderColor/80 focus:ring-borderColor/30 rounded-md  border border-borderColor bg-background py-0.5 text-sm text-textSecondary shadow-sm shadow-shadow  transition-all duration-200 focus:outline-none focus:ring-2 md:p-1'
             value={testLevel}
             onChange={(e) => setTestLevel(Number(e.target.value))}

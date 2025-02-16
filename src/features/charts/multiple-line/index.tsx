@@ -15,13 +15,13 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
       <NavBar />
       <div className='flex min-h-min flex-col content-center items-center justify-evenly bg-background'>
         <Head>
-          <title>{`LabGraph - ${testList[0] || ''}`}</title>
+          <title>{`LabGraph - ${testList[0] ?? ''}`}</title>
         </Head>
         <div className='flex flex-col'>
           <div className='mb-8 mt-14 flex justify-evenly md:mt-24 xl:mb-8 xl:mt-32'>
             <TestSelectorWithoutLevel
               name={testList[0]}
-              setListinig={setGroupResponse}
+              setListing={setGroupResponse}
               analyticsType={analyticsType}
               list={testList}
             />

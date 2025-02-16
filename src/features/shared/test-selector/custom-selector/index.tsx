@@ -12,7 +12,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   list,
   analyticsType,
   name,
-  setListinig,
+  setListing,
 }) => {
   const [testName, setTestName] = useState<string>(name);
   const {
@@ -39,8 +39,8 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   const { listing } = useFetchListeningGrouped(url);
 
   useEffect(() => {
-    setListinig(listing);
-  }, [url, listing, setListinig]);
+    setListing(listing);
+  }, [url, listing, setListing]);
 
   const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK;
 
@@ -63,6 +63,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
       <div className='flex flex-row content-center items-center justify-between gap-3'>
         <span className='text-sm font-medium'>Test:</span>
         <select
+          name='custom-selector'
           className='hover:border-borderColor/80 focus:ring-borderColor/30 rounded-md border border-borderColor bg-background p-0.5 text-sm text-textSecondary shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 md:px-2 md:py-1'
           value={testName}
           onChange={(e) => setTestName(e.target.value)}
@@ -77,7 +78,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
           <Link
             className='hover:bg-background/90 focus:ring-borderColor/30 flex items-center justify-center rounded-md border border-borderColor bg-background px-2 py-0.5 text-sm font-medium text-textSecondary shadow-sm transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 md:px-2 md:py-1'
             target='_blank'
-            href={GOOGLE_SHEET_URL || ''}
+            href={GOOGLE_SHEET_URL ?? ''}
           >
             <span className='hidden p-0.5 md:inline'>
               <CheckCircle size={19} />

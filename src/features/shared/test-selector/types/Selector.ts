@@ -13,5 +13,5 @@ export interface TestSelectorProps {
   analyticsType: string;
   list: string[];
   name: string;
-  setListinig: (data: LevelGroupResponse[]) => void;
+  setListing: (data: LevelGroupResponse[]) => void;
 }

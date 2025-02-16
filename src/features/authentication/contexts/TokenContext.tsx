@@ -41,8 +41,7 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
         if (!tokenResponse.ok || tokenResponse.status === 401) {
           setLoading(false);
           setToken(null);
-          router.push('/auth/login');
-          return;
+          return router.push('/auth/login');
         }
 
         const data = await tokenResponse.json();

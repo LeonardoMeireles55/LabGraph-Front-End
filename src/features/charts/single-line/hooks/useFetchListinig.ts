@@ -1,8 +1,8 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext';
 import getStatusMessage from '@/features/shared/utils/helpers/getStatusMessage';
+import { FetchWrapper } from '@/services/fetch-wrapper';
 import { useCallback, useEffect, useState } from 'react';
 import { FetchListingData, ListingCollection } from '../../types/Chart';
-import { serverFetch } from '@/services/fetch-service';
 
 const useFetchListing = (url: string) => {
   const [listing, setListing] = useState<ListingCollection>([]);
@@ -14,13 +14,12 @@ const useFetchListing = (url: string) => {
   const { token, loading } = useToken();
 
   const fetchData = useCallback(async (): Promise<FetchListingData> => {
-
-    const data = await serverFetch({
+    const data = await FetchWrapper({
       route: url,
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     return data as FetchListingData;

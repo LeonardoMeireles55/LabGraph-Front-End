@@ -1,8 +1,8 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext';
 import { ListingItem } from '@/features/charts/types/Chart';
+import { FetchWrapper } from '@/services/fetch-wrapper';
 import { useEffect, useState } from 'react';
 import { UseReportsDataProps } from '../types/Reports';
-import { serverFetch } from '@/services/fetch-service';
 
 const useReportsData = ({ url }: UseReportsDataProps) => {
   const { token, loading } = useToken();
@@ -13,13 +13,13 @@ const useReportsData = ({ url }: UseReportsDataProps) => {
     const fetchData = async () => {
       if (loading) return;
       try {
-        const result = await serverFetch({
+        const result = await FetchWrapper({
           route: url,
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
-          }
+          },
         });
         setDataFetched(result);
       } catch (error) {

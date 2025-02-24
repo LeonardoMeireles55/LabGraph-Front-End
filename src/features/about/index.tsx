@@ -4,7 +4,7 @@ import AboutNavbar from '@/features/about/components/AboutNavbar';
 import AvailableFeatures from '@/features/about/components/AvailableFeatures';
 import Carousel from '@/features/about/components/Carousel';
 import Contacts from '@/features/about/components/Contacts';
-import FAQ from '@/features/about/components/FAQ';
+import FAQSection from '@/features/about/components/FAQ';
 import Overview from '@/features/about/components/Overview';
 
 const AboutUs = () => {
@@ -30,7 +30,7 @@ const AboutUs = () => {
         </section>
 
         <section className='w-full'>
-          <FAQ />
+          <FAQSection />
         </section>
 
         <section id='contact' className='w-full'>

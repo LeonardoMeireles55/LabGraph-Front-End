@@ -21,27 +21,19 @@ const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
       <span className='text-sm font-medium'>Test:</span>
       <TestNameSelector testNameList={list} testName={testName} setTestName={setTestName} />
       {levelOptions && levelOptions.length > 0 && setTestLevel && (
-        <>
-          <span className='text-sm font-medium'>Level:</span>
-          <TestLevelSelector
-            levelOptions={levelOptions}
-            testLevel={testLevel}
-            setTestLevel={setTestLevel}
-          />
-        </>
+        <TestLevelSelector
+          levelOptions={levelOptions}
+          testLevel={testLevel}
+          setTestLevel={setTestLevel}
+        />
       )}
-      <span className='flex flex-row place-content-center items-center'>
+      <span className='flex items-center'>
         <Link
-          className='hover:bg-background/90 focus:ring-borderColor/30 flex items-center justify-center rounded-md border border-borderColor bg-background px-2 py-0.5 text-sm font-medium text-textSecondary shadow-sm shadow-shadow transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 md:px-2 md:py-1'
+          className='flex items-center justify-center rounded-md border border-borderColor  px-2 py-0.5 text-sm font-medium text-textSecondary shadow-sm shadow-shadow  transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 md:px-2 md:py-1'
           target='_blank'
           href={googleSheetUrl || ''}
         >
-          <span className='hidden p-0.5 md:inline'>
-            <CheckCircle size={17} />
-          </span>
-          <span className='inline p-0.5 md:hidden'>
-            <CheckCircle size={17} />
-          </span>
+          <CheckCircle size={21} />
         </Link>
       </span>
       <UpdateResults analyticsType={analyticsType} />

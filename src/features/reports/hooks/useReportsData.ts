@@ -1,6 +1,6 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext';
 import { ListingItem } from '@/features/charts/types/Chart';
-import { FetchWrapper } from '@/services/fetch-wrapper';
+import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useEffect, useState } from 'react';
 import { UseReportsDataProps } from '../types/Reports';
 
@@ -13,7 +13,7 @@ const useReportsData = ({ url }: UseReportsDataProps) => {
     const fetchData = async () => {
       if (loading) return;
       try {
-        const result = await FetchWrapper({
+        const result = await fetchWrapper({
           route: url,
           method: 'GET',
           headers: {

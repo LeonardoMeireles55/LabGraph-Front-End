@@ -1,5 +1,5 @@
 import { AuthFormData } from '@/features/authentication/types/Auth';
-import { FetchWrapper } from './fetch-wrapper';
+import { fetchWrapper } from './fetch-wrapper';
 import { AuthParams } from './types/AuthParams';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -7,13 +7,13 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export const authService = {
   signIn: async ({ identifier, password, remember }: AuthParams) => {
     try {
-      const backendResponse = await FetchWrapper({
+      const backendResponse = await fetchWrapper({
         route: `${API_BASE_URL}/users/sign-in`,
         method: 'POST',
         body: { identifier, password },
       });
 
-      const cookieResponse = await FetchWrapper({
+      const cookieResponse = await fetchWrapper({
         route: '/api/login',
         method: 'POST',
         body: {
@@ -32,7 +32,7 @@ export const authService = {
 
   async signUp(userData: Omit<AuthFormData, 'confirmPassword'>) {
     try {
-      const response = await FetchWrapper({
+      const response = await fetchWrapper({
         route: `${API_BASE_URL}/users/sign-up`,
         method: 'POST',
         body: userData,

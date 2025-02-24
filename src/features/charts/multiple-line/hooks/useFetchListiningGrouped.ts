@@ -1,6 +1,6 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext';
 import getStatusMessage from '@/features/shared/utils/helpers/getStatusMessage';
-import { FetchWrapper } from '@/services/fetch-wrapper';
+import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useCallback, useEffect, useState } from 'react';
 import { LevelGroupResponse } from '../../types/Chart';
 
@@ -14,7 +14,7 @@ const useFetchListeningGrouped = (url: string) => {
   const fetchData = useCallback(async (): Promise<LevelGroupResponse[]> => {
     if (!token) throw new Error('No authentication token available');
 
-    const data = await FetchWrapper({
+    const data = await fetchWrapper({
       route: url,
       method: 'GET',
       headers: {

@@ -75,7 +75,7 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
   };
 
   return (
-    <div className='mr-4 flex items-center gap-0 text-textSecondary shadow-sm shadow-shadow'>
+    <div className='flex items-center gap-0 text-textSecondary'>
       <input
         type='file'
         id='fileInput'
@@ -87,8 +87,8 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
       <label
         htmlFor='fileInput'
         title='Send analytics results TXT or CSV file'
-        className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 text-base text-textSecondary hover:scale-110 md:px-2 md:py-1 ${
-          status.isProcessing ? 'cursor-not-allowed opacity-50' : ''
+        className={`cursor-pointer rounded border border-borderColor bg-background px-2 py-1 text-base text-textSecondary shadow-sm shadow-shadow hover:scale-110 md:px-2 md:py-1 ${
+          status.isProcessing ? 'cursor-not-allowed opacity-25' : ''
         }`}
       >
         <span className='hidden py-0.5 md:inline'>

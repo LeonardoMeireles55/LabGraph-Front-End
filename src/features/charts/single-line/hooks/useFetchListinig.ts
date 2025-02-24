@@ -1,6 +1,5 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext';
-import getStatusMessage from '@/features/shared/utils/helpers/getStatusMessage';
-import { FetchWrapper } from '@/services/fetch-wrapper';
+import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useCallback, useEffect, useState } from 'react';
 import { FetchListingData, ListingCollection } from '../../types/Chart';
 
@@ -14,10 +13,10 @@ const useFetchListing = (url: string) => {
   const { token, loading } = useToken();
 
   const fetchData = useCallback(async (): Promise<FetchListingData> => {
-    let data = {} as FetchListingData
+    let data = {} as FetchListingData;
 
     if (!loading) {
-      data = await FetchWrapper({
+      data = await fetchWrapper({
         route: url,
         method: 'GET',
         headers: {
@@ -29,34 +28,28 @@ const useFetchListing = (url: string) => {
     return data;
   }, [url, token, loading]);
 
-  useEffect(() => {
+  const handleFetchData = useCallback(async () => {
     if (loading) return;
 
     setIsLoading(true);
     setError(null);
 
-    (async () => {
-      try {
-        const data = await fetchData();
-        setOwnMeanValue(data.calcMeanAndStdDTO.mean);
-        setOwnSdValue(data.calcMeanAndStdDTO.standardDeviation);
+    try {
+      const data = await fetchData();
+      setOwnMeanValue(data.calcMeanAndStdDTO.mean);
+      setOwnSdValue(data.calcMeanAndStdDTO.standardDeviation);
+      setUnitValues(data.analyticsDTO[0]?.unit_value ?? '-');
+      setListing(data.analyticsDTO);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [loading, fetchData]);
 
-        if (data.analyticsDTO.length > 0) {
-          setUnitValues(data.analyticsDTO[0]?.unit_value ?? '-');
-          setListing(data.analyticsDTO);
-        } else {
-          setUnitValues('-');
-        }
-      } catch (error: unknown) {
-        if (error instanceof Error && error.name === 'AbortError') return;
-        const errorMessage = getStatusMessage((error as any).status);
-        setError(errorMessage);
-        console.error('Error fetching data:', errorMessage);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [loading, fetchData, token]);
+  useEffect(() => {
+    handleFetchData();
+  }, [handleFetchData]);
 
   return {
     listing,

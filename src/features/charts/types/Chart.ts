@@ -145,3 +145,11 @@ export interface LegendMultipleProps {
   payload?: any[];
   levels: string[];
 }
+
+export type ViewMode = 'single' | 'dual';
+
+export interface GraphContextType {
+  viewMode: ViewMode;
+  toggleView: () => void;
+  setViewMode: (mode: ViewMode) => void;
+}

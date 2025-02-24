@@ -1,7 +1,7 @@
-import CheckResponse from '@/features/shared/utils/helpers/checkResponse';
-import FetchOptions from '@/services/types/FetchOptions';
+import handleResponseError from '@/features/shared/utils/helpers/handleResponseError';
+import { FetchOptions } from '@/services/types/FetchOptions';
 
-export const FetchWrapper = async (options: FetchOptions) => {
+export const fetchWrapper = async (options: FetchOptions) => {
   const { route, method = 'GET', body, headers = {} } = options;
   try {
     const fetchOptions: RequestInit = {
@@ -15,9 +15,12 @@ export const FetchWrapper = async (options: FetchOptions) => {
       fetchOptions.body = JSON.stringify(body);
     }
     const response = await fetch(`${route}`, fetchOptions);
-    return await CheckResponse(response);
+    if (!response.ok) {
+      return handleResponseError(response);
+    }
+    return await response.json();
   } catch (error) {
-    console.error(`Server API error for ${route}:`, error);
+    console.error(`Fetch error for ${route}:`, error);
     throw error;
   }
 };

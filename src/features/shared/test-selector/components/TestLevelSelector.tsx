@@ -15,14 +15,12 @@ const TestLevelSelector: React.FC<TestLevelSelectorProps> = ({
 
   return (
     <>
-      <label htmlFor='testLevel' className='sr-only'>
-        Test Level
-      </label>
+      <label htmlFor='testLevel'>Level:</label>
       <select
         id='testLevel'
         value={testLevel}
         onChange={handleChange}
-        className='focus:ring-borderColor/30 mt-1 rounded border border-borderColor bg-background text-textSecondary focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'
+        className='rounded border border-borderColor bg-background text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'
       >
         {levelOptions
           .filter((option) => option.value !== 0)

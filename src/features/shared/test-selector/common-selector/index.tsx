@@ -93,7 +93,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
         handleEndMonthChange={handleEndMonthChange}
         handleEndYearChange={handleEndYearChange}
       />
-      <div className='mt-2 grid grid-cols-1 place-content-start items-start gap-2 md:mt-0 md:flex-row'>
+      <div className='grid grid-cols-1 place-content-start items-start gap-1 md:flex-row'>
         <TestSelectorActions
           testNameList={list}
           testName={testName}

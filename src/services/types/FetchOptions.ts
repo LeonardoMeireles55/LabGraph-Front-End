@@ -1,7 +1,6 @@
-export default interface FetchOptions {
+export interface FetchOptions {
   route: string;
-  method?: string;
-  body?: any;
-  auth?: boolean;
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+  body?: unknown;
   headers?: Record<string, string>;
 }

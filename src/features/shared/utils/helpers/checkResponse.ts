@@ -1,4 +1,4 @@
-const checkResponse = async (response: Response) => {
+const CheckResponse = async (response: Response) => {
   if (!response.ok) {
     const resp = await response.json()
     throw new Error(`${resp.details}`);
@@ -6,4 +6,4 @@ const checkResponse = async (response: Response) => {
   return await response.json();
 };
 
-export default checkResponse;
+export default CheckResponse;

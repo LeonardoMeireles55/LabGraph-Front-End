@@ -1,4 +1,4 @@
-export interface FetchOptions {
+export default interface FetchOptions {
   route: string;
   method?: string;
   body?: any;

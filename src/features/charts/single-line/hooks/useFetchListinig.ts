@@ -14,16 +14,20 @@ const useFetchListing = (url: string) => {
   const { token, loading } = useToken();
 
   const fetchData = useCallback(async (): Promise<FetchListingData> => {
-    const data = await FetchWrapper({
-      route: url,
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    let data = {} as FetchListingData
 
-    return data as FetchListingData;
-  }, [url, token]);
+    if (!loading) {
+      data = await FetchWrapper({
+        route: url,
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    }
+
+    return data;
+  }, [url, token, loading]);
 
   useEffect(() => {
     if (loading) return;

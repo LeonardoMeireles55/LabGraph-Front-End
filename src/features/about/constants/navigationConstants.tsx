@@ -5,5 +5,5 @@ export const NAVIGATION_ITEMS: NavigationProps[] = [
   { id: 'features', label: 'FEATURES' },
   { id: 'contact', label: 'CONTACT' },
   { id: 'faq', label: 'FAQ' },
-  { id: 'team', label: 'TEAM' },
+  { id: 'team', label: 'TEAM' }
 ];
